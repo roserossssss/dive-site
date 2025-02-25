@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg: gray;
+    --bgSoft: rgb(126, 130, 133);
+    --text: gray;
+    --TextSoft: rgb(20, 20, 20);
+    font-weight: bold;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+
+body{
+    background-color: var(--bg);
+    color: var(--text);
+}

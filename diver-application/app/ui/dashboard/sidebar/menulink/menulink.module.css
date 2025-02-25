@@ -1,0 +1,13 @@
+.container {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+    border-radius: 5px;
+
+}
+
+.container:hover {
+    background-color: rgba(43, 43, 223, 0.831);
+}
