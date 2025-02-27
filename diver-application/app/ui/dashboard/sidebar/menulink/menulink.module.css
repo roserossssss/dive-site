@@ -4,10 +4,10 @@
     align-items: center;
     text-align: center;
     margin: 5px;
-    border-radius: 5px;
+    border-radius: 10px;
 
 }
 
-.container:hover {
-    background-color: rgba(43, 43, 223, 0.831);
+.container:hover, .active {
+    background-color: rgb(103, 103, 240);
 }

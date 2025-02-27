@@ -1,7 +1,9 @@
+import styles from "./navbar.module.css"
+
 export default function navbar() {
     return (
 
-        <div>navbar</div>
+        <div className={styles.cointainer}>navbar</div>
 
 
     )};

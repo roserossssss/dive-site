@@ -13,7 +13,6 @@ export default function Layout({
             <Sidebar />
             </div>
             <div className={Styles.content}>
-              <Navbar />
               {children}
             </div>
         </div>

@@ -1,5 +1,5 @@
 import styles from "./sidebar.module.css";
-import {MdDashboard, } from "react-icons/md";
+import {MdDashboard, MdSearch, } from "react-icons/md";
 import { CiUser } from "react-icons/ci";
 import { GiSnorkel } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
@@ -41,6 +41,11 @@ const Itemmenu = [
                 path: "/dashboard/AnalyticsPage",
                 icon: <IoAnalytics />
             },
+            {
+                title: "Logout",
+                path: "/login",
+                icon: <IoAnalytics />
+            },
         ],
        
     },
@@ -51,8 +56,11 @@ const Itemmenu = [
 
 export default function Sidebar() {
     return (
-
         <div className={styles.container}>
+            <div className={styles.containersearch}>
+                <MdSearch/>
+                <input type="text" placeholder="Search..." className={styles.input}></input> 
+            </div>    
             <ul>
             {Itemmenu.map((cat)=>(
                 <li key={cat.title}>
