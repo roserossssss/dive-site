@@ -11,5 +11,4 @@ export const fetchUsers = async ()=>{
         console.log(err)
         throw new Error("Failed to fetch users!")
     }
-
 }
