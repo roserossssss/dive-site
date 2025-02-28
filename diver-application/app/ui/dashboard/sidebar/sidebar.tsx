@@ -5,11 +5,14 @@ import { GiSnorkel } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { FaFileMedical } from "react-icons/fa";
 import { IoAnalytics } from "react-icons/io5";
+import { GrGallery } from "react-icons/gr";
+import { CiSettings } from "react-icons/ci";
 import MenuLink from "./menulink/menulink";
+import Link from 'next/link';
 
 const Itemmenu = [
     {
-        title: "ML Dive",
+        title: "User Log",
         list: [
             {
                 title: "Dashboard",
@@ -17,15 +20,25 @@ const Itemmenu = [
                 icon: <MdDashboard />
             },
             {
-                title: "Profile",
-                path: "/dashboard/ProfilePage",
-                icon: <CiUser />
+                title: "Gallery",
+                path: "#",
+                icon: <GrGallery />
             },
+            // {
+            //     title: "Profile",
+            //     path: "/dashboard/ProfilePage",
+            //     icon: <CiUser />
+            // },
             {
                 title: "Dive Management",
                 path: "/dashboard/DiveManagement",
                 icon: <GiSnorkel/>
             },
+        ],
+    },
+    {
+        title: "Requirements",
+        list: [
             {
                 title: "Certificate Management",
                 path: "/dashboard/CertificatePage",
@@ -36,10 +49,25 @@ const Itemmenu = [
                 path: "/dashboard/MedicalPage",
                 icon: <FaFileMedical />
             },
+        ],
+    },
+    {
+        title: "Analytics",
+        list: [
             {
-                title: "Analytics",
+                title: "Analytics Dashboard",
                 path: "/dashboard/AnalyticsPage",
                 icon: <IoAnalytics />
+            },
+        ],
+    },
+    {
+        title: "Account",
+        list: [
+            {
+                title: "Settings",
+                path: "#",
+                icon: <CiSettings />
             },
             {
                 title: "Logout",
@@ -47,11 +75,9 @@ const Itemmenu = [
                 icon: <IoAnalytics />
             },
         ],
-       
     },
-    
-            
 ];
+
 
 
 export default function Sidebar() {
@@ -78,6 +104,11 @@ export default function Sidebar() {
                     <span className={styles.username}>User Name</span>
                     <span className={styles.userTitle}>User email</span>
                 </div>
+                <Link href="/dashboard/ProfilePage">
+                    <span>...</span>
+                </Link>
+                    
+                
             </div>
         </div>
 

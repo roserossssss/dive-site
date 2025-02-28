@@ -1,12 +1,7 @@
 import styles from "@/app/ui/dashboard/divemanagementpage/divemanagement.module.css";
 import Link from "next/link";
-import {fetchUsers} from "@/app/lib/data";
 
 export default async function DiveManagement() {
-
-    const DiveAdd = await fetchUsers();
-
-    console.log(DiveAdd)
 
     return (
         <div className={styles.container}>
