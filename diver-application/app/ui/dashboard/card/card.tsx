@@ -7,8 +7,8 @@ export default function Card() {
         <div className={style.container}>
                 <MdSupervisedUserCircle size={24}/>
                 <div className={style.texts}>
-                    <span className={style.number}>Number</span>
-                    <span>Description</span>
+                    <span className={style.number}></span>
+                    <span></span>
                 </div>
         </div>
     )

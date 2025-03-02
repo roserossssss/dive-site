@@ -3,19 +3,14 @@
 @tailwind utilities;
 
 :root {
-    --bg: gray;
-    --bgSoft: rgb(126, 130, 133);
+    --bg: #999999;
+    --bgSoft: rgb(193, 213, 228);
     --text: gray;
     --TextSoft: rgb(20, 20, 20);
     font-weight: bold;
 
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing:border-box;
-}
 
 body{
     background-color: var(--bg);

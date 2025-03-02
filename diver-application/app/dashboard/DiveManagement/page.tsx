@@ -3,65 +3,82 @@ import Link from "next/link";
 
 export default async function DiveManagement() {
 
+    const diveData = [
+        {
+            title: "Coral Reef Exploration",
+            description: "Exploring the vibrant coral reefs",
+            notes: "Great visibility, lots of marine life",
+            date: "2024-02-25",
+            location: "Great Barrier Reef",
+            depth: 30,
+            time: "45 min",
+            image: "/sample-dive1.jpg",
+        },
+        {
+            title: "Sunken Ship Dive",
+            description: "Investigating a WWII shipwreck",
+            notes: "Low visibility but exciting",
+            date: "2024-02-20",
+            location: "Truk Lagoon",
+            depth: 40,
+            time: "50 min",
+            image: "/sample-dive2.jpg",
+        },
+    ];
+    
     return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Dive Management</h1>
-
+        <div className="bg-white p-4">
+        <h1 className="text-black text-center text-2xl md:text-3xl font-semibold mb-4">Dive Management</h1>
+    
+        <div className="flex justify-center">
             <Link href="/dashboard/DiveManagement/add">
-                <button className={styles.newDiveBtn}>+ New Dive</button>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+                    + New Dive
+                </button>
             </Link>
-
-            <table className={styles.table}>
+        </div>
+    
+        <div className="overflow-x-auto mt-4">
+            <table className="w-full border border-gray-200 shadow-md rounded-lg">
                 <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Notes</th>
-                        <th>Date</th>
-                        <th>Location</th>
-                        <th>Depth (m)</th>
-                        <th>Time</th>
-                        <th>Image</th>
-                        <th>Actions</th>
+                    <tr className="bg-gray-100 text-gray-700 text-xs md:text-sm">
+                        <th className="p-2 border">Title</th>
+                        <th className="p-2 border hidden md:table-cell">Description</th>
+                        <th className="p-2 border hidden md:table-cell">Notes</th>
+                        <th className="p-2 border">Date</th>
+                        <th className="p-2 border hidden md:table-cell">Location</th>
+                        <th className="p-2 border">Depth (m)</th>
+                        <th className="p-2 border">Time</th>
+                        <th className="p-2 border">Image</th>
+                        <th className="p-2 border">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Coral Reef Exploration</td>
-                        <td>Exploring the vibrant coral reefs</td>
-                        <td>Great visibility, lots of marine life</td>
-                        <td>2024-02-25</td>
-                        <td>Great Barrier Reef</td>
-                        <td>30</td>
-                        <td>45 min</td>
-                        <td>
-                            <img src="/sample-dive1.jpg" alt="Dive" className={styles.diveImage} />
-                        </td>
-                        <td>
-                            <Link href="/dashboard/DiveManagement/test">
-                                <button className={styles.updateBtn}>Update</button>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sunken Ship Dive</td>
-                        <td>Investigating a WWII shipwreck</td>
-                        <td>Low visibility but exciting</td>
-                        <td>2024-02-20</td>
-                        <td>Truk Lagoon</td>
-                        <td>40</td>
-                        <td>50 min</td>
-                        <td>
-                            <img src="/sample-dive2.jpg" alt="Dive" className={styles.diveImage} />
-                        </td>
-                        <td>
-                            <Link href="/dashboard/DiveManagement/test">
-                                <button className={styles.updateBtn}>Update</button>
-                            </Link>
-                        </td>
-                    </tr>
+                    {diveData.map((dive, index) => (
+                        <tr key={index} className="border-b hover:bg-gray-50 transition text-xs md:text-sm">
+                            <td className="p-2 border">{dive.title}</td>
+                            <td className="p-2 border hidden md:table-cell">{dive.description}</td>
+                            <td className="p-2 border hidden md:table-cell">{dive.notes}</td>
+                            <td className="p-2 border">{dive.date}</td>
+                            <td className="p-2 border hidden md:table-cell">{dive.location}</td>
+                            <td className="p-2 border">{dive.depth}</td>
+                            <td className="p-2 border">{dive.time}</td>
+                            <td className="p-2 border">
+                                <img src={dive.image} alt="Dive" className="w-12 h-12 md:w-16 md:h-16 rounded-md object-cover mx-auto" />
+                            </td>
+                            <td className="p-2 border">
+                                <Link href="/dashboard/DiveManagement/test">
+                                    <button className="bg-green-500 text-white px-2 py-1 rounded-lg hover:bg-green-600 transition text-xs md:text-sm">
+                                        Update
+                                    </button>
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
+    </div>
     );
+    
 }

@@ -7,10 +7,13 @@ export default function dashboard() {
 
         <div className={styles.wrapper}>
            <div className={styles.main}>
-            <div className={styles.cards}>
+
+            <div className="grid grid-cols-2">
+            <Card />
             <Card />
             </div>
-            <div className="bg-white p-4 text-black text-xl shadow-2xl shadow-black">
+
+            <div className="bg-white text-black shadow-2xl shadow-black">
             <Chart />
             </div>
         </div>

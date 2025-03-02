@@ -50,7 +50,8 @@ const data = [
 
 export default function chart() {
     return (
-        <div className={style.container}>
+      <div className="bg-slate-50 h-full">
+        <div className="h-96">
             <h2 className={style.text}>Weekly report</h2>
             <ResponsiveContainer width="100%" height="100%">
         <BarChart
@@ -74,6 +75,8 @@ export default function chart() {
         </BarChart>
       </ResponsiveContainer>
         </div>
+      </div>
+        
     )
 
 }

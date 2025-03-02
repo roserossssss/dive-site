@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { MdDashboard, MdSearch } from "react-icons/md";
-import { CiUser, CiSettings } from "react-icons/ci";
+import {  CiSettings } from "react-icons/ci";
 import { GiSnorkel } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { FaFileMedical } from "react-icons/fa";
@@ -19,7 +19,7 @@ const Itemmenu = [
              path: "/dashboard",
              icon: <MdDashboard /> },
             { title: "Gallery", 
-              path: "#", icon: <GrGallery /> },
+              path: "/dashboard/GalleryPage", icon: <GrGallery /> },
             { title: "Dive Management",
              path: "/dashboard/DiveManagement", icon: <GiSnorkel /> },
         ],
@@ -27,13 +27,23 @@ const Itemmenu = [
     {
         title: "Requirements",
         list: [
-            { title: "Certificate Management", path: "/dashboard/CertificatePage", icon: <TbCertificate /> },
-            { title: "Medical Management", path: "/dashboard/MedicalPage", icon: <FaFileMedical /> },
+            { 
+                title: "Certificate Management",
+                path: "/dashboard/CertificatePage", 
+                icon: <TbCertificate /> },
+
+            {
+                title: "Medical Management", 
+                path: "/dashboard/MedicalPage", 
+                icon: <FaFileMedical /> },
         ],
     },
     {
         title: "Analytics",
-        list: [{ title: "Analytics Dashboard", path: "/dashboard/AnalyticsPage", icon: <IoAnalytics /> }],
+        list: [{ 
+            title: "Analytics Dashboard", 
+            path: "/dashboard/AnalyticsPage", 
+            icon: <IoAnalytics /> }],
     },
     {
         title: "Account",
@@ -83,7 +93,7 @@ export default function Sidebar() {
                                     <li key={item.title}>
                                         <Link
                                             href={item.path}
-                                            className="flex items-center space-x-3 p-2 rounded-lg hover:bg-blue-500 transition shadow-black"
+                                            className="flex items-center space-x-3 p-2 rounded-lg hover:bg-cyan-300 transition shadow-black"
                                         >
                                             {item.icon}
                                             <span>{item.title}</span>
