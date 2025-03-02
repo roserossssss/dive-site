@@ -1,7 +1,7 @@
 .container {
     position: sticky;
     left: 0;
-    background: #f8f9fa; 
+    background: black; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;

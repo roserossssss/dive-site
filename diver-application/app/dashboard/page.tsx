@@ -9,10 +9,10 @@ export default function dashboard() {
            <div className={styles.main}>
             <div className={styles.cards}>
             <Card />
-            <Card />
-            <Card />
             </div>
+            <div className="bg-white p-4 text-black text-xl shadow-2xl shadow-black">
             <Chart />
+            </div>
         </div>
         
         </div> 
