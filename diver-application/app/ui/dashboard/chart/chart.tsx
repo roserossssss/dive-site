@@ -50,9 +50,9 @@ const data = [
 
 export default function chart() {
     return (
-      <div className="bg-slate-50 h-full">
+      <div className="bg-slate-50 p-4">
         <div className="h-96">
-            <h2 className={style.text}>Weekly report</h2>
+            <h2 className={style.text}>My daily data</h2>
             <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
@@ -70,8 +70,8 @@ export default function chart() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-          <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+          <Bar dataKey="pv" stackId="a" fill="#211C84" />
+          <Bar dataKey="uv" stackId="a" fill="#D91656" />
         </BarChart>
       </ResponsiveContainer>
         </div>

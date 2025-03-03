@@ -8,17 +8,22 @@ export default function dashboard() {
         <div className={styles.wrapper}>
            <div className={styles.main}>
 
-            <div className="grid grid-cols-2">
-            <Card />
-            <Card />
+            <div className="grid grid-cols-2 gap-2 ">
+                <div className="row-span-1 ">
+                <Card />
+                </div>
+            <div>
+            <Chart />
+            </div>
+            
             </div>
 
-            <div className="bg-white text-black shadow-2xl shadow-black">
-            <Chart />
+            <div className="bg-white text-black shadow-2xl shadow-black grid grid-cols-2">
+           <Card />
+           <Card />
             </div>
         </div>
         
         </div> 
-
 
     )};
