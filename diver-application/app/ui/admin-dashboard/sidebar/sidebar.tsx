@@ -12,10 +12,19 @@ import Link from "next/link";
 
 const Itemmenu = [
     {
-        title: "User Log",
+        title: "Dashboard",
+        list: [{ title: "Dashboard", path: "/dashboard", icon: <MdDashboard /> }],
+    },
+    {
+        title: "Admin Management",
         list: [
-            { title: "Dashboard", path: "/dashboard", icon: <MdDashboard /> },
-            { title: "Gallery", path: "/dashboard/GalleryPage", icon: <GrGallery /> },
+            { title: "User Management", path: "/dashboard/UserManagement", icon: <CiUser /> },
+            { title: "Roles & Permissions", path: "/dashboard/RolesPermissions", icon: <CiSettings /> },
+        ],
+    },
+    {
+        title: "User Log Data Management",
+        list: [
             { title: "Dive Management", path: "/dashboard/DiveManagement", icon: <GiSnorkel /> },
         ],
     },
@@ -31,6 +40,10 @@ const Itemmenu = [
         list: [{ title: "Analytics Dashboard", path: "/dashboard/AnalyticsPage", icon: <IoAnalytics /> }],
     },
     {
+        title: "Gallery Module",
+        list: [{ title: "Gallery", path: "/dashboard/GalleryPage", icon: <GrGallery /> }],
+    },
+    {
         title: "Account",
         list: [
             { title: "Settings", path: "/dashboard/SettingsPage", icon: <CiSettings /> },
@@ -44,7 +57,6 @@ export default function Sidebar() {
 
     return (
         <>
-            
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden fixed top-4 right-4 z-50 bg-white text-black p-2 rounded-full shadow-md"
@@ -52,29 +64,28 @@ export default function Sidebar() {
                 {isOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
             </button>
 
-            
             <aside
                 className={`fixed top-0 left-0 h-full w-64 md:w-72 bg-white text-black p-4 shadow-lg z-50 transform md:translate-x-0 ${
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 } transition-transform md:relative overflow-y-auto`}
             >
-             <div className="flex">   
-                <div className="h-20 w-10">
-                    <img className="" src="../images/sidebarlogo.svg"/>
-                </div>
-                <div className="flex items-center p-2 rounded-lg mb-4 ">
-                    <MdSearch className="text-black" />
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="bg-transparent text-black outline-none ml-2 w-full text-sm"
-                    />
-                </div>
+                <div className="flex">   
+                    <div className="h-20 w-10">
+                        <img className="" src="../images/sidebarlogo.svg"/>
+                    </div>
+                    <div className="flex items-center p-2 rounded-lg mb-4 ">
+                        <MdSearch className="text-black" />
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            className="bg-transparent text-black outline-none ml-2 w-full text-sm"
+                        />
+                    </div>
                 </div>
                 <ul>
                     {Itemmenu.map((category) => (
                         <li key={category.title} className="mb-3">
-                            <span className="text-gray-400 uppercase text-xs tracking-wider block truncate">
+                            <span className="text-gray-400 uppercase text-xs truncate">
                                 {category.title}
                             </span>
                             <ul className="mt-2 space-y-1">
@@ -83,7 +94,7 @@ export default function Sidebar() {
                                         <Link
                                             href={item.path}
                                             className="flex items-center gap-2 p-2 rounded-lg hover:bg-cyan-300 transition text-sm"
-                                            onClick={() => setIsOpen(false)} // Close sidebar when a link is clicked
+                                            onClick={() => setIsOpen(false)}
                                         >
                                             {item.icon}
                                             <span className="truncate">{item.title}</span>
@@ -94,8 +105,8 @@ export default function Sidebar() {
                         </li>
                     ))}
                 </ul>
-
-                <div className="absolute bottom-4 left-2 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
+                            {/*this*/}
+                            <div className="absolute bottom-4 left-2 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
                     <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
                     <div className="flex-1">
                         <span className="block font-semibold text-black text-sm truncate">User Name</span>
@@ -108,12 +119,6 @@ export default function Sidebar() {
             </aside>
 
            
-            {/* {isOpen && (
-                <div
-                    className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
-                    onClick={() => setIsOpen(false)}
-                ></div>
-            )} */}
         </>
     );
 }
