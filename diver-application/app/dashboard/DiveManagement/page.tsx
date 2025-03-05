@@ -2,7 +2,6 @@ import styles from "@/app/ui/dashboard/divemanagementpage/divemanagement.module.
 import Link from "next/link";
 
 export default async function DiveManagement() {
-
     const diveData = [
         {
             title: "Coral Reef Exploration",
@@ -24,61 +23,56 @@ export default async function DiveManagement() {
             time: "50 min",
             image: "/sample-dive2.jpg",
         },
+        {
+            title: "Cave diving",
+            description: "Investigating a cave under WATER?",
+            notes: "Exciting",
+            date: "2024-03-02",
+            location: "Pacific ocean",
+            depth: 4,
+            time: "50 min",
+            image: "/sample-dive2.jpg",
+        },
     ];
-    
+
     return (
         <div className="bg-white p-4">
-        <h1 className="text-black text-center text-2xl md:text-3xl font-semibold mb-4">Dive Management</h1>
-    
-        <div className="flex justify-center">
-            <Link href="/dashboard/DiveManagement/add">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
-                    + New Dive
-                </button>
-            </Link>
+            <h1 className="text-black text-center text-2xl md:text-3xl font-semibold mb-4">Dive Management</h1>
+
+            <div className="flex justify-center">
+                <Link href="/dashboard/DiveManagement/add">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+                        + New Dive
+                    </button>
+                </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                {diveData.map((dive, index) => (
+                    <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md">
+                        <img src={dive.image} alt="Dive" className="w-full h-40 object-cover rounded-md mb-3" />
+                        <h2 className="text-lg font-semibold">{dive.title}</h2>
+                        <p className="text-sm text-gray-700">{dive.description}</p>
+                        <p className="text-xs text-gray-500 mt-1">{dive.notes}</p>
+
+                        <div className="flex justify-between text-sm text-gray-600 mt-2">
+                            <span>{dive.date}</span>
+                            <span>{dive.location}</span>
+                        </div>
+
+                        <div className="flex justify-between items-center text-sm text-gray-700 mt-2">
+                            <span>{dive.depth}m</span>
+                            <span>{dive.time}</span>
+                        </div>
+
+                        <Link href="/dashboard/DiveManagement/test">
+                            <button className="mt-3 bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition text-sm w-full">
+                                Update
+                            </button>
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </div>
-    
-        <div className="overflow-x-auto mt-4">
-            <table className="w-full border border-gray-200 shadow-md rounded-lg">
-                <thead>
-                    <tr className="bg-gray-100 text-gray-700 text-xs md:text-sm">
-                        <th className="p-2 border">Title</th>
-                        <th className="p-2 border hidden md:table-cell">Description</th>
-                        <th className="p-2 border hidden md:table-cell">Notes</th>
-                        <th className="p-2 border">Date</th>
-                        <th className="p-2 border hidden md:table-cell">Location</th>
-                        <th className="p-2 border">Depth (m)</th>
-                        <th className="p-2 border">Time</th>
-                        <th className="p-2 border">Image</th>
-                        <th className="p-2 border">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {diveData.map((dive, index) => (
-                        <tr key={index} className="border-b hover:bg-gray-50 transition text-xs md:text-sm">
-                            <td className="p-2 border">{dive.title}</td>
-                            <td className="p-2 border hidden md:table-cell">{dive.description}</td>
-                            <td className="p-2 border hidden md:table-cell">{dive.notes}</td>
-                            <td className="p-2 border">{dive.date}</td>
-                            <td className="p-2 border hidden md:table-cell">{dive.location}</td>
-                            <td className="p-2 border">{dive.depth}</td>
-                            <td className="p-2 border">{dive.time}</td>
-                            <td className="p-2 border">
-                                <img src={dive.image} alt="Dive" className="w-12 h-12 md:w-16 md:h-16 rounded-md object-cover mx-auto" />
-                            </td>
-                            <td className="p-2 border">
-                                <Link href="/dashboard/DiveManagement/test">
-                                    <button className="bg-green-500 text-white px-2 py-1 rounded-lg hover:bg-green-600 transition text-xs md:text-sm">
-                                        Update
-                                    </button>
-                                </Link>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    </div>
     );
-    
 }

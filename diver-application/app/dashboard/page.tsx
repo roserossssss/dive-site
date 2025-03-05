@@ -1,31 +1,23 @@
-import Card from "../ui/dashboard/card/card"
-import styles from "../ui/dashboard/dashboard.module.css"
-import Chart from "../ui/dashboard/chart/chart"
+import Card from "../ui/dashboard/card/card";
+import styles from "../ui/dashboard/dashboard.module.css";
+import Chart from "../ui/dashboard/chart/chart";
 
-export default function dashboard() {
+export default function Dashboard() {
     return (
-
         <div className={styles.wrapper}>
-        <div className={styles.main}>
-
-          <div className="flex flex-col md:flex-row gap-3">
-
-            <div className="w-full md:flex-1">
-              <Card />
+            <div className={styles.main}>
+                <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-4 items-start">
+                    {/* Card with fixed width */}
+                    <div className="lg:w-72 w-auto">
+                        <Card />
+                    </div>
+                    {/* Chart takes remaining space */}
+                    <div className="w-full flex-1 h-auto min-w-0">
+                        <Chart />
+                        <Chart />
+                    </div>
+                </div>
             </div>
-      
-
-            <div className="w-full md:flex-1">
-              <Chart />
-            </div>
-          </div>
-
-          <div className="bg-white text-black shadow-2xl shadow-black grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <Card />
-            <Card />
-          </div>
         </div>
-      </div>
-      
-
-    )};
+    );
+}

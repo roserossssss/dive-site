@@ -16,7 +16,7 @@ export default function login() {
 
             <div className="flex w-full md:w-1/2 justify-center items-center bg-gray-100">
                 <form className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-                    <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">ML Dive Log-in</h1>
+                    <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Log-in</h1>
 
 
                     <input 

@@ -58,18 +58,17 @@ export default function Sidebar() {
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 } transition-transform md:relative overflow-y-auto`}
             >
-             <div className="flex">   
-                <div className="h-20 w-10">
-                    <img className="" src="../images/sidebarlogo.svg"/>
+             <div className="flex items-center mb-4">
+                    <img className="h-10 w-10" src="../images/sidebarlogo.svg" />
+                    <span className={`ml-2 font-semibold transition-all ${isOpen ? "block" : "hidden md:block"}`}><a>Master</a> <a className="text-yellow-300">LiveBoards</a></span>
                 </div>
-                <div className="flex items-center p-2 rounded-lg mb-4 ">
+                <div className="flex items-center p-2 rounded-lg mb-4 bg-slate-200">
                     <MdSearch className="text-black" />
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="bg-transparent text-black outline-none ml-2 w-full text-sm"
+                        className={`bg-transparent text-black outline-none ml-2 w-full text-sm transition-all ${isOpen ? "block" : "hidden md:block"}`}
                     />
-                </div>
                 </div>
                 <ul>
                     {Itemmenu.map((category) => (

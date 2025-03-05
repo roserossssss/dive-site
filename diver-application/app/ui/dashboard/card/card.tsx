@@ -34,9 +34,9 @@ const oR = 100; // Outer radius
 export default function Card() {
   return (
     
-    <div className="bg-white shadow-lg rounded-lg p-2 h-[900px]">
+    <div className="bg-white shadow-lg rounded-lg h-[900px]">
         <h1 className="text-black text-center">idk what to put here</h1>
-        <h1 className="text-black text-center text-2xl">Awsome</h1>
+        <h1 className="text-black text-center text-2xl">Awesome</h1>
       <ResponsiveContainer width="100%" height="20%">
         <PieChart>
           <Pie
@@ -61,8 +61,8 @@ export default function Card() {
       <h1 className="text-black text-center">idk what to put here</h1>
       <h1 className="text-black text-center">idk what to put here</h1>
       <div>
-      <div className="flex justify-center w-full mt-4">
-         <button className="bg-pink-600 text-white p-2 rounded-lg w-full">
+      <div className="flex justify-center mt-4">
+         <button className="bg-pink-600 text-white p-2 rounded-lg w-64">
                      See Analytics
          </button>
             </div>

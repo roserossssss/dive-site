@@ -13,40 +13,31 @@ import Link from "next/link";
 const Itemmenu = [
     {
         title: "Dashboard",
-        list: [{ title: "Dashboard", path: "/dashboard", icon: <MdDashboard /> }],
+        list: [{ title: "Dashboard", path: "/Admin-Dashboard", icon: <MdDashboard /> }],
     },
     {
         title: "Admin Management",
         list: [
-            { title: "User Management", path: "/dashboard/UserManagement", icon: <CiUser /> },
-            { title: "Roles & Permissions", path: "/dashboard/RolesPermissions", icon: <CiSettings /> },
-        ],
-    },
-    {
-        title: "User Log Data Management",
-        list: [
-            { title: "Dive Management", path: "/dashboard/DiveManagement", icon: <GiSnorkel /> },
+            { title: "User Management", path: "/Admin-Dashboard/UsersManagement", icon: <CiUser /> },
+            { title: "Dive Management", path: "/Admin-Dashboard/DiveManagement", icon: <GiSnorkel /> },
+            { title: "Gallery Module", path: "/Admin-Dashboard/GalleryManagement", icon: <GrGallery /> },
         ],
     },
     {
         title: "Requirements",
         list: [
-            { title: "Certificate Management", path: "/dashboard/CertificatePage", icon: <TbCertificate /> },
-            { title: "Medical Management", path: "/dashboard/MedicalPage", icon: <FaFileMedical /> },
+            { title: "Certificate Management", path: "/Admin-Dashboard/CertificateManagement", icon: <TbCertificate /> },
+            { title: "Medical Management", path: "/Admin-Dashboard/MedicalManagement", icon: <FaFileMedical /> },
         ],
     },
     {
         title: "Analytics",
-        list: [{ title: "Analytics Dashboard", path: "/dashboard/AnalyticsPage", icon: <IoAnalytics /> }],
-    },
-    {
-        title: "Gallery Module",
-        list: [{ title: "Gallery", path: "/dashboard/GalleryPage", icon: <GrGallery /> }],
+        list: [{ title: "Analytics Dashboard", path: "/Admin-Dashboard/AnalyticsPage", icon: <IoAnalytics /> }],
     },
     {
         title: "Account",
         list: [
-            { title: "Settings", path: "/dashboard/SettingsPage", icon: <CiSettings /> },
+            { title: "Settings", path: "/Admin-Dashboard/SettingsPage", icon: <CiSettings /> },
             { title: "Logout", path: "/login", icon: <IoAnalytics /> },
         ],
     },
@@ -59,41 +50,40 @@ export default function Sidebar() {
         <>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden fixed top-4 right-4 z-50 bg-white text-black p-2 rounded-full shadow-md"
+                className="md:hidden fixed top-4 right-4 z-50 bg-gray-900 text-white p-2 rounded-full shadow-md"
             >
                 {isOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
             </button>
 
             <aside
-                className={`fixed top-0 left-0 h-full w-64 md:w-72 bg-white text-black p-4 shadow-lg z-50 transform md:translate-x-0 ${
+                className={`fixed top-0 left-0 h-full w-64 md:w-72 bg-gray-900 text-white p-4 shadow-lg z-50 transform md:translate-x-0 ${
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 } transition-transform md:relative overflow-y-auto`}
             >
-                <div className="flex">   
-                    <div className="h-20 w-10">
-                        <img className="" src="../images/sidebarlogo.svg"/>
-                    </div>
-                    <div className="flex items-center p-2 rounded-lg mb-4 ">
-                        <MdSearch className="text-black" />
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="bg-transparent text-black outline-none ml-2 w-full text-sm"
-                        />
-                    </div>
+               <div className="flex items-center">
+                    <img className="h-12 w-12" src="../images/sidebarlogo.svg" />
+                    <span className={`ml-2 font-semibold transition-all ${isOpen ? "block" : "hidden md:block"}`}>Admin Panel</span>
+                </div>
+                <div className="flex items-center p-2 rounded-lg mb-4 bg-gray-800">
+                    <MdSearch className="text-white" />
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        className={`bg-transparent text-white outline-none ml-2 w-full text-sm transition-all ${isOpen ? "block" : "hidden md:block"}`}
+                    />
                 </div>
                 <ul>
                     {Itemmenu.map((category) => (
-                        <li key={category.title} className="mb-3">
-                            <span className="text-gray-400 uppercase text-xs truncate">
+                        <li key={category.title} className="">
+                            <span className="text-gray-400 uppercase text-xs ">
                                 {category.title}
                             </span>
-                            <ul className="mt-2 space-y-1">
+                            <ul className="">
                                 {category.list.map((item) => (
                                     <li key={item.title}>
                                         <Link
                                             href={item.path}
-                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-cyan-300 transition text-sm"
+                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-cyan-300 transition  text-sm"
                                             onClick={() => setIsOpen(false)}
                                         >
                                             {item.icon}
@@ -105,19 +95,19 @@ export default function Sidebar() {
                         </li>
                     ))}
                 </ul>
-                            {/*this*/}
-                            <div className="absolute bottom-4 left-2 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
+
+                            <div className="flex absolute bottom-4 left-2 items-center gap-2 p-2 rounded-lg bg-gray-800 w-[calc(100%-1rem)]">
                     <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
                     <div className="flex-1">
-                        <span className="block font-semibold text-black text-sm truncate">User Name</span>
-                        <span className="text-gray-500 text-xs truncate">User email</span>
+                        <span className="block font-semibold  text-whitetext-sm truncate">User Name</span>
+                        <span className="text-white text-xs truncate">User email</span>
                     </div>
-                    <Link href="/dashboard/ProfilePage">
-                        <span className="text-lg text-black cursor-pointer">...</span>
+                    <Link href="/Admin-Dashboard/ProfilePage">
+                        <span className="text-lg text-white cursor-pointer">...</span>
                     </Link>
                 </div>
             </aside>
-
+                    
            
         </>
     );
