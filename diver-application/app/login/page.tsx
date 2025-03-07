@@ -5,7 +5,7 @@ export default function login() {
 
         <div className="flex min-h-screen">
 
-            <div className="hidden md:flex md:w-1/2 bg-blue-600 justify-center items-center">
+            <div className="hidden md:flex md:w-1/2 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/8a/Discover_Scuba_Diving_--_St._Croix%2C_US_Virgin_Islands.jpg')] bg-center bg-no-repeat bg-cover justify-center items-center">
                 <img 
                     src="#" 
                     alt="Login Illustration" 

@@ -7,13 +7,12 @@ export default function Dashboard() {
         <div className={styles.wrapper}>
             <div className={styles.main}>
                 <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-4 items-start">
-                    {/* Card with fixed width */}
+                    {/* Left side*/}
                     <div className="lg:w-72 w-auto">
                         <Card />
                     </div>
-                    {/* Chart takes remaining space */}
+                    {/* Right side*/}
                     <div className="w-full flex-1 h-auto min-w-0">
-                        <Chart />
                         <Chart />
                     </div>
                 </div>

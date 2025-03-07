@@ -18,10 +18,9 @@ const data = [
 
 export default function Chart() {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md w-full h-auto">
+    <div className="bg-white p-4 rounded-lg shadow-md w-full h-auto mb-2">
       <h2 className="mb-2 font-semibold text-gray-800">My Daily Data</h2>
       
-      {/* Ensures it fills parent */}
       <div className="w-full h-80">  
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
