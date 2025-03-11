@@ -18,8 +18,8 @@ const data = [
 
 export default function Chart() {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md w-full h-auto mb-2">
-      <h2 className="mb-2 font-semibold text-gray-800">My Daily Data</h2>
+    <div className="bg-white p-4 rounded-lg shadow-md mb-2">
+      <h2 className="mb-2 font-semibold text-black">Your Dive Data</h2>
       
       <div className="w-full h-80">  
         <ResponsiveContainer width="100%" height="100%">

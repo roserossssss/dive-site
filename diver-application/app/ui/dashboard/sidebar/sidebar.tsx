@@ -16,7 +16,7 @@ const Itemmenu = [
         list: [
             { title: "Dashboard", path: "/dashboard", icon: <MdDashboard /> },
             { title: "Gallery", path: "/dashboard/GalleryPage", icon: <GrGallery /> },
-            { title: "Dive Management", path: "/dashboard/DiveManagement", icon: <GiSnorkel /> },
+            { title: "Manage Dive", path: "/dashboard/DiveManagement", icon: <GiSnorkel /> },
         ],
     },
     {

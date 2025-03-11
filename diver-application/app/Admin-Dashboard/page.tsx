@@ -1,4 +1,4 @@
-import Card from "../ui/dashboard/card/card"
+import Card from "../ui/dashboard/reports/reports"
 import styles from "../ui/dashboard/dashboard.module.css"
 import Chart from "../ui/dashboard/chart/chart"
 
