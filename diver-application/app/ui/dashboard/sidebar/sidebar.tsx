@@ -15,15 +15,15 @@ const Itemmenu = [
         title: "User Log",
         list: [
             { title: "Dashboard", path: "/dashboard", icon: <MdDashboard /> },
-            { title: "Gallery", path: "/dashboard/GalleryPage", icon: <GrGallery /> },
             { title: "Manage Dive", path: "/dashboard/DiveManagement", icon: <GiSnorkel /> },
+            { title: "Gallery", path: "/dashboard/GalleryPage", icon: <GrGallery /> },
         ],
     },
     {
         title: "Requirements",
         list: [
-            { title: "Certificate Management", path: "/dashboard/CertificatePage", icon: <TbCertificate /> },
-            { title: "Medical Management", path: "/dashboard/MedicalPage", icon: <FaFileMedical /> },
+            { title: "Diving Certificate", path: "/dashboard/CertificatePage", icon: <TbCertificate /> },
+            { title: "Medical Profile", path: "/dashboard/MedicalPage", icon: <FaFileMedical /> },
         ],
     },
     {
@@ -34,7 +34,7 @@ const Itemmenu = [
         title: "Account",
         list: [
             { title: "Settings", path: "/dashboard/SettingsPage", icon: <CiSettings /> },
-            { title: "Logout", path: "/login", icon: <IoAnalytics /> },
+            { title: "Logout", path: "/Authentication/login", icon: <IoAnalytics /> },
         ],
     },
 ];
@@ -44,69 +44,69 @@ export default function Sidebar() {
 
     return (
         <>
-            
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden fixed top-4 right-4 z-50 bg-white text-black p-2 rounded-full shadow-md"
             >
                 {isOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
             </button>
+          
 
-            
-            <aside
-                className={`fixed top-0 left-0 h-full w-64 md:w-72 bg-white text-black p-4 shadow-lg z-50 transform md:translate-x-0 ${
-                    isOpen ? "translate-x-0" : "-translate-x-full"
-                } transition-transform md:relative overflow-y-auto`}
-            >
-             <div className="flex items-center mb-4">
-                    <img className="h-10 w-10" src="../images/sidebarlogo.svg" />
-                    <span className={`ml-2 font-semibold transition-all ${isOpen ? "block" : "hidden md:block"}`}><a>Master</a> <a className="text-yellow-300">LiveBoards</a></span>
-                </div>
-                <div className="flex items-center p-2 rounded-lg mb-4 bg-slate-200">
-                    <MdSearch className="text-black" />
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className={`bg-transparent text-black outline-none ml-2 w-full text-sm transition-all ${isOpen ? "block" : "hidden md:block"}`}
-                    />
-                </div>
-                <ul>
-                    {Itemmenu.map((category) => (
-                        <li key={category.title} className="mb-3">
-                            <span className="text-gray-400 uppercase text-xs tracking-wider block truncate">
-                                {category.title}
-                            </span>
-                            <ul className="mt-2 space-y-1">
-                                {category.list.map((item) => (
-                                    <li key={item.title}>
-                                        <Link
-                                            href={item.path}
-                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-cyan-300 transition text-sm"
-                                            onClick={() => setIsOpen(false)} // Close sidebar when a link is clicked
-                                        >
-                                            {item.icon}
-                                            <span className="truncate">{item.title}</span>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+<div className="fixed top-0 left-0 h-full w-64 md:w-72 flex flex-col text-black z-50">
+
+    <div className="hidden md:flex bg-white p-4 items-center justify-center mb-2">
+        <img className="h-10 w-10" src="../images/sidebarlogo.svg" alt="Logo" />
+        <span className="ml-2 text-black font-poppins">Master LiveBoards</span>
+    </div>
+
+    <aside
+        className={`rounded-r-3xl bg-[#001526] flex-1 overflow-y-auto transition-transform  transform md:translate-x-0 ${
+            isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+    >
+
+        
+<div className="mt-14 items-center">
+    <ul>
+        {Itemmenu.map((category) => (
+            <li key={category.title} className="mb-3 relative">
+                <ul className="mb-14 mt-4 space-y-2">
+                    {category.list.map((item) => (
+                        <li key={item.title} className="relative group text-center">
+                            <Link
+                                href={item.path}
+                                className="flex gap-2 p-2 pl-12 text-white text-l relative text-center"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {/* Blue Box on the Left */}
+                                <span className="absolute left-0 top-0 h-full w-8 bg-[#2C7DA0] rounded-r-lg hidden group-hover:block items-start"></span>
+                                <span className="text-2xl mr-4">{item.icon}</span>
+                               
+                                <span className="truncate">{item.title}</span>
+                            </Link>
                         </li>
                     ))}
                 </ul>
+            </li>
+        ))}
+    </ul>
+</div>
+       
 
-                <div className="absolute bottom-4 left-2 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
-                    <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
-                    <div className="flex-1">
-                        <span className="block font-semibold text-black text-sm truncate">User Name</span>
-                        <span className="text-gray-500 text-xs truncate">User email</span>
-                    </div>
-                    <Link href="/dashboard/ProfilePage">
-                        <span className="text-lg text-black cursor-pointer">...</span>
-                    </Link>
-                </div>
-            </aside>
+        {/* User Info Section */}
+        <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
+            <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
+            <div className="flex-1">
+                <span className="block font-semibold text-black text-sm truncate">User Name</span>
+                <span className="text-gray-500 text-xs truncate">User email</span>
+            </div>
+            <Link href="/dashboard/ProfilePage">
+                <span className="text-lg text-black cursor-pointer">...</span>
+            </Link>
+        </div>
+    </aside>
+</div>
 
-           
             {/* {isOpen && (
                 <div
                     className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"

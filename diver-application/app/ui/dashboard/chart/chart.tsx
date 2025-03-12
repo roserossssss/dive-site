@@ -1,5 +1,4 @@
 "use client";
-import style from "./chart.module.css";
 import React from "react";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, 
@@ -7,30 +6,30 @@ import {
 } from "recharts";
 
 const data = [
-  { name: "Monday", uv: 4000, pv: 2400, amt: 2400 },
-  { name: "Tuesday", uv: 3000, pv: 1398, amt: 2210 },
-  { name: "Wednesday", uv: 2000, pv: 9800, amt: 2290 },
-  { name: "Thursday", uv: 2780, pv: 3908, amt: 2000 },
-  { name: "Friday", uv: 1890, pv: 4800, amt: 2181 },
-  { name: "Saturday", uv: 2390, pv: 3800, amt: 2500 },
-  { name: "Sunday", uv: 3490, pv: 4300, amt: 2100 },
+  { name: "Monday", time: 150, depth: 240, },
+  { name: "Tuesday", time: 130, depth: 139, },
+  { name: "Wednesday", time: 20, depth: 198,  },
+  { name: "Thursday", time: 27, depth: 39,  },
+  { name: "Friday", time: 118, depth: 148,  },
+  { name: "Saturday", time: 23, depth: 38,  },
+  { name: "Sunday", time: 34, depth: 43,  },
 ];
 
 export default function Chart() {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mb-2">
-      <h2 className="mb-2 font-semibold text-black">Your Dive Data</h2>
+    <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md mb-2">
+      <h2 className="mb-2 font-bold text-3xl text-black">Your Dive Data</h2>
       
       <div className="w-full h-80">  
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3"/>
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="pv" stackId="a" fill="#211C84" />
-            <Bar dataKey="uv" stackId="a" fill="#D91656" />
+            <Bar dataKey="depth" stackId="a" fill="#001526" />
+            <Bar dataKey="time" stackId="a" fill="#2C7DA0" />
           </BarChart>
         </ResponsiveContainer>
       </div>

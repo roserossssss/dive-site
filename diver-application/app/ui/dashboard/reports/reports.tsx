@@ -1,100 +1,83 @@
 "use client";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
-const data = [
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "A", value: 25, color: "#A31D1D" },
-  { name: "B", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-  { name: "C", value: 25, color: "#A31D1D" },
-];
+import React from "react";
 
-const iR = 50; 
-const oR = 100; 
+const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
+  const totalgoal = 100;
+  const size = 350; // SVG size
+  const strokeWidth = 45; // Circle thickness
+  const radius = (size - strokeWidth) / 2; // Circle radius
+  const circumference = 2 * Math.PI * radius; // Total circumference
+  const offset = circumference - (progress / totalgoal) * circumference; // Progress calculation
+
+  return (
+    <div className="relative w-[150px] h-[120px] flex items-center justify-center mx-auto bg-[#001526] rounded-full">
+  <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    {/* 🔷 Define Gradient for Stroke */}
+    <defs>
+      <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#7C3AED" /> {/* Violet-600 */}
+        <stop offset="100%" stopColor="#4F46E5" /> {/* Indigo-600 */}
+      </linearGradient>
+    </defs>
+
+    {/* 🟠 Gray Background Circle */}
+    <circle
+      cx={size / 2}
+      cy={size / 2}
+      r={radius}
+      stroke="#E0E0E0"
+      strokeWidth={strokeWidth}
+      fill="none"
+    />
+
+    {/* 🔵 Blue Gradient Progress Circle */}
+    <circle
+      cx={size / 2}
+      cy={size / 2}
+      r={radius}
+      stroke="url(#progressGradient)" // Apply the gradient
+      strokeWidth={strokeWidth}
+      fill="none"
+      strokeDasharray={circumference}
+      strokeDashoffset={offset}
+      strokeLinecap="round"
+      transform={`rotate(-90 ${size / 2} ${size / 2})`} // Start from top
+    />
+  </svg>
+
+  {/* ✨ Centered Text */}
+  <span className="absolute text-4xl font-bold text-center text-white">{progress}</span>
+  <h1 className="absolute -mb-8 text-xs text-white mt-2">out of {totalgoal}</h1>
+</div>
+  );
+};
 
 export default function Card() {
-  return (
-    
-    <div className="bg-white shadow-lg rounded-lg h-[600px] p-2">
-        <h1 className="text-black text-center">Your score is</h1>
-        <h1 className="text-black text-center text-2xl">Awesome</h1>
-      <ResponsiveContainer width="100%" height="30%">
-        <PieChart>
-          <Pie
-            dataKey="value"
-            startAngle={180}
-            endAngle={1}
-            data={data}
-            cx="50%" 
-            cy="80%" 
-            innerRadius={iR}
-            paddingAngle={5}
-            outerRadius={oR}
-            fill="#8884d8"
-            stroke="none"
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
-            ))}
-            
-          </Pie>
-          
-        </PieChart>
-      </ResponsiveContainer>
-      <h1 className="text-black text-center text-3xl font-bold relative -mt-16">60</h1>
+  const data = { progress: 60 };
 
-      <h1 className="text-black text-center mt-10">idk what to put here</h1>
-      <h3 className="text-black text-center text-sm">idk what to put here</h3>
-      <div>
-        
+  return (
+    <div className="bg-[#D9E7EC] shadow-lg rounded-lg h-[500px] pt-8">
+      <h1 className="text-black text-center text-sm">Your score is</h1>
+      <h1 className="text-black text-center text-2xl font-bold">Awesome</h1>
+
+      <div className="mt-8">
+        <CircularProgress progress={data.progress}/>
+      </div>
+      
+
+
+      <h1 className="text-xs text-black text-center mt-10">
+        Your score is based on the completed
+      </h1>
+      <h3 className="text-black text-center text-sm">{data.progress} Total Dives</h3>
+
       <div className="flex justify-center mt-4">
-         <button className="bg-pink-600 text-white p-2 rounded-lg w-64">
-                     See Analytics
-         </button>
-            </div>
+        <button>
+          <p className="text-sm text-white bg-[#001526] rounded-lg p-1 text-center px-12 w-full">
+            View My Perks
+          </p>
+        </button>
       </div>
     </div>
   );
