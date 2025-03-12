@@ -21,7 +21,7 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
       </linearGradient>
     </defs>
 
-    {/* 🟠 Gray Background Circle */}
+
     <circle
       cx={size / 2}
       cy={size / 2}
@@ -31,7 +31,7 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
       fill="none"
     />
 
-    {/* 🔵 Blue Gradient Progress Circle */}
+
     <circle
       cx={size / 2}
       cy={size / 2}
@@ -46,7 +46,6 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
     />
   </svg>
 
-  {/* ✨ Centered Text */}
   <span className="absolute text-4xl font-bold text-center text-white">{progress}</span>
   <h1 className="absolute -mb-8 text-xs text-white mt-2">out of {totalgoal}</h1>
 </div>
