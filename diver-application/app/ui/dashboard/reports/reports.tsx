@@ -19,7 +19,6 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
         <stop offset="100%" stopColor="#4F46E5" /> {/* Indigo-600 */}
       </linearGradient>
     </defs>
-
     <circle
       cx={size / 2}
       cy={size / 2}
@@ -28,7 +27,6 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
       strokeWidth={strokeWidth}
       fill="none"
     />
-
     <circle
       cx={size / 2}
       cy={size / 2}
