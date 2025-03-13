@@ -13,7 +13,6 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
   return (
     <div className="relative w-[150px] h-[120px] flex items-center justify-center mx-auto bg-[#001526] rounded-full">
   <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-    {/* 🔷 Define Gradient for Stroke */}
     <defs>
       <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stopColor="#7C3AED" /> {/* Violet-600 */}
@@ -29,7 +28,6 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
       strokeWidth={strokeWidth}
       fill="none"
     />
-
 
     <circle
       cx={size / 2}

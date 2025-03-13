@@ -95,7 +95,7 @@ export default function Sidebar() {
 </div>
        
 
-        {/* User Info Section */}
+        
         <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
             <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
             <div className="flex-1">
