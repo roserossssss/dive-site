@@ -27,6 +27,7 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
       strokeWidth={strokeWidth}
       fill="none"
     />
+
     <circle
       cx={size / 2}
       cy={size / 2}
