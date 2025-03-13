@@ -12,7 +12,7 @@ export default function Card({ title, value, description, icon }: CardProps) {
     <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md w-full h-auto mb-2 flex flex-1">
       <div className="text-4xl mb-2 text-end pr-4">{icon}</div>
       <div>
-      <h1 className="text-3xl font-bold">{value}</h1>
+      <h1 className="text-3xl font-extrabold">{value}</h1>
       <p className="text-sm text-gray-500">{description}</p>
       </div>
     </div>

@@ -10,7 +10,7 @@ const poppins = Poppins({
 
 
 export const metadata: Metadata = {
-  title: "Diver user",
+  title: "Master Liveboards",
   description: "Run by Next.js, I WANNA ROCK, I WANNA ROCK, ROCK, I WANT TO ROCK ROCK! I WANT TO ROCK * cool gutar rift* TURN IT DOWN THEY SAY",
 };
 

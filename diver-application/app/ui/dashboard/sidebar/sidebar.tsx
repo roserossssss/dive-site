@@ -9,6 +9,7 @@ import { FaFileMedical } from "react-icons/fa";
 import { IoAnalytics, IoClose, IoMenu } from "react-icons/io5";
 import { GrGallery } from "react-icons/gr";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Itemmenu = [
     {
@@ -27,10 +28,6 @@ const Itemmenu = [
         ],
     },
     {
-        title: "Analytics",
-        list: [{ title: "Analytics Dashboard", path: "/dashboard/AnalyticsPage", icon: <IoAnalytics /> }],
-    },
-    {
         title: "Account",
         list: [
             { title: "Settings", path: "/dashboard/SettingsPage", icon: <CiSettings /> },
@@ -41,6 +38,7 @@ const Itemmenu = [
 
 export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname(); 
 
     return (
         <>
@@ -65,35 +63,39 @@ export default function Sidebar() {
         }`}
     >
 
-        
+
 <div className="mt-14 items-center">
     <ul>
         {Itemmenu.map((category) => (
             <li key={category.title} className="mb-3 relative">
-                <ul className="mb-14 mt-4 space-y-2">
-                    {category.list.map((item) => (
-                        <li key={item.title} className="relative group text-center">
-                            <Link
-                                href={item.path}
-                                className="flex gap-2 p-2 pl-12 text-white text-l relative text-center"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {/* Blue Box on the Left */}
-                                <span className="absolute left-0 top-0 h-full w-8 bg-[#2C7DA0] rounded-r-lg hidden group-hover:block items-start"></span>
-                                <span className="text-2xl mr-4">{item.icon}</span>
-                               
-                                <span className="truncate">{item.title}</span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </li>
+            <ul className="mb-14 mt-4 space-y-2">
+              {category.list.map((item) => (
+                <li key={item.title} className="relative text-center">
+                  <Link
+                    href={item.path}
+                    className="flex gap-2 p-2 pl-12 text-white text-l relative text-center"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {/* Show the blue bar if it's the active page */}
+                    <span 
+                      className={`absolute left-0 top-0 h-full w-8 rounded-r-lg ${
+                        pathname === item.path ? "bg-[#2C7DA0] block" : "bg-[#2C7DA0] hidden group-hover:block"
+                      }`}
+                    ></span>
+        
+                    <span className="text-2xl mr-4">{item.icon}</span>
+                    <span className="truncate">{item.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
         ))}
     </ul>
 </div>
        
 
-        {/* User Info Section */}
+        
         <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
             <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
             <div className="flex-1">
