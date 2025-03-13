@@ -15,8 +15,8 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
   <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
     <defs>
       <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#7C3AED" /> {/* Violet-600 */}
-        <stop offset="100%" stopColor="#4F46E5" /> {/* Indigo-600 */}
+        <stop offset="0%" stopColor="#7C3AED" /> 
+        <stop offset="100%" stopColor="#4F46E5" />
       </linearGradient>
     </defs>
     <circle
