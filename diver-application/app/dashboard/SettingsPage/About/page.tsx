@@ -28,9 +28,9 @@ export default function AboutUsPage() {
         </div>
 
         {/* About Us Content */}
-        <div className="mt-10 mx-auto ml-[150px] p-15 bg-[#D9E7EC] text-black rounded-2xl shadow-lg border-2 w-[870px] h-[650px] flex flex-col items-center justify-center">
+        <div className="mt-10 mx-auto  p-15 bg-[#D9E7EC] text-black rounded-2xl shadow-lg border-2 lg:w-[870px] lg:h-[650px] flex flex-col items-center justify-center">
           {/* Logo */}
-          <div className="w-[270px] h-[270px] flex justify-center -mt-20">
+          <div className="lg:w-[270px] lg:h-[270px]  flex justify-center lg:-mt-20 mt-10 m-12">
             <img src="/masterliveboards.svg" alt="Master LiveBoards Logo" className="object-contain" />
           </div>
 
@@ -40,7 +40,7 @@ export default function AboutUsPage() {
               Whether you're a beginner or a seasoned diver, our platform provides the tools you need to track dives, manage
               certifications, and ensure safety—all in one place.
             </p>
-            <p className="text-2xl text-[#374957] mt-20 font-bold">Dive Deeper, Dive Smarter with Master LiveBoards!</p>
+            <p className="text-2xl text-[#001526] mt-20 font-bold">Dive Deeper, Dive Smarter with Master LiveBoards!</p>
           </div>
         </div>
       </main>
