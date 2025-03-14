@@ -7,7 +7,7 @@ export default function DiveManagement() {
     const [searchTerm, setSearchTerm] = useState("");
     const [sortBy, setSortBy] = useState("");
     const [filterByLocation, setFilterByLocation] = useState("");
-    const [dropdownIndex, setDropdownIndex] = useState(null); // For "..." dropdown
+    const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
     
 
     const diveData = [

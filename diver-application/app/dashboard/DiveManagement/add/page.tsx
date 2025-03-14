@@ -23,19 +23,19 @@ export default function AddDive() {
     return (
         <>
         <h1 className="text-black text-4xl ">My Dive</h1>
-            {/* Top Buttons */}
+
             <div className="flex justify-end space-x-4 mb-4">
                 <button className="bg-gray-300 text-black font-bold py-2 px-6 rounded-3xl hover:bg-gray-400 transition">Cancel</button>
                 <button className="bg-[#2C7DA0] text-white font-bold py-2 px-6 rounded-3xl hover:bg-opacity-80 transition">Save</button>
             </div>
 
-            {/* Form Container */}
-            <div className="max-w-4xl mx-auto p-6 bg-[#D9E7EC] shadow-md rounded-xl">
-                <h1 className="text-2xl font-bold text-center bg-[#2C7DA0] text-[#2C7DA0] p-16 mb-6">Add New Dive</h1>
-                <form action="/api/add-dive" method="POST" encType="multipart/form-data" className="space-y-4">
+
+            <div className="max-w-4xl mx-auto -p-4 bg-[#D9E7EC] shadow-md rounded-xl">
+                <h1 className="text-2xl font-bold text-center rounded-t-2xl bg-[#2C7DA0] text-[#2C7DA0] p-12 mb-6"></h1>
+                <form action="/api/add-dive" method="POST" encType="multipart/form-data" className="space-y-4 p-5 -mt-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         
-                        {/* Dive Details */}
+
                         <div>
                             <h2 className="text-lg font-semibold text-gray-700 mb-2">Dive Details</h2>
                             <div className="flex flex-col">
@@ -56,23 +56,40 @@ export default function AddDive() {
                             
                         </div>
 
-                        {/* Image Upload */}
+                        {/*Le Image Upload */}
                         <div>
-                            <h2 className="text-lg font-semibold text-gray-700 mb-2">Image Upload</h2>
-                            <div className="flex flex-col">
-                                <label className="text-gray-700 font-semibold">Upload Image</label>
-                                <input 
-                                    type="file" 
-                                    name="image" 
-                                    accept="image/*" 
-                                    className="border p-2 rounded-md" 
-                                    onChange={handleImageChange} 
-                                />
-                                {imagePreview && (
-                                    <img src={imagePreview} alt="Preview" className="mt-4 rounded-md shadow-md max-h-40 object-cover" />
-                                )}
-                            </div>
-                        </div>
+    <h2 className="text-lg font-semibold text-gray-700 mb-2">Image Upload</h2>
+    <div className="flex flex-col">
+        <label className="text-gray-700 font-semibold">Upload Image</label>
+
+        <input 
+            type="file" 
+            name="image" 
+            accept="image/*" 
+            className="hidden" 
+            id="fileUpload"
+            onChange={handleImageChange} 
+        />
+
+        <label htmlFor="fileUpload" className="cursor-pointer mt-4 border-2 border-black rounded-md shadow-md max-h-40 object-cover overflow-hidden">
+            {imagePreview ? (
+                <img src={imagePreview} alt="Preview" className="w-full h-full object-cover rounded-md" />
+            ) : (
+                <div className="flex items-center justify-center w-full h-40 text-gray-500">
+                    Click to upload image
+                </div>
+            )}
+        </label>
+
+
+        <label htmlFor="fileUpload" className="mt-4 flex justify-center">
+            <button type="button" className="bg-[#001526] text-white font-bold p-1 w-full px-6 rounded-md hover:bg-opacity-80 transition">
+                Upload Image
+            </button>
+        </label>
+    </div>
+</div>
+
                     </div>
 
                     <h1 className="text-black text-lg">Dive Details</h1>
@@ -88,7 +105,7 @@ export default function AddDive() {
                           <div className="grid grid-cols-2 mt-4">
 
                           <div className="flex flex-col">
-                <label className="text-gray-700 font-semibold">Dive Depth in meter</label>
+                <label className="text-gray-700 font-semibold">Dive Depth(m)</label>
                 <div className="flex items-center space-x-2">
                     
                     <input 
@@ -115,7 +132,7 @@ export default function AddDive() {
             </div>
 
             <div className="flex flex-col">
-                <label className="text-gray-700 font-semibold">Dive Time in minutes</label>
+                <label className="text-gray-700 font-semibold">Dive Time(min)</label>
                 <div className="flex items-center space-x-2">
                    
                     <input 
