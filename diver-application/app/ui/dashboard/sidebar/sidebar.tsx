@@ -53,8 +53,8 @@ export default function Sidebar() {
 <div className="fixed top-0 left-0 h-full w-64 md:w-72 flex flex-col text-black z-50">
 
     <div className="hidden md:flex bg-white p-4 items-center justify-center mb-2">
-        <img className="h-10 w-10" src="../images/sidebarlogo.svg" alt="Logo" />
-        <span className="ml-2 text-black font-poppins">Master LiveBoards</span>
+        <img className="h-10 w-10" src="../images/dive_light_logo.svg" alt="Logo" />
+        <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
     </div>
 
     <aside
@@ -99,8 +99,8 @@ export default function Sidebar() {
         <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
             <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
             <div className="flex-1">
-                <span className="block font-semibold text-black text-sm truncate">User Name</span>
-                <span className="text-gray-500 text-xs truncate">User email</span>
+                <span className="block font-semibold text-black text-sm truncate">John Doe</span>
+                <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>
             </div>
             <Link href="/dashboard/ProfilePage">
                 <span className="text-lg text-black cursor-pointer">...</span>

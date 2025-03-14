@@ -43,7 +43,7 @@ const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
   </svg>
 
   <span className="absolute text-4xl font-bold text-center text-white">{progress}</span>
-  <h1 className="absolute -mb-8 text-xs text-white mt-4 text-opacity-25 ">out of {totalgoal}</h1>
+  <h1 className="absolute -mb-8 text-xs text-white mt-4">OUT OF {totalgoal}</h1>
 </div>
   );
 };
@@ -53,8 +53,8 @@ export default function Card() {
 
   return (
     <div className="bg-[#D9E7EC] shadow-lg rounded-lg h-[500px] pt-8">
-      <h1 className="text-black text-center text-sm">Your score is</h1>
-      <h1 className="text-black text-center text-2xl font-bold">Awesome</h1>
+      <h1 className="text-[#001526] text-center text-sm">Your score is</h1>
+      <h1 className="text-[#001526] text-center text-2xl font-bold">Awesome</h1>
 
       <div className="mt-8">
         <CircularProgress progress={data.progress}/>
@@ -62,14 +62,14 @@ export default function Card() {
       
 
 
-      <h1 className="text-xs text-black text-center mt-10">
-        Your score is based on the completed
+      <h1 className="text-xs text-[#001526] text-center mt-10">
+        Your score is based on the <br />completed
       </h1>
-      <h3 className="text-black text-center text-sm">{data.progress} Total Dives</h3>
+      <h3 className="text-[#001526] font-bold text-center text-sm">{data.progress} Total Dives</h3>
 
       <div className="flex justify-center mt-4">
         <button>
-          <p className="text-sm text-white bg-[#001526] rounded-lg p-1 text-center px-12 w-full">
+          <p className="text-sm text-white bg-[#001526] font-semibold rounded-lg p-1 text-center px-12 w-full">
             View My Perks
           </p>
         </button>
