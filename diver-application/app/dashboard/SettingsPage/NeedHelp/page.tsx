@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { LifeBuoy, Monitor, FileText, Heart, RefreshCcw, Mail, ArrowRightCircle } from "lucide-react";
+import { LifeBuoy, Monitor, FileText, Heart, RefreshCcw, Mail,  ArrowRight } from "lucide-react";
 
 export default function HelpPage() {
   const router = useRouter();
@@ -17,14 +17,14 @@ export default function HelpPage() {
             <LifeBuoy size={30} /> Need Help?
           </h2>
 
-          {/* Leave Button (Aligned to Top Right) */}
+          {/* Leave Button */}
           <button
           onClick={() => router.push("/dashboard/SettingsPage")}
           className="bg-[#2C6D89] hover:bg-[#1E4D62] text-white rounded-xl p-3 shadow-lg transition duration-300 relative right-11"
           title="Go back to Settings"
           aria-label="Go back to Settings"
           >
-            <ArrowRightCircle size={25} />
+            <ArrowRight size={25} />
             </button>
             </div>
         
