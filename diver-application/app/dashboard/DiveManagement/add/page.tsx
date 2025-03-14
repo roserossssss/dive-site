@@ -1,58 +1,158 @@
-import styles from "@/app/ui/dashboard/divemanagementpage/addDive/addDive.module.css";
+"use client";
+import { useState } from "react";
+
+export default function AddDive() {
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
 
 
-export default async function AddDive() {
+    //for the up and down buttons
+    const [depth, setDepth] = useState(0);
+    const [time, setTime] = useState(0);
 
-   
-    
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Add New Dive</h1>
-            <form action="/api/add-dive" method="POST" encType="multipart/form-data" className={styles.form}>
-                <div className={styles.grid}>
-                    <div className={styles.inputGroup}>
-                        <label>Title</label>
-                        <input type="text" name="title" required />
+        <>
+        <h1 className="text-black text-4xl ">My Dive</h1>
+            {/* Top Buttons */}
+            <div className="flex justify-end space-x-4 mb-4">
+                <button className="bg-gray-300 text-black font-bold py-2 px-6 rounded-3xl hover:bg-gray-400 transition">Cancel</button>
+                <button className="bg-[#2C7DA0] text-white font-bold py-2 px-6 rounded-3xl hover:bg-opacity-80 transition">Save</button>
+            </div>
+
+            {/* Form Container */}
+            <div className="max-w-4xl mx-auto p-6 bg-[#D9E7EC] shadow-md rounded-xl">
+                <h1 className="text-2xl font-bold text-center bg-[#2C7DA0] text-[#2C7DA0] p-16 mb-6">Add New Dive</h1>
+                <form action="/api/add-dive" method="POST" encType="multipart/form-data" className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        {/* Dive Details */}
+                        <div>
+                            <h2 className="text-lg font-semibold text-gray-700 mb-2">Dive Details</h2>
+                            <div className="flex flex-col">
+                                <label className="text-gray-700 font-semibold">Title</label>
+                                <input type="text" name="title" required className="border p-2 rounded-md w-72" />
+                            </div>
+                            
+                            <div className="flex flex-col">
+                                <label className="text-gray-700 font-semibold">Location</label>
+                                <input type="text" name="location" required className="border p-2 rounded-md w-72" />
+                            </div>
+
+                            <div className="flex flex-col">
+                                <label className="text-gray-700 font-semibold">Date</label>
+                                <input type="date" name="date" required className="border text-sm p-2 w-36 rounded-md" />
+                            </div>
+
+                            
+                        </div>
+
+                        {/* Image Upload */}
+                        <div>
+                            <h2 className="text-lg font-semibold text-gray-700 mb-2">Image Upload</h2>
+                            <div className="flex flex-col">
+                                <label className="text-gray-700 font-semibold">Upload Image</label>
+                                <input 
+                                    type="file" 
+                                    name="image" 
+                                    accept="image/*" 
+                                    className="border p-2 rounded-md" 
+                                    onChange={handleImageChange} 
+                                />
+                                {imagePreview && (
+                                    <img src={imagePreview} alt="Preview" className="mt-4 rounded-md shadow-md max-h-40 object-cover" />
+                                )}
+                            </div>
+                        </div>
                     </div>
 
-                    <div className={styles.inputGroup}>
-                        <label>Date</label>
-                        <input type="date" name="date" required />
-                    </div>
+                    <h1 className="text-black text-lg">Dive Details</h1>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                           
+                            <div className="flex flex-col">
+                                <label className="text-gray-700 font-semibold">Notes</label>
+                                <textarea name="notes" className="border p-2 rounded-md h-24"></textarea>
+                            </div>
 
-                    <div className={styles.inputGroup}>
-                        <label>Location</label>
-                        <input type="text" name="location" required />
-                    </div>
 
-                    <div className={styles.inputGroup}>
-                        <label>Dive Depth (m)</label>
-                        <input type="number" name="depth" required />
-                    </div>
+                          <div className="grid grid-cols-2 mt-4">
 
-                    <div className={styles.inputGroup}>
-                        <label>Dive Time</label>
-                        <input type="text" name="time" required />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label>Upload Image</label>
-                        <input type="file" name="image" accept="image/*" />
-                    </div>
+                          <div className="flex flex-col">
+                <label className="text-gray-700 font-semibold">Dive Depth in meter</label>
+                <div className="flex items-center space-x-2">
+                    
+                    <input 
+                        type="text"
+                        value={depth} 
+                        readOnly 
+                        className="w-16 text-center border p-2 rounded-md"
+                    />
+                    <button 
+                        type="button" 
+                        className="bg-gray-300 text-black font-bold px-3 py-2 rounded-md hover:bg-gray-400 transition"
+                        onClick={() => setDepth((prev) => prev + 1)}
+                    >
+                        +
+                    </button>
+                    <button 
+                        type="button" 
+                        className="bg-gray-300 text-black font-bold px-3 py-2 rounded-md hover:bg-gray-400 transition"
+                        onClick={() => setDepth((prev) => Math.max(0, prev - 1))}
+                    >
+                        −
+                    </button>
                 </div>
+            </div>
 
-                <div className={styles.textAreaGroup}>
-                    <label>Description</label>
-                    <textarea name="description" required />
+            <div className="flex flex-col">
+                <label className="text-gray-700 font-semibold">Dive Time in minutes</label>
+                <div className="flex items-center space-x-2">
+                   
+                    <input 
+                        type="text"
+                        value={time} 
+                        readOnly 
+                        className="w-16 text-center border p-2 rounded-md"
+                    />
+                    <button 
+                        type="button" 
+                        className="bg-gray-300 text-black font-bold px-3 py-2 rounded-md hover:bg-gray-400 transition"
+                        onClick={() => setTime((prev) => prev + 1)}
+                    >
+                        +
+                    </button>
+                    <button 
+                        type="button" 
+                        className="bg-gray-300 text-black font-bold px-3 py-2 rounded-md hover:bg-gray-400 transition"
+                        onClick={() => setTime((prev) => Math.max(0, prev - 1))}
+                    >
+                        −
+                    </button>
                 </div>
+            </div>
+                          </div>
 
-                <div className={styles.textAreaGroup}>
-                    <label>Notes</label>
-                    <textarea name="notes" />
-                </div>
+                        </div>
 
-                <button type="submit" className={styles.submitBtn}>Add Dive</button>
-            </form>
-        </div>
+                        
+
+                        <div className="flex flex-col">
+                            <label className="text-gray-700 font-semibold">Description</label>
+                            <textarea name="description" required className="border p-2 rounded-md h-24"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </>
     );
 }
