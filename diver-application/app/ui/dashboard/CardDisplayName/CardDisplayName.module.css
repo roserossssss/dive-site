@@ -1,0 +1,16 @@
+.logoContainer {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 3rem;
+}
+
+.logo {
+    width: auto;
+    height: auto;
+    transform: scale(1.4);
+    transform-origin: right-center;
+}

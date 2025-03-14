@@ -6,6 +6,19 @@
 }
 
 .text {
-    color: black;
+    color: #001526;
     font-weight: bold;
+}
+
+.heading {
+    margin-left: 1.2rem;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #001526;
+    text-align: center;
+}
+
+.selectPosition {
+    margin-right: 1.5rem;
 }

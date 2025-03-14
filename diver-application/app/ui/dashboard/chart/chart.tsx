@@ -1,5 +1,8 @@
 "use client";
+
 import React, { useState } from "react";
+import styles from './chart.module.css';
+
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, 
   Tooltip, Legend, ResponsiveContainer 
@@ -41,14 +44,13 @@ export default function Chart() {
   return (
     <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md mb-2">
       <div className="flex justify-between items-center">
-        <h2 className="mb-2 font-bold text-3xl text-black">Your Dive Data</h2>
-        
+        <h2 className={`${styles.heading}`}>Your Dive Data</h2>
 
         <div className="relative">
           <select 
             value={selectedTime} 
             onChange={(e) => setSelectedTime(e.target.value)}
-            className="text-sm text-white bg-[#001526] rounded-lg p-1 px-6"
+            className={`text-sm text-white bg-[#001526] rounded-lg p-1 px-6 ${styles.selectPosition}`}
           >
             <option value="year">Current Year</option>
             <option value="month">Current Month</option>
