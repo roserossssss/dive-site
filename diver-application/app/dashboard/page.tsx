@@ -12,7 +12,7 @@ import Divetime from "../ui/dashboard/card/carddata/DiveTime/DiveTime"
 export default function Dashboard() {
     return (
         <div className="text-black">
-            <h1 className="text-3xl text-black p-2">Dashboard</h1>
+            <h1 className="text-3xl text-black p-2 font-extrabold">Dashboard</h1>
             <div className="grid grid-cols-3 gap-2 items-start">
                 <Destinations />
                 <Divedepth />
