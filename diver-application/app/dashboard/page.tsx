@@ -12,24 +12,17 @@ import Divetime from "../ui/dashboard/card/carddata/DiveTime/DiveTime"
 export default function Dashboard() {
     return (
         <div className="text-black">
-
-            <h1 className="text-3xl text-black p-2 font-extrabold">Dashboard</h1>
-            <div className="grid grid-cols-3 gap-2 items-start">
-                <Destinations />
-                <Divedepth />
-                <Divetime />
-
-            <h1 className="text-3xl text-black p-2">Dashboard</h1>
-            <div className="grid grid-cols-1 gap-2 items-center">
-            <div className="carousel carousel-center ">
-            <div className="carousel-item gap-2">
-                <a id="item1" className="w-full"><Destinations /></a>
-                <a id="item2" className="w-full"><Divedepth /></a>
-                <a id="item3" className="w-full"><Divetime /></a>
-                </div>
-                </div>
+           <h1 className="text-3xl text-black p-2 font-extrabold">Dashboard</h1>
+                <div className="grid grid-cols-1 gap-2 items-center">
+                    <div className="carousel carousel-center ">
+                        <div className="carousel-item gap-2">
+                            <a id="item1" className="w-full"><Destinations /></a>
+                            <a id="item2" className="w-full"><Divedepth /></a>
+                            <a id="item3" className="w-full"><Divetime /></a>
+                        </div>
+                    </div>
                 {/* Add "Add more widget section" here soon */}
-            </div>
+                </div>
             <div className="lg:hidden flex w-full justify-center gap-2 py-2">
                 <a href="#item1" className="btn btn-xs bg-[#001526] text-white">1</a>
                 <a href="#item2" className="btn btn-xs bg-[#001526] text-white">2</a>
