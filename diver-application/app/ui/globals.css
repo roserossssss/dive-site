@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
     --bg: #FFFFFF;
     --bgSoft: rgb(193, 213, 228);
