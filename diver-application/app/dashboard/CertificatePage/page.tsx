@@ -1,114 +1,63 @@
-"use client";
+import React from "react";
+import { Search, Filter, SortAsc } from "lucide-react";
 
-import { useState } from "react";
-import Link from "next/link";
-
-interface Certificate {
-  id: number;
-  name: string;
-  acquireDate: string;
-  status: "Pending" | "Approved" | "Rejected";
-  expiryDate: string;
-}
-
-export default function DivingPage() {
-  const [certificates, setCertificates] = useState<Certificate[]>([
-    {
-      id: 1,
-      name: "Open Water Diver Certification",
-      status: "Approved",
-      acquireDate: "2023-07-10",
-      expiryDate: "2025-07-10",
-    },
-    {
-      id: 2,
-      name: "Advanced Diver Certification",
-      status: "Pending",
-      acquireDate: "2024-02-20",
-      expiryDate: "2026-02-20",
-    },
-    {
-      id: 3,
-      name: "Rescue Diver Certification",
-      status: "Pending",
-      acquireDate: "2024-05-15",
-      expiryDate: "2026-05-15",
-    },
-  ]);
-
+const DiveCertification = () => {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">
-        Diving Certifications
-      </h1>
+    <div className="flex-1 p-10 pt-0 relative">
+      <h2 className="text-4xl font-bold text-gray-800 flex items-center gap-2">
+        My Dive Certification
+      </h2>
+      <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center space-x-2">
+          
+          <img src="/leftarrow.svg" alt="Left Arrow" className="w-6 h-6 cursor-pointer" />
 
-      {/* Upload Certificate Form */}
-      <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-        <h2 className="text-lg font-semibold text-gray-700">Upload Certificate</h2>
+          <img src="/rightarrow.svg" alt="Right Arrow" className="w-6 h-6 cursor-pointer" />
 
-        {/* Certificate Name */}
-        <label className="block text-gray-600 mt-2">Certificate Name:</label>
-        <input
+          <button className="bg-[#001526] text-white px-6 py-2 rounded-full flex items-center gap-2">
+            <img src="/plus.svg" alt="Plus" className="w-3 h-3" />
+            New Certificate
+            </button>
+
+        </div>
+
+        <div className="flex items-center space-x-2">
+        <div className="relative">
+          <input
           type="text"
-          placeholder="Enter certificate name"
-          className="mt-1 block w-full border rounded p-2"
-        />
+          placeholder="Search"
+          className="border rounded-full px-4 py-2 w-64"
+          />
+          {/* Search Section */}
+          <img src="/search.svg" alt="Search" className="absolute right-3 top-2 w-5 h-5" />
+          </div>
+          
+          {/* Sort Section */}
+          <button className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-2">
+            <img src="/sort.svg" alt="Sort" className="w-=4 h-4" />
+            Sort
+            </button>
 
-        {/* Date Acquired */}
-        <label className="block text-gray-600 mt-2">Date Acquired:</label>
-        <input type="date" className="mt-1 block w-full border rounded p-2" />
+            {/* FilterSection */}
+            <button className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-2">
+              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
+              Filter
+              </button>
+              </div>
+              </div>
 
-        {/* Expiry Date */}
-        <label className="block text-gray-600 mt-2">Expires:</label>
-        <input type="date" className="mt-1 block w-full border rounded p-2" />
-
-        {/* File Upload */}
-        <label className="block text-gray-600 mt-2">Upload Certificate:</label>
-        <input type="file" className="mt-1 block w-full border rounded p-2" />
-
-        {/* Upload Button */}
-        <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-          Upload
-        </button>
-      </div>
-
-      {/* Certificates List */}
-      <div className="bg-white p-4 rounded-lg shadow-md">
-        <h2 className="text-lg font-semibold text-gray-700">Your Certificates:</h2>
-
-        {certificates.length === 0 ? (
-          <p className="text-gray-500">No certificates uploaded.</p>
-        ) : (
-          <ul className="space-y-2 mt-3">
-            {certificates.map((cert) => (
-              <li
-                key={cert.id}
-                className="flex items-center justify-between p-3 border rounded-lg"
-              >
-                <div>
-                  <p className="font-semibold text-gray-800">{cert.name}</p>
-                  <p className="text-sm text-gray-600">Date acquired: {cert.acquireDate}</p>
-                  <p className="text-sm text-gray-600">Expires on: {cert.expiryDate}</p>
-                  <span
-                    className={`px-3 py-1 text-sm rounded-lg ${
-                      cert.status === "Approved"
-                        ? "bg-green-500 text-white"
-                        : cert.status === "Pending"
-                        ? "bg-yellow-500 text-white"
-                        : "bg-red-500 text-white"
-                    }`}
-                  >
-                    {cert.status}
-                  </span>
-                </div>
-                <Link href="">
-                  <div className="text-blue-600 hover:underline cursor-pointer">Edit</div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+      <div className="mt-6 flex items-center justify-center min-w-[500px] min-h-[870px] bg-[#D9E7EC] border rounded-3xl">
+        <div className="text-center">
+          <div className="w-40 h-40 border-2 border-black rounded-full mx-auto"></div>
+          <p className="text-5xl text-black font-bold mt-4">No Certifications Yet</p>
+          <p className="text-black text-xl mt-7">
+            You haven’t added any certifications. Start tracking your dive
+            qualifications here!
+          </p>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default DiveCertification;
