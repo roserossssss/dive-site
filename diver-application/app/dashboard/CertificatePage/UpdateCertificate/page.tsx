@@ -1,66 +1,69 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function NewCertificate() {
+export default function EditCertificate() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const certId = searchParams.get("id"); 
+
   const [file, setFile] = useState<File | null>(null);
   const [certification, setCertification] = useState({
+    id: null,
     name: "",
     level: "",
     agency: "",
     location: "",
+    image: "", 
   });
 
+  // Loads the existing certification
+  useEffect(() => {
+    const existingCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
+    const certificateToEdit = existingCertificates.find((cert: any) => cert.id == certId);
+    if (certificateToEdit) {
+      setCertification(certificateToEdit);
+    }
+  }, [certId]);
+
+  // Handle File Upload
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.size <= 5 * 1024 * 1024) {
       setFile(selectedFile);
+      setCertification({ ...certification, image: URL.createObjectURL(selectedFile) });
     } else {
       alert("File size must be 5MB or less.");
     }
   };
 
+  // Handle Input Changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCertification({ ...certification, [e.target.name]: e.target.value });
   };
 
-  // Save Certificate Function
   const saveCertificate = () => {
-    if (!certification.name || !certification.level || !certification.agency || !certification.location || !file) {
-      alert("Please fill in all fields and upload an image.");
+    if (!certification.name || !certification.level || !certification.agency || !certification.location) {
+      alert("Please fill in all fields.");
       return;
     }
 
-    const newCertificate = {
-      id: Date.now(),
-      name: certification.name,
-      level: certification.level,
-      agency: certification.agency,
-      location: certification.location,
-      image: URL.createObjectURL(file), // Convert file to a URL for display
-    };
-
-    // Get existing certificates from localStorage
     const existingCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
+    const updatedCertificates = existingCertificates.map((cert: any) =>
+      cert.id === certification.id
+        ? { ...cert, ...certification, image: file ? URL.createObjectURL(file) : cert.image }
+        : cert
+    );
 
-    // Add new certificate
-    const updatedCertificates = [...existingCertificates, newCertificate];
-
-    // Save back to localStorage
     localStorage.setItem("certificates", JSON.stringify(updatedCertificates));
-
-    // Redirect back to Diving Certification Page
     router.push("/dashboard/CertificatePage");
   };
 
   return (
     <div className="flex-1 p-10 pt-0 relative">
-      {/* Page Title */}
-      <h2 className="text-4xl font-bold text-black">My Dive Certification</h2>
+      <h2 className="text-4xl font-bold text-black">Edit Dive Certification</h2>
 
-      {/* Buttons Section */}
       <div className="flex justify-end gap-4 mt-6">
         <button
           onClick={() => router.back()}
@@ -79,13 +82,11 @@ export default function NewCertificate() {
       <div className="mt-6 bg-[#2E6782] p-6 rounded-t-3xl">
         <div className="flex flex-col items-center">
           <div className="w-[200px] h-[310px] flex items-center justify-center bg-transparent">
-            <img src={file ? URL.createObjectURL(file) : "/image-upload.svg"} 
+            <img src={certification.image || "/image-upload.svg"} 
                  alt="Upload Preview" 
                  className="w-[270px] h-[270px] -mt-6" />
           </div>
-          <p className="text-white text-sm -mt-15">Maximum of 5MB</p>
-          <p className="text-white text-sm">JPEG, PNG, PDF</p>
-          <label className="mt-5 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
+          <label className="mt-1 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
             Upload Image
             <input type="file" className="hidden" onChange={handleFileChange} />
           </label>
