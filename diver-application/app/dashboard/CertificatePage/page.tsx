@@ -18,6 +18,8 @@ const DiveCertification = () => {
   const [menuOpen, setMenuOpen] = useState<number | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCertId, setSelectedCertId] = useState<number | null>(null);
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
 
   // Load certificates from localStorage
   useEffect(() => {
@@ -25,13 +27,40 @@ const DiveCertification = () => {
     setCertificates(storedCertificates);
   }, []);
 
+  // Sort function
+  const handleSort = (type: string) => {
+    let sortedCertificates = [...certificates];
+
+    if (type === "name") {
+      sortedCertificates.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (type === "level") {
+      sortedCertificates.sort((a, b) => a.level.localeCompare(b.level));
+    }
+
+    setCertificates(sortedCertificates);
+    setSortDropdownOpen(false);
+  };
+
+  // Filter function
+  const handleFilter = (agency: string | null) => {
+    const storedCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
+
+    if (agency) {
+      setCertificates(storedCertificates.filter((cert: Certificate) => cert.agency === agency));
+    } else {
+      setCertificates(storedCertificates);
+    }
+
+    setFilterDropdownOpen(false);
+  };
+
   // Delete a certificate
   const deleteCertificate = () => {
     if (selectedCertId !== null) {
       const updatedCertificates = certificates.filter((cert) => cert.id !== selectedCertId);
       setCertificates(updatedCertificates);
       localStorage.setItem("certificates", JSON.stringify(updatedCertificates));
-      setShowDeleteModal(false); g
+      setShowDeleteModal(false);
     }
   };
 
@@ -66,20 +95,130 @@ const DiveCertification = () => {
             <img src="/search.svg" alt="Search" className="absolute right-3 top-2 w-5 h-5" />
           </div>
 
-          <button className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-2">
-            <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
-            Sort
-          </button>
+          {/* Sort Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+            >
+              <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
+              Sort
+            </button>
+            {sortDropdownOpen && (
+              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg w-[100px] h-[75px] z-50">
+                <button
+                  onClick={() => handleSort("name")}
+                  className="block w-28 text-left px-7 py-3 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  Name
+                </button>
+                <button
+                  onClick={() => handleSort("level")}
+                  className="block w-28 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  Level
+                </button>
+              </div>
+            )}
+          </div>
 
-          <button className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-2">
-            <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
-            Filter
-          </button>
+          {/* Filter Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+            >
+              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
+              Filter
+            </button>
+            {filterDropdownOpen && (
+              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[90px] h-[398px] z-50">
+                <button
+                  onClick={() => handleFilter(null)}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => handleFilter("ACUC")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  ACUC
+                </button>
+                <button
+                  onClick={() => handleFilter("BSAC")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  BSAC
+                </button>
+                <button
+                  onClick={() => handleFilter("CMAS")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  CMAS
+                </button>
+                <button
+                  onClick={() => handleFilter("GUE")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  GUE
+                </button>
+                <button
+                  onClick={() => handleFilter("IANTD")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  IANTD
+                </button>
+                <button
+                  onClick={() => handleFilter("NASE")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  NASE
+                </button>
+                <button
+                  onClick={() => handleFilter("NAUI")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  NAUI
+                </button>
+                <button
+                  onClick={() => handleFilter("PADI")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  PADI
+                </button>
+                <button
+                  onClick={() => handleFilter("RADI")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  RADI
+                </button>
+                <button
+                  onClick={() => handleFilter("SDI")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  SDI
+                </button>
+                <button
+                  onClick={() => handleFilter("SSI")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  SSI
+                </button>
+                <button
+                  onClick={() => handleFilter("TDI")}
+                  className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-black hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
+                >
+                  TDI
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Certification Display */}
-      <div className="mt-6 min-w-[500px] min-h-[870px] bg-[#D9E7EC] border rounded-3xl p-10">
+     {/* Certification Display */}
+      <div className="mt-6 min-w-[500px] min-h-[870px] bg-[#D9E7EC] border rounded-3xl p-10 ">
         {certificates.length === 0 ? (
           <div className="flex items-center justify-center min-h-[700px] text-center">
             <div>
@@ -101,7 +240,7 @@ const DiveCertification = () => {
                   <img
                     src={cert.image}
                     alt="Certificate"
-                    className="w-full rounded-xl border-4 border-white"
+                    className="w-[250px] h-[470px] w-full rounded-xl border-4 border-white"
                   />
                   <button
                     onClick={() => setMenuOpen(menuOpen === cert.id ? null : cert.id)}
@@ -114,7 +253,7 @@ const DiveCertification = () => {
                     <div className="absolute bottom-[-3rem] right-2 bg-white shadow-lg rounded-lg p-2 w-32">
                       <button
                         onClick={() => updateCertificate(cert.id)}
-                        className="block w-full text-left px-4 py-2 rounded-lg text-sm text-black hover:bg-[#2C7DA0] hover:bg-opacity-50"
+                        className="block w-full text-left px-4 py-2 rounded-lg text-medium text-black hover:bg-[#2C7DA0] hover:bg-opacity-50"
                       >
                         Update
                       </button>
@@ -123,7 +262,7 @@ const DiveCertification = () => {
                           setSelectedCertId(cert.id);
                           setShowDeleteModal(true);
                         }}
-                        className="block w-full text-left px-4 py-2 rounded-lg text-sm text-black hover:bg-[#2C7DA0] hover:bg-opacity-50"
+                        className="block w-full text-left px-4 py-2 rounded-lg text-medium text-black hover:bg-[#2C7DA0] hover:bg-opacity-50"
                       >
                         Delete
                       </button>
@@ -177,3 +316,4 @@ const DiveCertification = () => {
 };
 
 export default DiveCertification;
+
