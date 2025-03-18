@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Bell, HelpCircle, Info } from "lucide-react";
 
 export default function ProfilePage() {
-  const router = useRouter(); 
+  const router = useRouter();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   return (
@@ -54,8 +54,8 @@ export default function ProfilePage() {
             <h3 className="flex items-center gap-2 text-xl md:text-2xl font-bold text-black">
               <HelpCircle size={24} className="text-black" /> Need Help?
             </h3>
-            <button 
-              onClick={() => router.push("/dashboard/SettingsPage/NeedHelp")} 
+            <button
+              onClick={() => router.push("/dashboard/SettingsPage/NeedHelp")}
               className="mt-3 w-full md:w-80 p-4 border rounded-3xl flex justify-between items-center bg-white shadow-md hover:bg-gray-100 transition"
             >
               <span className="text-black font-medium">Help and Support</span>
@@ -68,8 +68,8 @@ export default function ProfilePage() {
             <h3 className="flex items-center gap-2 text-xl md:text-2xl font-bold text-black">
               <Info size={24} className="text-black" /> Learn more about us
             </h3>
-            <button 
-              onClick={() => router.push("/dashboard/SettingsPage/About")} 
+            <button
+              onClick={() => router.push("/dashboard/SettingsPage/About")}
               className="mt-3 w-full md:w-24 p-4 border rounded-3xl flex justify-between items-center bg-white shadow-md hover:bg-gray-100 transition"
             >
               <span className="text-black font-medium">About</span>
