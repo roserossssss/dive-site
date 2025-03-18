@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function AddDive() {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -25,7 +26,9 @@ export default function AddDive() {
         <h1 className="text-black text-4xl ">My Dive</h1>
 
             <div className="flex justify-end space-x-4 mb-4">
+            <Link href="/dashboard/DiveManagement">
                 <button className="bg-gray-300 text-black font-bold py-2 px-6 rounded-3xl hover:bg-gray-400 transition">Cancel</button>
+                </Link>
                 <button className="bg-[#2C7DA0] text-white font-bold py-2 px-6 rounded-3xl hover:bg-opacity-80 transition">Save</button>
             </div>
 
@@ -40,17 +43,17 @@ export default function AddDive() {
                             <h2 className="text-lg font-semibold text-gray-700 mb-2">Dive Details</h2>
                             <div className="flex flex-col">
                                 <label className="text-gray-700 font-semibold">Title</label>
-                                <input type="text" name="title" required className="border p-2 rounded-md w-72" />
+                                <input type="text" name="title" required className="bg-[#D9E7EC] border border-black p-2 rounded-md w-72" />
                             </div>
                             
                             <div className="flex flex-col">
                                 <label className="text-gray-700 font-semibold">Location</label>
-                                <input type="text" name="location" required className="border p-2 rounded-md w-72" />
+                                <input type="text" name="location" required className="bg-[#D9E7EC] border border-black p-2 rounded-md w-72" />
                             </div>
 
                             <div className="flex flex-col">
                                 <label className="text-gray-700 font-semibold">Date</label>
-                                <input type="date" name="date" required className="border text-sm p-2 w-36 rounded-md" />
+                                <input type="date" name="date" required className="bg-[#D9E7EC] border border-black text-sm p-2 w-36 rounded-md" />
                             </div>
 
                             
@@ -66,7 +69,7 @@ export default function AddDive() {
             type="file" 
             name="image" 
             accept="image/*" 
-            className="hidden" 
+            className="hidden bg-[#D9E7EC] border border-black" 
             id="fileUpload"
             onChange={handleImageChange} 
         />
@@ -97,8 +100,8 @@ export default function AddDive() {
                         <div>
                            
                             <div className="flex flex-col">
-                                <label className="text-gray-700 font-semibold">Notes</label>
-                                <textarea name="notes" className="border p-2 rounded-md h-24"></textarea>
+                                <label className="text-gray-700 font-semibold ">Notes</label>
+                                <textarea name="notes" className="bg-[#D9E7EC] border border-black p-2 rounded-md h-24"></textarea>
                             </div>
 
 
@@ -165,7 +168,7 @@ export default function AddDive() {
 
                         <div className="flex flex-col">
                             <label className="text-gray-700 font-semibold">Description</label>
-                            <textarea name="description" required className="border p-2 rounded-md h-24"></textarea>
+                            <textarea name="description" required className="bg-[#D9E7EC] border border-black p-2 rounded-md h-24"></textarea>
                         </div>
                     </div>
                 </form>

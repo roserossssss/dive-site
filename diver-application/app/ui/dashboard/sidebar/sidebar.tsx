@@ -20,7 +20,7 @@ const Itemmenu = [
       { title: "Gallery", path: "/dashboard/GalleryPage", icon: <TfiGallery /> },
     ],
   },
-  {
+  { 
     title: "Requirements",
     list: [
       { title: "Diving Certificate", path: "/dashboard/CertificatePage", icon: <TbCertificate /> },

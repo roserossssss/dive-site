@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { CiSearch } from "react-icons/ci";
 
+import { CiMenuKebab } from "react-icons/ci";
+
 export default function DiveManagement() {
     const [searchTerm, setSearchTerm] = useState("");
     const [sortBy, setSortBy] = useState("");
@@ -140,7 +142,7 @@ export default function DiveManagement() {
                                 }
                                 className="text-2xl font-bold cursor-pointer text-white"
                             >
-                                ...
+                                <CiMenuKebab />
                             </button>
 
                             {dropdownIndex === index && (
