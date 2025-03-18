@@ -33,10 +33,8 @@ export default function MedicalPage() {
   };
 
   return (
-    <div className="p-2 relative">
-      <div className="">
-        <h2 className="text-2xl font-bold text-[#001526] sm:ml-7">Medical Profile</h2>
-      </div>
+    <div>
+      <h2 className="text-3xl text-black p-2 font-extrabold">Medical Profile</h2>
       <div className="mb-1 text-right mt-4 pt-5">
         {editMode ? (
           <>
