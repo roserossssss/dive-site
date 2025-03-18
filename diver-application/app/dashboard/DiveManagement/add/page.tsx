@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 
+
 export default function AddDive() {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -39,8 +40,8 @@ export default function AddDive() {
                         <div>
                             <h2 className="text-lg font-semibold text-gray-700 mb-2">Dive Details</h2>
                             <div className="flex flex-col">
-                                <label className="text-gray-700 font-semibold">Title</label>
-                                <input type="text" name="title" required className="border p-2 rounded-md w-72" />
+                                <label className="text-gray-700  font-semibold">Title</label>
+                                <input type="text" name="title" required className="border p-2 rounded-md w-72 " />
                             </div>
                             
                             <div className="flex flex-col">
