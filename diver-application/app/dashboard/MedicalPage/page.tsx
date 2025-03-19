@@ -7,13 +7,29 @@ import { BsExclamationCircle } from "react-icons/bs";
 
 export default function MedicalPage() {
   const [editMode, setEditMode] = useState(false);
+  const [firstName, setFirstName] = useState("John");
+  const [middleName, setMiddleName] = useState("");
+  const [lastName, setLastName] = useState("Doe");
+  const [suffix, setSuffix] = useState("");
+  const [birthdate, setBirthdate] = useState("1990-01-01");
+  const [age, setAge] = useState("35");
+  const [sex, setSex] = useState("male");
   const [hasAllergies, setHasAllergies] = useState(false);
   const [hasChronicCondition, setHasChronicCondition] = useState(false);
   const [hasDisability, setHasDisability] = useState(false);
+  const [bloodType, setBloodType] = useState("");
+  const [allergiesDetails, setAllergiesDetails] = useState("");
+  const [chronicConditionDetails, setChronicConditionDetails] = useState("");
+  const [disabilityDetails, setDisabilityDetails] = useState("");
+  const [emergencyContactPerson, setEmergencyContactPerson] = useState("");
   const [emergencyContactNumber, setEmergencyContactNumber] = useState("");
+  const [relationship, setRelationship] = useState("");
   const [medicalCertificate, setMedicalCertificate] = useState("");
+  const [issuedBy, setIssuedBy] = useState("");
+  const [dateIssued, setDateIssued] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [isValidationModalOpen, setIsValidationModalOpen] = useState(false);
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -35,9 +51,30 @@ export default function MedicalPage() {
     }
   };
 
+  const validateFields = () => {
+    return (
+      emergencyContactPerson.trim() !== "" &&
+      emergencyContactNumber.trim() !== "" &&
+      relationship.trim() !== "" &&
+      medicalCertificate.trim() !== "" &&
+      bloodType.trim() !== "" &&
+      (hasAllergies ? allergiesDetails.trim() !== "" : true) &&
+      (hasChronicCondition ? chronicConditionDetails.trim() !== "" : true) &&
+      (hasDisability ? disabilityDetails.trim() !== "" : true) &&
+      issuedBy.trim() !== "" &&
+      dateIssued.trim() !== "" &&
+      (hasAllergies !== null) &&
+      (hasChronicCondition !== null) &&
+      (hasDisability !== null)
+    );
+  };
+
   const handleSave = () => {
-    setEditMode(false);
-    setIsModalOpen(true);
+    if (validateFields()) {
+      setIsModalOpen(true);
+    } else {
+      setIsValidationModalOpen(true);
+    }
   };
 
   return (
@@ -52,13 +89,13 @@ export default function MedicalPage() {
         {editMode ? (
           <>
             <button
-              className="w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] rounded-full mr-2 text-[16px] font-semibold"
+              className="w-full sm:w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] rounded-full mr-2 text-[16px] font-semibold"
               onClick={() => setIsCancelModalOpen(true)}
             >
               Cancel
             </button>
             <button
-              className="w-36 px-5 py-3 bg-[#2C7DA0] text-white rounded-full text-[16px] font-semibold"
+              className="w-full sm:w-36 px-5 py-3 bg-[#2C7DA0] text-white rounded-full text-[16px] font-semibold"
               onClick={handleSave}
             >
               Save
@@ -66,7 +103,7 @@ export default function MedicalPage() {
           </>
         ) : (
           <button
-            className="w-36 px-5 py-3 bg-[#2C7DA0] text-white rounded-full text-[16px] font-semibold"
+            className="w-full sm:w-36 px-5 py-3 bg-[#2C7DA0] text-white rounded-full text-[16px] font-semibold"
             onClick={() => setEditMode(true)}
           >
             Edit Details
@@ -95,38 +132,38 @@ export default function MedicalPage() {
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/3">
                     <label className="block text-[#001526] font-semibold mb-1">First Name</label>
-                    <input type="text" placeholder="First Name" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled />
+                    <input type="text" placeholder="" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={firstName} disabled />
                   </div>
                   <div className="w-full md:w-1/3">
                     <label className="block text-[#001526] font-semibold mb-1">Middle Name</label>
-                    <input type="text" placeholder="Middle Name" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled />
+                    <input type="text" placeholder="" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={middleName} disabled />
                   </div>
                   <div className="w-full md:w-1/3">
                     <label className="block text-[#001526] font-semibold mb-1">Last Name</label>
-                    <input type="text" placeholder="Last Name" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled />
+                    <input type="text" placeholder="" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={lastName} disabled />
                   </div>
                   <div className="w-full md:w-1/12">
                     <label className="block text-[#001526] font-semibold mb-1">Suffix</label>
-                    <input type="text" placeholder="Suffix" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled />
+                    <input type="text" placeholder="" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={suffix} disabled />
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-1">Birthdate</label>
-                    <input type="date" placeholder="Birthdate" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                    <input type="date" placeholder="" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={birthdate} disabled />
                   </div>
                   <div className="w-full md:w-1/12">
                     <label className="block text-[#001526] font-semibold mb-1">Age</label>
-                    <input type="number" placeholder="Age" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled />
+                    <input type="number" placeholder="" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={age} disabled />
                   </div>
                   <div className="w-full md:w-1/3">
                     <label className="block text-[#001526] font-semibold mb-3">Sex</label>
                     <div className="flex items-center gap-3">
                       <label className="flex items-center font-semibold text-[#001526]">
-                        <input type="radio" name="sex" value="male" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} disabled /> Male
+                        <input type="radio" name="sex" value="male" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} checked={sex === 'male'} disabled /> Male
                       </label>
                       <label className="flex items-center font-semibold text-[#001526]">
-                        <input type="radio" name="sex" value="female" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} disabled /> Female
+                        <input type="radio" name="sex" value="female" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} checked={sex === 'female'} disabled /> Female
                       </label>
                     </div>
                   </div>
@@ -139,16 +176,16 @@ export default function MedicalPage() {
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/3">
                     <label className="block text-[#001526] font-semibold mb-1">Blood Type <span className="text-red-500">*</span></label>
-                    <select className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode}>
-                      <option value="">Select Blood Type</option>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                      <option value="O+">O+</option>
-                      <option value="O-">O-</option>
+                    <select className={`p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={bloodType} onChange={(e) => setBloodType(e.target.value)} disabled={!editMode}>
+                      <option value="" className="text-[#001526]">Select Blood Type</option>
+                      <option value="A+" className="text-[#001526]">A+</option>
+                      <option value="A-" className="text-[#001526]">A-</option>
+                      <option value="B+" className="text-[#001526]">B+</option>
+                      <option value="B-" className="text-[#001526]">B-</option>
+                      <option value="AB+" className="text-[#001526]">AB+</option>
+                      <option value="AB-" className="text-[#001526]">AB-</option>
+                      <option value="O+" className="text-[#001526]">O+</option>
+                      <option value="O-" className="text-[#001526]">O-</option>
                     </select>
                   </div>
                   <div className="w-full md:w-1/4 md:ml-4">
@@ -162,7 +199,7 @@ export default function MedicalPage() {
                       </label>
                     </div>
                     {hasAllergies && (
-                      <input type="text" placeholder="Please specify" className="mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                      <input type="text" placeholder="Please specify" className={`mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={allergiesDetails} onChange={(e) => setAllergiesDetails(e.target.value)} disabled={!editMode} />
                     )}
                   </div>
                   <div className="w-full md:w-1/4 md:ml-4">
@@ -176,7 +213,7 @@ export default function MedicalPage() {
                       </label>
                     </div>
                     {hasChronicCondition && (
-                      <input type="text" placeholder="Please specify" className="mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                      <input type="text" placeholder="Please specify" className={`mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={chronicConditionDetails} onChange={(e) => setChronicConditionDetails(e.target.value)} disabled={!editMode} />
                     )}
                   </div>
                   <div className="w-full md:w-1/4 md:ml-4">
@@ -190,14 +227,14 @@ export default function MedicalPage() {
                       </label>
                     </div>
                     {hasDisability && (
-                      <input type="text" placeholder="Please specify" className="mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                      <input type="text" placeholder="Please specify" className={`mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={disabilityDetails} onChange={(e) => setDisabilityDetails(e.target.value)} disabled={!editMode} />
                     )}
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/2">
                     <label className="block text-[#001526] font-semibold mb-1">Emergency Contact Person <span className="text-red-500">*</span></label>
-                    <input type="text" placeholder="Emergency Contact" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                    <input type="text" className={`p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={emergencyContactPerson} onChange={(e) => setEmergencyContactPerson(e.target.value)} disabled={!editMode} />
                   </div>
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-1">Emergency Contact Number <span className="text-red-500">*</span></label>
@@ -211,7 +248,8 @@ export default function MedicalPage() {
                           required: true,
                           autoFocus: true,
                           disabled: !editMode,
-                          className: 'p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] pl-12'
+                          className: `p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] pl-12 text-[#001526]`,
+                          readOnly: !editMode
                         }}
                         containerStyle={{ width: '100%' }}
                         inputStyle={{ width: '100%' }}
@@ -221,14 +259,14 @@ export default function MedicalPage() {
                   </div>
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-1">Relationship <span className="text-red-500">*</span></label>
-                    <input type="text" placeholder="Relationship" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                    <input type="text" className={`p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={relationship} onChange={(e) => setRelationship(e.target.value)} disabled={!editMode} />
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3 items-start">
                   <div className="w-full md:w-1/3">
                     <label className="block text-[#001526] font-semibold mb-1">Medical Certificate <span className="text-red-500">*</span></label>
                     <div className="flex items-center gap-3">
-                      <input type="text" placeholder="Medical Certificate" className="p-2 border border-[#001526] rounded-lg w-3/4 bg-[#D9E7EC]" value={medicalCertificate} disabled={!editMode} />
+                      <input type="text" placeholder="" className={`p-2 border border-[#001526] rounded-lg w-3/4 bg-[#D9E7EC] text-[#001526]`} value={medicalCertificate} disabled={!editMode} />
                       <input
                         type="file"
                         id="file-upload"
@@ -258,11 +296,11 @@ export default function MedicalPage() {
                   <div className="flex flex-row gap-3 items-start w-full md:w-2/3">
                     <div className="w-full md:w-3/5">
                       <label className="block text-[#001526] font-semibold mb-1">Issued By <span className="text-red-500">*</span></label>
-                      <input type="text" placeholder="Issued By" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                      <input type="text" placeholder="" className={`p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={issuedBy} onChange={(e) => setIssuedBy(e.target.value)} disabled={!editMode} />
                     </div>
                     <div className="w-full md:w-2/5">
                       <label className="block text-[#001526] font-semibold mb-1">Date Issued <span className="text-red-500">*</span></label>
-                      <input type="date" placeholder="Date Issued" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC]" disabled={!editMode} />
+                      <input type="date" placeholder="" className={`p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]`} value={dateIssued} onChange={(e) => setDateIssued(e.target.value)} disabled={!editMode} />
                     </div>
                   </div>
                 </div>
@@ -272,13 +310,14 @@ export default function MedicalPage() {
         </div>
       </div>
 
+      {/* Save Changes Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] h-auto sm:h-[450px] rounded-2xl shadow-lg flex flex-col justify-center items-center">
             <div className="flex justify-center mb-4">
               <BsExclamationCircle className="w-24 h-24 text-[#001526]" />
             </div>
-            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Confirm Changes</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Confirm Changes?</h2>
             <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">You're about to update your details. 
             <br />Want to proceed?</p>
             <div className="flex justify-center mt-5">
@@ -292,6 +331,7 @@ export default function MedicalPage() {
                 className="ml-2 w-36 px-5 py-3 bg-[#001526] text-white rounded-full text-[16px] font-semibold"
                 onClick={() => {
                   // Logic for save changes
+                  setEditMode(false);
                   setIsModalOpen(false);
                 }}
               >
@@ -302,13 +342,35 @@ export default function MedicalPage() {
         </div>
       )}
 
+        {/* Validation Modal */}
+        {isValidationModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] h-auto sm:h-[450px] rounded-2xl shadow-lg flex flex-col justify-center items-center">
+            <div className="flex justify-center mb-4">
+              <BsExclamationCircle className="w-24 h-24 text-[#001526]" />
+            </div>
+            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Incomplete Information</h2>
+            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">Please fill in all required fields before saving.</p>
+            <div className="flex justify-center mt-5">
+              <button
+                className="w-36 px-5 py-3 bg-[#001526] text-white rounded-full text-[16px] font-semibold"
+                onClick={() => setIsValidationModalOpen(false)}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Discard Changes Modal */}
       {isCancelModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] h-auto sm:h-[450px] rounded-2xl shadow-lg flex flex-col justify-center items-center">
             <div className="flex justify-center mb-4">
               <BsExclamationCircle className="w-24 h-24 text-[#001526]" />
             </div>
-            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Discard Changes</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Discard Changes?</h2>
             <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">Are you sure you want to cancel?
             <br />Your changes won't be saved.</p>
             <div className="flex justify-center mt-5">
