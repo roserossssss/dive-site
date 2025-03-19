@@ -12,6 +12,7 @@ export default function NewCertificate() {
     agency: "",
     location: "",
   });
+  const [showModal, setShowModal] = useState<"save" | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -26,7 +27,6 @@ export default function NewCertificate() {
     setCertification({ ...certification, [e.target.name]: e.target.value });
   };
 
-  // Save Certificate Function
   const saveCertificate = () => {
     if (!certification.name || !certification.level || !certification.agency || !certification.location || !file) {
       alert("Please fill in all fields and upload an image.");
@@ -39,38 +39,41 @@ export default function NewCertificate() {
       level: certification.level,
       agency: certification.agency,
       location: certification.location,
-      image: URL.createObjectURL(file), // Convert file to a URL for display
+      image: URL.createObjectURL(file),
     };
 
-    // Get existing certificates from localStorage
     const existingCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
-
-    // Add new certificate
     const updatedCertificates = [...existingCertificates, newCertificate];
-
-    // Save back to localStorage
     localStorage.setItem("certificates", JSON.stringify(updatedCertificates));
 
-    // Redirect back to Diving Certification Page
     router.push("/dashboard/CertificatePage");
   };
 
+  const handleConfirm = () => {
+    if (showModal === "save") {
+      saveCertificate();
+    }
+    setShowModal(null);
+  };
+  
+
   return (
-    <div className="flex-1 p-10 pt-0 relative">
+    <div className="flex-1 p-5 pt-2 relative">
       {/* Page Title */}
-      <h2 className="text-4xl font-bold text-black">My Dive Certification</h2>
+      <h2 className="text-3xl font-bold text-black">New Dive Certification</h2>
 
       {/* Buttons Section */}
       <div className="flex justify-end gap-4 mt-6">
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/dashboard/CertificatePage")}
           className="w-[230px] h-[60px] px-9 py-2 font-semibold text-xl bg-gray-300 text-black rounded-full"
         >
           Cancel
         </button>
-        <button 
-          onClick={saveCertificate} 
-          className="w-[230px] h-[60px] px-9 py-2 text-xl font-semibold bg-[#2E6782] text-white rounded-full">
+        <button
+          onClick={() => setShowModal("save")}
+          className="w-[230px] h-[60px] px-9 py-2 text-xl font-semibold bg-[#2E6782] text-white rounded-full"
+        >
           Save
         </button>
       </div>
@@ -79,9 +82,11 @@ export default function NewCertificate() {
       <div className="mt-6 bg-[#2E6782] p-6 rounded-t-3xl">
         <div className="flex flex-col items-center">
           <div className="w-[200px] h-[310px] flex items-center justify-center bg-transparent">
-            <img src={file ? URL.createObjectURL(file) : "/image-upload.svg"} 
-                 alt="Upload Preview" 
-                 className="w-[270px] h-[270px] -mt-6" />
+            <img
+              src={file ? URL.createObjectURL(file) : "/image-upload.svg"}
+              alt="Upload Preview"
+              className="w-[270px] h-[270px] -mt-6"
+            />
           </div>
           <p className="text-white text-sm -mt-15">Maximum of 5MB</p>
           <p className="text-white text-sm">JPEG, PNG, PDF</p>
@@ -146,6 +151,38 @@ export default function NewCertificate() {
           </div>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
+            <div className="flex justify-center mb-4">
+            </div>
+
+            <div className="flex justify-center mb-4">
+              <img src="/exclamation.svg" alt="Delete" className="w-50 h-50 mt-40" />
+            </div>
+
+            <h2 className="text-5xl font-bold text-black mt-10">Save New Certificate?</h2>
+            <p className="text-xl font-semibold text-gray-600 mt-4">You can edit this certificate later if necessary.</p>
+
+            <div className="mt-20 flex justify-center space-x-4">
+              <button
+                onClick={() => setShowModal(null)}
+                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

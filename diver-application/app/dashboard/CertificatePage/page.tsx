@@ -69,9 +69,9 @@ const DiveCertification = () => {
   };
 
   return (
-    <div className="flex-1 p-10 pt-0 relative">
+    <div className="flex-1 p-5 pt-2 relative">
       {/* Header Section */}
-      <h2 className="text-4xl font-bold text-black">My Dive Certification</h2>
+      <h2 className="text-3xl font-bold text-black">My Dive Certification</h2>
       <div className="flex items-center justify-between mt-4">
         <div className="flex items-center space-x-2">
           <img src="/leftarrow.svg" alt="Left Arrow" className="w-6 h-6 cursor-pointer" />
@@ -291,8 +291,8 @@ const DiveCertification = () => {
               <img src="/trash-delete.svg" alt="Delete" className="w-50 h-50 mt-40" />
             </div>
 
-            <h2 className="text-5xl font-bold text-black">Delete Certificate?</h2>
-            <p className="text-xl font-semibold text-gray-600 mt-1">This action cannot be undone.</p>
+            <h2 className="text-5xl font-bold text-black mt-10">Delete Certificate?</h2>
+            <p className="text-xl font-semibold text-gray-600 mt-4">This action cannot be undone.</p>
 
             <div className="mt-20 flex justify-center space-x-4">
               <button
