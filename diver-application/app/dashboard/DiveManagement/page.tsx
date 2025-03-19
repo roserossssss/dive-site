@@ -106,7 +106,7 @@ export default function DiveManagement() {
             <input
               type="text"
               placeholder="Search"
-              className="border rounded-full px-70 py-2 w-64 pl-5 placeholder:text-medium"
+              className="border rounded-full px-70 py-2 w-[400px] pl-5 placeholder:text-medium"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -127,12 +127,12 @@ export default function DiveManagement() {
               Sort
             </button>
             {sortDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[120px] z-50">
+              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg w-[70px] h-[97px] z-50">
                 {["date", "time", "depth"].map((criteria) => (
                   <button
                     key={criteria}
                     onClick={() => handleSort(criteria)}
-                    className="block w-full text-left px-4 py-2 text-black hover:bg-[#001526] hover:text-white"
+                    className="block w-fit text-left px-4 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white mx-auto"
                   >
                     {criteria.charAt(0).toUpperCase() + criteria.slice(1)}
                   </button>
@@ -151,10 +151,10 @@ export default function DiveManagement() {
               Filter
             </button>
             {filterDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[120px] z-50">
+              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[127px] h-[117px] z-50">
                 <button
                   onClick={() => handleFilter(null)}
-                  className="block w-full text-left px-4 py-2 text-black hover:bg-[#001526] hover:text-white"
+                  className="block w-full text-left px-4 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white hover: w-[110px] mx-auto"
                 >
                   All
                 </button>
@@ -163,7 +163,7 @@ export default function DiveManagement() {
                     <button
                       key={loc}
                       onClick={() => handleFilter(loc)}
-                      className="block w-full text-left px-4 py-2 text-black hover:bg-[#001526] hover:text-white"
+                      className="block w-full text-left px-2 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white w-[110px] mx-auto"
                     >
                       {loc}
                     </button>
@@ -189,10 +189,10 @@ export default function DiveManagement() {
       />
 
       <div className="flex-1 ml-8">
-        <h2 className="text-4xl font-bold text-white -mt-[40px]">{dive.title}</h2>
+        <h2 className="text-4xl font-bold text-white -mt-[30px]">{dive.title}</h2>
         <div className="flex items-center mt-1 tracking-wider">
           <img src="/location.svg" alt="Location Icon" className="w-7 h-7 mr-2" />
-          <p className="text-white font-bold text-xl tracking-wider mt-1">{dive.location}</p>
+          <p className="text-white font-bold text-xl tracking-wider mt-3">{dive.location}</p>
         </div>
         <div className="flex items-center text-xl mt-3">
           <img src="/calendar.svg" alt="Date Icon" className="w-7 h-7 mr-2" />
@@ -203,7 +203,6 @@ export default function DiveManagement() {
                 day: 'numeric',
                 })}
                 </p>
-
         </div>
         <p className="text-white text-xl mt-5 tracking-wider">{dive.notes}</p>
         <p className="text-white text-xl mt-2">{dive.description}</p>
@@ -246,9 +245,8 @@ export default function DiveManagement() {
         )}
       </div>
     </div>
-  ))}
+))}
 </div>
-
-    </div>
+</div>
   );
 }
