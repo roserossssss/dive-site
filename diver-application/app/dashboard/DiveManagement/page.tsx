@@ -180,16 +180,16 @@ export default function DiveManagement() {
       </div>
 
       {/* Dive List */}
-<div className="mt-5 flex flex-col items-center">
+<div className="mt-6 flex flex-col items-center">
   {filteredDives.map((dive, index) => (
     <div
       key={index}
-      className="p-10 w-[1400px] h-[370px] mb-7 rounded-3xl shadow-md bg-[#2C7DA0] flex items-center relative"
+      className="p-10 w-full max-w-[1450px] h-[400px] mb-7 rounded-3xl shadow-md bg-[#2C7DA0] flex items-center relative"
     >
       <img
         src={dive.image}
         alt={dive.title}
-        className="w-[520px] h-[370px] object-cover rounded-2xl -ml-10"
+        className="w-[570px] h-[400px] object-cover rounded-2xl flex-shrink-0 -ml-10"
       />
 
       <div className="flex-1 ml-8">
