@@ -5,48 +5,51 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function DiveManagement() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState<string>("");
-  const [filterByLocation, setFilterByLocation] = useState<string>("");
-  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
-  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
-  const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
+    const router = useRouter();
+    const [searchTerm, setSearchTerm] = useState("");
+    const [sortBy, setSortBy] = useState<string>("");
+    const [filterByLocation, setFilterByLocation] = useState<string>("");
+    const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+    const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+    const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
+    
+    const diveData = [
+  {
+    id: 1,
+    title: "Coral Reef Exploration",
+    description:
+      "Exploring the vibrant coral reefs, home to colorful fish, swaying corals, and graceful sea turtles in crystal-clear waters.",
+    notes: "Great visibility, lots of marine life",
+    date: "2024-01-01",
+    location: "Great Barrier Reef",
+    depth: 30,
+    time: 40,
+    image: "/sample-dive1.jpg",
+  },
+  {
+    id: 2,
+    title: "Sunken Ship Dive",
+    description: "Exploring the wreckage.",
+    notes: "Low visibility, but exciting",
+    date: "2024-01-19",
+    location: "Truk Lagoon",
+    depth: 30,
+    time: 40,
+    image: "/sample-dive1.jpg",
+  },
+  {
+    id: 3,
+    title: "Coral Reef Exploration",
+    description: "Exploring the vibrant coral reefs.",
+    notes: "Great visibility, lots of marine life",
+    date: "2024-01-01",
+    location: "Great Barrier Reef",
+    depth: 30,
+    time: 40,
+    image: "/sample-dive1.jpg",
+  },
+];
 
-  const diveData = [
-    {
-      id: 1,
-      title: "Coral Reef Exploration",
-      description: "Exploring the vibrant coral reefs, home to colorful fish, swaying corals, and graceful sea turtles in crystal-clear waters.",
-      notes: "Great visibility, lots of marine life",
-      date: "2024-01-01",
-      location: "Great Barrier Reef",
-      depth: 30,
-      time: 40,
-      image: "/sample-dive1.jpg",
-    },
-    {
-      id: 2,
-      title: "Sunken Sheep Dive",
-      description: "Exploring the wreckage",
-      notes: "Low visibility, but exciting",
-      date: "2024-01-19",
-      location: "Truk Lagoon",
-      depth: 30,
-      time: 40,
-      image: "/sample-dive1.jpg",
-    },
-    {
-      id: 3,
-      title: "Coral Reef Exploration",
-      description: "Exploring the vibrant coral reefs",
-      notes: "Great visibility, lots of marine life",
-      date: "2024-01-01",
-      location: "Great Barrier Reef",
-      depth: 30,
-      time: 40,
-      image: "/sample-dive1.jpg",
-    },
-  ];
 
   const handleSort = (criteria: string) => {
     setSortBy(criteria);
@@ -54,7 +57,7 @@ export default function DiveManagement() {
   };
 
   const handleFilter = (location: string | null) => {
-    setFilterByLocation(location || "");
+    setFilterByLocation(location ?? "");
     setFilterDropdownOpen(false);
   };
 
@@ -95,7 +98,8 @@ export default function DiveManagement() {
             onClick={() => router.push("/dashboard/DiveManagement/add")}
             className="bg-[#001526] text-white px-7 py-2 rounded-full flex items-center gap-2 mt-5"
           >
-            <img src="/plus.svg" alt="Plus" className="w-3 h-3" />
+            <img src="/plus.svg" alt="Plus" className="w-3 h-3" 
+            />
             New Dive
           </button>
         </div>
