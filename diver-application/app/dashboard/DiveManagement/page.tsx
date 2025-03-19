@@ -121,7 +121,7 @@ export default function DiveManagement() {
         </div>
   
         {/* Sort & Filter Buttons */}
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 p-4">
           <button
             onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
             className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
