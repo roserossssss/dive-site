@@ -1,186 +1,254 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { CiSearch } from "react-icons/ci";
 
 export default function DiveManagement() {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [sortBy, setSortBy] = useState("");
-    const [filterByLocation, setFilterByLocation] = useState("");
-    const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
-    
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState<string>("");
+  const [filterByLocation, setFilterByLocation] = useState<string>("");
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
 
-    const diveData = [
-        {
-            title: "Coral Reef Exploration",
-            description: "Exploring the vibrant coral reefs",
-            notes: "Great visibility, lots of marine life",
-            date: "2024-02-25",
-            location: "Great Barrier Reef",
-            depth: 30,
-            time: 50,
-            image: "/sample-dive1.jpg",
-        },
-        {
-            title: "Sunken Ship Dive",
-            description: "Investigating a WWII shipwreck",
-            notes: "Low visibility but exciting",
-            date: "2024-02-20",
-            location: "Truk Lagoon",
-            depth: 40,
-            time: 50,
-            image: "/sample-dive2.jpg",
-        },
-        {
-            title: "Cave diving",
-            description: "Investigating a cave under WATER?",
-            notes: "Exciting",
-            date: "2024-03-02",
-            location: "Pacific Ocean",
-            depth: 4,
-            time: 50,
-            image: "/sample-dive2.jpg",
-        },
-    ];
+  const diveData = [
+    {
+      id: 1,
+      title: "Coral Reef Exploration",
+      description: "Exploring the vibrant coral reefs, home to colorful fish, swaying corals, and graceful sea turtles in crystal-clear waters.",
+      notes: "Great visibility, lots of marine life",
+      date: "2024-01-01",
+      location: "Great Barrier Reef",
+      depth: 30,
+      time: 40,
+      image: "/sample-dive1.jpg",
+    },
+    {
+      id: 2,
+      title: "Sunken Sheep Dive",
+      description: "Exploring the wreckage",
+      notes: "Low visibility, but exciting",
+      date: "2024-01-19",
+      location: "Truk Lagoon",
+      depth: 30,
+      time: 40,
+      image: "/sample-dive1.jpg",
+    },
+    {
+      id: 3,
+      title: "Coral Reef Exploration",
+      description: "Exploring the vibrant coral reefs",
+      notes: "Great visibility, lots of marine life",
+      date: "2024-01-01",
+      location: "Great Barrier Reef",
+      depth: 30,
+      time: 40,
+      image: "/sample-dive1.jpg",
+    },
+  ];
 
-    // Filterings
-    const filteredDives = diveData
-        .filter((dive) =>
-            dive.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .filter((dive) =>
-            filterByLocation ? dive.location === filterByLocation : true
-        )
-        .sort((a, b) => {
-            if (sortBy === "date") return  - new Date(b.date);
-            if (sortBy === "depth") return b.depth - a.depth;
-            if (sortBy === "time") return b.time - a.time;
-            return 0;
-        });
+  const handleSort = (criteria: string) => {
+    setSortBy(criteria);
+    setSortDropdownOpen(false);
+  };
 
-    return (
-        <div>
-            <h1 className="text-3xl text-black p-2 font-extrabold">
-                My Dive
-            </h1>
+  const handleFilter = (location: string | null) => {
+    setFilterByLocation(location || "");
+    setFilterDropdownOpen(false);
+  };
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 lg:px-8 mt-8">
+  const filteredDives = diveData
+    .filter((dive) =>
+      dive.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((dive) =>
+      filterByLocation ? dive.location === filterByLocation : true
+    )
+    .sort((a, b) => {
+      if (sortBy === "date")
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      if (sortBy === "depth") return b.depth - a.depth;
+      if (sortBy === "time") return b.time - a.time;
+      return 0;
+    });
 
-            <div>
-        <Link href="/dashboard/DiveManagement/add">
-            <button className="bg-[#001526] text-white p-1 text-sm w-32 border-black rounded-2xl shadow-md hover:bg-blue-600 transition">
-                + Add Dive
+  return (
+    <div className="flex-1 p-5 pt-2 relative">
+      {/* Header Section */}
+      <h2 className="text-3xl font-bold text-black">My Dive</h2>
+
+      {/* Controls */}
+      <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center space-x-2">
+          <img
+            src="/leftarrow.svg"
+            alt="Left Arrow"
+            className="w-7 h-7 cursor-pointer mt-5"
+          />
+          <img
+            src="/rightarrow.svg"
+            alt="Right Arrow"
+            className="w-7 h-7 cursor-pointer mt-5"
+          />
+          <button
+            onClick={() => router.push("/dashboard/DiveManagement/add")}
+            className="bg-[#001526] text-white px-7 py-2 rounded-full flex items-center gap-2 mt-5"
+          >
+            <img src="/plus.svg" alt="Plus" className="w-3 h-3" />
+            New Dive
+          </button>
+        </div>
+
+        <div className="flex space-x-4">
+          {/* Search */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search"
+              className="border rounded-full px-70 py-2 w-64 pl-5 placeholder:text-medium"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <img
+              src="/search.svg"
+              alt="Search"
+              className="absolute right-3 top-2 w-5 h-5"
+            />
+          </div>
+
+          {/* Sort Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+            >
+              <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
+              Sort
             </button>
-        </Link>
-    </div>
+            {sortDropdownOpen && (
+              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[120px] z-50">
+                {["date", "time", "depth"].map((criteria) => (
+                  <button
+                    key={criteria}
+                    onClick={() => handleSort(criteria)}
+                    className="block w-full text-left px-4 py-2 text-black hover:bg-[#001526] hover:text-white"
+                  >
+                    {criteria.charAt(0).toUpperCase() + criteria.slice(1)}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
-
-    <div className="flex flex-wrap lg:justify-end justify-center gap-2">
-    <div className="relative w-56"> 
-        <CiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500" /> 
-        <input
-            type="text"
-            placeholder="Search"
-            className="pl-8 p-1 w-full rounded-lg text-sm text-black bg-white border border-black" 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-        />
+          {/* Filter Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+            >
+              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
+              Filter
+            </button>
+            {filterDropdownOpen && (
+              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[120px] z-50">
+                <button
+                  onClick={() => handleFilter(null)}
+                  className="block w-full text-left px-4 py-2 text-black hover:bg-[#001526] hover:text-white"
+                >
+                  All
+                </button>
+                {Array.from(new Set(diveData.map((d) => d.location))).map(
+                  (loc) => (
+                    <button
+                      key={loc}
+                      onClick={() => handleFilter(loc)}
+                      className="block w-full text-left px-4 py-2 text-black hover:bg-[#001526] hover:text-white"
+                    >
+                      {loc}
+                    </button>
+                  )
+                )}
+              </div>
+            )}
+          </div>
         </div>
+      </div>
+
+      {/* Dive List */}
+<div className="mt-5 flex flex-col items-center">
+  {filteredDives.map((dive, index) => (
+    <div
+      key={index}
+      className="p-10 w-[1400px] h-[370px] mb-7 rounded-3xl shadow-md bg-[#2C7DA0] flex items-center relative"
+    >
+      <img
+        src={dive.image}
+        alt={dive.title}
+        className="w-[520px] h-[370px] object-cover rounded-2xl -ml-10"
+      />
+
+      <div className="flex-1 ml-8">
+        <h2 className="text-4xl font-bold text-white -mt-[40px]">{dive.title}</h2>
+        <div className="flex items-center mt-1 tracking-wider">
+          <img src="/location.svg" alt="Location Icon" className="w-7 h-7 mr-2" />
+          <p className="text-white font-bold text-xl tracking-wider mt-1">{dive.location}</p>
+        </div>
+        <div className="flex items-center text-xl mt-3">
+          <img src="/calendar.svg" alt="Date Icon" className="w-7 h-7 mr-2" />
+          <p className="text-white">
+            {new Date(dive.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                })}
+                </p>
+
+        </div>
+        <p className="text-white text-xl mt-5 tracking-wider">{dive.notes}</p>
+        <p className="text-white text-xl mt-2">{dive.description}</p>
         
+        {/* Dive Depth and Time Section */}
+        <div className="flex space-x-16 mt-[48px] text-white ml-[290px]">
+          <div className="flex flex-col items-center">
+            <span className="font-bold text-7xl">
+              {dive.depth}
+              <span className="text-2xl font-bold">M</span>
+            </span>
+            <span className="text-xl tracking-widest">Dive Depth</span>
+          </div>
 
-        <select
-            className="p-1 border rounded-lg text-sm bg-[#001526] text-white"
-            onChange={(e) => setSortBy(e.target.value)}
-        >
-            <option value="">Sort By</option>
-            <option value="date">Date</option>
-            <option value="depth">Depth</option>
-            <option value="time">Time</option>
-        </select>
-
-        <select
-            className="p-1 border rounded-lg text-sm bg-[#001526] text-white"
-            onChange={(e) => setFilterByLocation(e.target.value)}
-        >
-            <option value="">Filter by Location</option>
-            {Array.from(new Set(diveData.map((d) => d.location))).map((loc) => (
-                <option key={loc} value={loc}>
-                    {loc}
-                </option>
-            ))}
-        </select>
-    </div>
-</div>
-
-
-            {/* Dive List */}
-<div className="px-8">
-    {filteredDives.map((dive, index) => (
-        <div key={index} className="bg-[#2C7DA0] p-4 rounded-xl shadow-md mb-8">
-            <div className="grid grid-cols-2">
-                <img
-                    src={dive.image}
-                    alt="Dive"
-                    className="w-full h-40 object-cover rounded-md"
-                />
-
-                <div className="relative flex flex-col justify-between">
-
-                    <div className="flex justify-between items-center">
-                        <h2 className="font-extrabold text-2xl text-white">
-                            {dive.title}
-                        </h2>
-
-
-                        <div className="relative">
-                            <button
-                                onClick={() =>
-                                    setDropdownIndex(dropdownIndex === index ? null : index)
-                                }
-                                className="text-2xl font-bold cursor-pointer text-white"
-                            >
-                                ...
-                            </button>
-
-                            {dropdownIndex === index && (
-                                <div className="absolute right-0 bg-[#D9E7EC] text-black shadow-md rounded-3xl p-2 mt-2">
-                                <Link href="/dashboard/DiveManagement/${dive.id}">
-                                <button className="block px-4 py-1 hover:bg-[#2C7DA0] hover:bg-opacity-100 hover:rounded-3xl w-full ">
-                                        Edit
-                                    </button>
-                                </Link>
-                                    <button className="block px-4 py-1 hover:bg-[#2C7DA0] hover:bg-opacity-100 hover:rounded-3xl w-full">
-                                        Delete
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                    <p className="text-lg text-white mt-1">{dive.location}</p>
-                    <p className="text-lg text-white">{dive.date}</p>
-
-                    <div className="text-xs text-white mt-2">
-                        <p>{dive.description}</p>
-                        <p>{dive.notes}</p>
-                    </div>
-
-                    <div className="flex justify-center gap-4 items-center font-bold text-4xl text-white mt-2">
-                        <span>{dive.depth}M</span>
-                        <span>{dive.time}Min</span>
-                    </div>
-
-                    <div className="flex justify-center gap-4 items-center font-bold text-xs text-white">
-                        <span>Dive Depth</span>
-                        <span>Dive Time</span>
-                    </div>
-                </div>
-            </div>
+          <div className="flex flex-col items-center">
+            <span className="font-bold text-7xl">
+              {dive.time}
+              <span className="text-2xl font-bold">MIN</span>
+            </span>
+            <span className="text-xl tracking-widest">Dive Time</span>
+          </div>
         </div>
-    ))}
+      </div>
+
+      {/* Action Menu */}
+      <div className="absolute top-7 right-5">
+        <button
+          onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
+          className="text-white"
+        >
+          <img src="/verticaldots.svg" alt="More options" className="w-6 h-6" />
+        </button>
+        {dropdownIndex === index && (
+          <div className="absolute top-10 right-0 bg-white shadow-md rounded-lg p-2">
+            <Link href={`/dashboard/DiveManagement/${dive.id}`}>
+              <button className="block px-3 py-3 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50 ">Update</button>
+            </Link>
+            <button className="block px-4 py-3 rounded-lg  text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50 ">Delete</button>
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
 </div>
 
-</div>
-    );
+    </div>
+  );
 }
