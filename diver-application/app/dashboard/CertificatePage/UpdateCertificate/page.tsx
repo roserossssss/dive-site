@@ -122,7 +122,9 @@ export default function EditCertificate() {
                  alt="Upload Preview" 
                  className="w-[270px] h-[270px] -mt-6" />
           </div>
-          <label className="mt-1 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
+          <p className="text-white text-sm -mt-5 mb-5">Maximum of 5MB</p>
+          <p className="text-white text-sm -mt-4">JPEG, PNG, PDF</p>
+          <label className="mt-5 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
             Upload Image
             <input type="file" className="hidden" onChange={handleFileChange} />
           </label>

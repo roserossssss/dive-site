@@ -88,8 +88,8 @@ export default function NewCertificate() {
               className="w-[270px] h-[270px] -mt-6"
             />
           </div>
-          <p className="text-white text-sm -mt-15">Maximum of 5MB</p>
-          <p className="text-white text-sm">JPEG, PNG, PDF</p>
+          <p className="text-white text-sm -mt-5 mb-5">Maximum of 5MB</p>
+          <p className="text-white text-sm -mt-4">JPEG, PNG, PDF</p>
           <label className="mt-5 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
             Upload Image
             <input type="file" className="hidden" onChange={handleFileChange} />
@@ -99,7 +99,7 @@ export default function NewCertificate() {
 
       {/* Certification Details Section */}
       <div className="bg-[#D9E7EC] p-10 rounded-b-3xl h-[400px]">
-        <h3 className="text-2xl font-bold text-black mb-4">Certification Details</h3>
+        <h3 className="text-3xl font-bold text-black mb-5">Certification Details</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Certification Name */}
