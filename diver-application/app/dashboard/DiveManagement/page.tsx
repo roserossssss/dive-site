@@ -175,7 +175,7 @@ export default function DiveManagement() {
               </p>
             </div>
   
-            <p className="text-white text-lg lg:text-xl mt-5">{dive.notes}</p>
+            <p className="text-white text-lg lg:text-xl mt-4">{dive.notes}</p>
             <p className="text-white text-lg lg:text-xl mt-2">{dive.description}</p>
   
             {/* Dive Depth and Time */}
