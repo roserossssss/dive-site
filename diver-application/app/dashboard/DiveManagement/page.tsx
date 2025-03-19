@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { CiSearch } from "react-icons/ci";
+
+import { CiMenuKebab } from "react-icons/ci";
 
 export default function DiveManagement() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -59,14 +62,14 @@ export default function DiveManagement() {
         });
 
     return (
-        <div className="bg-white p-4">
-            <h1 className="text-black text-3xl font-semibold mb-4">
-                Dive Management
+        <div>
+            <h1 className="text-3xl text-black p-2 font-extrabold">
+                My Dive
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 lg:px-8 mt-8">
 
-    <div>
+            <div>
         <Link href="/dashboard/DiveManagement/add">
             <button className="bg-[#001526] text-white p-1 text-sm w-32 border-black rounded-2xl shadow-md hover:bg-blue-600 transition">
                 + Add Dive
@@ -75,14 +78,18 @@ export default function DiveManagement() {
     </div>
 
 
-    <div className="flex flex-wrap justify-end gap-2">
+    <div className="flex flex-wrap lg:justify-end justify-center gap-2">
+    <div className="relative w-56"> 
+        <CiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500" /> 
         <input
             type="text"
             placeholder="Search"
-            className="p-1 w-56 rounded-lg text-sm text-black"
+            className="pl-8 p-1 w-full rounded-lg text-sm text-black bg-white border border-black" 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
         />
+        </div>
+        
 
         <select
             className="p-1 border rounded-lg text-sm bg-[#001526] text-white"
@@ -110,7 +117,7 @@ export default function DiveManagement() {
 
 
             {/* Dive List */}
-<div className="">
+<div className="px-8">
     {filteredDives.map((dive, index) => (
         <div key={index} className="bg-[#2C7DA0] p-4 rounded-xl shadow-md mb-8">
             <div className="grid grid-cols-2">
@@ -135,7 +142,7 @@ export default function DiveManagement() {
                                 }
                                 className="text-2xl font-bold cursor-pointer text-white"
                             >
-                                ...
+                                <CiMenuKebab />
                             </button>
 
                             {dropdownIndex === index && (
@@ -176,6 +183,6 @@ export default function DiveManagement() {
     ))}
 </div>
 
-        </div>
+</div>
     );
 }
