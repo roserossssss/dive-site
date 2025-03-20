@@ -17,6 +17,7 @@ export default function EditCertificate() {
     location: "",
     image: "", 
   });
+  const [showModal, setShowModal] = useState(false);
 
   // Loads the existing certification
   useEffect(() => {
@@ -60,9 +61,14 @@ export default function EditCertificate() {
     router.push("/dashboard/CertificatePage");
   };
 
+  const handleConfirm = () => {
+    saveCertificate();
+    setShowModal(false);
+  };
+
   return (
-    <div className="flex-1 p-10 pt-0 relative">
-      <h2 className="text-4xl font-bold text-black">Edit Dive Certification</h2>
+    <div className="flex-1 p-5 pt-2 relative">
+      <h2 className="text-3xl font-bold text-black">Edit Dive Certification</h2>
 
       <div className="flex justify-end gap-4 mt-6">
         <button
@@ -72,11 +78,41 @@ export default function EditCertificate() {
           Cancel
         </button>
         <button 
-          onClick={saveCertificate} 
+          onClick={() => setShowModal(true)} 
           className="w-[230px] h-[60px] px-9 py-2 text-xl font-semibold bg-[#2E6782] text-white rounded-full">
           Save
         </button>
       </div>
+
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
+            <div className="flex justify-center mb-4">
+              <img src="/exclamation.svg" alt="Warning" className="w-50 h-50 mt-40" />
+            </div>
+
+            <h2 className="text-5xl font-bold text-black mt-10">Confirm Changes</h2>
+            <p className="text-xl font-semibold text-gray-600 mt-4">You're about to update your details.</p>
+            <p className="text-xl font-semibold text-gray-600 mt-1">Want to proceed? </p>
+
+            <div className="mt-20 flex justify-center space-x-4">
+              <button
+                onClick={() => setShowModal(false)}
+                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Upload Section */}
       <div className="mt-6 bg-[#2E6782] p-6 rounded-t-3xl">
@@ -86,7 +122,9 @@ export default function EditCertificate() {
                  alt="Upload Preview" 
                  className="w-[270px] h-[270px] -mt-6" />
           </div>
-          <label className="mt-1 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
+          <p className="text-white text-sm -mt-5 mb-5">Maximum of 5MB</p>
+          <p className="text-white text-sm -mt-4">JPEG, PNG, PDF</p>
+          <label className="mt-5 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
             Upload Image
             <input type="file" className="hidden" onChange={handleFileChange} />
           </label>
