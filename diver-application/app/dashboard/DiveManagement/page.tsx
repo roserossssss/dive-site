@@ -98,8 +98,12 @@ export default function DiveManagement() {
           onClick={() => router.push("/dashboard/DiveManagement/add")}
           className="bg-[#001526] text-white px-9 py-3 rounded-full flex items-center gap-2 mt-6"
         >
-          <img src="/plus.svg" alt="Plus" className="w-3 h-3" />
-          New Dive
+          <img 
+          src="/plus.svg"
+          alt="Plus"
+          className="w-3 h-3 -mt-1 -ml-1 transition-transform duration-300"
+          />
+          <span className="text-white font-medium ml-1">New Dive</span>
         </button>
       </div>
   
