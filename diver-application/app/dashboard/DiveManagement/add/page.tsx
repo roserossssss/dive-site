@@ -64,7 +64,9 @@ export default function AddDive() {
 
               {/* Title */}
               <div className="flex flex-col ml-10">
-                <label className="mt-1 text-2xl font-semibold text-[#001526]">Title *</label>
+                <label className="mt-1 text-2xl font-semibold text-[#001526]">
+                    Title *
+                </label>
                 <input
                   type="text"
                   required
@@ -74,7 +76,9 @@ export default function AddDive() {
 
               {/* Location */}
               <div className="flex flex-col ml-10">
-                <label className="text-2xl font-semibold text-[#001526]">Location *</label>
+                <label className="text-2xl font-semibold text-[#001526]">
+                    Location *
+                </label>
                 <input
                   type="text"
                   required
@@ -84,7 +88,9 @@ export default function AddDive() {
 
               {/* Date Input */}
               <div className="flex flex-col ml-10">
-                <label className="mt-1 text-2xl font-semibold text-[#001526]">Date *</label>
+                <label className="mt-1 text-2xl font-semibold text-[#001526]">
+                    Date *
+                    </label>
                 <div className="mt-2 relative w-[170px]">
                   <input
                     type="text"
@@ -123,12 +129,14 @@ export default function AddDive() {
                 )}
               </div>
 
-              <button
-              onClick={handleUploadClick}
-              className="mt-5 w-[600px] h-[40px] bg-black text-white rounded-xl bg-[#001526] cursor-pointer text-lg font-bold tracking-widest"
+              <label htmlFor="fileUpload" className="cursor-pointer">
+                <button
+                onClick={handleUploadClick}
+                className="mt-5 w-[600px] h-[40px] bg-black text-white rounded-xl bg-[#001526] cursor-pointer text-lg font-bold tracking-widest"
               >
                 Upload Image
                 </button>
+                </label>
                 <input
                 type="file"
                 accept="image/*"
@@ -163,7 +171,9 @@ export default function AddDive() {
             {/* Dive Depth & Time */}
             <div className="col-span-0 flex justify-center gap-x-10 mt-5 ml-[-350px]">
               <div className="flex flex-col items-center">
-                <label className="text-2xl font-semibold text-[#001526]">Dive Depth in Meter</label>
+                <label className="text-2xl font-semibold text-[#001526]">
+                    Dive Depth in Meter
+                    </label>
                 <div className="relative flex items-center mt-5">
                   <input
                     type="text"
@@ -172,23 +182,20 @@ export default function AddDive() {
                     className="w-24 h-20 text-center text-xl text-[#001526] border p-4 rounded-2xl border-black bg-transparent"
                   />
                   <div className="absolute right-[-30px] flex flex-col gap-1">
-                    <img src="/arrow-up.svg" 
-                    alt="Increase Depth" 
-                    className="w-6 h-6 cursor-pointer" 
-                    onClick={() => handleDepthChange(1)}
-                    />
-                    <img 
-                    src="/arrow-down.svg"
-                    alt="Decrease Depth"
-                    className="w-6 h-6 cursor-pointer" 
-                    onClick={() => handleDepthChange(-1)}
-                    />
+                  <button onClick={() => handleDepthChange(1)}>
+                    <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
+                 </button>
+                 <button onClick={() => handleDepthChange(-1)}>
+                    <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
+                 </button>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col items-center">
-                <label className="text-2xl font-semibold text-[#001526]">Dive Time in Minutes</label>
+                <label className="text-2xl font-semibold text-[#001526]">
+                    Dive Time in Minutes
+                    </label>
                 <div className="relative flex items-center mt-5">
                   <input
                     type="text"
@@ -197,18 +204,12 @@ export default function AddDive() {
                     className="w-24 h-20 text-center text-xl text-[#001526] border p-4 rounded-xl border-2 border-black bg-transparent"
                   />
                   <div className="absolute right-[-30px] flex flex-col gap-1">
-                    <img 
-                    src="/arrow-up.svg"
-                    alt="Increase Time"
-                    className="w-6 h-6 cursor-pointer"
-                    onClick={() => handleTimeChange(1)}
-                    />
-                    <img
-                    src="/arrow-down.svg"
-                    alt="Decrease Time"
-                    className="w-6 h-6 cursor-pointer"
-                    onClick={() => handleTimeChange(-1)}
-                    />
+                  <button onClick={() => handleTimeChange(1)}>
+                    <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
+                 </button>
+                 <button onClick={() => handleTimeChange(-1)}>
+                    <img src="/arrow-down.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
+                 </button>
                   </div>
                 </div>
               </div>
