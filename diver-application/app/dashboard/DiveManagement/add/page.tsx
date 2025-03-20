@@ -7,17 +7,24 @@ export default function AddDive() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [depth, setDepth] = useState(0);
   const [time, setTime] = useState(0);
+  const [showModal, setShowModal] = useState<"save" | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const file = event.target.files?.[0];
+  if (file) {
+    console.log("File selected:", file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      console.log("File loaded:", reader.result);
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    console.log("No file selected");
+  }
+};
+
+  
 
   const handleUploadClick = () => {
     document.getElementById("fileUpload")?.click();
@@ -26,10 +33,18 @@ export default function AddDive() {
   const handleDepthChange = (amount: number) => {
     setDepth((prev) => Math.max(0, prev + amount));
   };
-
+  
   const handleTimeChange = (amount: number) => {
     setTime((prev) => Math.max(0, prev + amount));
+  };  
+
+  const handleConfirm = () => {
+    if (showModal === "save") {
+    }
+    setShowModal(null);
   };
+  
+
 
   return (
     <div className="flex-1 p-5 pt-2 relative">
@@ -39,19 +54,49 @@ export default function AddDive() {
       {/* Buttons Section */}
       <div className="flex justify-end gap-4 mt-7">
         <button
-          onClick={() => router.push("/dashboard/DiveManagement")}
+          onClick={() => router.push("/dashboard/DiveManagement/add")}
           className="w-[230px] h-[60px] px-9 py-2 font-semibold text-xl bg-gray-300 text-black rounded-full"
         >
           Cancel
         </button>
         <button
+         onClick={() => setShowModal("save")}
           className="w-[230px] h-[60px] px-9 py-2 text-xl font-semibold bg-[#2E6782] text-white rounded-full"
         >
           Save
         </button>
       </div>
 
-      {/* Wrapper to center Section Background & Form */}
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
+            <div className="flex justify-center mb-4">
+              <img src="/exclamation.svg" alt="Delete" className="w-50 h-50 mt-40" />
+            </div>
+            <h2 className="text-5xl font-bold text-black mt-10">Save New Certificate?</h2>
+            <p className="text-xl font-semibold text-gray-600 mt-4">
+              You can edit this certificate later if necessary.
+            </p>
+
+            <div className="mt-20 flex justify-center space-x-4">
+              <button
+                onClick={() => setShowModal(null)}
+                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm} 
+                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col items-center mt-6">
         {/* Section Background */}
         <div className="bg-[#2E6782] w-[1670px] h-[170px] rounded-t-2xl"></div>
@@ -60,7 +105,7 @@ export default function AddDive() {
         <div className="bg-[#D9E7EC] p-6 w-[1670px] h-[790px] rounded-b-2xl">
           <form className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h2 className="text-4xl text-[#001526] font-bold ml-10 mt-16">Dive Information</h2>
+              <h2 className="text-4xl text-[#001526] font-bold ml-10 mt-12">Dive Information</h2>
 
               {/* Title */}
               <div className="flex flex-col ml-10">
@@ -69,7 +114,6 @@ export default function AddDive() {
                 </label>
                 <input
                   type="text"
-                  required
                   className="mt-2 border p-5 rounded-2xl border-black bg-transparent w-full"
                 />
               </div>
@@ -81,7 +125,6 @@ export default function AddDive() {
                 </label>
                 <input
                   type="text"
-                  required
                   className="mt-2 border p-5 rounded-xl text-medium border-black bg-transparent w-full"
                 />
               </div>
@@ -95,7 +138,6 @@ export default function AddDive() {
                   <input
                     type="text"
                     placeholder="mm/dd/yy"
-                    required
                     className="border p-5 rounded-2xl border-black w-[160px] bg-transparent w-full pr-12"
                   />
                   <img
@@ -114,7 +156,7 @@ export default function AddDive() {
                   <img
                     src={imagePreview}
                     alt="Preview"
-                    className="w-full h-full object-cover rounded-md"
+                    className="w-full h-full objec-contain rounded-md"
                   />
                 ) : (
                   <div className="text-center">
@@ -129,14 +171,12 @@ export default function AddDive() {
                 )}
               </div>
 
-              <label htmlFor="fileUpload" className="cursor-pointer">
-                <button
-                onClick={handleUploadClick}
-                className="mt-5 w-[600px] h-[40px] bg-black text-white rounded-xl bg-[#001526] cursor-pointer text-lg font-bold tracking-widest"
+              <button
+              onClick={handleUploadClick}
+              className="z-10 mt-5 w-[600px] h-[40px] bg-black text-white rounded-xl bg-[#001526] cursor-pointer text-lg font-bold tracking-widest"
               >
                 Upload Image
                 </button>
-                </label>
                 <input
                 type="file"
                 accept="image/*"
@@ -159,9 +199,8 @@ export default function AddDive() {
 
                 {/* Description */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-2xl font-semibold text-[#001526] ml-36 mt-7">Description *</label>
+                  <label className="text-2xl font-semibold text-[#001526] ml-36 mt-6">Description *</label>
                   <textarea
-                    required
                     className="border p-3 rounded-2xl border-black bg-transparent w-[600px] h-[100px] ml-36"
                   ></textarea>
                 </div>
@@ -182,12 +221,12 @@ export default function AddDive() {
                     className="w-24 h-20 text-center text-xl text-[#001526] border p-4 rounded-2xl border-black bg-transparent"
                   />
                   <div className="absolute right-[-30px] flex flex-col gap-1">
-                  <button onClick={() => handleDepthChange(1)}>
-                    <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
-                 </button>
-                 <button onClick={() => handleDepthChange(-1)}>
-                    <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
-                 </button>
+                  <button type="button" onClick={(e) => { e.preventDefault(); handleDepthChange(1); }}>
+                    <img src="/arrow-up.svg" alt="Increase Depth" className="w-6 h-6 cursor-pointer"/>
+                    </button>
+                    <button type="button" onClick={(e) => { e.preventDefault(); handleDepthChange(-1); }}>
+                      <img src="/arrow-down.svg" alt="Decrease Depth" className="w-6 h-6 cursor-pointer"/>
+                      </button>
                   </div>
                 </div>
               </div>
@@ -204,12 +243,12 @@ export default function AddDive() {
                     className="w-24 h-20 text-center text-xl text-[#001526] border p-4 rounded-xl border-2 border-black bg-transparent"
                   />
                   <div className="absolute right-[-30px] flex flex-col gap-1">
-                  <button onClick={() => handleTimeChange(1)}>
+                  <button type="button" onClick={(e) => { e.preventDefault(); handleTimeChange(1); }}>
                     <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
-                 </button>
-                 <button onClick={() => handleTimeChange(-1)}>
-                    <img src="/arrow-down.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
-                 </button>
+                    </button>
+                    <button type="button" onClick={(e) => { e.preventDefault(); handleTimeChange(-1); }}>
+                      <img src="/arrow-down.svg" alt="Decrease Time" className="w-6 h-6 cursor-pointer"/>
+                      </button>
                   </div>
                 </div>
               </div>
