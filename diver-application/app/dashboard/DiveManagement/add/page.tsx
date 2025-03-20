@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AddDive() {
@@ -10,20 +10,19 @@ export default function AddDive() {
   const [showModal, setShowModal] = useState<"save" | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const file = event.target.files?.[0];
-  if (file) {
-    console.log("File selected:", file);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      console.log("File loaded:", reader.result);
-      setImagePreview(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    console.log("No file selected");
-  }
-};
-
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  useEffect(() => {
+    console.log("Updated Image Preview:", imagePreview);
+  }, [imagePreview]);
   
 
   const handleUploadClick = () => {
@@ -52,16 +51,16 @@ export default function AddDive() {
       <h2 className="text-3xl font-bold text-black">New Dive</h2>
 
       {/* Buttons Section */}
-      <div className="flex justify-end gap-4 mt-7">
+      <div className="max-w-[1200px] mx-auto flex justify-end gap-4 mt-5 mr-14">
         <button
           onClick={() => router.push("/dashboard/DiveManagement/add")}
-          className="w-[230px] h-[60px] px-9 py-2 font-semibold text-xl bg-gray-300 text-black rounded-full"
+          className="w-full md:w-[230px] h-[60px] md:h-[60px] px-9 py-2 font-semibold text-xl bg-gray-300 text-[#001526] rounded-full"
         >
           Cancel
         </button>
         <button
          onClick={() => setShowModal("save")}
-          className="w-[230px] h-[60px] px-9 py-2 text-xl font-semibold bg-[#2E6782] text-white rounded-full"
+          className="w-full md:w-[230px] h-[60px] px-9 py-2 text-xl font-semibold bg-[#2E6782] text-white rounded-full"
         >
           Save
         </button>
@@ -74,7 +73,7 @@ export default function AddDive() {
             <div className="flex justify-center mb-4">
               <img src="/exclamation.svg" alt="Delete" className="w-50 h-50 mt-40" />
             </div>
-            <h2 className="text-5xl font-bold text-black mt-10">Save New Certificate?</h2>
+            <h2 className="text-5xl font-bold text-[#001526] mt-10">Save New Certificate?</h2>
             <p className="text-xl font-semibold text-gray-600 mt-4">
               You can edit this certificate later if necessary.
             </p>
@@ -82,13 +81,13 @@ export default function AddDive() {
             <div className="mt-20 flex justify-center space-x-4">
               <button
                 onClick={() => setShowModal(null)}
-                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+                className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirm} 
-                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+                className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
               >
                 Yes
               </button>
@@ -150,41 +149,43 @@ export default function AddDive() {
             </div>
 
             {/* Image Upload */}
-            <div className="flex flex-col items-center mt-12">
-              <div className="border-2 border-black rounded-2xl w-[590px] h-[340px] flex items-center justify-center bg-transparent">
-                {imagePreview ? (
-                  <img
-                    src={imagePreview}
-                    alt="Preview"
-                    className="w-full h-full objec-contain rounded-md"
-                  />
-                ) : (
-                  <div className="text-center">
-                    <img
-                      src="/image-uploadblack.svg"
-                      alt="Upload Icon"
-                      className="w-60 h-60 mx-auto"
-                    />
-                    <p className="text-medium mt-5">Maximum of 5MB</p>
-                    <p className="text-medium">JPEG, PNG, JPEG</p>
-                  </div>
-                )}
-              </div>
+<div className="flex flex-col items-center mt-12">
+  <div className="border-2 border-black rounded-2xl w-[590px] h-[340px] flex items-center justify-center bg-transparent">
+    {imagePreview ? (
+      <img
+        src={imagePreview}
+        alt="Preview"
+        className="w-full h-full object-cover rounded-md"
+      />
+    ) : (
+      <div className="text-center">
+        <img
+          src="/image-uploadblack.svg"
+          alt="Upload Icon"
+          className="w-60 h-60 mx-auto"
+        />
+        <p className="text-medium mt-5">Maximum of 5MB</p>
+        <p className="text-medium">JPEG, PNG, JPEG</p>
+      </div>
+    )}
+  </div>
 
-              <button
-              onClick={handleUploadClick}
-              className="z-10 mt-5 w-[600px] h-[40px] bg-black text-white rounded-xl bg-[#001526] cursor-pointer text-lg font-bold tracking-widest"
-              >
-                Upload Image
-                </button>
-                <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                id="fileUpload"
-                onChange={handleImageChange}
-              />
-            </div>
+  {/* Upload Image Button */}
+  <label
+    htmlFor="fileUpload"
+    className="z-10 mt-5 w-[600px] h-[40px] bg-black text-white rounded-xl bg-[#001526] cursor-pointer text-lg font-bold tracking-widest flex items-center justify-center"
+  >
+    Upload Image
+  </label>
+  <input
+    type="file"
+    accept="image/*"
+    className="hidden"
+    id="fileUpload"
+    onChange={handleImageChange}
+  />
+</div>
+
 
             {/*Dive Details */}
             <div className="col-span-2">
