@@ -79,7 +79,7 @@ export default function DiveManagement() {
   return (
     <div>
     {/* Header Section */}
-    <h2 className="text-3xl font-bold text-black">My Dive</h2>
+    <h2 className="text-3xl font-bold text-[#001526]">My Dive</h2>
   
     {/* Controls */}
     <div className="flex flex-wrap items-center justify-between gap-4">
@@ -87,59 +87,96 @@ export default function DiveManagement() {
         <img
           src="/leftarrow.svg"
           alt="Left Arrow"
-          className="w-7 h-7 cursor-pointer mt-5"
+          className="w-7 h-7 cursor-pointer mt-6"
         />
         <img
           src="/rightarrow.svg"
           alt="Right Arrow"
-          className="w-7 h-7 cursor-pointer mt-5"
+          className="w-7 h-7 cursor-pointer mt-6"
         />
         <button
           onClick={() => router.push("/dashboard/DiveManagement/add")}
-          className="bg-[#001526] text-white px-7 py-2 rounded-full flex items-center gap-2 mt-5"
+          className="bg-[#001526] text-white px-9 py-3 rounded-full flex items-center gap-2 mt-6"
         >
           <img src="/plus.svg" alt="Plus" className="w-3 h-3" />
           New Dive
         </button>
       </div>
   
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 mt-1">
         {/* Search */}
-        <div className="relative w-full sm:w-auto">
+        <div className="relative w-full mt-1 sm:w-auto">
           <input
             type="text"
             placeholder="Search"
-            className="border rounded-full px-5 py-2 w-full sm:w-[400px] placeholder:text-medium bg-white"
+            className="border rounded-full px-5 py-2 w-full mt-5 sm:w-[400px] placeholder:text-medium bg-white"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <img
             src="/search.svg"
             alt="Search"
-            className="absolute right-3 top-2 w-5 h-5"
+            className="absolute right-3 mt-5 top-2 w-6 h-6"
           />
         </div>
   
-        {/* Sort & Filter Buttons */}
-        <div className="flex space-x-4 p-4">
-          <button
-            onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-            className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
-          >
-            <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
-            Sort
-          </button>
-  
-          <button
-            onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-            className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
-          >
-            <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
-            Filter
-          </button>
+        {/* Sort Dropdown */}
+        <div className="relative mt-5 ">
+            <button
+              onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+            >
+              <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
+              Sort
+            </button>
+            {sortDropdownOpen && (
+              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg w-[70px] h-[97px] z-50">
+                {["date", "time", "depth"].map((criteria) => (
+                  <button
+                    key={criteria}
+                    onClick={() => handleSort(criteria)}
+                    className="block w-fit text-left px-4 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white mx-auto"
+                  >
+                    {criteria.charAt(0).toUpperCase() + criteria.slice(1)}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Filter Dropdown */}
+          <div className="relative mt-5 -ml-7 px-5">
+            <button
+              onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+            >
+              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
+              Filter
+            </button>
+            {filterDropdownOpen && (
+              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[127px] h-[117px] z-50">
+                <button
+                  onClick={() => handleFilter(null)}
+                  className="block w-full text-left px-4 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white hover: w-[110px] mx-auto"
+                >
+                  All
+                </button>
+                {Array.from(new Set(diveData.map((d) => d.location))).map(
+                  (loc) => (
+                    <button
+                      key={loc}
+                      onClick={() => handleFilter(loc)}
+                      className="block w-full text-left px-2 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white w-[110px] mx-auto"
+                    >
+                      {loc}
+                    </button>
+                  )
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
   
     {/* Dive List */}
     <div className="mt-6 flex flex-col items-center mx-4">
@@ -156,7 +193,7 @@ export default function DiveManagement() {
           />
   
           {/* Content Section */}
-          <div className="flex-1 p-4 w-full text-center lg:text-left">
+          <div className="flex-1 p-5 -mt-20 w-full text-center lg:text-left">
             <h2 className="text-2xl lg:text-4xl font-bold text-white">{dive.title}</h2>
   
             <div className="flex flex-wrap justify-center lg:justify-start mt-2 gap-2">
@@ -181,7 +218,7 @@ export default function DiveManagement() {
             {/* Dive Depth and Time */}
             <div className="flex flex-col md:flex-row justify-center  mt-6 text-white gap-6">
               <div className="flex flex-col items-center">
-                <span className="font-bold text-5xl lg:text-7xl">
+                <span className="font-bold text-5xl lg:text-7xl mt-10 p-2">
                   {dive.depth}
                   <span className="text-lg lg:text-2xl font-bold">M</span>
                 </span>
@@ -189,7 +226,7 @@ export default function DiveManagement() {
               </div>
   
               <div className="flex flex-col items-center">
-                <span className="font-bold text-5xl lg:text-7xl">
+                <span className="font-bold text-5xl lg:text-7xl mt-10 p-2">
                   {dive.time}
                   <span className="text-lg lg:text-2xl font-bold">MIN</span>
                 </span>
