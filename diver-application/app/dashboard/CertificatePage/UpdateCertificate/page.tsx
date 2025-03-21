@@ -86,7 +86,7 @@ export default function EditCertificate() {
 
       {/* Confirmation Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
             <div className="flex justify-center mb-4">
               <img src="/exclamation.svg" alt="Warning" className="w-50 h-50 mt-40" />
