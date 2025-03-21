@@ -58,7 +58,7 @@ export default function Sidebar() {
       >
         {/* Sidebar Header */}
         <div className=" md:flex bg-white p-4 items-center justify-center mb-2">
-          <img className="h-10 w-10" src="../images/dive_light_logo.svg" alt="Logo" />
+          <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
           <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
         </div>
 
@@ -99,7 +99,7 @@ export default function Sidebar() {
             <span className="block font-semibold text-black text-sm truncate">John Doe</span>
             <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>
           </div>
-          <Link href="/dashboard/ProfilePage">
+          <Link href="/dashboard/ProfilePage/ProfileSettings">
             <span className="text-lg text-black cursor-pointer">...</span>
           </Link>
         </div>
