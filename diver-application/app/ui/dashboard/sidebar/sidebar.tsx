@@ -68,7 +68,7 @@ export default function Sidebar() {
     className={`fixed top-0 left-0 w-60 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform ease-in-out 
     ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
   >
-    <img className="h-10 w-10" src="../images/dive_light_logo.svg" alt="Logo" />
+    <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
     <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
   </div>
 
@@ -130,7 +130,7 @@ export default function Sidebar() {
         <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>
 
       </div>
-      <Link href="/dashboard/ProfilePage">
+      <Link href="/dashboard/ProfilePage/ProfileSettings">
         <span className="text-lg text-black cursor-pointer">...</span>
       </Link>
     </div>
