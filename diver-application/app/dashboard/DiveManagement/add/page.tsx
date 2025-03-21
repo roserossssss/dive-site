@@ -25,10 +25,6 @@ export default function AddDive() {
   }, [imagePreview]);
   
 
-  const handleUploadClick = () => {
-    document.getElementById("fileUpload")?.click();
-  };
-
   const handleDepthChange = (amount: number) => {
     setDepth((prev) => Math.max(0, prev + amount));
   };
@@ -98,10 +94,10 @@ export default function AddDive() {
 
       <div className="flex flex-col items-center mt-6">
         {/* Section Background */}
-        <div className="bg-[#2E6782] w-[1670px] h-[170px] rounded-t-2xl"></div>
+        <div className="bg-[#2E6782] w-[1670px] h-[170px] rounded-t-[3rem]"></div>
 
         {/* Dive Form */}
-        <div className="bg-[#D9E7EC] p-6 w-[1670px] h-[790px] rounded-b-2xl">
+        <div className="bg-[#D9E7EC] p-6 w-[1670px] h-[790px] rounded-b-[3rem]">
           <form className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
               <h2 className="text-4xl text-[#001526] font-bold ml-10 mt-12">Dive Information</h2>
@@ -149,7 +145,7 @@ export default function AddDive() {
             </div>
 
             {/* Image Upload */}
-<div className="flex flex-col items-center mt-12">
+            <div className="flex flex-col items-center mt-12">
   <div className="border-2 border-black rounded-2xl w-[590px] h-[340px] flex items-center justify-center bg-transparent">
     {imagePreview ? (
       <img
@@ -260,3 +256,4 @@ export default function AddDive() {
     </div>
   );
 }
+
