@@ -12,6 +12,9 @@ export default function DiveManagement() {
     const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
     const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
     const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [deleteDiveId, setDeleteDiveId] = useState<number | null>(null);
+    
     
     const diveData = [
   {
@@ -49,6 +52,17 @@ export default function DiveManagement() {
     image: "/sample-dive1.jpg",
   },
 ];
+
+const handleDelete = (id: number) => {
+  setDeleteDiveId(id);
+  setDeleteModalOpen(true);
+};
+
+const confirmDelete = () => {
+  console.log(`Deleting dive with ID: ${deleteDiveId}`);
+  setDeleteModalOpen(false);
+  setDeleteDiveId(null);
+};
 
 
   const handleSort = (criteria: string) => {
@@ -249,12 +263,14 @@ export default function DiveManagement() {
             </button>
             {dropdownIndex === index && (
               <div className="absolute top-10 right-0 bg-white shadow-md rounded-lg p-2 w-28">
-                <Link href={`/dashboard/DiveManagement/${dive.id}`}>
+                <Link href={`/dashboard/DiveManagement/id${dive.id}`}>
                   <button className="block w-full px-3 py-3 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50">
                     Update
                   </button>
                 </Link>
-                <button className="block w-full px-4 py-3 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50">
+                <button 
+                 onClick={() => handleDelete(dive.id)}
+                 className="block w-full px-4 py-3 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50">
                   Delete
                 </button>
               </div>
@@ -263,6 +279,36 @@ export default function DiveManagement() {
         </div>
       ))}
     </div>
+
+     {/* Delete Confirmation Modal */}
+     {deleteModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
+                  <div className="flex justify-center mb-4">
+                    <img src="/trash-delete.svg" alt="Delete" className="w-50 h-50 mt-40" />
+                  </div>
+                  <h2 className="text-5xl font-bold text-[#001526] mt-10">Delete Dive?</h2>
+                  <p className="text-xl font-semibold text-gray-600 mt-4">
+                    This action cannot be undone.
+                  </p>
+      
+                  <div className="mt-20 flex justify-center space-x-4">
+                    <button
+                      onClick={() =>  setDeleteModalOpen(false)}
+                      className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={confirmDelete} 
+                      className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
+                    >
+                      Yes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
   </div>
   
   );

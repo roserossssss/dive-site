@@ -47,7 +47,7 @@ export default function AddDive() {
       <h2 className="text-3xl font-bold text-black">New Dive</h2>
 
       {/* Buttons Section */}
-      <div className="max-w-[1200px] mx-auto flex justify-end gap-4 mt-5 mr-14">
+      <div className="max-w-[1200px] mx-auto flex justify-end gap-4 mt-5 mr-20">
         <button
           onClick={() => router.push("/dashboard/DiveManagement/add")}
           className="w-full md:w-[230px] h-[60px] md:h-[60px] px-9 py-2 font-semibold text-xl bg-gray-300 text-[#001526] rounded-full"
@@ -94,10 +94,10 @@ export default function AddDive() {
 
       <div className="flex flex-col items-center mt-6">
         {/* Section Background */}
-        <div className="bg-[#2E6782] w-[1670px] h-[170px] rounded-t-[3rem]"></div>
+        <div className="bg-[#2E6782]  w-full max-w-[92%] h-[120px] rounded-t-[3rem]"></div>
 
         {/* Dive Form */}
-        <div className="bg-[#D9E7EC] p-6 w-[1670px] h-[790px] rounded-b-[3rem]">
+        <div className="bg-[#D9E7EC]  p-6 w-full max-w-[92%] h-auto rounded-b-[3rem]">
           <form className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
               <h2 className="text-4xl text-[#001526] font-bold ml-10 mt-12">Dive Information</h2>
@@ -105,35 +105,35 @@ export default function AddDive() {
               {/* Title */}
               <div className="flex flex-col ml-10">
                 <label className="mt-1 text-2xl font-semibold text-[#001526]">
-                    Title *
+                    Title <span className="text-[#CF0C0F]">*</span>
                 </label>
                 <input
                   type="text"
-                  className="mt-2 border p-5 rounded-2xl border-black bg-transparent w-full"
+                  className="mt-2 border sm:p-3 md:p-5 rounded-2xl border-black bg-transparent w-full max-w-[600px]"
                 />
               </div>
 
               {/* Location */}
               <div className="flex flex-col ml-10">
                 <label className="text-2xl font-semibold text-[#001526]">
-                    Location *
+                    Location <span className="text-[#CF0C0F]">*</span>
                 </label>
                 <input
                   type="text"
-                  className="mt-2 border p-5 rounded-xl text-medium border-black bg-transparent w-full"
+                  className="mt-2 border sm:p-3 md:p-5 rounded-xl text-medium border-black bg-transparent w-full max-w-[600px]"
                 />
               </div>
 
               {/* Date Input */}
               <div className="flex flex-col ml-10">
                 <label className="mt-1 text-2xl font-semibold text-[#001526]">
-                    Date *
+                    Date <span className="text-[#CF0C0F]">*</span>
                     </label>
                 <div className="mt-2 relative w-[170px]">
                   <input
                     type="text"
                     placeholder="mm/dd/yy"
-                    className="border p-5 rounded-2xl border-black w-[160px] bg-transparent w-full pr-12"
+                    className="border p-5 rounded-2xl border-black w-[160px] bg-transparent w-full pr-12 w-full max-w-[600px]"
                   />
                   <img
                     src="/calendar-icon.svg"
@@ -190,23 +190,23 @@ export default function AddDive() {
 
                 {/* Notes */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-2xl font-semibold text-[#001526] ml-10 mt-7">Notes *</label>
-                  <textarea className="border p-3 rounded-2xl border-black bg-transparent w-[650px] h-[100px] ml-10"></textarea>
+                  <label className="text-2xl font-semibold text-[#001526] ml-10 mt-7">Notes <span className="text-[#CF0C0F]">*</span> </label>
+                  <textarea className="border p-3 rounded-2xl border-black bg-transparent w-full max-w-[610px] h-32 ml-10"></textarea>
                 </div>
 
                 {/* Description */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-2xl font-semibold text-[#001526] ml-36 mt-6">Description *</label>
+                  <label className="text-2xl font-semibold text-[#001526] ml-18 mt-6">Description <span className="text-[#CF0C0F]">*</span> </label>
                   <textarea
-                    className="border p-3 rounded-2xl border-black bg-transparent w-[600px] h-[100px] ml-36"
+                    className="border p-3 rounded-2xl border-black bg-transparent w-full max-w-[570px] h-32 ml-18"
                   ></textarea>
                 </div>
               </div>
             </div>
 
             {/* Dive Depth & Time */}
-            <div className="col-span-0 flex justify-center gap-x-10 mt-5 ml-[-350px]">
-              <div className="flex flex-col items-center">
+            <div className="grid grid-cols-2 gap-x-20 mt-5">
+              <div className="flex flex-col items-start w-full ml-10">
                 <label className="text-2xl font-semibold text-[#001526]">
                     Dive Depth in Meter
                     </label>
@@ -228,7 +228,7 @@ export default function AddDive() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-start w-full -ml-36">
                 <label className="text-2xl font-semibold text-[#001526]">
                     Dive Time in Minutes
                     </label>
@@ -239,7 +239,7 @@ export default function AddDive() {
                     readOnly
                     className="w-24 h-20 text-center text-xl text-[#001526] border p-4 rounded-xl border-2 border-black bg-transparent"
                   />
-                  <div className="absolute right-[-30px] flex flex-col gap-1">
+                  <div className="absolute right-[-25px] flex flex-col gap-1">
                   <button type="button" onClick={(e) => { e.preventDefault(); handleTimeChange(1); }}>
                     <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
                     </button>
