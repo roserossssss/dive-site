@@ -1,54 +1,73 @@
 import Link from 'next/link';
+import Image from "next/image";
 
-export default function login() {
+export default function Login() {
     return (
+        <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
+            <Image 
+                src="/images/Landing_Page.jpg"  
+               alt="Landing Page"
+               layout="fill"
+               objectFit="cover"
+               priority 
+                className="absolute inset-0 brightness-110 contrast-105"
+                            />
+            <div className="relative z-10 flex w-full lg:w-3/5 justify-center items-center ml-auto lg:p-16">
+                
 
-        <div className="flex min-h-screen">
+                <div className="w-full max-w-4xl lg:p-12 p-6">
+                    <form className="bg-[#D9E7EC] p-10 rounded-3xl shadow-lg w-full">
+                        <div className="flex flex-col items-center lg:px-10">
 
-            <div className="hidden md:flex md:w-1/2 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/8a/Discover_Scuba_Diving_--_St._Croix%2C_US_Virgin_Islands.jpg')] bg-center bg-no-repeat bg-cover justify-center items-center">
-                <img 
-                    src="#" 
-                    alt="Login Illustration" 
-                    className="w-3/4 max-w-md"
-                />
-            </div>
+                        <img className="w-32 h-32 mb-4" src="../masterliveboards.svg"/>
+                            
+                            <h1 className="text-3xl font-bold text-center mb-10 text-[#001526]">
+                                Log in
+                            </h1>
 
+                            {/* Email Input */}
+                            <input    
+                                type="text" 
+                                placeholder="Email Address" 
+                                className="w-full p-3 mb-4 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#D9E7EC] border-black border-t-1"
+                                required 
+                            />
 
-            <div className="flex w-full md:w-1/2 justify-center items-center bg-gray-100">
-                <form className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-                    <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Log-in</h1>
+                            {/* Password Input */}
+                            <input 
+                                type="password" 
+                                placeholder="Password" 
+                                className="w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#D9E7EC] border-black border-t-1"
+                                required 
+                            />
 
+                            {/* Forgot Password Link */}
+                            <div className="flex justify-end w-full mb-4 text-sm">
+                                <Link href="/forgot-password" className="text-[#001526] hover:underline font-bold">
+                                    Forgot Password?
+                                </Link>
+                            </div>
 
-                    <input 
-                        type="text" 
-                        placeholder="Username" 
-                        className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required 
-                    />
+                            {/* Login Button */}
+                            <button className="w-full bg-[#001526] text-white py-3 rounded-2xl hover:bg-blue-700 transition mt-8">
+                                Login
+                            </button>
 
+                            {/* Signup Redirect */}
+                            <div className="flex justify-center mt-4">
+                                <span className="text-[#001526] font-bold">Don't have an account?</span>
+                                <Link href="/Authentication/signup" className="text-[#2C7DA0] hover:underline font-bold ml-2">
+                                    Sign-up
+                                </Link>
+                            </div>
 
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        className="w-full px-4 py-2 mb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required 
-                    />
-
-
-                    <div className="flex justify-between mb-4 text-sm">
-                        <Link href="/sign-up" className="text-blue-500 hover:underline">
-                            Sign up
-                        </Link>
-                        <Link href="/forgot-password" className="text-blue-500 hover:underline">
-                            Forgot Password?
-                        </Link>
-                    </div>
-
-
-                    <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                        Login
-                    </button>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    )};
+    );
+};
+
+
+    
