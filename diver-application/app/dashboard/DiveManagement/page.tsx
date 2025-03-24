@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 
+import { CiMenuKebab } from "react-icons/ci";
+
 export default function DiveManagement() {
     const router = useRouter();
     const [searchTerm, setSearchTerm] = useState("");
@@ -251,15 +253,25 @@ const confirmDelete = () => {
                 <span className="text-lg lg:text-xl">Dive Time</span>
               </div>
             </div>
+
           </div>
-  
-          {/* Action Menu */}
-          <div className="absolute top-5 right-5">
+
+          {/* Sort & Filter Buttons */}
+          <div className="flex space-x-4 p-4">
             <button
-              onClick={() => setDropdownIndex(dropdownIndex === index ? null : index)}
-              className="text-white"
+              onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
             >
-              <img src="/verticaldots.svg" alt="More options" className="w-6 h-6" />
+              <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
+              Sort
+            </button>
+
+            <button
+              onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
+              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+            >
+              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
+              Filter
             </button>
             {dropdownIndex === index && (
               <div className="absolute top-10 right-0 bg-white shadow-md rounded-lg p-2 w-28">
@@ -310,6 +322,7 @@ const confirmDelete = () => {
               </div>
             )}
   </div>
+
   
   );
 }

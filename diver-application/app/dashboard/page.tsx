@@ -38,7 +38,7 @@ export default function Dashboard() {
                     <div className="w-auto">
                         <Reports />
                     </div>
-                    <div className="lg:w-[800px] lg:-mt-80 md:-mt-72">
+                    <div className="lg:w-[800px] lg:-mt-80 md:-mt-72 mt-4">
                     <Chart />
                     </div>
                 </div>

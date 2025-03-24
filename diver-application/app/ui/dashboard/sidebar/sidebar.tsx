@@ -20,7 +20,7 @@ const Itemmenu = [
       { title: "Gallery", path: "/dashboard/GalleryPage", icon: <TfiGallery /> },
     ],
   },
-  {
+  { 
     title: "Requirements",
     list: [
       { title: "Diving Certificate", path: "/dashboard/CertificatePage", icon: <TbCertificate /> },
@@ -50,23 +50,26 @@ export default function Sidebar() {
         {isOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
       </button>
 
-      {/* Sidebar */}
+      {/* Sidebar Header (Separate but Follows Sidebar State) */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 md:w-72 flex flex-col text-black z-50 
-        transition-transform duration-300 ease-in-out bg-[#001526] rounded-3xl overflow-y-auto 
+        className={`fixed top-0 left-0 w-64 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
-        {/* Sidebar Header */}
-        <div className=" md:flex bg-white p-4 items-center justify-center mb-2">
-          <img className="h-10 w-10" src="../images/dive_light_logo.svg" alt="Logo" />
-          <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
-        </div>
+        <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
+        <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
+      </div>
 
+      {/* Sidebar */}
+      <div
+        className={`fixed top-14 left-0 h-[calc(100%-56px)] w-64 md:w-72 flex flex-col text-black z-50 
+        transition-transform duration-300 ease-in-out bg-[#001526] rounded-tr-3xl overflow-y-auto 
+        ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+      >
         {/* Sidebar Menu */}
-        <div className="mt-14">
+        <div className="mt-8 p-4">
           <ul>
             {Itemmenu.map((category) => (
-              <li key={category.title} className="mb-3 relative">
+              <li key={category.title} className="mb-3 relative -left-5">
                 <ul className="mb-14 mt-4 space-y-2">
                   {category.list.map((item) => (
                     <li key={item.title} className="relative text-center">
@@ -99,7 +102,7 @@ export default function Sidebar() {
             <span className="block font-semibold text-black text-sm truncate">John Doe</span>
             <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>
           </div>
-          <Link href="/dashboard/ProfilePage">
+          <Link href="/dashboard/ProfilePage/ProfileSettings">
             <span className="text-lg text-black cursor-pointer">...</span>
           </Link>
         </div>
