@@ -5,31 +5,27 @@ export default function Login() {
     return (
         <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
             <Image 
-                src="/images/Landing_Page.jpg"  
-               alt="Landing Page"
-               layout="fill"
-               objectFit="cover"
-               priority 
-                className="absolute inset-0 brightness-110 contrast-105"
-                            />
-            <div className="relative z-10 flex w-full lg:w-3/5 justify-center items-center ml-auto lg:p-16">
-                
-
-                <div className="w-full max-w-4xl lg:p-12 p-6">
-                    <form className="bg-[#D9E7EC] p-10 rounded-3xl shadow-lg w-full">
-                        <div className="flex flex-col items-center lg:px-10">
-
-                        <img className="w-32 h-32 mb-4" src="../masterliveboards.svg"/>
-                            
-                            <h1 className="text-3xl font-bold text-center mb-10 text-[#001526]">
+                src="/images/page_bg_v1.jpg"  
+                alt="Landing Page"
+                layout="fill"
+                objectFit="cover"
+                priority 
+                className="absolute inset-0"
+            />
+            <div className="relative z-10 flex w-full lg:w-2/4 justify-center items-center ml-auto lg:p-8 p-4">
+                <div className="w-full max-w-xl lg:p-8 p-4">
+                    <form className="bg-[#D9E7EC] p-8 rounded-3xl shadow-lg w-full lg:pt-16 pt-5 lg:pb-24 pb-12 lg:pl-14 lg:pr-14">
+                        <div className="flex flex-col items-center lg:px-6 px-4">
+                            <img className="w-40 h-40 mb-4" src="../images/dive_light_logo_name.svg"/>
+                            <h1 className="text-2xl font-bold text-center mb-6 text-[#001526]">
                                 Log in
                             </h1>
 
                             {/* Email Input */}
-                            <input    
+                            <input
                                 type="text" 
                                 placeholder="Email Address" 
-                                className="w-full p-3 mb-4 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#D9E7EC] border-black border-t-1"
+                                className="w-full pl-4 p-2 mb-2 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#D9E7EC] border-black border-t-1 text-[15px] text-[#001526]"
                                 required 
                             />
 
@@ -37,24 +33,24 @@ export default function Login() {
                             <input 
                                 type="password" 
                                 placeholder="Password" 
-                                className="w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#D9E7EC] border-black border-t-1"
+                                className="w-full pl-4 p-2 mb-2 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#D9E7EC] border-black border-t-1 text-[15px] text-[#001526]"
                                 required 
                             />
 
                             {/* Forgot Password Link */}
-                            <div className="flex justify-end w-full mb-4 text-sm">
+                            <div className="flex justify-end w-full mb-2 text-[15px]">
                                 <Link href="/forgot-password" className="text-[#001526] hover:underline font-bold">
                                     Forgot Password?
                                 </Link>
                             </div>
 
                             {/* Login Button */}
-                            <button className="w-full bg-[#001526] text-white py-3 rounded-2xl hover:bg-blue-700 transition mt-8">
+                            <button className="w-full bg-[#001526] text-white py-2 rounded-3xl hover:bg-blue-700 transition mt-6 text-[15px] font-semibold">
                                 Login
                             </button>
 
                             {/* Signup Redirect */}
-                            <div className="flex justify-center mt-4">
+                            <div className="flex justify-center mt-3 text-[15px]">
                                 <span className="text-[#001526] font-bold">Don't have an account?</span>
                                 <Link href="/Authentication/signup" className="text-[#2C7DA0] hover:underline font-bold ml-2">
                                     Sign-up
@@ -68,6 +64,3 @@ export default function Login() {
         </div>
     );
 };
-
-
-    
