@@ -53,25 +53,25 @@ export default function DiveManagement() {
   };
     return (
 
-        <div className="p-2">
+        <div className="flex-1 p-5 pt-2 relative">
         <h1 className="text-black text-3xl font-extrabold">My Gallery</h1>
         <div className="mx-auto md:px-8">
 
           <div className="mt-7 mb-4 flex items-center justify-between">
             
               <div>
-                <h1 className="text-black text-xl font-semibold">Items count {gallery.length}</h1>
+                <h1 className="text-black text-2xl font-bold">{gallery.length} Items </h1>
               </div>
 
               <div className=" ">
               <Link href="#">
-            <button className="bg-[#001526] m-1 text-white p-1 text-sm w-32 border-black rounded-2xl shadow-md hover:bg-blue-600 transition">
+            <button className="bg-[#001526] m-1 text-white p-1 text-medium w-36 h-10 border-black rounded-full shadow-md">
                 Add photo
             </button>
               </Link>
 
               <button onClick={toggleSelectMode}
-                            className={`m-1 p-1 text-sm w-32 border-black rounded-2xl shadow-md transition ${
+                            className={`m-1 p-1 text-medium w-36 h-10 border-black rounded-full shadow-md transition ${
                                 isSelecting
                                     ? "bg-gray-600 text-white"
                                     : "bg-[#001526] text-white hover:bg-blue-600"
@@ -80,7 +80,7 @@ export default function DiveManagement() {
                             {isSelecting ? "Cancel" : "Select"}
                         </button>
 
-              <button className={`m-1 p-1 text-sm w-32 border-black rounded-2xl shadow-md transition ${
+              <button className={`m-1 p-1 text-medium w-36 h-10 border-black rounded-full shadow-md transition ${
                                 selectedImages.length > 0
                                     ? "bg-[#CF0C0F] text-white hover:bg-red-700"
                                     : "bg-gray-400 text-gray-200 cursor-not-allowed"
@@ -94,7 +94,7 @@ export default function DiveManagement() {
   
 
           <div className="grid grid-cols-1 gap-1 lg:grid-cols-2 md:gap-6 ">
-            {gallery.map((item, index) => (
+            {gallery.map((item, index) => ( 
               <a
                 key={index}
                 href="#"

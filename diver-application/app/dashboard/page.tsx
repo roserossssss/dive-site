@@ -19,6 +19,8 @@ export default function Dashboard() {
                 <Divedepth />
                 <Divetime />
 
+            </div>
+
             <h1 className="text-3xl text-black p-2">Dashboard</h1>
             <div className="grid grid-cols-1 gap-2 items-center">
             <div className="carousel carousel-center ">
