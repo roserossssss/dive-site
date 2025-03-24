@@ -9,7 +9,6 @@
     --bg: #FFFFFF;
     --bgSoft: rgb(193, 213, 228);
     --text: gray;
-    --TextSoft: rgb(20, 20, 20);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -18,3 +17,9 @@ body{
     color: var(--text);
     font-family: var(--font-family);
 }
+
+/* Test (might remove), it removes default calendar logo */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
