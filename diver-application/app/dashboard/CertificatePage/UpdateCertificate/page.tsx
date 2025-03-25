@@ -99,13 +99,13 @@ export default function EditCertificate() {
             <div className="mt-20 flex justify-center space-x-4">
               <button
                 onClick={() => setShowModal(false)}
-                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+                className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirm}
-                className="w-48 h-14 border border-black border-2 rounded-full font-semibold text-black hover:bg-black hover:text-white"
+                className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
               >
                 Yes
               </button>
@@ -122,9 +122,9 @@ export default function EditCertificate() {
                  alt="Upload Preview" 
                  className="w-[270px] h-[270px] -mt-6" />
           </div>
-          <p className="text-white text-sm -mt-5 mb-5">Maximum of 5MB</p>
+          <p className="text-white text-medium -mt-5 mb-5">Maximum of 5MB</p>
           <p className="text-white text-sm -mt-4">JPEG, PNG, PDF</p>
-          <label className="mt-5 px-20 py-2 bg-black text-white text-xl rounded-lg cursor-pointer">
+          <label className="mt-5 px-20 py-2 bg-[#001526] text-white text-xl rounded-lg cursor-pointer">
             Upload Image
             <input type="file" className="hidden" onChange={handleFileChange} />
           </label>
@@ -133,12 +133,12 @@ export default function EditCertificate() {
 
       {/* Certification Details Section */}
       <div className="bg-[#D9E7EC] p-10 rounded-b-3xl h-[400px]">
-        <h3 className="text-2xl font-bold text-black mb-4">Certification Details</h3>
+        <h3 className="text-2xl font-bold text-[#001526] mb-4">Certification Details</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Certification Name */}
           <div className="flex flex-col">
-            <label className="text-black font-semibold text-xl mb-1">Certification Name</label>
+            <label className="text-[#001526] font-semibold text-xl mb-4">Certification Name</label>
             <input
               type="text"
               name="name"
@@ -150,7 +150,7 @@ export default function EditCertificate() {
 
           {/* Certifying Agency */}
           <div className="flex flex-col">
-            <label className="text-black font-semibold text-xl mb-1">Certifying Agency</label>
+            <label className="text-[#001526] font-semibold text-xl mb-4">Certifying Agency</label>
             <input
               type="text"
               name="agency"
@@ -162,7 +162,7 @@ export default function EditCertificate() {
 
           {/* Certification Level */}
           <div className="flex flex-col">
-            <label className="text-black font-semibold text-xl mb-1">Certification Level</label>
+            <label className="text-[#001526] font-semibold text-xl mb-4">Certification Level</label>
             <input
               type="text"
               name="level"
@@ -174,7 +174,7 @@ export default function EditCertificate() {
 
           {/* Training Location */}
           <div className="flex flex-col">
-            <label className="text-black font-semibold text-xl mb-1">Training Location</label>
+            <label className="text-[#001526] font-semibold text-xl mb-4">Training Location</label>
             <input
               type="text"
               name="location"
