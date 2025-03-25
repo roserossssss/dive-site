@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState} from "react";
 import Link from "next/link";
 
 import { CiMenuKebab } from "react-icons/ci";
@@ -95,10 +95,13 @@ const confirmDelete = () => {
   return (
     <div>
     {/* Header Section */}
+    <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 rounded-t-2xl md:pl-80">
     <h2 className="text-3xl font-bold text-[#001526]">My Dive</h2>
+    </div>
+   
   
     {/* Controls */}
-    <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="flex flex-wrap items-center justify-between gap-4 mt-8">
       <div className="flex items-center space-x-2">
         <img
           src="/leftarrow.svg"
@@ -150,7 +153,7 @@ const confirmDelete = () => {
               Sort
             </button>
             {sortDropdownOpen && (
-              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg w-[70px] h-[97px] z-50">
+              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg z-50">
                 {["date", "time", "depth"].map((criteria) => (
                   <button
                     key={criteria}
@@ -174,10 +177,10 @@ const confirmDelete = () => {
               Filter
             </button>
             {filterDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[127px] h-[117px] z-50">
+              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg z-50">
                 <button
                   onClick={() => handleFilter(null)}
-                  className="block w-full text-left px-4 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white hover: w-[110px] mx-auto"
+                  className="block text-left px-4 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white hover: w-[110px] mx-auto"
                 >
                   All
                 </button>
@@ -186,7 +189,7 @@ const confirmDelete = () => {
                     <button
                       key={loc}
                       onClick={() => handleFilter(loc)}
-                      className="block w-full text-left px-2 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white w-[110px] mx-auto"
+                      className="block text-left px-2 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white w-[110px] mx-auto"
                     >
                       {loc}
                     </button>
@@ -206,14 +209,16 @@ const confirmDelete = () => {
           className="w-full h-auto mb-7 rounded-3xl shadow-md bg-[#2C7DA0] flex flex-col lg:flex-row md:items-center items-center relative overflow-hidden"
         >
           {/* Image Section */}
-          <img
-            src={dive.image}
-            alt={dive.title}
-            className="w-full lg:w-[570px] h-full object-cover rounded-t-3xl lg:rounded-3xl"
-          />
+          <div className="w-full lg:w-[500px] h-full flex">
+  <img
+    src={dive.image}
+    alt={dive.title}
+    className="w-full h-full object-cover rounded-t-3xl lg:rounded-3xl"
+  />
+</div>
   
           {/* Content Section */}
-          <div className="flex-1 p-5 -mt-20 w-full text-center lg:text-left">
+          <div className="flex-1 p-5 w-full text-center lg:text-left">
             <h2 className="text-2xl lg:text-4xl font-bold text-white">{dive.title}</h2>
   
             <div className="flex flex-wrap justify-center lg:justify-start mt-2 gap-2">
@@ -256,23 +261,18 @@ const confirmDelete = () => {
 
           </div>
 
-          {/* Sort & Filter Buttons */}
-          <div className="flex space-x-4 p-4">
-            <button
-              onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
-            >
-              <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
-              Sort
-            </button>
+            {/* Dropdown Button */}
+            <div className="absolute top-4 right-5">
+                <button
+                  onClick={() =>
+                    setDropdownIndex(dropdownIndex === index ? null : index)
+                  }
+                  className="text-2xl font-bold cursor-pointer text-white"
+                >
+                  ...
+                </button>
 
-            <button
-              onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
-            >
-              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
-              Filter
-            </button>
+          
             {dropdownIndex === index && (
               <div className="absolute top-10 right-0 bg-white shadow-md rounded-lg p-2 w-28">
                 <Link href={`/dashboard/DiveManagement/id${dive.id}`}>
@@ -307,13 +307,13 @@ const confirmDelete = () => {
                   <div className="mt-20 flex justify-center space-x-4">
                     <button
                       onClick={() =>  setDeleteModalOpen(false)}
-                      className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
+                      className="w-48 h-14 border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
                     >
                       Cancel
                     </button>
                     <button
                       onClick={confirmDelete} 
-                      className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
+                      className="w-48 h-14 border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
                     >
                       Yes
                     </button>
