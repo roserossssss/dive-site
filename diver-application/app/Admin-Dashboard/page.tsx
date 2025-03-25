@@ -1,12 +1,10 @@
-import Card from "../ui/dashboard/reports/reports"
-import styles from "../ui/dashboard/dashboard.module.css"
-import Chart from "../ui/dashboard/chart/chart"
+
 
 export default function dashboard() {
     
     return (
-        <div className={styles.wrapper}>
-        <div className={styles.main}>
+        <div className="">
+        <div className="">
 
           <div className="flex flex-col md:flex-row gap-3">
 
