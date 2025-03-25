@@ -15,6 +15,7 @@ export default function Dashboard() {
            <h1 className="text-3xl text-black p-2 font-extrabold">Dashboard</h1>
                 <div className="grid grid-cols-1 gap-2 items-center">
                     <div className="carousel carousel-center ">
+                        {/*Top Header of dashboard */}
                         <div className="carousel-item gap-2">
                             <a id="item1" className="w-full"><Destinations /></a>
                             <a id="item2" className="w-full"><Divedepth /></a>
