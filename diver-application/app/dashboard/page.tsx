@@ -11,9 +11,11 @@ import Divetime from "../ui/dashboard/card/carddata/DiveTime/DiveTime"
 
 export default function Dashboard() {
     return (
-        <div className="text-black">
-           <h1 className="text-3xl text-black p-2 font-extrabold">Dashboard</h1>
-                <div className="grid grid-cols-1 gap-2 items-center">
+        <div className="text-black p-5 relative">
+             <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 rounded-t-2xl md:pl-80">
+             <h1 className="text-3xl text-black p-2 font-extrabold">Dashboard</h1>
+             </div>
+                <div className="grid grid-cols-1 gap-2 items-center mt-4 pt-8">
                     <div className="carousel carousel-center ">
                         {/*Top Header of dashboard */}
                         <div className="carousel-item gap-2">
