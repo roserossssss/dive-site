@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState} from "react";
 import Link from "next/link";
 
 import { CiMenuKebab } from "react-icons/ci";
@@ -256,23 +256,18 @@ const confirmDelete = () => {
 
           </div>
 
-          {/* Sort & Filter Buttons */}
-          <div className="flex space-x-4 p-4">
-            <button
-              onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
-            >
-              <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
-              Sort
-            </button>
+            {/* Dropdown Button */}
+            <div className="absolute top-4 right-5">
+                <button
+                  onClick={() =>
+                    setDropdownIndex(dropdownIndex === index ? null : index)
+                  }
+                  className="text-2xl font-bold cursor-pointer text-white"
+                >
+                  ...
+                </button>
 
-            <button
-              onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
-            >
-              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
-              Filter
-            </button>
+          
             {dropdownIndex === index && (
               <div className="absolute top-10 right-0 bg-white shadow-md rounded-lg p-2 w-28">
                 <Link href={`/dashboard/DiveManagement/id${dive.id}`}>
