@@ -39,7 +39,6 @@ const Itemmenu = [
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-
   return (
     <>
       {/* Sidebar Toggle Button for Mobile */}
