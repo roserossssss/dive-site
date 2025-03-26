@@ -6,10 +6,11 @@ import { CiSettings } from "react-icons/ci";
 import { GiSnorkel } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { FaFileMedical } from "react-icons/fa";
-import { IoAnalytics, IoClose, IoMenu } from "react-icons/io5";
+import { IoClose, IoMenu } from "react-icons/io5";
 import { TfiGallery } from "react-icons/tfi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CiLogout } from "react-icons/ci";
 
 const Itemmenu = [
   {
@@ -31,7 +32,7 @@ const Itemmenu = [
     title: "Account",
     list: [
       { title: "Settings", path: "/dashboard/SettingsPage", icon: <CiSettings /> },
-      { title: "Logout", path: "/Authentication/login", icon: <IoAnalytics /> },
+      { title: "Logout", path: "/Authentication/login", icon: <CiLogout /> },
     ],
   },
 ];
