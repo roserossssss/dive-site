@@ -12,7 +12,7 @@ export default function Layout({
         <Sidebar />
     </div>
 
-    <div className="flex-1 p-4 md:ml-72 ml-0">
+    <div className="flex-1 p-5 md:ml-72 ml-0">
         {children}
     </div>
 </div>

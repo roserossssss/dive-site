@@ -42,7 +42,7 @@ export default function Chart() {
   };
 
   return (
-    <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md mb-2">
+    <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md mb-2 mt-8">
       <div className="flex justify-between items-center">
         <h2 className={`${styles.heading}`}>Your Dive Data</h2>
 
