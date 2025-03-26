@@ -90,7 +90,7 @@ const DiveCertification = () => {
             <input
               type="text"
               placeholder="Search"
-              className="border rounded-full px-5 py-2 w-[300px]"
+              className="border rounded-full px-5 py-2 w-[300px] bg-white"
             />
             <img src="/search.svg" alt="Search" className="absolute right-3 top-2 w-6 h-6" />
           </div>
@@ -105,7 +105,7 @@ const DiveCertification = () => {
               Sort
             </button>
             {sortDropdownOpen && (
-              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg w-[100px] h-[75px] z-50">
+              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg z-50">
                 <button
                   onClick={() => handleSort("name")}
                   className="block w-28 text-left px-7 py-3 rounded-lg text-medium text-[#001526] hover:bg-[#001526] hover:bg-opacity-40 mx-auto"
@@ -132,7 +132,7 @@ const DiveCertification = () => {
               Filter
             </button>
             {filterDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-[90px] h-[398px] z-50">
+              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg  z-50">
                 <button
                   onClick={() => handleFilter(null)}
                   className="block w-24 text-left px-7 py-2 rounded-lg text-medium text-[#001526]hover:bg-[#001526] hover:bg-opacity-50 mx-auto"
