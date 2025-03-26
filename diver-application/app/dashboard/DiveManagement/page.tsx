@@ -101,7 +101,7 @@ const confirmDelete = () => {
    
   
     {/* Controls */}
-    <div className="flex flex-wrap items-center justify-between gap-4 mt-8">
+    <div className="flex flex-wrap items-center justify-between gap-4 mt-8 ml-3">
       <div className="flex items-center space-x-2">
         <img
           src="/leftarrow.svg"
@@ -153,7 +153,7 @@ const confirmDelete = () => {
               Sort
             </button>
             {sortDropdownOpen && (
-              <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg z-50">
+              <div className="absolute right-20 mt-2 p-1 bg-white shadow-lg rounded-lg z-50">
                 {["date", "time", "depth"].map((criteria) => (
                   <button
                     key={criteria}
@@ -177,7 +177,7 @@ const confirmDelete = () => {
               Filter
             </button>
             {filterDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg z-50">
+              <div className="absolute right-0 mt-2 p-1 bg-white shadow-lg rounded-lg z-50">
                 <button
                   onClick={() => handleFilter(null)}
                   className="block text-left px-4 py-2 text-[#001526] rounded-lg hover:bg-[#001526] hover:text-white hover: w-[110px] mx-auto"

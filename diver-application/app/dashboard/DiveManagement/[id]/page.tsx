@@ -51,7 +51,7 @@ export default function AddDive() {
       
 
       {/* Buttons Section */}
-      <div className="max-w-[1200px] mx-auto flex justify-end gap-4 mt-5 mr-20">
+      <div className="max-w-[1200px] mx-auto flex justify-end gap-4 mt-11 mr-20">
         <button
           onClick={() => router.push("/dashboard/DiveManagement")}
           className="w-full md:w-[230px] h-[60px] md:h-[60px] px-9 py-2 font-semibold text-xl bg-gray-300 text-[#001526] rounded-full"
