@@ -21,11 +21,15 @@ const DiveCertification = () => {
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
 
-  // Load certificates from localStorage
   useEffect(() => {
-    const storedCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
-    setCertificates(storedCertificates);
-  }, []);
+    requestIdleCallback(() => {
+      const storedCertificates = localStorage.getItem("certificates");
+      if (storedCertificates) {
+        setCertificates(JSON.parse(storedCertificates));
+      }
+    });
+  }, []);  
+
 
   // Sort function
   const handleSort = (type: string) => {
@@ -43,7 +47,7 @@ const DiveCertification = () => {
 
   // Filter function
   const handleFilter = (agency: string | null) => {
-    const storedCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
+    const storedCertificates = JSON.parse(localStorage.getItem("certificates") ?? "[]");
 
     if (agency) {
       setCertificates(storedCertificates.filter((cert: Certificate) => cert.agency === agency));
@@ -80,8 +84,7 @@ const DiveCertification = () => {
             onClick={() => router.push("/dashboard/CertificatePage/NewCertificate")}
             className="bg-[#001526] mt-1 text-white px-4 md:px-6 lg:px-6 py-3 md:py-3 rounded-full flex items-center gap-1 md:gap-2 text-sm md:text-base lg:text-lg whitespace-nowrap"
           >
-            <img src="/plus.svg" alt="Plus" className="w-3 h-3 -mt-1 -ml-2" />
-            New Certificate
+            <img src="/plus.svg" alt="Plus" className="w-3 h-3 -mt-1 -ml-2" /> New Certificate
           </button>
         </div>
 
@@ -101,8 +104,7 @@ const DiveCertification = () => {
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
               className="bg-[#001526] text-white px-4 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center gap-2 text-sm md:text-base lg:text-lg"
             >
-              <img src="/sort.svg" alt="Sort" className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6" />
-              Sort
+              <img src="/sort.svg" alt="Sort" className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6" />Sort
             </button>
             {sortDropdownOpen && (
               <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg z-50">
@@ -128,8 +130,7 @@ const DiveCertification = () => {
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
               className="bg-[#001526] text-white px-4 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center gap-2 text-sm md:text-base lg:text-lg"
             >
-              <img src="/filter.svg" alt="Filter" className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6" />
-              Filter
+              <img src="/filter.svg" alt="Filter" className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6" /> Filter
             </button>
             {filterDropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg  z-50">
@@ -240,6 +241,7 @@ const DiveCertification = () => {
                   <img
                     src={cert.image}
                     alt="Certificate"
+                    loading="lazy"
                     className="w-[250px] h-[470px] w-full rounded-xl border-4 border-white"
                   />
                   <button
