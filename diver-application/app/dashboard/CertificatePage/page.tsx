@@ -76,35 +76,38 @@ const DiveCertification = () => {
     <div className="flex-1 p-5 pt-2 relative">
       {/* Header Section */}
       <h2 className="text-3xl font-bold text-[#001526]">My Dive Certification</h2>
-      <div className="flex items-center justify-between mt-4">
-        <div className="flex items-center space-x-2">
-          <img src="/leftarrow.svg" alt="Left Arrow" className="w-6 md:w-7 lg:w-8 h-6 md:h-7 lg:h-8 cursor-pointer mt-1" />
-          <img src="/rightarrow.svg" alt="Right Arrow" className="w-6 md:w-7 lg:w-8 h-6 md:h-7 lg:h-8 cursor-pointer mt-1" />
+      <div className="flex items-center justify-between gap-2 md:gap-4 mt-4 flex-nowrap">
+        <div className="flex items-center space-x-2 flex-shrink-0">
+          <img src="/leftarrow.svg" alt="Left Arrow" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
+          <img src="/rightarrow.svg" alt="Right Arrow" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
           <button
             onClick={() => router.push("/dashboard/CertificatePage/NewCertificate")}
-            className="bg-[#001526] mt-1 text-white px-4 md:px-6 lg:px-6 py-3 md:py-3 rounded-full flex items-center gap-1 md:gap-2 text-sm md:text-base lg:text-lg whitespace-nowrap"
+            className="bg-[#001526] mt-1 text-white px-4 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center gap-1 md:gap-2 text-xs md:text-base lg:text-lg whitespace-nowrap"
           >
-            <img src="/plus.svg" alt="Plus" className="w-3 h-3 -mt-1 -ml-2" /> New Certificate
+            <img src="/plus.svg" alt="Plus" className="w-3 sm:w-2 md:w-3 lg:w-4 h-3 sm:h-2 md:h-3 lg:h-4 -mt-0.5 -ml-0.5" />
+            <span className="text-xs md:text-base lg:text-lg">New Certificate</span>
           </button>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <div className="relative flex-1">
+        <div className="flex items-center space-x-2 min-w-0">
+          <div className="relative w-auto sm:w-[140px] md:w-[200px] lg:w-[300px] min-w-[70px]">
             <input
               type="text"
               placeholder="Search"
-              className="border rounded-full pl-4 pr-10 py-2 sm:py-2.5 md:py-3 w-full sm:max-w-[300px] md:max-w-[600px] lg:max-w-[700px] bg-white"
+              className="border rounded-full pl-4 pr-10 py-1.5 sm:py-2.5 md:py-3 w-full bg-white text-sm sm:text-base md:text-lg"
             />
-            <img src="/search.svg" alt="Search" className="absolute right-3 top-1 mt-2 w-6 h-6" />
+            <img src="/search.svg" alt="Search" className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6" />
           </div>
+
 
           {/* Sort Dropdown */}
           <div className="relative">
             <button
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="bg-[#001526] text-white px-4 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center gap-2 text-sm md:text-base lg:text-lg"
+              className="bg-[#001526] text-white px-4 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg"
             >
-              <img src="/sort.svg" alt="Sort" className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6" />Sort
+              <img src="/sort.svg" alt="Sort" className="w-4 sm:w-4 md:w-6 lg:w-7 h-4 sm:h-4 md:h-6 lg:h-7"/>
+              <span className="leading-none">Sort</span>
             </button>
             {sortDropdownOpen && (
               <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg z-50">
@@ -128,9 +131,10 @@ const DiveCertification = () => {
           <div className="relative">
             <button
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              className="bg-[#001526] text-white px-4 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center gap-2 text-sm md:text-base lg:text-lg"
+              className="bg-[#001526] text-white px-4 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg"
             >
-              <img src="/filter.svg" alt="Filter" className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6" /> Filter
+              <img src="/filter.svg" alt="Filter" className="w-4 sm:w-4 md:w-6 lg:w-7 h-4 sm:h-4 md:h-6 lg:h-7"/> 
+              <span className="leading-none">Filter</span>
             </button>
             {filterDropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg  z-50">
@@ -219,12 +223,12 @@ const DiveCertification = () => {
       </div>
 
      {/* Certification Display */}
-      <div className="mt-6 min-w-[500px] min-h-[870px] bg-[#D9E7EC] border rounded-3xl p-10 ">
+      <div className="mt-6 bg-[#D9E7EC] border rounded-3xl p-6 sm:p-8 md:p-10 min-w-full sm:min-w-[350px] md:min-w-[450px] lg:min-w-[500px] min-h-[600px] sm:min-h-[700px] md:min-h-[800px] lg:min-h-[870px]">
         {certificates.length === 0 ? (
-          <div className="flex items-center justify-center min-h-[700px] text-center">
+          <div className="flex items-center justify-center min-w-[350px] min-h-[700px] text-center">
             <div>
-              <div className="w-[250px] h-[250px] border-2 border-[#001526] rounded-full mx-auto"></div>
-              <p className="text-5xl text-[#001526] font-bold mt-20">No Certifications Yet</p>
+              <div className="w-[180px] h-[180px] border-2 border-[#001526] rounded-full mx-auto"></div>
+              <p className="text-5xl text-[#001526] font-bold mt-5">No Certifications Yet</p>
               <p className="text-[#001526] text-xl mt-6">
                 You haven’t added any certifications. 
               </p>
