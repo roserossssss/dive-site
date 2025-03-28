@@ -80,16 +80,20 @@ export default function ProfilePage() {
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto relative">
             <div className="relative">
               <img src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
-              <button className="absolute bottom-0 right-6 bg-white p-1 rounded-full" onClick={() => fileInputRef.current?.click()}>
+              <button
+                className="absolute bottom-0 right-6 bg-white p-1 rounded-full"
+                onClick={() => fileInputRef.current?.click()}
+                aria-label="Edit Profile Picture"
+              >
                 <TbEditCircle className="text-[#001526]" />
               </button>
               <input type="file" id="profileImageInput" className="hidden" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
             </div>
             <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-100" style={{ textTransform: 'uppercase' }}>
+              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-white" style={{ textTransform: 'uppercase' }}>
                 {firstName} {lastName} {suffix && suffix.toUpperCase()}
               </h2>
-              <p className="text-lg md:text-xl font-medium text-gray-200">{email}</p>
+              <p className="text-lg md:text-xl font-medium text-white">{email}</p>
             </div>
           </div>
         </div>
@@ -103,20 +107,20 @@ export default function ProfilePage() {
                 <h3 className="text-xl font-bold text-[#001526] mb-1">Personal Information</h3>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-2/4">
-                    <label className="block text-[#001526] font-semibold mb-1">First Name <span className="text-red-500">*</span></label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                    <label htmlFor="firstName" className="block text-[#001526] font-semibold mb-1">First Name <span className="text-red-500">*</span></label>
+                    <input id="firstName" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
                   </div>
                   <div className="w-full md:w-2/4">
-                    <label className="block text-[#001526] font-semibold mb-1">Middle Name</label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={middleName} onChange={(e) => setMiddleName(e.target.value)} />
+                    <label htmlFor="middleName" className="block text-[#001526] font-semibold mb-1">Middle Name</label>
+                    <input id="middleName" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={middleName} onChange={(e) => setMiddleName(e.target.value)} />
                   </div>
                   <div className="w-full md:w-2/4">
-                    <label className="block text-[#001526] font-semibold mb-1">Last Name <span className="text-red-500">*</span></label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                    <label htmlFor="lastName" className="block text-[#001526] font-semibold mb-1">Last Name <span className="text-red-500">*</span></label>
+                    <input id="lastName" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
                   </div>
                   <div className="w-full md:w-1/12">
-                    <label className="block text-[#001526] font-semibold mb-1">Suffix</label>
-                    <select className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={suffix} onChange={(e) => setSuffix(e.target.value)}>
+                    <label htmlFor="suffix" className="block text-[#001526] font-semibold mb-1">Suffix</label>
+                    <select id="suffix" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={suffix} onChange={(e) => setSuffix(e.target.value)}>
                       <option value=""></option>
                       <option value="Jr.">Jr.</option>
                       <option value="Sr.">Sr.</option>
@@ -126,17 +130,17 @@ export default function ProfilePage() {
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/4">
-                    <label className="block text-[#001526] font-semibold mb-1">Birthdate <span className="text-red-500">*</span></label>
-                    <input type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} required />
+                    <label htmlFor="birthdate" className="block text-[#001526] font-semibold mb-1">Birthdate <span className="text-red-500">*</span></label>
+                    <input id="birthdate" type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} required />
                   </div>
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-3">Sex <span className="text-red-500">*</span></label>
                     <div className="flex items-center gap-3">
-                      <label className="flex items-center font-semibold text-[#001526]">
-                        <input type="radio" name="sex" value="male" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} checked={sex === 'male'} onChange={() => setSex('male')} required /> Male
+                      <label htmlFor="male" className="flex items-center font-semibold text-[#001526]">
+                        <input id="male" type="radio" name="sex" value="male" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} checked={sex === 'male'} onChange={() => setSex('male')} required /> Male
                       </label>
-                      <label className="flex items-center font-semibold text-[#001526]">
-                        <input type="radio" name="sex" value="female" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} checked={sex === 'female'} onChange={() => setSex('female')} required /> Female
+                      <label htmlFor="female" className="flex items-center font-semibold text-[#001526]">
+                        <input id="female" type="radio" name="sex" value="female" className="mr-1 w-6 h-6" style={{ accentColor: '#001526' }} checked={sex === 'female'} onChange={() => setSex('female')} required /> Female
                       </label>
                     </div>
                   </div>
@@ -149,13 +153,14 @@ export default function ProfilePage() {
                   <h3 className="text-xl font-bold text-[#001526] mb-1">Contact Information</h3>
                   <div className="flex flex-col gap-3 mb-3">
                     <div className="w-full">
-                      <label className="block text-[#001526] font-semibold mb-1">Contact Number <span className="text-red-500">*</span></label>
+                      <label htmlFor="contactNumber" className="block text-[#001526] font-semibold mb-1">Contact Number <span className="text-red-500">*</span></label>
                       <div className="flex items-center w-full">
                         <PhoneInput
                           country={'us'}
                           value={contactNumber}
                           onChange={setContactNumber}
                           inputProps={{
+                            id: 'contactNumber',
                             name: 'contactNumber',
                             required: true,
                             autoFocus: true,
@@ -167,8 +172,8 @@ export default function ProfilePage() {
                       </div>
                     </div>
                     <div className="w-full">
-                      <label className="block text-[#001526] font-semibold mb-1">Email Address <span className="text-red-500">*</span></label>
-                      <input type="email" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                      <label htmlFor="email" className="block text-[#001526] font-semibold mb-1">Email Address <span className="text-red-500">*</span></label>
+                      <input id="email" type="email" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                   </div>
                 </section>
@@ -178,13 +183,13 @@ export default function ProfilePage() {
                   <h3 className="text-xl font-bold text-[#001526] mb-1">Personal Address</h3>
                   <div className="flex flex-col gap-3 mb-3">
                     <div className="w-full">
-                      <label className="block text-[#001526] font-semibold mb-1">Home Address <span className="text-red-500">*</span></label>
-                      <input type="text" placeholder="House Number, Unit Number, Street, Subdivision/Village/Apartment" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={homeAddress} onChange={(e) => setHomeAddress(e.target.value)} required />
+                      <label htmlFor="homeAddress" className="block text-[#001526] font-semibold mb-1">Home Address <span className="text-red-500">*</span></label>
+                      <input id="homeAddress" type="text" placeholder="House Number, Unit Number, Street, Subdivision/Village/Apartment" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={homeAddress} onChange={(e) => setHomeAddress(e.target.value)} required />
                     </div>
                     <div className="flex flex-col md:flex-row gap-3 mb-3">
                       <div className="w-full md:w-1/3">
-                        <label className="block text-[#001526] font-semibold mb-1">Country <span className="text-red-500">*</span></label>
-                        <select className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={country} onChange={(e) => setCountry(e.target.value)} required>
+                        <label htmlFor="country" className="block text-[#001526] font-semibold mb-1">Country <span className="text-red-500">*</span></label>
+                        <select id="country" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={country} onChange={(e) => setCountry(e.target.value)} required>
                           <option value="">Select Country</option>
                           <option value="USA">USA</option>
                           <option value="Canada">Canada</option>
@@ -192,8 +197,8 @@ export default function ProfilePage() {
                         </select>
                       </div>
                       <div className="w-full md:w-1/3">
-                        <label className="block text-[#001526] font-semibold mb-1">State/Province <span className="text-red-500">*</span></label>
-                        <select className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={state} onChange={(e) => setState(e.target.value)} required>
+                        <label htmlFor="state" className="block text-[#001526] font-semibold mb-1">State/Province <span className="text-red-500">*</span></label>
+                        <select id="state" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={state} onChange={(e) => setState(e.target.value)} required>
                           <option value="">Select State/Province</option>
                           <option value="California">California</option>
                           <option value="Ontario">Ontario</option>
@@ -201,12 +206,9 @@ export default function ProfilePage() {
                         </select>
                       </div>
                       <div className="w-full md:w-1/3">
-                        <label className="block text-[#001526] font-semibold mb-1">ZIP Code</label>
-                        <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                        <label htmlFor="zipCode" className="block text-[#001526] font-semibold mb-1">ZIP Code</label>
+                        <input id="zipCode" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                       </div>
-                    </div>
-                    <div className="flex justify-center md:justify-end">
-                      <button type="submit" className="w-52 px-6 py-2 bg-[#001526] text-white font-bold rounded-[40px] mx-auto md:mx-0">Save Changes</button>
                     </div>
                   </div>
                 </section>

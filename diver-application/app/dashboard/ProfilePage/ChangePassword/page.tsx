@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { usePathname, useRouter } from 'next/navigation';
-import { LuShieldCheck } from "react-icons/lu";
+import dynamic from "next/dynamic";
+
+const PasswordUpdatedModal = dynamic(() => import('./PasswordUpdatedModal'), { ssr: false });
 
 export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -34,7 +36,6 @@ export default function ChangePasswordPage() {
       return;
     }
     // Handle form submission for changing password
-    // Assuming password update logic is successful
     setIsPasswordUpdatedModalOpen(true);
   };
 
@@ -71,7 +72,6 @@ export default function ChangePasswordPage() {
         </div>
       </div>
       <div className="pt-3">
-        {/* Header Container for User's Profile Photo, Name, and Email Address */}
         <div className="bg-[#2C7DA0] p-6 md:p-[39px] rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12"></div>
         <div className="bg-[#D9E7EC] p-6 rounded-b-2xl">
           <div className="mt-5 px-4">
@@ -81,12 +81,26 @@ export default function ChangePasswordPage() {
                 <p className="text-[#001526] mb-3 text-justify">Please enter your current password to change your password</p>
                 <div className="flex flex-col gap-3 mb-3">
                   <div className="w-full">
-                    <label className="block text-[#001526] font-semibold mb-1">Current Password <span className="text-red-500">*</span></label>
-                    <input type="password" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
+                    <label htmlFor="currentPassword" className="block text-[#001526] font-semibold mb-1">Current Password <span className="text-red-500">*</span></label>
+                    <input
+                      id="currentPassword"
+                      type="password"
+                      className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]"
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      required
+                    />
                   </div>
                   <div className="w-full">
-                    <label className="block text-[#001526] font-semibold mb-1">New Password <span className="text-red-500">*</span></label>
-                    <input type="password" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+                    <label htmlFor="newPassword" className="block text-[#001526] font-semibold mb-1">New Password <span className="text-red-500">*</span></label>
+                    <input
+                      id="newPassword"
+                      type="password"
+                      className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      required
+                    />
                     <p className="text-[#001526] mt-2">New password must contain:</p>
                     <ul className="list-disc list-inside text-[#001526] text-justify">
                       <li>At least 8 characters</li>
@@ -96,8 +110,15 @@ export default function ChangePasswordPage() {
                     </ul>
                   </div>
                   <div className="w-full">
-                    <label className="block text-[#001526] font-semibold mb-1">Confirm Password <span className="text-red-500">*</span></label>
-                    <input type="password" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                    <label htmlFor="confirmPassword" className="block text-[#001526] font-semibold mb-1">Confirm Password <span className="text-red-500">*</span></label>
+                    <input
+                      id="confirmPassword"
+                      type="password"
+                      className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                    />
                   </div>
                 </div>
                 {error && <p className="text-red-500">{error}</p>}
@@ -112,23 +133,7 @@ export default function ChangePasswordPage() {
 
       {/* Password Updated Modal */}
       {isPasswordUpdatedModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] h-auto sm:h-[450px] rounded-2xl shadow-lg flex flex-col justify-center items-center">
-            <div className="flex justify-center mb-4">
-              <LuShieldCheck className="w-24 h-24 text-[#001526]" />
-            </div>
-            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Password Updated!</h2>
-            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">Password update complete. <br />Please use your new password to log in next time.</p>
-            <div className="flex justify-center mt-5">
-              <button
-                className="w-36 px-5 py-3 bg-[#001526] text-white rounded-full text-[16px] font-semibold"
-                onClick={handlePasswordUpdatedModalClose}
-              >
-                Okay
-              </button>
-            </div>
-          </div>
-        </div>
+        <PasswordUpdatedModal onClose={handlePasswordUpdatedModalClose} />
       )}
     </div>
   );
