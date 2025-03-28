@@ -132,14 +132,15 @@ export default function EditCertificate() {
       </div>
 
       {/* Certification Details Section */}
-      <div className="bg-[#D9E7EC] p-10 rounded-b-3xl h-[400px]">
+      <div className="bg-[#D9E7EC] p-10 rounded-b-3xl sm:h-[570px] md:h-[390px] lg:h-[450px]">
         <h3 className="text-2xl font-bold text-[#001526] mb-4">Certification Details</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Certification Name */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Certification Name</label>
+            <label  htmlFor="name" className="text-[#001526] font-semibold text-xl mb-4">Certification Name</label>
             <input
+              id="name"
               type="text"
               name="name"
               value={certification.name}
@@ -150,8 +151,9 @@ export default function EditCertificate() {
 
           {/* Certifying Agency */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Certifying Agency</label>
+            <label htmlFor="agency" className="text-[#001526] font-semibold text-xl mb-4">Certifying Agency</label>
             <input
+              id="agency"
               type="text"
               name="agency"
               value={certification.agency}
@@ -162,8 +164,9 @@ export default function EditCertificate() {
 
           {/* Certification Level */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Certification Level</label>
+            <label htmlFor="level" className="text-[#001526] font-semibold text-xl mb-4">Certification Level</label>
             <input
+              id="level"
               type="text"
               name="level"
               value={certification.level}
@@ -174,8 +177,9 @@ export default function EditCertificate() {
 
           {/* Training Location */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Training Location</label>
+            <label htmlFor="location" className="text-[#001526] font-semibold text-xl mb-4">Training Location</label>
             <input
+              id="location"
               type="text"
               name="location"
               value={certification.location}

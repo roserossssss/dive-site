@@ -104,8 +104,9 @@ export default function NewCertificate() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Certification Name */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Certification Name</label>
+            <label htmlFor="name" className="text-[#001526] font-semibold text-xl mb-4">Certification Name</label>
             <input
+              id="name"
               type="text"
               name="name"
               value={certification.name}
@@ -116,8 +117,9 @@ export default function NewCertificate() {
 
           {/* Certifying Agency */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Certifying Agency</label>
+            <label htmlFor="agency" className="text-[#001526] font-semibold text-xl mb-4">Certifying Agency</label>
             <input
+              id="agency"
               type="text"
               name="agency"
               value={certification.agency}
@@ -128,8 +130,9 @@ export default function NewCertificate() {
 
           {/* Certification Level */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Certification Level</label>
+            <label htmlFor="level" className="text-[#001526] font-semibold text-xl mb-4">Certification Level</label>
             <input
+              id="level"
               type="text"
               name="level"
               value={certification.level}
@@ -140,8 +143,9 @@ export default function NewCertificate() {
 
           {/* Training Location */}
           <div className="flex flex-col">
-            <label className="text-[#001526] font-semibold text-xl mb-4">Training Location</label>
+            <label htmlFor="location" className="text-[#001526] font-semibold text-xl mb-4">Training Location</label>
             <input
+              id="location"
               type="text"
               name="location"
               value={certification.location}
