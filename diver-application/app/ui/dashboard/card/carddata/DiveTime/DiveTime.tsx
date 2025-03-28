@@ -1,3 +1,4 @@
+
 import Card from "@/app/ui/dashboard/card/card";
 import Image from 'next/image';
 import DiveTimeIcon from '@/public/images/db_dive_time.svg';
