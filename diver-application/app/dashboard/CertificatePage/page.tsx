@@ -76,7 +76,7 @@ const DiveCertification = () => {
     <div className="flex-1 p-5 pt-2 relative">
       {/* Header Section */}
       <h2 className="text-3xl font-bold text-[#001526]">My Dive Certification</h2>
-      <div className="flex items-center justify-between gap-2 md:gap-4 mt-4 flex-nowrap">
+      <div className="lg:flex items-center justify-between gap-2 md:gap-4 mt-4 flex-nowrap">
         <div className="flex items-center space-x-2 flex-shrink-0">
           <img src="/leftarrow.svg" alt="Left Arrow" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
           <img src="/rightarrow.svg" alt="Right Arrow" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
@@ -222,101 +222,103 @@ const DiveCertification = () => {
         </div>
       </div>
 
-     {/* Certification Display */}
-      <div className="mt-6 bg-[#D9E7EC] border rounded-3xl p-6 sm:p-8 md:p-10 min-w-full sm:min-w-[350px] md:min-w-[450px] lg:min-w-[500px] min-h-[600px] sm:min-h-[700px] md:min-h-[800px] lg:min-h-[870px]">
-        {certificates.length === 0 ? (
-          <div className="flex items-center justify-center min-w-[350px] min-h-[700px] text-center">
-            <div>
-              <div className="w-[180px] h-[180px] border-2 border-[#001526] rounded-full mx-auto"></div>
-              <p className="text-5xl text-[#001526] font-bold mt-5">No Certifications Yet</p>
-              <p className="text-[#001526] text-xl mt-6">
-                You haven’t added any certifications. 
-              </p>
-              <p className="text-[#001526] text-xl mt-1"> 
-              Start tracking your dive qualifications here!
-              </p>
-            </div>
+   {/* Certification Display */}
+<div className="mt-6 bg-[#D9E7EC] border rounded-3xl p-6 sm:p-8 md:p-10 w-full min-h-[80vh]">
+  {certificates.length === 0 ? (
+    <div className="flex items-center justify-center w-full min-h-[80vh] text-center">
+      <div>
+        <div className="w-36 h-36 border-2 border-[#001526] rounded-full mx-auto"></div>
+        <p className="text-3xl sm:text-4xl font-bold text-[#001526] mt-5">
+          No Certifications Yet
+        </p>
+        <p className="text-lg sm:text-xl text-[#001526] mt-6">
+          You haven’t added any certifications.
+        </p>
+        <p className="text-lg sm:text-xl text-[#001526] mt-1">
+          Start tracking your dive qualifications here!
+        </p>
+      </div>
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      {certificates.map((cert) => (
+        <div key={cert.id} className="bg-[#2C7DA0] rounded-2xl p-4 shadow-lg relative">
+          <div className="relative">
+            <img
+              src={cert.image}
+              alt="Certificate"
+              loading="lazy"
+              className="w-full max-w-xs h-auto rounded-xl border-4 border-white"
+            />
+            <button
+              onClick={() => setMenuOpen(menuOpen === cert.id ? null : cert.id)}
+              className="absolute bottom-0 right-2 translate-y-20"
+            >
+              <img src="/threedots.svg" alt="Menu" className="w-6 h-6" />
+            </button>
+
+            {menuOpen === cert.id && (
+              <div className="absolute bottom-[-3rem] right-2 bg-white shadow-lg rounded-lg p-2 w-32">
+                <button
+                  onClick={() => updateCertificate(cert.id)}
+                  className="block w-full text-left px-4 py-2 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedCertId(cert.id);
+                    setShowDeleteModal(true);
+                  }}
+                  className="block w-full text-left px-4 py-2 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {certificates.map((cert) => (
-              <div key={cert.id} className="bg-[#2C7DA0] rounded-2xl p-4 shadow-lg relative">
-                <div className="relative">
-                  <img
-                    src={cert.image}
-                    alt="Certificate"
-                    loading="lazy"
-                    className="w-[250px] h-[470px] w-full rounded-xl border-4 border-white"
-                  />
-                  <button
-                    onClick={() => setMenuOpen(menuOpen === cert.id ? null : cert.id)}
-                    className="absolute bottom-0 right-2 translate-y-20"
-                  >
-                    <img src="/threedots.svg" alt="Menu" className="w-6 h-6" />
-                  </button>
 
-                  {menuOpen === cert.id && (
-                    <div className="absolute bottom-[-3rem] right-2 bg-white shadow-lg rounded-lg p-2 w-32">
-                      <button
-                        onClick={() => updateCertificate(cert.id)}
-                        className="block w-full text-left px-4 py-2 rounded-lg text-medium text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50"
-                      >
-                        Update
-                      </button>
-                      <button
-                        onClick={() => {
-                          setSelectedCertId(cert.id);
-                          setShowDeleteModal(true);
-                        }}
-                        className="block w-full text-left px-4 py-2 rounded-lg text-medium text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50"
-                      >
-                        Delete
-                      </button>
+                      {/* Certificate Details */}
+                      <div className="text-center mt-4">
+                        <p className="text-lg font-bold text-white">{cert.name}</p>
+                        <p className="text-white italic">{cert.level}</p>
+                        <p className="text-white">{cert.location}</p>
+                      </div>
                     </div>
-                  )}
+                  ))}
                 </div>
+              )}
+            </div>
 
-                {/* Certificate Details */}
-                <div className="text-center mt-4">
-                  <p className="text-lg font-bold text-white">{cert.name}</p>
-                  <p className="text-white italic">{cert.level}</p>
-                  <p className="text-white">{cert.location}</p>
+            {/* Delete Confirmation Modal */}
+            {showDeleteModal && (
+              <div className="fixed inset-0 bg-[#001526] bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-full max-w-xl h-auto text-center">
+                  <div className="flex justify-center mb-4">
+                    <img src="/trash-delete.svg" alt="Delete" className="w-20 h-20 mt-10" />
+                  </div>
+
+                  <h2 className="text-3xl sm:text-4xl font-bold text-[#001526] mt-6">Delete Certificate?</h2>
+                  <p className="text-lg text-gray-600 mt-4">This action cannot be undone.</p>
+
+                  <div className="mt-10 flex justify-center space-x-4">
+                    <button
+                      onClick={() => setShowDeleteModal(false)}
+                      className="w-40 h-12 border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={deleteCertificate}
+                      className="w-40 h-12 border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
+                    >
+                      Yes
+                    </button>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            )}
 
-      {/* Delete Confirmation Modal */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 bg-[#001526] bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
-
-            <div className="flex justify-center mb-4">
-              <img src="/trash-delete.svg" alt="Delete" className="w-50 h-50 mt-40" />
-            </div>
-
-            <h2 className="text-5xl font-bold text-[#001526] mt-10">Delete Certificate?</h2>
-            <p className="text-xl font-semibold text-gray-600 mt-4">This action cannot be undone.</p>
-
-            <div className="mt-20 flex justify-center space-x-4">
-              <button
-                onClick={() => setShowDeleteModal(false)}
-                className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={deleteCertificate}
-                className="w-48 h-14 border border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
