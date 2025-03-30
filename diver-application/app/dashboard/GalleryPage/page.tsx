@@ -47,24 +47,24 @@ export default function DiveManagement() {
   };
 
   return (
-    <div className="flex-1 p-5 pt-2 relative">
+    <div className="flex-1 p-5 pt-1 relative">
   <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 rounded-t-2xl md:pl-80">
     <h1 className="text-[#001526] text-3xl font-bold">My Gallery</h1>
   </div>
-  <div className="mx-auto md:px-8 mt-12">
-    <div className="mt-7 mb-4 flex items-center justify-between">
-      <h1 className="text-[#001526] text-2xl font-bold mt-4">{gallery.length} Items</h1>
+  <div className="mx-auto md:px-8 mt-12 -ml-2">
+    <div className="mt-7 mb-4 flex flex-wrap items-center justify-between gap-2 flex-nowrap">
+      <h1 className="text-[#001526] text-xl md:text-2xl lg:text-3xl font-bold mt-3">{gallery.length} Items</h1>
 
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center flex-nowrap">
         <Link href="#">
-          <button className="bg-[#001526] m-1 text-white p-1 text-medium w-36 h-10 border-[#001526] rounded-full shadow-md hover:bg-white hover:text-[#001526] hover:border-2 border-[#001526]">
+          <button className="bg-[#001526] m-1 text-white p-1 text-sm md:text-base w-24 h-8 md:w-28 lg:w-36 md:h-10 lg:h-11 mt-4 border-[#001526] rounded-full shadow-md hover:bg-white hover:text-[#001526] hover:border-2 border-[#001526]">
             Add Photo
           </button>
         </Link>
 
         <button
           onClick={toggleSelectMode}
-          className={`m-1 p-1 text-medium w-36 h-10 border-[#001526] rounded-full shadow-md transition ${
+          className={`m-1 p-1 text-sm md:text-base w-28 h-8 md:w-28 lg:w-36 md:h-10 lg:h-11 mt-4 border-[#001526] rounded-full shadow-md transition ${
             isSelecting
               ? "bg-white border-2 border-[#001526] text-[#001526]"
               : "bg-[#001526] text-white hover:bg-white hover:text-[#001526] hover:border-2 border-[#001526]"
@@ -74,7 +74,7 @@ export default function DiveManagement() {
         </button>
 
         <button
-          className={`m-1 p-1 text-medium w-36 h-10 border-[#001526] rounded-full shadow-md transition ${
+          className={`m-1 p-1 text-sm md:text-base w-32 h-8 md:w-28 lg:w-36 md:h-10 lg:h-11 mt-4 border-[#001526] rounded-full shadow-md transition ${
             selectedImages.length > 0
               ? "bg-[#CF0C0F] text-white hover:bg-red-700"
               : "bg-gray-400 text-gray-200 cursor-not-allowed"
@@ -84,11 +84,10 @@ export default function DiveManagement() {
           Delete ({selectedImages.length})
         </button>
 
-        <img src="/leftarrow.svg" alt="Left Arrow" className="w-9 h-9 cursor-pointer" />
-        <img src="/rightarrow.svg" alt="Right Arrow" className="w-9 h-9 cursor-pointer" />
+        <img src="/leftarrow.svg" alt="Left Arrow" className="w-6 sm:w-7 md:w-7 lg:w-8 h-5 sm:h-7 md:h-7 lg:h-8 cursor-pointer mt-4" />
+        <img src="/rightarrow.svg" alt="Right Arrow" className="w-6 sm:w-7 md:w-7 lg:w-8 h-5 sm:h-7 md:h-7 lg:h-8 cursor-pointer mt-4" />
       </div>
     </div>
-
 
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8 
     auto-rows-[200px] sm:auto-rows-[250px] md:auto-rows-[300px] lg:auto-rows-[350px]">
