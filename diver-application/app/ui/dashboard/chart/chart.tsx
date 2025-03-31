@@ -1,14 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from './chart.module.css';
 
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, 
   Tooltip, Legend, ResponsiveContainer 
 } from "recharts";
 
-const yearlyData = [
+// Define an interface for your data points
+interface ChartDataPoint {
+  name: string;
+  time: number;
+  depth: number;
+}
+
+const yearlyData: ChartDataPoint[] = [
   { name: "Jan", time: 150, depth: 240 },
   { name: "Feb", time: 130, depth: 139 },
   { name: "Mar", time: 20, depth: 198 },
@@ -18,14 +24,14 @@ const yearlyData = [
   { name: "Jul", time: 34, depth: 43 },
 ];
 
-const monthlyData = [
+const monthlyData: ChartDataPoint[] = [
   { name: "Week 1", time: 500, depth: 800 },
   { name: "Week 2", time: 450, depth: 750 },
   { name: "Week 3", time: 600, depth: 950 },
   { name: "Week 4", time: 700, depth: 1000 },
 ];
 
-const dailyData = [
+const dailyData: ChartDataPoint[] = [
   { name: "6AM", time: 10, depth: 20 },
   { name: "12PM", time: 30, depth: 50 },
   { name: "6PM", time: 40, depth: 60 },
@@ -33,9 +39,11 @@ const dailyData = [
 ];
 
 export default function Chart() {
-  const [selectedTime, setSelectedTime] = useState("year");
-  
-  const getChartData = () => {
+
+  const [selectedTime, setSelectedTime] = useState<'year' | 'month' | 'day'>('year');
+
+
+  const getChartData = (): ChartDataPoint[] => {
     if (selectedTime === "month") return monthlyData;
     if (selectedTime === "day") return dailyData;
     return yearlyData;
@@ -43,14 +51,14 @@ export default function Chart() {
 
   return (
     <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md mb-2 mt-8">
-      <div className="flex justify-between items-center">
-        <h2 className={`${styles.heading}`}>Your Dive Data</h2>
+      <div className="lg:flex justify-between items-center">
+        <h2 className="justify-center text-black text-3xl p-2">Your Dive Data</h2>
 
-        <div className="relative">
+        <div className="justify-self-center">
           <select 
             value={selectedTime} 
-            onChange={(e) => setSelectedTime(e.target.value)}
-            className={`text-sm text-white bg-[#001526] rounded-lg p-1 px-6 ${styles.selectPosition}`}
+            onChange={(e) => setSelectedTime(e.target.value as 'year' | 'month' | 'day')}
+            className={`text-sm text-white bg-[#001526] rounded-lg p-1 px-6`}
           >
             <option value="year">Current Year</option>
             <option value="month">Current Month</option>
