@@ -6,7 +6,7 @@ export default function Login() {
         <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
             <Image 
                 src="/images/page_bg_v1.jpg"  
-                alt="Landing Page"
+                alt="Master Liveboards"
                 layout="fill"
                 objectFit="cover"
                 priority 
@@ -16,7 +16,7 @@ export default function Login() {
                 <div className="w-full max-w-xl lg:p-8 p-4">
                     <form className="bg-[#D9E7EC] p-8 rounded-3xl shadow-lg w-full lg:pt-16 pt-5 lg:pb-24 pb-12 lg:pl-14 lg:pr-14">
                         <div className="flex flex-col items-center lg:px-6 px-4">
-                            <img className="w-40 h-40 mb-4" src="../images/dive_light_logo_name.svg"/>
+                            <img className="w-40 h-40 mb-4" src="../images/dive_light_logo_name.svg" alt="Master Liveboards"/>
                             <h1 className="text-2xl font-bold text-center mb-6 text-[#001526]">
                                 Log in
                             </h1>
@@ -52,7 +52,7 @@ export default function Login() {
                             {/* Signup Redirect */}
                             <div className="flex justify-center mt-3 text-[15px]">
                                 <span className="text-[#001526] font-bold">Don't have an account?</span>
-                                <Link href="/Authentication/signup" className="text-[#2C7DA0] hover:underline font-bold ml-2">
+                                <Link href="/Authentication/signup" className="text-[#005f80] hover:underline font-bold ml-2">
                                     Sign-up
                                 </Link>
                             </div>
