@@ -1,4 +1,3 @@
-"use client";
 
 import Card from "@/app/ui/dashboard/card/card";
 import Image from 'next/image';
