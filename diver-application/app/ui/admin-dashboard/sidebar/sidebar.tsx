@@ -1,47 +1,56 @@
-"use client";
+
+"use client"
 
 import { useState } from "react";
 import { MdDashboard, MdSearch } from "react-icons/md";
-import { CiUser, CiSettings } from "react-icons/ci";
+import { CiLogout, CiSettings } from "react-icons/ci";
+import { FaStore, FaHouseUser, FaFileMedical } from "react-icons/fa";
 import { GiSnorkel } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
-import { FaFileMedical } from "react-icons/fa";
 import { IoAnalytics, IoClose, IoMenu } from "react-icons/io5";
 import { GrGallery } from "react-icons/gr";
 import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 
+
 const Itemmenu = [
-    {
-        title: "Dashboard",
-        list: [{ title: "Dashboard", path: "/Admin-Dashboard", icon: <MdDashboard /> }],
-    },
-    {
-        title: "Admin Management",
-        list: [
-            { title: "User Management", path: "/Admin-Dashboard/UsersManagement", icon: <CiUser /> },
-            { title: "Dive Management", path: "/Admin-Dashboard/DiveManagement", icon: <GiSnorkel /> },
-            { title: "Gallery Module", path: "/Admin-Dashboard/GalleryManagement", icon: <GrGallery /> },
-        ],
-    },
-    {
-        title: "Requirements",
-        list: [
-            { title: "Certificate Management", path: "/Admin-Dashboard/CertificateManagement", icon: <TbCertificate /> },
-            { title: "Medical Management", path: "/Admin-Dashboard/MedicalManagement", icon: <FaFileMedical /> },
-        ],
-    },
-    {
-        title: "Analytics",
-        list: [{ title: "Analytics Dashboard", path: "/Admin-Dashboard/AnalyticsPage", icon: <IoAnalytics /> }],
-    },
-    {
-        title: "Account",
-        list: [
-            { title: "Settings", path: "/Admin-Dashboard/SettingsPage", icon: <CiSettings /> },
-            { title: "Logout", path: "/login", icon: <IoAnalytics /> },
-        ],
-    },
+  {
+      title: "Dashboard",
+      list: [
+          { title: "Dashboard", path: "/Admin-Dashboard", icon: <MdDashboard /> }
+      ],
+  },
+  {
+      title: "Management",
+      list: [
+          { title: "User Management", path: "/Admin-Dashboard/UsersManagement", icon: <FaHouseUser/> },
+          { title: "Dive Management", path: "/Admin-Dashboard/DiveManagement", icon: <GiSnorkel /> },
+          { title: "Gallery", path: "/Admin-Dashboard/GalleryManagement", icon: <GrGallery/> },
+          { title: "Certificates", path: "/Admin-Dashboard/CertificateManagement", icon: <TbCertificate /> },
+          { title: "Medical Records", path: "/Admin-Dashboard/MedicalManagement", icon: <FaFileMedical /> },
+      ],
+  },
+  {
+      title: "Store",
+      list: [
+          { title: "Merch Store", path: "/Admin-Dashboard/Store", icon: <FaStore /> },
+          { title: "Orders", path: "/Admin-Dashboard/Orders", icon: <FaStore /> },
+      ],
+  },
+  {
+      title: "Analytics",
+      list: [
+          { title: "Analytics ", path: "/Admin-Dashboard/AnalyticsPage", icon: <IoAnalytics/> }
+      ],
+  },
+  {
+      title: "Settings",
+      list: [
+          { title: "General Settings", path: "/Admin-Dashboard/SettingsPage", icon: <CiSettings /> },
+          { title: "Logout", path: "/login", icon: <CiLogout />},
+      ],
+  },
 ];
 
 export default function Sidebar() {
@@ -59,7 +68,7 @@ export default function Sidebar() {
   
         {/* Sidebar Header (Separate but Follows Sidebar State) */}
         <div
-          className={`fixed top-0 left-0 w-64 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
+          className={`fixed top-0 left-0 w-64 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform duration-300  
           ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
         >
           <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
@@ -69,7 +78,7 @@ export default function Sidebar() {
         {/* Sidebar */}
         <div
           className={`fixed top-14 left-0 h-[calc(100%-56px)] w-64 md:w-72 flex flex-col text-black z-50 
-          transition-transform duration-300 ease-in-out bg-[#001526] rounded-tr-3xl overflow-y-auto 
+          transition-transform duration-300 bg-[#001526] rounded-tr-3xl overflow-y-auto 
           ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
         >
           {/* Sidebar Menu */}
@@ -77,12 +86,12 @@ export default function Sidebar() {
             <ul>
               {Itemmenu.map((category) => (
                 <li key={category.title} className="mb-3 relative -left-5">
-                  <ul className="mb-14 mt-4 space-y-2">
+                  <ul className="mb-8 mt-1 space-y-1">
                     {category.list.map((item) => (
                       <li key={item.title} className="relative text-center">
                         <Link
                           href={item.path}
-                          className="flex gap-2 p-2 pl-12 text-white text-l relative"
+                          className="flex gap-2 p-2 pl-12 text-white relative"
                           onClick={() => setIsOpen(false)}
                         >
                           {/* Active Page Indicator */}
@@ -91,8 +100,8 @@ export default function Sidebar() {
                             ${pathname === item.path ? "bg-[#2C7DA0] block" : "hidden group-hover:block"}`}
                           ></span>
   
-                          <span className="text-2xl mr-4">{item.icon}</span>
-                          <span className="truncate">{item.title}</span>
+                          <span className="text-xl mr-4">{item.icon}</span>
+                          <span className="text-sm">{item.title}</span>
                         </Link>
                       </li>
                     ))}
@@ -103,7 +112,7 @@ export default function Sidebar() {
           </div>
   
           {/* User Profile Section */}
-          <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
+          <div className="m-4  flex items-center gap-2 p-2 rounded-lg bg-gray-100 ">
             <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
             <div className="flex-1">
               <span className="block font-semibold text-black text-sm truncate">John Doe</span>
