@@ -1,5 +1,4 @@
 import  Sidebar from "../ui/dashboard/sidebar/sidebar";
-import Styles from "../ui/dashboard/dashboard.module.css"
 
 export default function Layout({
     children,
