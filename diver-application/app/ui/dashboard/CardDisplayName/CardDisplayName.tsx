@@ -14,13 +14,13 @@ export default function WelcomeCard() {
   };
 
   return (
-    <div className="bg-[#2C7DA0] text-white p-8 rounded-lg shadow-md w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="bg-[#2C7DA0] text-white lg:p-8 p-4  rounded-lg shadow-md w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="flex flex-col justify-center">
         <h1 className="text-2xl md:text-3xl font-bold mb-3">
           Welcome, {userProfile.name}
         </h1>
         
-        <p className="text-xs text-white text-opacity-70 mb-4">
+        <p className="text-xs text-white text-opacity-90 mb-4">
           Stay updated with your dive history and make every dive count!
         </p>
         
@@ -28,7 +28,7 @@ export default function WelcomeCard() {
           href="/dashboard/DiveManagement" 
           className="inline-block"
         >
-          <button className="bg-[#001526] text-white text-sm font-semibold py-3 px-4 rounded-lg w-full transition-colors hover:bg-opacity-90">
+          <button className="bg-[#001526] text-white text-sm font-semibold py-3 px-4 rounded-lg w-full transition-colors hover:bg-[#002233]">
             Check Dive Logs →
           </button>
         </Link>
