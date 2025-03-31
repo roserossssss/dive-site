@@ -5,25 +5,24 @@ import SaveChangesModal from "./components/SaveChangesModal";
 import DiscardChangesModal from "./components/DiscardChangesModal";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useState } from "react";
 
 export default function MedicalPage() {
   const {
     editMode,
     setEditMode,
     firstName,
-    setFirstName,
+    // setFirstName,
     middleName,
-    setMiddleName,
+    // setMiddleName,
     lastName,
     setLastName,
     suffix,
-    setSuffix,
+    // setSuffix,
     birthdate,
     setBirthdate,
     age,
     sex,
-    setSex,
+    // setSex,
     hasAllergies,
     setHasAllergies,
     hasChronicCondition,
@@ -45,7 +44,7 @@ export default function MedicalPage() {
     relationship,
     setRelationship,
     medicalCertificate,
-    setMedicalCertificate,
+    // setMedicalCertificate,
     issuedBy,
     setIssuedBy,
     dateIssued,
@@ -58,7 +57,7 @@ export default function MedicalPage() {
   } = useMedicalPage();
 
   const handleSave = () => {
-    const form = document.querySelector("form"); // Select the form element
+    const form = document.querySelector("form");
     if (form && form.reportValidity()) {
       // If all fields are valid, proceed with saving
       setIsModalOpen(true);
@@ -107,10 +106,10 @@ export default function MedicalPage() {
               className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4"
             />
             <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-100">
+              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-white">
                 JOHN DOE
               </h2>
-              <p className="text-lg md:text-xl font-medium text-gray-200">
+              <p className="text-lg md:text-xl font-medium text-white">
                 johndoe@gmail.com
               </p>
             </div>
@@ -126,36 +125,36 @@ export default function MedicalPage() {
                 <h3 className="text-xl font-bold text-[#001526] mb-1">Personal Information</h3>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/3">
-                    <label className="block text-[#001526] font-semibold mb-1">First Name</label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={firstName} disabled />
+                    <label htmlFor="firstName" className="block text-[#001526] font-semibold mb-1">First Name</label>
+                    <input id="firstName" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={firstName} disabled />
                   </div>
                   <div className="w-full md:w-1/3">
-                    <label className="block text-[#001526] font-semibold mb-1">Middle Name</label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={middleName} disabled />
+                    <label htmlFor="middleName" className="block text-[#001526] font-semibold mb-1">Middle Name</label>
+                    <input id="middleName" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={middleName} disabled />
                   </div>
                   <div className="w-full md:w-1/3">
-                    <label className="block text-[#001526] font-semibold mb-1">Last Name</label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={lastName} disabled />
+                    <label htmlFor="lastName" className="block text-[#001526] font-semibold mb-1">Last Name</label>
+                    <input id="lastName" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={lastName} disabled />
                   </div>
                   <div className="w-full md:w-1/12">
-                    <label className="block text-[#001526] font-semibold mb-1">Suffix</label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={suffix} disabled />
+                    <label htmlFor="suffix" className="block text-[#001526] font-semibold mb-1">Suffix</label>
+                    <input id="suffix" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={suffix} disabled />
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/4">
-                    <label className="block text-[#001526] font-semibold mb-1">Birthdate</label>
-                    <input type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={birthdate} disabled />
+                    <label htmlFor="birthdate" className="block text-[#001526] font-semibold mb-1">Birthdate</label>
+                    <input id="birthdate" type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={birthdate} disabled />
                   </div>
                   <div className="w-full md:w-1/12">
-                    <label className="block text-[#001526] font-semibold mb-1">Age</label>
-                    <input type="number" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={age} disabled />
+                    <label htmlFor="age" className="block text-[#001526] font-semibold mb-1">Age</label>
+                    <input id="age" type="number" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={age} disabled />
                   </div>
                   <div className="w-full md:w-1/3">
                     <label className="block text-[#001526] font-semibold mb-3">Sex</label>
                     <div className="flex items-center gap-3">
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="sex" value="male" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} checked={sex === "male"} disabled /> Male</label>
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="sex" value="female" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} checked={sex === "female"} disabled /> Female</label>
+                      <label htmlFor="male" className="flex items-center font-semibold text-[#001526]"><input id="male" type="radio" name="sex" value="male" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} checked={sex === "male"} disabled /> Male</label>
+                      <label htmlFor="female" className="flex items-center font-semibold text-[#001526]"><input id="female" type="radio" name="sex" value="female" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} checked={sex === "female"} disabled /> Female</label>
                     </div>
                   </div>
                 </div>
@@ -166,8 +165,8 @@ export default function MedicalPage() {
                 <h3 className="text-xl font-bold text-[#001526] mb-1">Medical Information</h3>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/3">
-                    <label className="block text-[#001526] font-semibold mb-1">Blood Type <span className="text-red-500">*</span></label>
-                    <select className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={bloodType} onChange={(e) => setBloodType(e.target.value)} disabled={!editMode} required>
+                    <label htmlFor="bloodType" className="block text-[#001526] font-semibold mb-1">Blood Type <span className="text-red-500">*</span></label>
+                    <select id="bloodType" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={bloodType} onChange={(e) => setBloodType(e.target.value)} disabled={!editMode} required>
                       <option value="" className="text-[#001526]">Select Blood Type</option>
                       <option value="A+">A+</option>
                       <option value="A-">A-</option>
@@ -182,47 +181,47 @@ export default function MedicalPage() {
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-3">Allergies <span className="text-red-500">*</span></label>
                     <div className="flex items-center gap-3">
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="allergies" value="yes" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasAllergies(true)} required /> Yes</label>
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="allergies" value="no" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasAllergies(false)} required /> No</label>
+                      <label htmlFor="allergies-yes" className="flex items-center font-semibold text-[#001526]"><input id="allergies-yes" type="radio" name="allergies" value="yes" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasAllergies(true)} required /> Yes</label>
+                      <label htmlFor="allergies-no" className="flex items-center font-semibold text-[#001526]"><input id="allergies-no" type="radio" name="allergies" value="no" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasAllergies(false)} required /> No</label>
                     </div>
                     {hasAllergies && <input type="text" placeholder="Please specify" className="mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={allergiesDetails} onChange={(e) => setAllergiesDetails(e.target.value)} disabled={!editMode} required />}
                   </div>
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-3">Chronic Condition <span className="text-red-500">*</span></label>
                     <div className="flex items-center gap-3">
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="chronicCondition" value="yes" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasChronicCondition(true)} required /> Yes</label>
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="chronicCondition" value="no" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasChronicCondition(false)} required /> No</label>
+                      <label htmlFor="chronic-yes" className="flex items-center font-semibold text-[#001526]"><input id="chronic-yes" type="radio" name="chronicCondition" value="yes" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasChronicCondition(true)} required /> Yes</label>
+                      <label htmlFor="chronic-no" className="flex items-center font-semibold text-[#001526]"><input id="chronic-no" type="radio" name="chronicCondition" value="no" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasChronicCondition(false)} required /> No</label>
                     </div>
                     {hasChronicCondition && <input type="text" placeholder="Please specify" className="mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={chronicConditionDetails} onChange={(e) => setChronicConditionDetails(e.target.value)} disabled={!editMode} required />}
                   </div>
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-3">Disability <span className="text-red-500">*</span></label>
                     <div className="flex items-center gap-3">
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="disability" value="yes" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasDisability(true)} required /> Yes</label>
-                      <label className="flex items-center font-semibold text-[#001526]"><input type="radio" name="disability" value="no" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasDisability(false)} required /> No</label>
+                      <label htmlFor="disability-yes" className="flex items-center font-semibold text-[#001526]"><input id="disability-yes" type="radio" name="disability" value="yes" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasDisability(true)} required /> Yes</label>
+                      <label htmlFor="disability-no" className="flex items-center font-semibold text-[#001526]"><input id="disability-no" type="radio" name="disability" value="no" className="mr-1 w-6 h-6" style={{ accentColor: "#001526" }} disabled={!editMode} onChange={() => setHasDisability(false)} required /> No</label>
                     </div>
                     {hasDisability && <input type="text" placeholder="Please specify" className="mt-3 p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={disabilityDetails} onChange={(e) => setDisabilityDetails(e.target.value)} disabled={!editMode} required />}
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/2">
-                    <label className="block text-[#001526] font-semibold mb-1">Emergency Contact Person <span className="text-red-500">*</span></label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={emergencyContactPerson} onChange={(e) => setEmergencyContactPerson(e.target.value)} disabled={!editMode} required />
+                    <label htmlFor="emergencyContactPerson" className="block text-[#001526] font-semibold mb-1">Emergency Contact Person <span className="text-red-500">*</span></label>
+                    <input id="emergencyContactPerson" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={emergencyContactPerson} onChange={(e) => setEmergencyContactPerson(e.target.value)} disabled={!editMode} required />
                   </div>
                   <div className="w-full md:w-1/4">
-                    <label className="block text-[#001526] font-semibold mb-1">Emergency Contact Number <span className="text-red-500">*</span></label>
+                    <label htmlFor="emergencyContactNumber" className="block text-[#001526] font-semibold mb-1">Emergency Contact Number <span className="text-red-500">*</span></label>
                     <PhoneInput country={"ph"} value={emergencyContactNumber} onChange={setEmergencyContactNumber} inputProps={{ name: "emergencyContactNumber", required: true, disabled: !editMode }} containerStyle={{ width: "100%" }} inputStyle={{ width: "100%", backgroundColor: "#D9E7EC", borderColor: "#001526", color: "#001526" }} disabled={!editMode} />
                   </div>
                   <div className="w-full md:w-1/4">
-                    <label className="block text-[#001526] font-semibold mb-1">Relationship <span className="text-red-500">*</span></label>
-                    <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={relationship} onChange={(e) => setRelationship(e.target.value)} disabled={!editMode} required />
+                    <label htmlFor="relationship" className="block text-[#001526] font-semibold mb-1">Relationship <span className="text-red-500">*</span></label>
+                    <input id="relationship" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={relationship} onChange={(e) => setRelationship(e.target.value)} disabled={!editMode} required />
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3 items-start">
                   <div className="w-full md:w-1/3">
-                    <label className="block text-[#001526] font-semibold mb-1">Medical Certificate <span className="text-red-500">*</span></label>
+                    <label htmlFor="medicalCertificate" className="block text-[#001526] font-semibold mb-1">Medical Certificate <span className="text-red-500">*</span></label>
                     <div className="flex items-center gap-3">
-                      <input type="text" className="p-2 border border-[#001526] rounded-lg w-3/4 bg-[#D9E7EC] text-[#001526]" value={medicalCertificate} disabled={!editMode} required />
+                      <input id="medicalCertificate" type="text" className="p-2 border border-[#001526] rounded-lg w-3/4 bg-[#D9E7EC] text-[#001526]" value={medicalCertificate} disabled={!editMode} required />
                       <input type="file" id="file-upload" className="hidden" onChange={handleFileUpload} disabled={!editMode} required />
                       <button type="button" className="w-32 px-4 py-2 bg-[#001526] text-white rounded-lg text-[16px] font-semibold" onClick={() => { const fileUpload = document.getElementById("file-upload") as HTMLInputElement; if (fileUpload) { fileUpload.click(); } }} disabled={!editMode}>Upload</button>
                     </div>
@@ -230,12 +229,12 @@ export default function MedicalPage() {
                   </div>
                   <div className="flex flex-row gap-3 items-start w-full md:w-2/3">
                     <div className="w-full md:w-3/5">
-                      <label className="block text-[#001526] font-semibold mb-1">Issued By <span className="text-red-500">*</span></label>
-                      <input type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={issuedBy} onChange={(e) => setIssuedBy(e.target.value)} disabled={!editMode} required />
+                      <label htmlFor="issuedBy" className="block text-[#001526] font-semibold mb-1">Issued By <span className="text-red-500">*</span></label>
+                      <input id="issuedBy" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={issuedBy} onChange={(e) => setIssuedBy(e.target.value)} disabled={!editMode} required />
                     </div>
                     <div className="w-full md:w-2/5">
-                      <label className="block text-[#001526] font-semibold mb-1">Date Issued <span className="text-red-500">*</span></label>
-                      <input type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={dateIssued} onChange={(e) => setDateIssued(e.target.value)} disabled={!editMode} required />
+                      <label htmlFor="dateIssued" className="block text-[#001526] font-semibold mb-1">Date Issued <span className="text-red-500">*</span></label>
+                      <input id="dateIssued" type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={dateIssued} onChange={(e) => setDateIssued(e.target.value)} disabled={!editMode} required />
                     </div>
                   </div>
                 </div>
