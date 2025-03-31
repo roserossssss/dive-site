@@ -23,3 +23,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
   }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #e2e8f0;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #001526;
+    border-radius: 10px;
+  }

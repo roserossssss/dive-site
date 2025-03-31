@@ -77,7 +77,7 @@ export default function Card() {
   return (
     <div className="bg-[#D9E7EC] shadow-lg rounded-lg h-[500px] p-8 m-2">
       <h1 className="text-[#001526] text-center text-sm">Your score is</h1>
-      <h1 className="text-[#001526] text-center text-2xl font-bold">Awesome</h1>
+      <h2 className="text-[#001526] text-center text-2xl font-bold">Awesome</h2>
 
       <div className="mt-8">
         <CircularProgress progress={data.progress}/>
@@ -88,7 +88,7 @@ export default function Card() {
       <h1 className="text-xs text-[#001526] text-center mt-10">
         Your score is based on the <br />completed
       </h1>
-      <h3 className="text-[#001526] font-bold text-center text-sm">{data.progress} Total Dives</h3>
+      <h2 className="text-[#001526] font-bold text-center text-sm">{data.progress} Total Dives</h2>
 
       <div className="flex justify-center mt-4">
         <button>
