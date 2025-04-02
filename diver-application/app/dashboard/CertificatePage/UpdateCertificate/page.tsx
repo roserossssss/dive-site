@@ -154,7 +154,7 @@ export default function EditCertificate() {
           name="name"
           value={certification.name}
           onChange={handleChange}
-          className="bg-transparent border-black border p-3 rounded-lg w-full"
+          className="bg-transparent border-[#001526] text-[#001526] border p-3 rounded-lg w-full"
         />
       </div>
 
@@ -167,7 +167,7 @@ export default function EditCertificate() {
           name="agency"
           value={certification.agency}
           onChange={handleChange}
-          className="bg-transparent border-black border p-3 rounded-lg w-full"
+          className="bg-transparent border-[#001526] text-[#001526] border p-3 rounded-lg w-full"
         />
       </div>
 
@@ -180,7 +180,7 @@ export default function EditCertificate() {
           name="level"
           value={certification.level}
           onChange={handleChange}
-          className="bg-transparent border-black border p-3 rounded-lg w-full"
+          className="bg-transparent border-[#001526] text-[#001526] border p-3 rounded-lg w-full"
         />
       </div>
 
@@ -193,7 +193,7 @@ export default function EditCertificate() {
           name="location"
           value={certification.location}
           onChange={handleChange}
-          className="bg-transparent border-black border p-3 rounded-lg w-full"
+          className="bg-transparent border-[#001526] text-[#001526] border p-3 rounded-lg w-full"
         />
       </div>
     </div>

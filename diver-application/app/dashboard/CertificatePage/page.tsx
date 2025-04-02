@@ -94,14 +94,14 @@ const DiveCertification = () => {
         </div>
 
         <div className="flex justify-between items-center">
-          <div className="relative">
+          <div className="relative ">
             <input
               type="text"
               placeholder="Search"
-              className="border rounded-full w-40 md:w-20 lg:w-80 pl-4 pr-10 py-2 sm:py-2 md:py-3 bg-white text-sm md:text-base lg:text-lg"
+              className="border rounded-full border-[#001526] placeholder-[#001526] text-[#001526] w-32 md:w-20 lg:w-80 pl-4 pr-10 py-2 sm:py-2 md:py-3 bg-white white text-sm md:text-base lg:text-lg"
               aria-label="Search certificate"
             />
-            <img src="/search.svg" alt="Search" className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6" />
+            <img src="/search.svg" alt="Search" className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 " />
           </div>
 
 
