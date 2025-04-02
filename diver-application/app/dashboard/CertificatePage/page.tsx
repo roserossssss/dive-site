@@ -79,8 +79,8 @@ const DiveCertification = () => {
                 <h1 className="text-3xl text-black p-2 font-extrabold">My Diving Certificate</h1>
             </div>
 
-      <div className="lg:flex items-center justify-between gap-4 md:gap-4 mt-14 flex-nowrap">
-        <div className="flex items-center space-x-2">
+      <div className="flex items-center justify-between gap-1 md:gap-4 mt-14 flex-nowrap">
+        <div className="flex items-center space-x-1">
           <img src="/leftarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
           <img src="/rightarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
           <button
@@ -93,25 +93,25 @@ const DiveCertification = () => {
           </button>
         </div>
 
-        <div className="lg:flex items-center gap-4 mt-2 space-y-2 ">
+        <div className="flex justify-between items-center">
           <div className="relative">
             <input
               type="text"
               placeholder="Search"
-              className="border rounded-full w-full lg:w-80 pl-4 pr-10 py-2 sm:py-2 md:py-3 bg-white text-sm md:text-base lg:text-lg"
+              className="border rounded-full w-40 md:w-20 lg:w-80 pl-4 pr-10 py-2 sm:py-2 md:py-3 bg-white text-sm md:text-base lg:text-lg"
               aria-label="Search certificate"
             />
             <img src="/search.svg" alt="Search" className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6" />
           </div>
 
 
-          <div className="lg:relative md:relative flex space-x-2 justify-end ">
+          <div className="flex space-x-1.5">
 
           {/* Sort Dropdown */}
           <div className="relative ">
             <button
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="bg-[#001526] text-white px-5 md:px-5 lg:px-6 py-3 md:py-3 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg"
+              className="bg-[#001526] text-white px-5 md:px-5 lg:px-6 py-3 md:py-3 lg:py-3.5 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg ml-2"
               aria-label="Sort certificates"
             >
               <img src="/sort.svg" alt="" aria-hidden="true" className="sm:w-4 md:w-6 lg:w-7 sm:h-4 md:h-6 lg:h-7"/>
@@ -139,7 +139,7 @@ const DiveCertification = () => {
           <div className="relative">
             <button
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              className="bg-[#001526] text-white px-5 md:px-5 lg:px-6 py-3 md:py-3 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg"
+              className="bg-[#001526] text-white px-5 md:px-5 lg:px-6 py-3 md:py-3 lg:py-3.5 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg"
               aria-label="Filter certificates"
             >
               <img src="/filter.svg" alt="" aria-hidden="true" className="sm:w-4 md:w-6 lg:w-7 sm:h-4 md:h-6 lg:h-7"/> 
