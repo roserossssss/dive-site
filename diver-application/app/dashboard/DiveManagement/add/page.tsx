@@ -6,20 +6,36 @@ import { useRouter } from "next/navigation";
 export default function AddDive() {
   const router = useRouter();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [depth, setDepth] = useState(0);
-  const [time, setTime] = useState(0);
+  const [file, setFile] = useState<File | null>(null);
   const [showModal, setShowModal] = useState<"save" | null>(null);
+  
+  const [divingdata, setdivingdata] = useState({
+      title: "",
+      description: "",
+      notes: "",
+      date: "",
+      location: "",
+      depth: 0,
+      time: 0, 
+    });
+    
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setdivingdata({ ...divingdata, [e.target.name]: e.target.value });
+    };
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const selectedFile = event.target.files?.[0];
+      if (selectedFile) {
+        setFile(selectedFile);
+    
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result as string);
+        };
+        reader.readAsDataURL(selectedFile);
+      }
+    };
   
   useEffect(() => {
     console.log("Updated Image Preview:", imagePreview);
@@ -27,15 +43,47 @@ export default function AddDive() {
   
 
   const handleDepthChange = (amount: number) => {
-    setDepth((prev) => Math.max(0, prev + amount));
+    setdivingdata((prev) => ({
+      ...prev,
+      depth: Math.max(0, prev.depth + amount), // Ensure depth doesn't go below 0
+    }));
   };
   
   const handleTimeChange = (amount: number) => {
-    setTime((prev) => Math.max(0, prev + amount));
-  };  
+    setdivingdata((prev) => ({
+      ...prev,
+      time: Math.max(0, prev.time + amount), // Ensure time doesn't go below 0
+    }));
+  };
+
+  const savedDivingdata = () => {
+    if ( !divingdata.title || !divingdata.description || !divingdata.notes || !divingdata.date || !divingdata.location || !divingdata.depth || !divingdata.time || !file ) {
+      alert("Please fill in all fields and upload an image.");
+      return;
+    }
+
+    const newDiveData = {
+      id: Date.now(),
+      title: divingdata.title,
+      description: divingdata.description,
+      note: divingdata.notes,
+      date: divingdata.date,
+      location: divingdata.location,
+      depth: divingdata.depth,
+      time: divingdata.time,
+      image: URL.createObjectURL(file),
+    };
+
+    const existingdivedata = JSON.parse(localStorage.getItem("Divingdata") || "[]");
+    const updateddivedata = [...existingdivedata, newDiveData];
+    localStorage.setItem("Divingdata", JSON.stringify(updateddivedata));
+
+    router.push("/dashboard/DiveManagement");
+  };
 
   const handleConfirm = () => {
     if (showModal === "save") {
+      savedDivingdata();
     }
     setShowModal(null);
   };
@@ -110,11 +158,15 @@ export default function AddDive() {
             
             {/* Title */}
             <div className="flex flex-col">
-              <label className="mt-1 text-lg md:text-2xl font-semibold text-[#001526]">
+              <label htmlFor="name" className="mt-1 text-lg md:text-2xl font-semibold text-[#001526]">
                 Title <span className="text-[#CF0C0F]">*</span>
               </label>
               <input
-                type="text"
+                 id="title"
+                 type="text"
+                 name="title"
+                 value={divingdata.title}
+                 onChange={handleChange}
                 className="mt-2 border p-3 md:p-5 rounded-2xl border-black bg-transparent w-full max-w-md md:max-w-lg"
               />
             </div>
@@ -125,19 +177,27 @@ export default function AddDive() {
                 Location <span className="text-[#CF0C0F]">*</span>
               </label>
               <input
+                id="location"
                 type="text"
+                name="location"
+                value={divingdata.location}
+                onChange={handleChange}
                 className="mt-2 border p-3 md:p-5 rounded-xl text-medium border-black bg-transparent w-full max-w-md md:max-w-lg"
               />
             </div>
 
             {/* Date Input */}
             <div className="flex flex-col">
-              <label className="mt-1 text-lg md:text-2xl font-semibold text-[#001526]">
+              <label htmlFor="date" className="mt-1 text-lg md:text-2xl font-semibold text-[#001526]">
                 Date <span className="text-[#CF0C0F]">*</span>
               </label>
               <div className="mt-2 relative w-full max-w-xs">
                 <input
+                  id="date"
                   type="text"
+                  name="date"
+                  value={divingdata.date}
+                  onChange={handleChange}
                   placeholder="mm/dd/yy"
                   className="border p-3 md:p-5 rounded-2xl border-black w-full pr-12 bg-transparent"
                 />
@@ -196,13 +256,23 @@ export default function AddDive() {
               {/* Notes */}
               <div className="flex flex-col">
                 <label className="text-lg md:text-2xl font-semibold text-[#001526]">Notes <span className="text-[#CF0C0F]">*</span> </label>
-                <textarea className="border p-3 rounded-2xl border-black bg-transparent w-full max-w-md md:max-w-lg h-32"></textarea>
+                <textarea 
+                id="notes"
+                 name="notes"
+                 value={divingdata.notes}
+                 onChange={handleChange}
+                 className="border p-3 rounded-2xl border-black bg-transparent w-full max-w-md md:max-w-lg h-32"></textarea>
               </div>
+
 
               {/* Description */}
               <div className="flex flex-col">
                 <label className="text-lg md:text-2xl font-semibold text-[#001526]">Description <span className="text-[#CF0C0F]">*</span> </label>
-                <textarea className="border p-3 rounded-2xl border-black bg-transparent w-full max-w-md md:max-w-lg h-32"></textarea>
+                <textarea id="description"
+                  name="description"
+                  value={divingdata.description}
+                  onChange={handleChange}
+                  className="border p-3 rounded-2xl border-black bg-transparent w-full max-w-md md:max-w-lg h-32"></textarea>
               </div>
             </div>
           </div>
@@ -214,9 +284,11 @@ export default function AddDive() {
               <label className="text-lg md:text-2xl font-semibold text-[#001526]">Dive Depth (M)</label>
               <div className="relative flex items-center mt-3">
                 <input
+                  id="depth"
                   type="text"
-                  value={depth}
-                  readOnly
+                  name="depth"
+                  value={divingdata.depth}
+                  onChange={handleChange}
                   className="w-20 md:w-24 h-14 text-center text-lg md:text-xl text-[#001526] border p-4 rounded-2xl border-black bg-transparent"
                 />
                 <div className="absolute right-[-30px] flex flex-col gap-1">
@@ -235,9 +307,11 @@ export default function AddDive() {
               <label className="text-lg md:text-2xl font-semibold text-[#001526]">Dive Time (MIN)</label>
               <div className="relative flex items-center mt-3">
                 <input
-                  type="text"
-                  value={time}
-                  readOnly
+                 id="time"
+                 type="text"
+                 name="time"
+                 value={divingdata.time}
+                 onChange={handleChange}
                   className="w-20 md:w-24 h-14 text-center text-lg md:text-xl text-[#001526] border p-4 rounded-xl border-black bg-transparent"
                 />
                 <div className="absolute right-[-30px] flex flex-col gap-1">
