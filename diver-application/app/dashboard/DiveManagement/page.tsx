@@ -1,10 +1,21 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import Link from "next/link";
 
-import { CiMenuKebab } from "react-icons/ci";
+interface diveData {
+  id: number;
+  title: string;
+  description: string;
+  notes: string;
+  date: string;
+  location: string;
+  depth: number;
+  time: number; 
+  image: string;
+
+}
 
 export default function DiveManagement() {
     const router = useRouter();
@@ -16,44 +27,17 @@ export default function DiveManagement() {
     const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteDiveId, setDeleteDiveId] = useState<number | null>(null);
-    
-    
-    const diveData = [
-  {
-    id: 1,
-    title: "Coral Reef Exploration",
-    description:
-      "Exploring the vibrant coral reefs, home to colorful fish, swaying corals, and graceful sea turtles in crystal-clear waters.",
-    notes: "Great visibility, lots of marine life",
-    date: "2024-01-01",
-    location: "Great Barrier Reef",
-    depth: 30,
-    time: 40,
-    image: "/sample-dive1.jpg",
-  },
-  {
-    id: 2,
-    title: "Sunken Ship Dive",
-    description: "Exploring the wreckage.",
-    notes: "Low visibility, but exciting",
-    date: "2024-01-19",
-    location: "Truk Lagoon",
-    depth: 30,
-    time: 40,
-    image: "/sample-dive1.jpg",
-  },
-  {
-    id: 3,
-    title: "Coral Reef Exploration",
-    description: "Exploring the vibrant coral reefs.",
-    notes: "Great visibility, lots of marine life",
-    date: "2024-01-01",
-    location: "Great Barrier Reef",
-    depth: 30,
-    time: 40,
-    image: "/sample-dive1.jpg",
-  },
-];
+    const [divingdata, setdivingdata] = useState<diveData[]>([]); 
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+   useEffect(() => {
+      requestIdleCallback(() => {
+        const storedDiveData = localStorage.getItem("Divingdata");
+        if (storedDiveData) {
+          setdivingdata(JSON.parse(storedDiveData));
+        }
+      });
+    }, []);  
 
 const handleDelete = (id: number) => {
   setDeleteDiveId(id);
@@ -61,11 +45,16 @@ const handleDelete = (id: number) => {
 };
 
 const confirmDelete = () => {
+  if (deleteDiveId !== null) {
+    const updatedDivedata = divingdata.filter((dive) => dive.id !== deleteDiveId);
+    setdivingdata(updatedDivedata );
+    localStorage.setItem("Divingdata", JSON.stringify(updatedDivedata ));
+    setShowDeleteModal(false);
+  }
   console.log(`Deleting dive with ID: ${deleteDiveId}`);
   setDeleteModalOpen(false);
   setDeleteDiveId(null);
 };
-
 
   const handleSort = (criteria: string) => {
     setSortBy(criteria);
@@ -77,7 +66,8 @@ const confirmDelete = () => {
     setFilterDropdownOpen(false);
   };
 
-  const filteredDives = diveData
+  //sort button
+  const filteredDives = divingdata
     .filter((dive) =>
       dive.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -132,7 +122,7 @@ const confirmDelete = () => {
           <input
             type="text"
             placeholder="Search"
-            className="border rounded-full px-5 py-2 w-full mt-5 sm:w-[400px] placeholder:text-medium bg-white"
+            className="border rounded-full bg-black px-5 py-2 w-full mt-5 sm:w-[400px] placeholder:text-medium bg-white"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -149,7 +139,7 @@ const confirmDelete = () => {
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
               className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
             >
-              <img src="/sort.svg" alt="Sort" className="w-4 h-4" />
+              <img src="/sort.svg" alt="Sort button" className="w-4 h-4" />
               Sort
             </button>
             {sortDropdownOpen && (
@@ -173,7 +163,7 @@ const confirmDelete = () => {
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
               className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
             >
-              <img src="/filter.svg" alt="Filter" className="w-4 h-4" />
+              <img src="/filter.svg" alt="Filter button" className="w-4 h-4" />
               Filter
             </button>
             {filterDropdownOpen && (
@@ -184,7 +174,7 @@ const confirmDelete = () => {
                 >
                   All
                 </button>
-                {Array.from(new Set(diveData.map((d) => d.location))).map(
+                {Array.from(new Set(divingdata.map((d) => d.location))).map(
                   (loc) => (
                     <button
                       key={loc}
@@ -200,10 +190,12 @@ const confirmDelete = () => {
           </div>
         </div>
       </div>
+
+      
   
     {/* Dive List */}
     <div className="mt-6 flex flex-col items-center mx-4">
-      {filteredDives.map((dive, index) => (
+      {divingdata.map((dive, index) => (
         <div
           key={index}
           className="w-full h-auto mb-7 rounded-3xl shadow-md bg-[#2C7DA0] flex flex-col lg:flex-row md:items-center items-center relative overflow-hidden"
@@ -250,13 +242,13 @@ const confirmDelete = () => {
                 <span className="text-lg lg:text-xl">Dive Depth</span>
               </div>
   
-              <div className="flex flex-col items-center">
-                <span className="font-bold text-5xl lg:text-7xl mt-10 p-2">
-                  {dive.time}
-                  <span className="text-lg lg:text-2xl font-bold">MIN</span>
-                </span>
-                <span className="text-lg lg:text-xl">Dive Time</span>
-              </div>
+                          <div className="flex flex-col items-center">
+              <span className="font-bold text-5xl lg:text-7xl mt-10 p-2 font-sans">
+                {dive.time}
+                <span className="text-lg lg:text-2xl font-bold">MIN</span>
+              </span>
+              <span className="text-lg lg:text-xl font-sans">Dive Time</span>
+            </div>
             </div>
 
           </div>
@@ -312,7 +304,7 @@ const confirmDelete = () => {
                       Cancel
                     </button>
                     <button
-                      onClick={confirmDelete} 
+                      onClick={confirmDelete}
                       className="w-48 h-14 border-[#001526] border-2 rounded-full font-semibold text-[#001526] hover:bg-[#001526] hover:text-white"
                     >
                       Yes
