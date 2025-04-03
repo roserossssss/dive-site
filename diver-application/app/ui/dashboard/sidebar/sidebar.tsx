@@ -45,6 +45,7 @@ export default function Sidebar() {
       {/* Sidebar Toggle Button for Mobile */}
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
         className="md:hidden fixed top-4 right-4 z-50 bg-white text-black p-2 rounded-full shadow-md"
       >
         {isOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
