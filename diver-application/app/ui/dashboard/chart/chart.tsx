@@ -52,10 +52,13 @@ export default function Chart() {
   return (
     <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md mb-2 mt-8">
       <div className="lg:flex justify-between items-center">
-        <h2 className="justify-center text-black text-3xl p-2">Your Dive Data</h2>
+        <h2 className="text-[#001526] text-3xl p-2 font-bold">Your Dive Data</h2>
 
         <div className="justify-self-center">
+
           <select 
+            aria-label="Select Time Range"
+            id="timeSelect"
             value={selectedTime} 
             onChange={(e) => setSelectedTime(e.target.value as 'year' | 'month' | 'day')}
             className={`text-sm text-white bg-[#001526] rounded-lg p-1 px-6`}
