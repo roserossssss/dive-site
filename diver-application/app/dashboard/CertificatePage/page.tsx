@@ -79,33 +79,33 @@ const DiveCertification = () => {
                 <h1 className="text-3xl text-black p-2 font-extrabold">My Diving Certificate</h1>
             </div>
 
-      <div className="flex items-center justify-between gap-1 md:gap-4 mt-14 flex-nowrap">
+      <div className="flex items-center justify-between gap-1 md:gap-4 mt-16 flex-nowrap">
         <div className="flex items-center space-x-1">
-          <img src="/leftarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
-          <img src="/rightarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
+          <img src="/leftarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
+          <img src="/rightarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
           <button
             onClick={() => router.push("/dashboard/CertificatePage/NewCertificate")}
-            className="bg-[#001526] mt-1 text-white px-5 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center gap-1 md:gap-2 text-xs md:text-base lg:text-lg whitespace-nowrap"
+            className="bg-[#001526] text-white w-48 h-10 sm:w-48 sm:h-10 md:w-44 md:h-12 lg:w-52 lg:h-12 rounded-full flex items-center gap-1 sm:gap-2 text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap transition-all duration-200 overflow-hidden relative"
             aria-label="Add a new certificate"
           >
-            <img src="/plus.svg" alt="" aria-hidden="true" className="w-3 sm:w-2 md:w-3 lg:w-4 h-3 sm:h-2 md:h-3 lg:h-4 -mt-0.5 -ml-2" />
-            <span className="text-sm md:text-base lg:text-lg">New Certificate</span>
+            <img src="/plus.svg" alt="" aria-hidden="true" className="w-3 sm:w-3.5 md:w-4 lg:w-5 h-3 sm:h-3.5 md:h-4 lg:h-3.5 -mt-0.5 sm: ml-3 md: ml-4 lg: ml-2" />
+            <span className="text-sm md:text-base lg:text-lg sm: ml-0.5 md:-ml-0.5 lg:-ml-1">New Certificate</span>
           </button>
         </div>
 
-        <div className="flex justify-between items-center">
-          <div className="relative ">
+        <div className="flex gap-0 items-center">
+          <div className="relative">
             <input
               type="text"
               placeholder="Search"
-              className="border rounded-full border-[#001526] placeholder-[#001526] text-[#001526] w-32 md:w-20 lg:w-80 pl-4 pr-10 py-2 sm:py-2 md:py-3 bg-white white text-sm md:text-base lg:text-lg"
+              className="border rounded-full border-[#001526] placeholder-[#001526] text-[#001526] sm: ml-2 md:ml-0.5 lg:ml-1 w-28 md:w-48 lg:w-80 pl-4 pr-10 py-2 sm:py-2 md:py-3 bg-white white text-sm md:text-base lg:text-lg"
               aria-label="Search certificate"
             />
             <img src="/search.svg" alt="Search" className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 " />
           </div>
 
 
-          <div className="flex space-x-1.5">
+          <div className="flex items-center gap-2 md:gap-4 flex-1 justify-end">
 
           {/* Sort Dropdown */}
           <div className="relative ">
