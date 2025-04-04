@@ -94,15 +94,24 @@ const DiveCertification = () => {
         </div>
 
         <div className="flex items-center gap-8">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className=" relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base focus:ring-2 focus:ring-black focus:border-blue-500 ml-auto"
-              aria-label="Search certificate"
-            />
-            <img src="/search.svg" alt="Search" className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 " />
-          </div>
+        <div className="relative group">
+        <input
+          type="text"
+          placeholder="Search"
+          className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full 
+            w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base 
+            focus:ring-2 focus:ring-black focus:border-blue-500 
+            ml-auto transition-all duration-300 ease-in-out 
+            group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80"
+          aria-label="Search certificate"
+        />
+        <img 
+          src="/search.svg" 
+          alt="Search" 
+          className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 
+            w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6"
+        />
+      </div>
 
 
           <div className="flex items-center gap-2 md:gap-2 flex-1 justify-end">
