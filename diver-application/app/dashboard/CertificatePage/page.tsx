@@ -75,47 +75,56 @@ const DiveCertification = () => {
   return (
     <div className="flex-1 p-5 pt-2 relative">
       {/* Header Section */}
-      <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 md:pl-80">
-                <h1 className="text-3xl text-black p-2 font-extrabold">My Diving Certificate</h1>
+      <div className="fixed top-0 left-0 w-full bg-white z-10 px-4 py-3 sm:px-6 md:pl-80 lg:pl-80">
+                <h1 className="text-2xl p-2 sm:text-2xl md:text-3xl text-black font-extrabold">My Diving Certificate</h1>
             </div>
 
-      <div className="lg:flex items-center justify-between gap-4 md:gap-4 mt-14 flex-nowrap">
-        <div className="flex items-center space-x-2">
-          <img src="/leftarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
-          <img src="/rightarrow.svg" alt="" aria-hidden="true" className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-1" />
+      <div className="flex items-center justify-between gap-1 md:gap-4 mt-14 flex-nowrap">
+        <div className="flex items-center space-x-1">
+          <img src="/leftarrow.svg" alt="" aria-hidden="true" className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
+          <img src="/rightarrow.svg" alt="" aria-hidden="true" className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
           <button
             onClick={() => router.push("/dashboard/CertificatePage/NewCertificate")}
-            className="bg-[#001526] mt-1 text-white px-5 md:px-5 lg:px-6 py-2 md:py-3 rounded-full flex items-center gap-1 md:gap-2 text-xs md:text-base lg:text-lg whitespace-nowrap"
+            className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 text-xs md:sm font-medium text-white bg-[#001526] rounded-full shadow-md transition duration-200 w-10 md:w-16 lg:w-52 h-6 md:h-12 lg:h-12"
             aria-label="Add a new certificate"
           >
-            <img src="/plus.svg" alt="" aria-hidden="true" className="w-3 sm:w-2 md:w-3 lg:w-4 h-3 sm:h-2 md:h-3 lg:h-4 -mt-0.5 -ml-2" />
-            <span className="text-sm md:text-base lg:text-lg">New Certificate</span>
+            <img src="/plus.svg" alt="" aria-hidden="true" className="w-3 md:w-4 lg:w-5 h-3 md:h-4 lg:h-3.5 -mt-0.5" />
+            <span className="text-xs md:text-base lg:text-lg sm: ml-0.5 md:-ml-0.5 lg:-ml-1 hidden lg:inline">New Certificate</span>
           </button>
         </div>
 
-        <div className="lg:flex items-center gap-4 mt-2 space-y-2 ">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className="border rounded-full w-full lg:w-80 pl-4 pr-10 py-2 sm:py-2 md:py-3 bg-white text-sm md:text-base lg:text-lg"
-              aria-label="Search certificate"
-            />
-            <img src="/search.svg" alt="Search" className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6" />
-          </div>
+        <div className="flex items-center gap-8">
+        <div className="relative group">
+        <input
+          type="text"
+          placeholder="Search"
+          className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full 
+            w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base 
+            focus:ring-2 focus:ring-black focus:border-blue-500 
+            ml-auto transition-all duration-300 ease-in-out 
+            group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80"
+          aria-label="Search certificate"
+        />
+        <img 
+          src="/search.svg" 
+          alt="Search" 
+          className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 
+            w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6"
+        />
+      </div>
 
 
-          <div className="lg:relative md:relative flex space-x-2 justify-end ">
+          <div className="flex items-center gap-2 md:gap-2 flex-1 justify-end">
 
           {/* Sort Dropdown */}
           <div className="relative ">
             <button
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="bg-[#001526] text-white px-5 md:px-5 lg:px-6 py-3 md:py-3 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg"
+              className="bg-[#001526] text-white w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg -ml-7"
               aria-label="Sort certificates"
             >
-              <img src="/sort.svg" alt="" aria-hidden="true" className="sm:w-4 md:w-6 lg:w-7 sm:h-4 md:h-6 lg:h-7"/>
-              <span className="leading-none">Sort</span>
+              <img src="/sort.svg" alt="" aria-hidden="true" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7"/>
+              <span className="hidden lg:inline">Sort</span>
             </button>
             {sortDropdownOpen && (
               <div className="absolute right-20 mt-2 bg-white shadow-lg rounded-lg z-50">
@@ -139,11 +148,11 @@ const DiveCertification = () => {
           <div className="relative">
             <button
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              className="bg-[#001526] text-white px-5 md:px-5 lg:px-6 py-3 md:py-3 rounded-full flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg"
+              className="bg-[#001526] text-white  w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg"
               aria-label="Filter certificates"
             >
-              <img src="/filter.svg" alt="" aria-hidden="true" className="sm:w-4 md:w-6 lg:w-7 sm:h-4 md:h-6 lg:h-7"/> 
-              <span className="leading-none">Filter</span>
+              <img src="/filter.svg" alt="" aria-hidden="true" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7"/> 
+              <span className="hidden lg:inline">Filter</span>
             </button>
             {filterDropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg  z-50">

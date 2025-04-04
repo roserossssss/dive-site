@@ -63,7 +63,7 @@ export default function NewCertificate() {
   <h2 className="text-3xl font-bold text-[#001526]">New Dive Certification</h2>
 
   {/* Buttons Section */}
-  <div className="flex justify-end gap-4 mt-6 flex-wrap">
+  <div className="flex justify-end gap-4 mt-6">
     <button
       onClick={() => router.push("/dashboard/CertificatePage")}
       className="max-w-sm w-full h-14 px-6 py-2 font-semibold text-lg bg-gray-300 text-[#001526] rounded-full"
@@ -111,7 +111,7 @@ export default function NewCertificate() {
           name="name"
           value={certification.name}
           onChange={handleChange}
-          className="bg-transparent border border-black p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
 
@@ -124,7 +124,7 @@ export default function NewCertificate() {
           name="agency"
           value={certification.agency}
           onChange={handleChange}
-          className="bg-transparent border border-black p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
 
@@ -137,7 +137,7 @@ export default function NewCertificate() {
           name="level"
           value={certification.level}
           onChange={handleChange}
-          className="bg-transparent border border-black p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
 
@@ -150,7 +150,7 @@ export default function NewCertificate() {
           name="location"
           value={certification.location}
           onChange={handleChange}
-          className="bg-transparent border border-[#001526] p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
     </div>
