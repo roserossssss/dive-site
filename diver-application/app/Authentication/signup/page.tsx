@@ -110,7 +110,7 @@ export default function Signup() {
               {/* Login Redirect */}
               <div className="flex justify-center mt-3 text-[15px]">
                 <span className="text-[#001526] font-bold">Already have an account?</span>
-                <Link href="/Authentication/login" className="text-[#2C7DA0] hover:underline font-bold ml-2">
+                <Link href="/Authentication/login" className="text-[#005f80] hover:underline font-bold ml-2">
                   Log-in
                 </Link>
               </div>
