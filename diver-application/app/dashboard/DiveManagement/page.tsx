@@ -85,62 +85,65 @@ const confirmDelete = () => {
   return (
     <div>
     {/* Header Section */}
-    <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 rounded-t-2xl md:pl-80">
-    <h2 className="text-3xl font-bold text-[#001526]">My Dive</h2>
+    <div className="fixed top-0 left-0 w-full bg-white z-10 p-3 rounded-t-2xl md:pl-80">
+    <h2 className="text-2xl p-2 sm:text-2xl md:text-3xl text-black font-bold">My Dive</h2>
     </div>
-   
-  
     {/* Controls */}
-    <div className="flex flex-wrap items-center justify-between gap-4 mt-8 ml-3">
-      <div className="flex items-center space-x-2">
+    <div className="flex items-center justify-between gap-1 md:gap-4 mt-8 flex-nowrap">
+      <div className="flex items-center space-x-1">
         <img
           src="/leftarrow.svg"
           alt="Left Arrow"
-          className="w-7 h-7 cursor-pointer mt-6"
+          className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-7"
         />
         <img
           src="/rightarrow.svg"
           alt="Right Arrow"
-          className="w-7 h-7 cursor-pointer mt-6"
+          className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-7"
         />
         <button
           onClick={() => router.push("/dashboard/DiveManagement/add")}
-          className="bg-[#001526] text-white px-9 py-3 rounded-full flex items-center gap-2 mt-6"
+          className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 text-xs md:sm font-medium text-white bg-[#001526] rounded-full shadow-md transition duration-200 w-10 md:w-16 lg:w-52 h-6 md:h-12 lg:h-12 mt-7"
         >
           <img 
           src="/plus.svg"
           alt="Plus"
-          className="w-3 h-3 -mt-1 -ml-1 transition-transform duration-300"
+          className="w-3 md:w-4 lg:w-5 h-3 md:h-4 lg:h-3.5 -mt-0.5"
           />
-          <span className="text-white font-medium ml-1">New Dive</span>
+          <span className="text-xs md:text-base lg:text-lg sm: ml-2 md:-ml-0.5 lg:-ml-1 hidden lg:inline">New Dive</span>
         </button>
       </div>
-  
-      <div className="flex flex-wrap gap-4 mt-1">
+
         {/* Search */}
-        <div className="relative w-full mt-1 sm:w-auto">
-          <input
-            type="text"
-            placeholder="Search"
-            className="border rounded-full bg-black px-5 py-2 w-full mt-5 sm:w-[400px] placeholder:text-medium bg-white"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <img
-            src="/search.svg"
-            alt="Search"
-            className="absolute right-3 mt-5 top-2 w-6 h-6"
-          />
-        </div>
+        <div className="flex items-center gap-8 mt-7">
+        <div className="relative group -ml-7">
+        <input
+          type="text"
+          placeholder="Search"
+          className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full 
+            w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base 
+            focus:ring-2 focus:ring-black focus:border-blue-500 
+            ml-auto transition-all duration-300 ease-in-out 
+            group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80 "
+          aria-label="Search certificate"
+        />
+        <img 
+          src="/search.svg" 
+          alt="Search" 
+          className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 
+            w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6"
+        />
+      </div>
+
   
         {/* Sort Dropdown */}
-        <div className="relative mt-5 ">
+        <div className="relative ml-4">
             <button
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+              className="bg-[#001526] text-white w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg -ml-10"
             >
-              <img src="/sort.svg" alt="Sort button" className="w-4 h-4" />
-              Sort
+              <img src="/sort.svg" alt="Sort button" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7" />
+              <span className="hidden lg:inline">Sort</span>
             </button>
             {sortDropdownOpen && (
               <div className="absolute right-20 mt-2 p-1 bg-white shadow-lg rounded-lg z-50">
@@ -158,13 +161,13 @@ const confirmDelete = () => {
           </div>
 
           {/* Filter Dropdown */}
-          <div className="relative mt-5 -ml-7 px-5">
+          <div className="relative">
             <button
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              className="bg-[#001526] text-white px-5 py-3 rounded-full flex items-center gap-3"
+              className="bg-[#001526] text-white w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg -ml-7"
             >
-              <img src="/filter.svg" alt="Filter button" className="w-4 h-4" />
-              Filter
+              <img src="/filter.svg" alt="Filter button" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7" />
+              <span className="hidden lg:inline">Filter</span>
             </button>
             {filterDropdownOpen && (
               <div className="absolute right-0 mt-2 p-1 bg-white shadow-lg rounded-lg z-50">
