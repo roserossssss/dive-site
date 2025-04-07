@@ -94,7 +94,7 @@ export default function AddDive() {
     <div className="flex-1 p-5 pt-2 relative">
       {/* Page Title */}
       <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 rounded-t-2xl md:pl-80">
-      <h2 className="text-3xl font-bold text-black">New Dive</h2>  
+      <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-[#001526] text-center md:text-left mt-2">New Dive</h2>  
       </div>
 
       {/* Buttons Section */}
