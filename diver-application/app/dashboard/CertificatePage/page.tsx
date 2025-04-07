@@ -76,8 +76,8 @@ const DiveCertification = () => {
     <div className="flex-1 p-5 pt-2 relative">
       {/* Header Section */}
       <div className="fixed top-0 left-0 w-full bg-white z-10 px-4 py-3 sm:px-6 md:pl-80 lg:pl-80">
-                <h1 className="text-2xl p-2 sm:text-2xl md:text-3xl text-black font-extrabold">My Diving Certificate</h1>
-            </div>
+        <h1 className="text-xl md:text-xl lg:text-2xl font-bold text-[#001526] text-center md:text-left mt-2">My Diving Certificate</h1>
+        </div>
 
       <div className="flex items-center justify-between gap-1 md:gap-4 mt-14 flex-nowrap">
         <div className="flex items-center space-x-1">

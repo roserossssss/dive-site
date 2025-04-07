@@ -60,7 +60,7 @@ export default function NewCertificate() {
   return (
     <div className="flex-1 p-5 pt-2 relative">
   {/* Page Title */}
-  <h2 className="text-3xl font-bold text-[#001526]">New Dive Certification</h2>
+  <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-[#001526] text-center md:text-left mt-2">New Dive Certification</h2>
 
   {/* Buttons Section */}
   <div className="flex justify-end gap-4 mt-6">
