@@ -11,6 +11,7 @@ import { TfiGallery } from "react-icons/tfi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CiLogout } from "react-icons/ci";
+import Image from 'next/image';
 
 const Itemmenu = [
   {
@@ -56,7 +57,7 @@ export default function Sidebar() {
         className={`fixed top-0 left-0 w-64 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
-        <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
+        <Image width={20} height={20} className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
         <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
       </div>
 
@@ -98,7 +99,7 @@ export default function Sidebar() {
 
         {/* User Profile Section */}
         <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
-          <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
+          <Image  src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
           <div className="flex-1">
             <span className="block font-semibold text-black text-sm truncate">John Doe</span>
             <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>

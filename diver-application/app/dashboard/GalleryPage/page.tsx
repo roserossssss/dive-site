@@ -4,9 +4,17 @@ import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Modals from "./Modals";
+import Image from "next/image";
+
+interface GalleryItem {
+  src: string;
+  alt: string;
+  Name: string;
+  Date: string;
+}
 
 export default function GalleryPage() {
-  const [gallery, setGallery] = useState<any[]>([
+  const [gallery, setGallery] = useState<GalleryItem[]>([
     {
       src: "https://media.istockphoto.com/id/1990410887/photo/scuba-diver-makes-ok-sign-underwater-scene-with-exotic-fishes-and-coral-reef.jpg?s=1024x1024&w=is&k=20&c=KKEOBFFWwFnJCVxH1poexlnC_AcFa5ap6wtXSt3OOy4=",
       alt: "Authorings",
@@ -247,7 +255,7 @@ export default function GalleryPage() {
                 }
               }}
             >
-              <img
+              <Image width={20} height={20}
                 src={item.src}
                 loading="lazy"
                 alt={item.alt}
@@ -280,10 +288,9 @@ export default function GalleryPage() {
         errorMessage={errorMessage}
         selectedPhotoIndex={selectedPhotoIndex}
         setSelectedPhotoIndex={setSelectedPhotoIndex}
-        gallery={gallery}
         handlePreviousPhoto={handlePreviousPhoto}
-        handleNextPhoto={handleNextPhoto}
-      />
+        handleNextPhoto={handleNextPhoto} 
+        gallery={[]}      />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import SaveChangesModal from "./components/SaveChangesModal";
 import DiscardChangesModal from "./components/DiscardChangesModal";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import Image from "next/image";
 
 export default function MedicalPage() {
   const {
@@ -15,11 +16,11 @@ export default function MedicalPage() {
     middleName,
     // setMiddleName,
     lastName,
-    setLastName,
+    // setLastName,
     suffix,
     // setSuffix,
     birthdate,
-    setBirthdate,
+    // setBirthdate,
     age,
     sex,
     // setSex,
@@ -100,7 +101,7 @@ export default function MedicalPage() {
         {/* Header Container for User's Profile Photo, Name, and Email Address */}
         <div className="bg-[#2C7DA0] p-8 rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12">
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto">
-            <img
+            <Image width={24} height={24}
               src="/images/sample_profile_pic.jpg"
               alt="User Photo"
               className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4"

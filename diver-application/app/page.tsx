@@ -6,14 +6,14 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-gray-200 flex justify-center">
             <Image 
-                src="/images/page_bg_v1.jpg"  
-                alt="Landing Page"
-                layout="fill"
-                objectFit="cover"
-                priority 
-                className="absolute inset-0"
-            />
-       
+          src="/images/page_bg_v1.jpg"  
+          alt="Landing Page"
+          objectFit="cover"
+          priority 
+          className="absolute inset-0 w-full h-full"
+          width={1500}
+          height={0}
+                        />
 
 
             <div className="relative lg:flex w-full">

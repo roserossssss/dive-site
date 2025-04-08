@@ -16,7 +16,7 @@ export default function DiscardChangesModal({ onCancel, onConfirm }: DiscardChan
         <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">
           Are you sure you want to cancel?
           <br />
-          Your changes won't be saved.
+          Your changes won&apos;t be saved.
         </p>
         <div className="flex justify-center mt-5">
           <button

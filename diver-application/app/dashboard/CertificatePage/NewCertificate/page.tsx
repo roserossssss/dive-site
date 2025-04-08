@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from 'next/image';
 
 export default function NewCertificate() {
   const router = useRouter();
@@ -82,7 +83,8 @@ export default function NewCertificate() {
   <div className="mt-6 bg-[#2E6782] p-6 rounded-t-3xl">
     <div className="flex flex-col items-center">
       <div className="w-full max-w-xs h-auto flex items-center justify-center">
-        <img
+        <Image
+          width={20} height={20}
           src={file ? URL.createObjectURL(file) : "/image-upload.svg"}
           alt="Upload Preview"
           className="w-40 h-40"
@@ -161,7 +163,7 @@ export default function NewCertificate() {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-full max-w-lg text-center">
         <div className="flex justify-center mb-4">
-          <img src="/exclamation.svg" alt="Delete" className="w-24 h-24" />
+          <Image width={20} height={20} src="/exclamation.svg" alt="Delete" className="w-24 h-24" />
         </div>
 
         <h2 className="text-2xl font-bold text-black mt-4">Save New Certificate?</h2>
