@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 
-export default function UsersManagement() {
-  const [users, setUsers] = useState([
+export default function UsersManagement() 
+//Add Certificate pages JSON data soon
+{
+  const [users] = useState([
     {
       id: 1,
       profile: "#",

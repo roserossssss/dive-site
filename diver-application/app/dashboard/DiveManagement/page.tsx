@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useState} from "react";
 import Link from "next/link";
 
-import { CiMenuKebab } from "react-icons/ci";
 
 export default function DiveManagement() {
     const router = useRouter();
