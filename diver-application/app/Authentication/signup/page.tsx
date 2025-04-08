@@ -11,7 +11,7 @@ export default function Signup() {
   return (
     <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
       <Image 
-        src="/images/page_bg_v1.jpg"  
+        src="/images/page_bg_v2.jpg"  
         alt="Landing Page"
         layout="fill"
         objectFit="cover"
