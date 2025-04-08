@@ -57,7 +57,7 @@ export default function Sidebar() {
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
-        <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
+        <span className="ml-2 text-[#001526] font-bold">MASTER LIVEABOARDS</span>
       </div>
 
       {/* Sidebar */}

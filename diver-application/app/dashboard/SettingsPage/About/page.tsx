@@ -36,14 +36,14 @@ export default function AboutUsPage() {
           <div className="text-center mt-1 lg:mt-2 px-4 lg:px-8">
             <div className="mb-1 lg:mb-2">
               <p className="text-base lg:text-lg text-[#001526]">
-                Master Liveboards is your ultimate companion for logging, managing, and enhancing your diving experiences.
+                Master Liveaboards is your ultimate companion for logging, managing, and enhancing your diving experiences.
                 Whether you're a beginner or a seasoned diver, our platform provides the tools you need to track dives, manage
                 certifications, and ensure safety—all in one place.
               </p>
             </div>
             <div className="text-center mb-4 mt-5 lg:mt-8 px-4 lg:px-8">
               <p className="text-xl lg:text-2xl text-[#001526] font-bold">
-                Dive Deeper, Dive Smarter with Master LiveBoards!
+                Dive Deeper, Dive Smarter with Master Liveaboards!
               </p>
             </div>
           </div>

@@ -3,7 +3,7 @@ import './ui/globals.css';
 
 
 export const metadata: Metadata = {
-  title: "Master Liveboards",
+  title: "Master Liveaboards",
   description: "Run by Next.js",
 };
 
