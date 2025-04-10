@@ -5,18 +5,19 @@ export default function Login() {
     return (
         <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
             <Image 
-                src="/images/page_bg_v1.jpg"  
-                alt="Landing Page"
-                layout="fill"
+                src="/images/page_bg_v2.jpg"  
+                alt="Master Liveaboards"
                 objectFit="cover"
                 priority 
-                className="absolute inset-0"
+                className="absolute inset-0 w-full h-full"
+                width={1500}
+                height={0}
             />
             <div className="relative z-10 flex w-full lg:w-2/4 justify-center items-center ml-auto lg:p-8 p-4">
                 <div className="w-full max-w-xl lg:p-8 p-4">
                     <form className="bg-[#D9E7EC] p-8 rounded-3xl shadow-lg w-full lg:pt-16 pt-5 lg:pb-24 pb-12 lg:pl-14 lg:pr-14">
                         <div className="flex flex-col items-center lg:px-6 px-4">
-                            <img className="w-40 h-40 mb-4" src="../images/dive_light_logo_name.svg"/>
+                            <Image className="w-40 h-40 mb-4" src="../images/dive_light_logo_name.svg" alt="logo"  width={40} height={40}/>
                             <h1 className="text-2xl font-bold text-center mb-6 text-[#001526]">
                                 Log in
                             </h1>
@@ -51,7 +52,7 @@ export default function Login() {
 
                             {/* Signup Redirect */}
                             <div className="flex justify-center mt-3 text-[15px]">
-                                <span className="text-[#001526] font-bold">Don't have an account?</span>
+                                <span className="text-[#001526] font-bold">Don&apos;t have an account?</span>
                                 <Link href="/Authentication/signup" className="text-[#2C7DA0] hover:underline font-bold ml-2">
                                     Sign-up
                                 </Link>

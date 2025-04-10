@@ -10,6 +10,7 @@ import { TbCertificate } from "react-icons/tb";
 import { IoAnalytics, IoClose, IoMenu } from "react-icons/io5";
 import { GrGallery } from "react-icons/gr";
 import Link from "next/link";
+import Image from 'next/image';
 
 import { usePathname } from "next/navigation";
 

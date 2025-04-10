@@ -11,6 +11,7 @@ import { TfiGallery } from "react-icons/tfi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CiLogout } from "react-icons/ci";
+import Image from 'next/image';
 
 const Itemmenu = [
   {
@@ -45,6 +46,7 @@ export default function Sidebar() {
       {/* Sidebar Toggle Button for Mobile */}
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
         className="md:hidden fixed top-4 right-4 z-50 bg-white text-black p-2 rounded-full shadow-md"
       >
         {isOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
@@ -56,7 +58,7 @@ export default function Sidebar() {
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
-        <span className="ml-2 text-[#001526] font-bold">MASTER LIVEBOARDS</span>
+        <span className="ml-2 text-[#001526] font-bold">MASTER LIVEABOARDS</span>
       </div>
 
       {/* Sidebar */}
@@ -97,7 +99,7 @@ export default function Sidebar() {
 
         {/* User Profile Section */}
         <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
-          <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
+          <Image  src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
           <div className="flex-1">
             <span className="block font-semibold text-black text-sm truncate">John Doe</span>
             <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>
