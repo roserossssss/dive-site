@@ -14,7 +14,7 @@ export default function SaveChangesModal({ onCancel, onConfirm }: SaveChangesMod
         </div>
         <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Confirm Changes?</h2>
         <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">
-          You're about to update your details.
+          You&apos;re about to update your details.
           <br />
           Want to proceed?
         </p>

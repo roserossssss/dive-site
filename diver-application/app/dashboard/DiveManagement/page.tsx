@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState} from "react";
 import Link from "next/link";
+import Image from 'next/image';
 
 interface diveData {
   id: number;
@@ -28,6 +29,7 @@ export default function DiveManagement() {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteDiveId, setDeleteDiveId] = useState<number | null>(null);
     const [divingdata, setdivingdata] = useState<diveData[]>([]); 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
    useEffect(() => {
@@ -91,12 +93,12 @@ const confirmDelete = () => {
     {/* Controls */}
     <div className="flex items-center justify-between gap-1 md:gap-4 mt-8 flex-nowrap">
       <div className="flex items-center space-x-1">
-        <img
+        <Image width={20} height={20}
           src="/leftarrow.svg"
           alt="Left Arrow"
           className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer sm: -ml-1 lg:ml-5 mt-7"
         />
-        <img
+        <Image width={20} height={20}
           src="/rightarrow.svg"
           alt="Right Arrow"
           className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer sm: -ml-1 lg:ml-5 mt-7"
@@ -105,7 +107,7 @@ const confirmDelete = () => {
           onClick={() => router.push("/dashboard/DiveManagement/add")}
           className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 text-xs md:sm font-medium text-white bg-[#001526] rounded-full shadow-md transition duration-200 w-8 md:w-12 lg:w-36 h-6 md:h-10 lg:h-12 mt-7"
         >
-          <img 
+          <Image width={20} height={20} 
           src="/plus.svg"
           alt="Plus"
           className="w-10 md:w-5 lg:w-3 h-10 md:h-5 lg:h-3 -mt-0.5"
@@ -120,9 +122,18 @@ const confirmDelete = () => {
         <input
           type="text"
           placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full 
+            w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base 
+            focus:ring-2 focus:ring-black focus:border-blue-500 
+            ml-auto transition-all duration-300 ease-in-out 
+            group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80 "
+          aria-label="Search certificate"
+        />
+        <Image width={20} height={20} 
           className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full w-20 md:w-32 lg:w-70 h-6 md:h-10 lg:h-12 pl-4 pr-10 text-xs sm:text-base focus:ring-2 focus:ring-black focus:border-blue-500 ml-auto transition-all duration-300 ease-in-out group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80"
           aria-label="Search certificate"/>
-        <img 
           src="/search.svg" 
           alt="Search" 
           className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 
@@ -137,7 +148,7 @@ const confirmDelete = () => {
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
               className="bg-[#001526] text-white w-8 md:w-14 lg:w-24 h-6 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg sm: -ml-7 lg:-ml-6"
             >
-              <img src="/sort.svg" alt="Sort button" className="w-3 md:w-5 lg:w-7 h-3 md:h-5 lg:h-6" />
+              <Image width={20} height={20} src="/sort.svg" alt="Sort button" className="w-3 md:w-5 lg:w-7 h-3 md:h-5 lg:h-6" />
               <span className="hidden lg:inline">Sort</span>
             </button>
             {sortDropdownOpen && (
@@ -161,7 +172,7 @@ const confirmDelete = () => {
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
               className="bg-[#001526] text-white w-8 md:w-14 lg:w-24 h-6 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg sm: -mr-2 lg:mr-10"
             >
-              <img src="/filter.svg" alt="Filter button" className="w-3 md:w-5 lg:w-7 h-3 md:h-5 lg:h-6" />
+              <Image width={20} height={20} src="/filter.svg" alt="Filter button" className="w-3 md:w-5 lg:w-7 h-3 md:h-5 lg:h-6" />
               <span className="hidden lg:inline">Filter</span>
             </button>
             {filterDropdownOpen && (
@@ -193,14 +204,14 @@ const confirmDelete = () => {
   
     {/* Dive List */}
     <div className="mt-6 flex flex-col items-center mx-4">
-      {divingdata.map((dive, index) => (
+      {filteredDives.map((dive, index) => (
         <div
           key={index}
           className="w-full h-auto mb-7 rounded-3xl shadow-md bg-[#2C7DA0] flex flex-col lg:flex-row md:items-center items-center relative overflow-hidden"
         >
           {/* Image Section */}
           <div className="w-full lg:w-[500px] h-full flex">
-  <img
+  <Image width={20} height={20}
     src={dive.image}
     alt={dive.title}
     className="w-full h-full object-cover rounded-t-3xl lg:rounded-3xl"
@@ -212,12 +223,12 @@ const confirmDelete = () => {
             <h2 className="text-2xl lg:text-4xl font-bold text-white">{dive.title}</h2>
   
             <div className="flex flex-wrap justify-center lg:justify-start mt-2 gap-2">
-              <img src="/location.svg" alt="Location Icon" className="w-6 h-6" />
+              <Image width={20} height={20} src="/location.svg" alt="Location Icon" className="w-6 h-6" />
               <p className="text-white font-bold text-lg lg:text-xl">{dive.location}</p>
             </div>
   
             <div className="flex flex-wrap justify-center lg:justify-start mt-3 gap-2">
-              <img src="/calendar.svg" alt="Date Icon" className="w-6 h-6" />
+              <Image width={20} height={20} src="/calendar.svg" alt="Date Icon" className="w-6 h-6" />
               <p className="text-white text-lg lg:text-xl">
                 {new Date(dive.date).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -287,7 +298,7 @@ const confirmDelete = () => {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
                   <div className="flex justify-center mb-4">
-                    <img src="/trash-delete.svg" alt="Delete" className="w-50 h-50 mt-40" />
+                    <Image width={20} height={20} src="/trash-delete.svg" alt="Delete" className="w-50 h-50 mt-40" />
                   </div>
                   <h2 className="text-5xl font-bold text-[#001526] mt-10">Delete Dive?</h2>
                   <p className="text-xl font-semibold text-gray-600 mt-4">

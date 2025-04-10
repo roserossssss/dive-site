@@ -13,11 +13,12 @@ export default function Signup() {
       <Image 
         src="/images/page_bg_v2.jpg"  
         alt="Landing Page"
-        layout="fill"
         objectFit="cover"
         priority 
-        className="absolute inset-0"
-      />
+        className="absolute inset-0 w-full h-full"
+        width={1500}
+        height={0}
+                  />
       <div className="relative z-10 flex w-full lg:w-2/4 justify-center items-center ml-auto lg:p-8 p-4">
         <div className="w-full max-w-xl lg:p-8 p-4">
           <form className="bg-[#D9E7EC] p-8 rounded-3xl shadow-lg w-full py-12 lg:py-16 px-12">

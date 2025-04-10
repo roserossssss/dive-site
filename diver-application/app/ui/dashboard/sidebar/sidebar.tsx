@@ -11,6 +11,7 @@ import { TfiGallery } from "react-icons/tfi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CiLogout } from "react-icons/ci";
+import Image from 'next/image';
 
 const Itemmenu = [
   {
@@ -98,7 +99,7 @@ export default function Sidebar() {
 
         {/* User Profile Section */}
         <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
-          <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
+          <Image  src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
           <div className="flex-1">
             <span className="block font-semibold text-black text-sm truncate">John Doe</span>
             <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>

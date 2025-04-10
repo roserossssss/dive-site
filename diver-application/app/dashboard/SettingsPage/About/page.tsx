@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { HelpCircle } from "lucide-react";
+// import { HelpCircle } from "lucide-react";
 import { IoIosArrowBack } from "react-icons/io";
+import Image from 'next/image';
 
 export default function AboutUsPage() {
   const router = useRouter();
@@ -30,14 +31,14 @@ export default function AboutUsPage() {
         <div className="mt-6 mx-auto p-6 bg-[#D9E7EC] text-[#001526] rounded-2xl shadow-lg border-2 lg:w-[870px] lg:h-[650px] flex flex-col items-center justify-center">
           {/* Logo */}
           <div className="w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] flex justify-center mb-1 lg:mb-2">
-            <img src="/images/dive_light_logo_name.svg" alt="Master LiveBoards Logo" className="object-contain" />
+            <Image width={20} height={20} src="/images/dive_light_logo_name.svg" alt="Master LiveBoards Logo" className="object-contain" />
           </div>
 
           <div className="text-center mt-1 lg:mt-2 px-4 lg:px-8">
             <div className="mb-1 lg:mb-2">
               <p className="text-base lg:text-lg text-[#001526]">
-                Master Liveaboards is your ultimate companion for logging, managing, and enhancing your diving experiences.
-                Whether you're a beginner or a seasoned diver, our platform provides the tools you need to track dives, manage
+                Master Liveboards is your ultimate companion for logging, managing, and enhancing your diving experiences.
+                Whether you&apos;re a beginner or a seasoned diver, our platform provides the tools you need to track dives, manage
                 certifications, and ensure safety—all in one place.
               </p>
             </div>

@@ -7,7 +7,7 @@ interface CardProps {
   icon?: React.ReactNode;
 }
 
-export default function Card({ title, value, description, icon }: CardProps) {
+export default function Card({value, description, icon }: CardProps) {
   return (
     <div className="bg-[#D9E7EC] p-2 rounded-lg shadow-md w-96 h-auto mb-2 flex flex-1">
       <div className="text-4xl mb-2 text-end pr-4">{icon}</div>

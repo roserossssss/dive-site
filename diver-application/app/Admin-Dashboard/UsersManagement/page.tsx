@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import Image from 'next/image';
 
 export default function UsersManagement() {
-  const [users, setUsers] = useState([
+  //replace with interface 
+  const [users] = useState([
     {
       id: 1,
       profile: "#",
@@ -78,7 +80,9 @@ export default function UsersManagement() {
                 users.map((user) => (
                   <tr key={user.id} className="border-b hover:bg-gray-100">
                     <td className="p-3">
-                      <img
+                      <Image
+                        width={12}
+                        height={12}
                         src={user.profile}
                         alt="Profile"
                         className="w-12 h-12 rounded-full object-cover"

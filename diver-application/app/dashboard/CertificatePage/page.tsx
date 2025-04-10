@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 
 interface Certificate {
   id: number;
@@ -33,7 +34,7 @@ const DiveCertification = () => {
 
   // Sort function
   const handleSort = (type: string) => {
-    let sortedCertificates = [...certificates];
+    const sortedCertificates = [...certificates];
 
     if (type === "name") {
       sortedCertificates.sort((a, b) => a.name.localeCompare(b.name));
@@ -81,14 +82,14 @@ const DiveCertification = () => {
 
       <div className="flex items-center justify-between gap-1 md:gap-4 mt-14 flex-nowrap">
         <div className="flex items-center space-x-1">
-          <img src="/leftarrow.svg" alt="" aria-hidden="true" className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
-          <img src="/rightarrow.svg" alt="" aria-hidden="true" className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
+          <Image src="/leftarrow.svg" width={20} height={20} alt="left" aria-hidden="true" className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
+          <Image src="/rightarrow.svg" width={20} height={20} alt="right" aria-hidden="true" className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1" />
           <button
             onClick={() => router.push("/dashboard/CertificatePage/NewCertificate")}
             className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 text-xs md:sm font-medium text-white bg-[#001526] rounded-full shadow-md transition duration-200 w-10 md:w-16 lg:w-52 h-6 md:h-12 lg:h-12"
             aria-label="Add a new certificate"
           >
-            <img src="/plus.svg" alt="" aria-hidden="true" className="w-3 md:w-4 lg:w-5 h-3 md:h-4 lg:h-3.5 -mt-0.5" />
+            <Image src="/plus.svg" width={20} height={20} alt="addmore" aria-hidden="true" className="w-3 md:w-4 lg:w-5 h-3 md:h-4 lg:h-3.5 -mt-0.5" />
             <span className="text-xs md:text-base lg:text-lg sm: ml-0.5 md:-ml-0.5 lg:-ml-1 hidden lg:inline">New Certificate</span>
           </button>
         </div>
@@ -105,9 +106,11 @@ const DiveCertification = () => {
             group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80"
           aria-label="Search certificate"
         />
-        <img 
+        <Image
           src="/search.svg" 
           alt="Search" 
+          width={20} height={20}
+          
           className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 
             w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6"
         />
@@ -123,7 +126,7 @@ const DiveCertification = () => {
               className="bg-[#001526] text-white w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg -ml-7"
               aria-label="Sort certificates"
             >
-              <img src="/sort.svg" alt="" aria-hidden="true" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7"/>
+              <Image src="/sort.svg" alt="" aria-hidden="true" width={20} height={20} className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7"/>
               <span className="hidden lg:inline">Sort</span>
             </button>
             {sortDropdownOpen && (
@@ -151,7 +154,7 @@ const DiveCertification = () => {
               className="bg-[#001526] text-white  w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg"
               aria-label="Filter certificates"
             >
-              <img src="/filter.svg" alt="" aria-hidden="true" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7"/> 
+              <Image src="/filter.svg" alt="" width={20} height={20} aria-hidden="true" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7"/> 
               <span className="hidden lg:inline">Filter</span>
             </button>
             {filterDropdownOpen && (
@@ -251,7 +254,7 @@ const DiveCertification = () => {
           No Certifications Yet
         </p>
         <p className="text-lg sm:text-xl text-[#001526] mt-6">
-          You haven’t added any certifications.
+          You haven&apos;t added any certifications.
         </p>
         <p className="text-lg sm:text-xl text-[#001526] mt-1">
           Start tracking your dive qualifications here!
@@ -263,7 +266,8 @@ const DiveCertification = () => {
       {certificates.map((cert) => (
         <div key={cert.id} className="bg-[#2C7DA0] rounded-2xl p-4 shadow-lg relative">
           <div className="relative">
-            <img
+            <Image
+              width={20} height={20}
               src={cert.image}
               alt="Certificate"
               loading="lazy"
@@ -273,7 +277,7 @@ const DiveCertification = () => {
               onClick={() => setMenuOpen(menuOpen === cert.id ? null : cert.id)}
               className="absolute bottom-0 right-2 translate-y-20"
             >
-              <img src="/threedots.svg" alt="Menu" className="w-6 h-6" />
+              <Image  src="/threedots.svg" alt="Menu" width={20} height={20} className="w-6 h-6" />
             </button>
 
             {menuOpen === cert.id && (
@@ -315,7 +319,7 @@ const DiveCertification = () => {
               <div className="fixed inset-0 bg-[#001526] bg-opacity-50 flex items-center justify-center z-50">
                 <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-full max-w-xl h-auto text-center">
                   <div className="flex justify-center mb-4">
-                    <img src="/trash-delete.svg" alt="Delete" className="w-20 h-20 mt-10" />
+                    <Image width={20} height={20}  src="/trash-delete.svg" alt="Delete" className="w-20 h-20 mt-10" />
                   </div>
 
                   <h2 className="text-3xl sm:text-4xl font-bold text-[#001526] mt-6">Delete Certificate?</h2>
