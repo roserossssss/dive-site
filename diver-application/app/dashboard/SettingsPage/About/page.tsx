@@ -31,7 +31,7 @@ export default function AboutUsPage() {
         <div className="mt-6 mx-auto p-6 bg-[#D9E7EC] text-[#001526] rounded-2xl shadow-lg border-2 lg:w-[870px] lg:h-[650px] flex flex-col items-center justify-center">
           {/* Logo */}
           <div className="w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] flex justify-center mb-1 lg:mb-2">
-            <Image width={20} height={20} src="/images/dive_light_logo_name.svg" alt="Master LiveBoards Logo" className="object-contain" />
+            <Image width={350} height={350} src="/images/dive_light_logo_name.svg" alt="Master LiveBoards Logo" className="object-contain" />
           </div>
 
           <div className="text-center mt-1 lg:mt-2 px-4 lg:px-8">

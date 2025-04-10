@@ -7,7 +7,6 @@ export default function Login() {
             <Image 
                 src="/images/page_bg_v2.jpg"  
                 alt="Master Liveaboards"
-                layout="fill"
                 objectFit="cover"
                 priority 
                 className="absolute inset-0 w-full h-full"

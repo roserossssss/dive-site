@@ -81,7 +81,7 @@ export default function ProfilePage() {
         <div className="bg-[#2C7DA0] p-8 rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12">
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto relative">
             <div className="relative">
-              <Image width={24} height={24} src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
+              <Image width={1000} height={1000} src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
               <button className="absolute bottom-0 right-6 bg-white p-1 rounded-full" onClick={() => fileInputRef.current?.click()}>
                 <TbEditCircle className="text-[#001526]" />
               </button>

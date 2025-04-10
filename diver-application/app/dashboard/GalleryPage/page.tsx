@@ -21,48 +21,7 @@ export default function GalleryPage() {
       Name: "Selfie",
       Date: "2024-06-06",
     },
-    {
-      src: "https://media.istockphoto.com/id/498283106/photo/underwater-scuba-diver-explore-and-enjoy-coral-reef-sea-life.jpg?s=1024x1024&w=is&k=20&c=-y2BATetieJjRS6EwA8VQ_ojDUK-P19rqPdP4WWlHvY=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-01",
-    },
-    {
-      src: "https://media.istockphoto.com/id/1990410887/photo/scuba-diver-makes-ok-sign-underwater-scene-with-exotic-fishes-and-coral-reef.jpg?s=1024x1024&w=is&k=20&c=KKEOBFFWwFnJCVxH1poexlnC_AcFa5ap6wtXSt3OOy4=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-06",
-    },
-    {
-      src: "https://media.istockphoto.com/id/498283106/photo/underwater-scuba-diver-explore-and-enjoy-coral-reef-sea-life.jpg?s=1024x1024&w=is&k=20&c=-y2BATetieJjRS6EwA8VQ_ojDUK-P19rqPdP4WWlHvY=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-01",
-    },
-    {
-      src: "https://media.istockphoto.com/id/1990410887/photo/scuba-diver-makes-ok-sign-underwater-scene-with-exotic-fishes-and-coral-reef.jpg?s=1024x1024&w=is&k=20&c=KKEOBFFWwFnJCVxH1poexlnC_AcFa5ap6wtXSt3OOy4=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-06",
-    },
-    {
-      src: "https://media.istockphoto.com/id/498283106/photo/underwater-scuba-diver-explore-and-enjoy-coral-reef-sea-life.jpg?s=1024x1024&w=is&k=20&c=-y2BATetieJjRS6EwA8VQ_ojDUK-P19rqPdP4WWlHvY=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-01",
-    },
-    {
-      src: "https://media.istockphoto.com/id/1990410887/photo/scuba-diver-makes-ok-sign-underwater-scene-with-exotic-fishes-and-coral-reef.jpg?s=1024x1024&w=is&k=20&c=KKEOBFFWwFnJCVxH1poexlnC_AcFa5ap6wtXSt3OOy4=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-06",
-    },
-    {
-      src: "https://media.istockphoto.com/id/498283106/photo/underwater-scuba-diver-explore-and-enjoy-coral-reef-sea-life.jpg?s=1024x1024&w=is&k=20&c=-y2BATetieJjRS6EwA8VQ_ojDUK-P19rqPdP4WWlHvY=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-01",
-    },
+
   ]);
 
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
@@ -255,7 +214,7 @@ export default function GalleryPage() {
                 }
               }}
             >
-              <Image width={20} height={20}
+              <Image width={1000} height={1000}
                 src={item.src}
                 loading="lazy"
                 alt={item.alt}
