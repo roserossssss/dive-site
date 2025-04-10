@@ -6,9 +6,10 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { TbEditCircle } from "react-icons/tb";
 import { BsExclamationCircle } from "react-icons/bs";
+import Image from 'next/image';
 
 export default function ProfilePage() {
-  const [editMode, setEditMode] = useState(true);
+  // const [editMode, setEditMode] = useState(true);
   const [firstName, setFirstName] = useState("John");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("Doe");
@@ -21,6 +22,7 @@ export default function ProfilePage() {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [profileImagePreview, setProfileImagePreview] = useState("/images/sample_profile_pic.jpg");
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
@@ -79,12 +81,17 @@ export default function ProfilePage() {
         <div className="bg-[#2C7DA0] p-8 rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12">
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto relative">
             <div className="relative">
+<<<<<<< HEAD
               <img src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
               <button
                 className="absolute bottom-0 right-6 bg-white p-1 rounded-full"
                 onClick={() => fileInputRef.current?.click()}
                 aria-label="Edit Profile Picture"
               >
+=======
+              <Image width={1000} height={1000} src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
+              <button className="absolute bottom-0 right-6 bg-white p-1 rounded-full" onClick={() => fileInputRef.current?.click()}>
+>>>>>>> main
                 <TbEditCircle className="text-[#001526]" />
               </button>
               <input type="file" id="profileImageInput" className="hidden" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
@@ -226,7 +233,7 @@ export default function ProfilePage() {
               <BsExclamationCircle className="w-24 h-24 text-[#001526]" />
             </div>
             <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Save Changes?</h2>
-            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">You're about to update your details. 
+            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">You&apos;re about to update your details. 
             <br />Want to proceed?</p>
             <div className="flex justify-center mt-5">
               <button

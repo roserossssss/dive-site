@@ -3,16 +3,17 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from "react";
 import { BsExclamationCircle } from "react-icons/bs";
+import Image from 'next/image';
 
 export default function DeleteAccountPage() {
   const pathname = usePathname();
   const router = useRouter();
-  const [profileImagePreview, setProfileImagePreview] = useState("/images/sample_profile_pic.jpg");
-  const [firstName, setFirstName] = useState("John");
-  const [middleName, setMiddleName] = useState("");
-  const [lastName, setLastName] = useState("Doe");
-  const [suffix, setSuffix] = useState("");
-  const [email, setEmail] = useState("johndoe@gmail.com");
+  const [profileImagePreview] = useState("/images/sample_profile_pic.jpg");
+  const [firstName] = useState("John");
+  // const [middleName, setMiddleName] = useState("");
+  const [lastName] = useState("Doe");
+  const [suffix] = useState("");
+  const [email] = useState("johndoe@gmail.com");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAccountDeletedModalOpen, setIsAccountDeletedModalOpen] = useState(false);
 
@@ -62,6 +63,7 @@ export default function DeleteAccountPage() {
         {/* Header Container for User's Profile Photo, Name, and Email Address */}
         <div className="bg-[#2C7DA0] p-8 rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12">
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto relative">
+<<<<<<< HEAD
           <div className="relative">
             <img
               src={profileImagePreview}
@@ -70,6 +72,13 @@ export default function DeleteAccountPage() {
             />
             <input type="file" id="profileImageInput" className="hidden" accept="image/*" />
           </div>
+=======
+            <div className="relative">
+              <Image width={1000} height={1000}
+               src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
+              <input type="file" id="profileImageInput" className="hidden" accept="image/*"/>
+            </div>
+>>>>>>> main
             <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
                 <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-white" style={{ textTransform: 'uppercase' }}>
                     {firstName} {lastName} {suffix && suffix.toUpperCase()}
@@ -83,7 +92,7 @@ export default function DeleteAccountPage() {
           <div className="mt-5 px-4">
             <section>
               <h3 className="text-xl font-bold text-[#001526] mb-1">Delete Account</h3>
-              <p className="font-semibold text-[15px] mb-7 text-[#001526] text-justify">You're about to start the process of deleting your account.</p>
+              <p className="font-semibold text-[15px] mb-7 text-[#001526] text-justify">You&apos;re about to start the process of deleting your account.</p>
               <p className="mb-8 text-[#001526] text-justify">Once deleted, your profile, personal data, and any associated records will be permanently removed from our system. This action cannot be undone.</p>
               <p className="font-semibold mb-2 text-[#001526]">What happens next?</p>
               <ul className="list-disc list-inside mb-8 text-[#001526] text-justify">
@@ -91,7 +100,7 @@ export default function DeleteAccountPage() {
                 <li>You will lose access to all your data and services.</li>
                 <li>This action is permanent and cannot be reversed.</li>
               </ul>
-              <p className="text-[#001526] text-justify">If you're sure, click <span className="font-semibold">"Delete My Account"</span> below.</p>
+              <p className="text-[#001526] text-justify">If you&apos;re sure, click <span className="font-semibold">&quot;Delete My Account&quot;</span> below.</p>
               <div className="flex justify-center md:justify-end mt-5">
                 <button onClick={handleDeleteAccount} className="w-52 px-6 py-2 bg-[#CF0C0F] text-white font-bold rounded-[40px] mx-auto md:mx-0">Delete My Account</button>
               </div>

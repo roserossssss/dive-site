@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
 export default function AddDive() {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function AddDive() {
     <div className="flex-1 p-5 pt-2 relative">
       {/* Page Title */}
       <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 rounded-t-2xl md:pl-80">
-      <h2 className="text-3xl font-bold text-black">Update Dive</h2>
+      <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-[#001526] text-center md:text-left mt-2">Update Dive</h2>
       </div>
       
 
@@ -71,11 +72,11 @@ export default function AddDive() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-[680px] h-[600px] text-center">
             <div className="flex justify-center mb-4">
-              <img src="/exclamation.svg" alt="Delete" className="w-50 h-50 mt-40" />
+              <Image width={20} height={20} src="/exclamation.svg" alt="Delete" className="w-50 h-50 mt-40" />
 
             </div>
             <h2 className="text-5xl font-bold text-[#001526] mt-10">Confirm Changes?</h2>
-            <p className="text-xl font-semibold text-gray-600 mt-4">You're about to update your details.</p>
+            <p className="text-xl font-semibold text-gray-600 mt-4">You&apos;re about to update your details.</p>
             <p className="text-xl font-semibold text-gray-600 mt-1">Want to proceed? </p>
 
             <div className="mt-20 flex justify-center space-x-4">
@@ -141,7 +142,7 @@ export default function AddDive() {
                         placeholder="mm/dd/yy"
                         className="border p-3 md:p-5 rounded-2xl border-black w-full pr-12 bg-transparent"
                       />
-                      <img
+                      <Image width={20} height={20}
                         src="/calendar-icon.svg"
                         alt="calendar"
                         className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 md:w-7 md:h-7"
@@ -154,14 +155,14 @@ export default function AddDive() {
                 <div className="flex flex-col items-center mt-6 md:mt-12">
                   <div className="border-2 border-black rounded-2xl w-full max-w-md md:max-w-lg h-60 md:h-80 flex items-center justify-center bg-transparent">
                     {imagePreview ? (
-                      <img
+                      <Image width={20} height={20}
                         src={imagePreview}
                         alt="Preview"
                         className="w-full h-full object-cover rounded-md"
                       />
                     ) : (
                       <div className="text-center">
-                        <img
+                        <Image width={20} height={20}
                           src="/image-uploadblack.svg"
                           alt="Upload Icon"
                           className="w-32 h-32 md:w-60 md:h-60 mx-auto"
@@ -221,10 +222,10 @@ export default function AddDive() {
                       />
                       <div className="absolute right-[-30px] flex flex-col gap-1">
                         <button type="button" onClick={(e) => { e.preventDefault(); handleDepthChange(1); }}>
-                          <img src="/arrow-up.svg" alt="Increase Depth" className="w-6 h-6 cursor-pointer"/>
+                          <Image width={20} height={20} src="/arrow-up.svg" alt="Increase Depth" className="w-6 h-6 cursor-pointer"/>
                         </button>
                         <button type="button" onClick={(e) => { e.preventDefault(); handleDepthChange(-1); }}>
-                          <img src="/arrow-down.svg" alt="Decrease Depth" className="w-6 h-6 cursor-pointer"/>
+                          <Image width={20} height={20} src="/arrow-down.svg" alt="Decrease Depth" className="w-6 h-6 cursor-pointer"/>
                         </button>
                       </div>
                     </div>
@@ -242,10 +243,10 @@ export default function AddDive() {
                       />
                       <div className="absolute right-[-30px] flex flex-col gap-1">
                         <button type="button" onClick={(e) => { e.preventDefault(); handleTimeChange(1); }}>
-                          <img src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
+                          <Image width={20} height={20} src="/arrow-up.svg" alt="Increase Time" className="w-6 h-6 cursor-pointer"/>
                         </button>
                         <button type="button" onClick={(e) => { e.preventDefault(); handleTimeChange(-1); }}>
-                          <img src="/arrow-down.svg" alt="Decrease Time" className="w-6 h-6 cursor-pointer"/>
+                          <Image width={20} height={20} src="/arrow-down.svg" alt="Decrease Time" className="w-6 h-6 cursor-pointer"/>
                         </button>
                       </div>
                     </div>

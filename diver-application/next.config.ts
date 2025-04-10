@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  //Can be remove if it doesnt involve stockphotos anymore
+  images: {
+    domains: ['media.istockphoto.com'],
+  },
 };
 
 export default nextConfig;

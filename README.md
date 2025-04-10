@@ -1,4 +1,4 @@
-# Diver Application
+# Diver Application for Master Liveaboards
 
 ## Prerequisites
 

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from 'next/image';
 
 export default function NewCertificate() {
   const router = useRouter();
@@ -60,10 +61,10 @@ export default function NewCertificate() {
   return (
     <div className="flex-1 p-5 pt-2 relative">
   {/* Page Title */}
-  <h2 className="text-3xl font-bold text-[#001526]">New Dive Certification</h2>
+  <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-[#001526] text-center md:text-left mt-2">New Dive Certification</h2>
 
   {/* Buttons Section */}
-  <div className="flex justify-end gap-4 mt-6 flex-wrap">
+  <div className="flex justify-end gap-4 mt-6">
     <button
       onClick={() => router.push("/dashboard/CertificatePage")}
       className="max-w-sm w-full h-14 px-6 py-2 font-semibold text-lg bg-gray-300 text-[#001526] rounded-full"
@@ -82,7 +83,8 @@ export default function NewCertificate() {
   <div className="mt-6 bg-[#2E6782] p-6 rounded-t-3xl">
     <div className="flex flex-col items-center">
       <div className="w-full max-w-xs h-auto flex items-center justify-center">
-        <img
+        <Image
+          width={20} height={20}
           src={file ? URL.createObjectURL(file) : "/image-upload.svg"}
           alt="Upload Preview"
           className="w-40 h-40"
@@ -111,7 +113,7 @@ export default function NewCertificate() {
           name="name"
           value={certification.name}
           onChange={handleChange}
-          className="bg-transparent border border-black p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
 
@@ -124,7 +126,7 @@ export default function NewCertificate() {
           name="agency"
           value={certification.agency}
           onChange={handleChange}
-          className="bg-transparent border border-black p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
 
@@ -137,7 +139,7 @@ export default function NewCertificate() {
           name="level"
           value={certification.level}
           onChange={handleChange}
-          className="bg-transparent border border-black p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
 
@@ -150,7 +152,7 @@ export default function NewCertificate() {
           name="location"
           value={certification.location}
           onChange={handleChange}
-          className="bg-transparent border border-[#001526] p-3 rounded-lg w-full"
+          className="bg-transparent border border-[#001526] text-[#001526] p-3 rounded-lg w-full"
         />
       </div>
     </div>
@@ -161,7 +163,7 @@ export default function NewCertificate() {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-[#D9E7EC] p-6 rounded-3xl shadow-lg w-full max-w-lg text-center">
         <div className="flex justify-center mb-4">
-          <img src="/exclamation.svg" alt="Delete" className="w-24 h-24" />
+          <Image width={20} height={20} src="/exclamation.svg" alt="Delete" className="w-24 h-24" />
         </div>
 
         <h2 className="text-2xl font-bold text-black mt-4">Save New Certificate?</h2>

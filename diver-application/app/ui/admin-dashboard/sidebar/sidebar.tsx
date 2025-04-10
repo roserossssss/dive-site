@@ -9,6 +9,7 @@ import { FaFileMedical } from "react-icons/fa";
 import { IoAnalytics, IoClose, IoMenu } from "react-icons/io5";
 import { GrGallery } from "react-icons/gr";
 import Link from "next/link";
+import Image from 'next/image';
 
 const Itemmenu = [
     {
@@ -61,7 +62,7 @@ export default function Sidebar() {
                 } transition-transform md:relative overflow-y-auto`}
             >
                <div className="flex items-center">
-                    <img className="h-12 w-12" src="../images/sidebarlogo.svg" />
+                    <Image width={12} height={12} className="h-12 w-12" src="../images/sidebarlogo.svg" alt={"admin section"} />
                     <span className={`ml-2 font-semibold transition-all ${isOpen ? "block" : "hidden md:block"}`}>Admin Panel</span>
                 </div>
                 <div className="flex items-center p-2 rounded-lg mb-4 bg-gray-800">
@@ -97,7 +98,7 @@ export default function Sidebar() {
                 </ul>
 
                             <div className="flex absolute bottom-4 left-2 items-center gap-2 p-2 rounded-lg bg-gray-800 w-[calc(100%-1rem)]">
-                    <img src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
+                    <Image src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
                     <div className="flex-1">
                         <span className="block font-semibold  text-whitetext-sm truncate">User Name</span>
                         <span className="text-white text-xs truncate">User email</span>
