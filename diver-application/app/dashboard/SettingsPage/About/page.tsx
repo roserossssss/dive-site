@@ -44,7 +44,7 @@ export default function AboutUsPage() {
             </div>
             <div className="text-center mb-4 mt-5 lg:mt-8 px-4 lg:px-8">
               <p className="text-xl lg:text-2xl text-[#001526] font-bold">
-                Dive Deeper, Dive Smarter with Master LiveBoards!
+                Dive Deeper, Dive Smarter with Master Liveaboards!
               </p>
             </div>
           </div>

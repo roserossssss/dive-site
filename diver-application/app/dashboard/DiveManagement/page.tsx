@@ -96,29 +96,29 @@ const confirmDelete = () => {
         <Image width={20} height={20}
           src="/leftarrow.svg"
           alt="Left Arrow"
-          className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-7"
+          className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer sm: -ml-1 lg:ml-5 mt-7"
         />
         <Image width={20} height={20}
           src="/rightarrow.svg"
           alt="Right Arrow"
-          className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 mt-7"
+          className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer sm: -ml-1 lg:ml-5 mt-7"
         />
         <button
           onClick={() => router.push("/dashboard/DiveManagement/add")}
-          className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 text-xs md:sm font-medium text-white bg-[#001526] rounded-full shadow-md transition duration-200 w-10 md:w-16 lg:w-52 h-6 md:h-12 lg:h-12 mt-7"
+          className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 text-xs md:sm font-medium text-white bg-[#001526] rounded-full shadow-md transition duration-200 w-8 md:w-12 lg:w-36 h-6 md:h-10 lg:h-12 mt-7"
         >
           <Image width={20} height={20} 
           src="/plus.svg"
           alt="Plus"
-          className="w-3 md:w-4 lg:w-5 h-3 md:h-4 lg:h-3.5 -mt-0.5"
+          className="w-10 md:w-5 lg:w-3 h-10 md:h-5 lg:h-3 -mt-0.5"
           />
-          <span className="text-xs md:text-base lg:text-lg sm: ml-2 md:-ml-0.5 lg:-ml-1 hidden lg:inline">New Dive</span>
+          <span className="text-xs md:text-base lg:text-lg sm: ml-2 md:-ml-0.5 lg:-ml-1 hidden lg:inline">New Dive</span> 
         </button>
       </div>
 
         {/* Search */}
-        <div className="flex items-center gap-8 mt-7">
-        <div className="relative group -ml-7">
+        <div className="flex items-center gap-8 mt-7 -ml-10">
+        <div className="relative group">
         <input
           type="text"
           placeholder="Search"
@@ -132,6 +132,8 @@ const confirmDelete = () => {
           aria-label="Search certificate"
         />
         <Image width={20} height={20} 
+          className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full w-20 md:w-32 lg:w-70 h-6 md:h-10 lg:h-12 pl-4 pr-10 text-xs sm:text-base focus:ring-2 focus:ring-black focus:border-blue-500 ml-auto transition-all duration-300 ease-in-out group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80"
+          aria-label="Search certificate"/>
           src="/search.svg" 
           alt="Search" 
           className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 
@@ -141,12 +143,12 @@ const confirmDelete = () => {
 
   
         {/* Sort Dropdown */}
-        <div className="relative ml-4">
+        <div className="relative sm: -mr-7 lg:-mr-6">
             <button
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="bg-[#001526] text-white w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg -ml-10"
+              className="bg-[#001526] text-white w-8 md:w-14 lg:w-24 h-6 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg sm: -ml-7 lg:-ml-6"
             >
-              <Image width={20} height={20} src="/sort.svg" alt="Sort button" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7" />
+              <Image width={20} height={20} src="/sort.svg" alt="Sort button" className="w-3 md:w-5 lg:w-7 h-3 md:h-5 lg:h-6" />
               <span className="hidden lg:inline">Sort</span>
             </button>
             {sortDropdownOpen && (
@@ -168,9 +170,9 @@ const confirmDelete = () => {
           <div className="relative">
             <button
               onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              className="bg-[#001526] text-white w-10 md:w-16 lg:w-28 h-7 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg -ml-7"
+              className="bg-[#001526] text-white w-8 md:w-14 lg:w-24 h-6 md:h-12 lg:h-54 rounded-full flex items-center justify-center gap-2 text-xs md:text-sm lg:text-lg sm: -mr-2 lg:mr-10"
             >
-              <Image width={20} height={20} src="/filter.svg" alt="Filter button" className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-7" />
+              <Image width={20} height={20} src="/filter.svg" alt="Filter button" className="w-3 md:w-5 lg:w-7 h-3 md:h-5 lg:h-6" />
               <span className="hidden lg:inline">Filter</span>
             </button>
             {filterDropdownOpen && (

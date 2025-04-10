@@ -5,8 +5,9 @@ export default function Login() {
     return (
         <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
             <Image 
-                src="/images/page_bg_v1.jpg"  
-                alt="Landing Page"
+                src="/images/page_bg_v2.jpg"  
+                alt="Master Liveaboards"
+                layout="fill"
                 objectFit="cover"
                 priority 
                 className="absolute inset-0 w-full h-full"

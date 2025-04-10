@@ -11,7 +11,7 @@ export default function Signup() {
   return (
     <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
       <Image 
-        src="/images/page_bg_v1.jpg"  
+        src="/images/page_bg_v2.jpg"  
         alt="Landing Page"
         objectFit="cover"
         priority 
@@ -111,7 +111,7 @@ export default function Signup() {
               {/* Login Redirect */}
               <div className="flex justify-center mt-3 text-[15px]">
                 <span className="text-[#001526] font-bold">Already have an account?</span>
-                <Link href="/Authentication/login" className="text-[#2C7DA0] hover:underline font-bold ml-2">
+                <Link href="/Authentication/login" className="text-[#005f80] hover:underline font-bold ml-2">
                   Log-in
                 </Link>
               </div>
