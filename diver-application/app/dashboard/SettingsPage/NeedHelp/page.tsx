@@ -31,7 +31,7 @@ export default function HelpPage() {
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3 justify-items-center">
           <HelpCard
             icon={<LifeBuoy size={130} className="text-[#001526]" />}
-            title="New to Master Liveboards?"
+            title="New to Master Liveaboards?"
             description="Set up your account, verify your profile, and start logging dives."
           />
 
@@ -62,7 +62,7 @@ export default function HelpPage() {
           <HelpCard
             icon={<Mail size={130} className="text-[#001526]" />}
             title="Contact Support"
-            description="For further assistance, reach support at: masterliveboards@gmail.com"
+            description="For further assistance, reach support at: masterliveaboards@gmail.com"
           />
         </div>
       </main>
