@@ -300,7 +300,7 @@ const DiveCertification = () => {
       </div>
 
       {/* Certification Display */}
-      <div className="mt-8 bg-[#D9E7EC] border rounded-3xl p-6 sm:p-8 md:p-8 w-full min-h-[75vh]">
+      <div className="mt-8 bg-[#D9E7EC] border rounded-3xl p-6 sm:p-8 md:p-8 w-full min-h-[75vh] flex justify-center">
         {paginatedCertificates.length === 0 ? (
           <div className="flex items-center justify-center w-full min-h-[65vh] text-center">
             <div>
@@ -323,7 +323,7 @@ const DiveCertification = () => {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
             {paginatedCertificates.map((cert) => (
               <div key={cert.id} className="bg-[#2C7DA0] rounded-2xl p-4 shadow-lg relative w-full max-w-xs h-[350px] flex flex-col items-center">
                 <div className="relative w-full h-[200px]">
@@ -368,7 +368,7 @@ const DiveCertification = () => {
 
                 {/* Certificate Details */}
                 <div className="text-center mt-4">
-                  <p className="text-lg font-bold text-white">{cert.name}</p>
+                  <p className="text-lg font-semibold text-white">{cert.name}</p>
                   <p className="text-white italic">{cert.level}</p>
                   <p className="text-white">{cert.location}</p>
                 </div>
