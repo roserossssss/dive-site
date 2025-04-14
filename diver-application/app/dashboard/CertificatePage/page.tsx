@@ -28,6 +28,8 @@ const DiveCertification = () => {
   const [selectedCertId, setSelectedCertId] = useState<number | null>(null);
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 6;
 
   useEffect(() => {
     requestIdleCallback(() => {
@@ -37,6 +39,25 @@ const DiveCertification = () => {
       }
     });
   }, []);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(certificates.length / recordsPerPage);
+  const paginatedCertificates = certificates.slice(
+    (currentPage - 1) * recordsPerPage,
+    currentPage * recordsPerPage
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   // Sort function
   const handleSort = (type: string) => {
@@ -90,15 +111,23 @@ const DiveCertification = () => {
 
       <div className="flex items-center justify-between gap-1 md:gap-4 mt-14 flex-nowrap">
         <div className="flex items-center space-x-1">
+          {/* Back Arrow for Pagination */}
           <IoIosArrowBack
             size={24}
-            className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1 text-[#001526]"
+            className={`w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1 text-[#001526] ${
+              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             aria-hidden="true"
+            onClick={handlePreviousPage}
           />
+          {/* Forward Arrow for Pagination */}
           <IoIosArrowForward
             size={24}
-            className="w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1 text-[#001526]"
+            className={`w-4 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8 cursor-pointer -ml-3 -mt-1 text-[#001526] ${
+              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             aria-hidden="true"
+            onClick={handleNextPage}
           />
           <button
             onClick={() => router.push("/dashboard/CertificatePage/NewCertificate")}
@@ -271,18 +300,18 @@ const DiveCertification = () => {
       </div>
 
       {/* Certification Display */}
-      <div className="mt-4 bg-[#D9E7EC] border rounded-3xl p-6 sm:p-8 md:p-10 w-full min-h-[80vh]">
-        {certificates.length === 0 ? (
-          <div className="flex items-center justify-center w-full min-h-[80vh] text-center">
+      <div className="mt-8 bg-[#D9E7EC] border rounded-3xl p-6 sm:p-8 md:p-8 w-full min-h-[75vh]">
+        {paginatedCertificates.length === 0 ? (
+          <div className="flex items-center justify-center w-full min-h-[65vh] text-center">
             <div>
               <Image
                 src="/images/my_certificate_empty.svg"
                 alt="No Certifications"
-                width={350}
-                height={200}
+                width={340}
+                height={170}
                 className="mx-auto"
               />
-              <p className="text-3xl sm:text-4xl font-bold text-[#001526] mt-5">
+              <p className="text-2xl sm:text-4xl font-bold text-[#001526] mt-5">
                 No Certifications Yet
               </p>
               <p className="text-lg sm:text-xl text-[#001526] mt-6">
@@ -295,20 +324,20 @@ const DiveCertification = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {certificates.map((cert) => (
-              <div key={cert.id} className="bg-[#2C7DA0] rounded-2xl p-4 shadow-lg relative">
-                <div className="relative">
+            {paginatedCertificates.map((cert) => (
+              <div key={cert.id} className="bg-[#2C7DA0] rounded-2xl p-4 shadow-lg relative w-full max-w-xs h-[350px] flex flex-col items-center">
+                <div className="relative w-full h-[200px]">
                   <Image
-                    width={20}
-                    height={20}
+                    width={200}
+                    height={200}
                     src={cert.image}
                     alt="Certificate"
                     loading="lazy"
-                    className="w-full max-w-xs h-auto rounded-xl border-4 border-white"
+                    className="w-full h-full object-cover rounded-xl border-4 border-white"
                   />
                   <button
                     onClick={() => setMenuOpen(menuOpen === cert.id ? null : cert.id)}
-                    className="absolute bottom-0 right-2 translate-y-20"
+                    className="absolute bottom-2 right-2 translate-y-32"
                   >
                     <FaEllipsis
                       size={20}
@@ -316,9 +345,8 @@ const DiveCertification = () => {
                       aria-hidden="true"
                     />
                   </button>
-
                   {menuOpen === cert.id && (
-                    <div className="absolute bottom-[-3rem] right-2 bg-white shadow-lg rounded-lg p-2 w-32">
+                    <div className="absolute bottom-[-6rem] right-1 bg-white shadow-lg rounded-lg p-2 w-32">
                       <button
                         onClick={() => updateCertificate(cert.id)}
                         className="block w-full text-left px-4 py-2 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50"

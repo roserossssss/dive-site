@@ -9,6 +9,7 @@ import { BsExclamationCircle } from "react-icons/bs";
 export default function NewCertificate() {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
+  const [previewSrc, setPreviewSrc] = useState<string>("/image-upload.svg");
   const [certification, setCertification] = useState({
     name: "",
     level: "",
@@ -26,6 +27,13 @@ export default function NewCertificate() {
         return;
       }
       setFile(selectedFile);
+
+      // Set preview source based on file type
+      if (selectedFile.type === "application/pdf") {
+        setPreviewSrc("/images/pdf_thumbnail.png"); // Default thumbnail for uploaded PDFs
+      } else {
+        setPreviewSrc(URL.createObjectURL(selectedFile));
+      }
     }
   };
 
@@ -51,7 +59,7 @@ export default function NewCertificate() {
       level: certification.level,
       agency: certification.agency,
       location: certification.location,
-      image: URL.createObjectURL(file!),
+      image: file?.type === "application/pdf" ? "/images/pdf_thumbnail.png" : URL.createObjectURL(file!),
     };
 
     const existingCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
@@ -98,11 +106,11 @@ export default function NewCertificate() {
         <div className="flex flex-col items-center">
           <div className="w-full max-w-xs h-auto flex items-center justify-center">
             <Image
-              width={20}
-              height={20}
-              src={file ? URL.createObjectURL(file) : "/image-upload.svg"}
+              width={50}
+              height={50}
+              src={previewSrc}
               alt="Upload Preview"
-              className="w-40 h-40"
+              className="w-60 h-40"
             />
           </div>
           <p className="text-white text-sm mt-2">Maximum of 5MB</p>
