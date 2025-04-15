@@ -1,6 +1,7 @@
 {
-    "theme_color": "#8936FF",
-    "background_color": "#2EC6FE",
+    "name": "Master Liveaboard app",
+    "short_name": "Divingapp",
+    "description": "Text app",
     "icons": [
       {
         "purpose": "maskable",
@@ -15,11 +16,12 @@
         "type": "image/png"
       }
     ],
-    "orientation": "any",
+    "theme_color": "#8936FF",
+    "background_color": "#2EC6FE",
+    "start_url": "/",
     "display": "standalone",
-    "dir": "auto",
-    "lang": "en-US",
-    "name": "Master Liveaboard app",
-    "short_name": "Divingapp"
+    "orientation": "portrait"
+   
   }
+  
   
