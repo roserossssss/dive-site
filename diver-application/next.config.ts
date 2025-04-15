@@ -1,11 +1,13 @@
-import type { NextConfig } from "next";
+// next.config.js or next.config.ts
+const withPWA = require("@ducanh2912/next-pwa").default({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+});
 
-
-const nextConfig: NextConfig = {
-  //Can be remove if it doesnt involve stockphotos anymore
+const nextConfig = {
   images: {
     domains: ['media.istockphoto.com'],
   },
 };
 
-export default nextConfig;
+module.exports = withPWA(nextConfig);
