@@ -30,7 +30,7 @@ interface diveData {
 
 export default function DiveManagement() {
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
   const [sortBy, setSortBy] = useState<string>("");
   const [filterByLocation, setFilterByLocation] = useState<string>("");
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
@@ -268,7 +268,7 @@ export default function DiveManagement() {
               className="w-[330px] sm:w-[95%] md:w-[90%] lg:w-full min-h-[220px] mb-5 rounded-3xl shadow-md bg-[#2C7DA0] flex flex-col lg:flex-row md:items-center items-center relative overflow-hidden mx-auto"
             >
               {/* Image Section */}
-              <div className="w-full lg:w-[405px] h-[250px] flex">
+              <div className="w-full lg:w-[490px] h-[330px] flex">
                 <Image
                   width={250}
                   height={200}
@@ -298,8 +298,14 @@ export default function DiveManagement() {
                   </p>
                 </div>
 
-                <p className="text-white text-sm lg:text-md mt-2 truncate">{dive.notes}</p>
-                <p className="text-white text-sm lg:text-md mt-1 truncate">{dive.description}</p>
+                <div className="space-y-4 mt-4">
+                  <p className="text-white text-sm lg:text-md whitespace-pre-line">
+                    {dive.notes}
+                    </p>
+                    <p className="text-white text-sm lg:text-md whitespace-pre-line">
+                      {dive.description}
+                      </p>
+                      </div>
 
                 {/* Dive Depth and Time */}
                 <div className="flex flex-col md:flex-row justify-center items-center mt-4 text-white gap-6">

@@ -78,7 +78,7 @@ export default function AddDive() {
         id: Date.now(),
         title: divingdata.title,
         description: divingdata.description,
-        note: divingdata.notes,
+        notes: divingdata.notes,
         date: divingdata.date,
         location: divingdata.location,
         depth: divingdata.depth,
@@ -392,7 +392,7 @@ export default function AddDive() {
             </div>
             <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Save New Dive?</h2>
             <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">
-              You&apos;re about to save this dive entry.
+              You're about to update your details.
               <br />
               Want to proceed?
             </p>

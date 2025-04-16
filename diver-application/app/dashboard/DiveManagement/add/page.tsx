@@ -78,7 +78,7 @@ export default function AddDive() {
         id: Date.now(),
         title: divingdata.title,
         description: divingdata.description,
-        note: divingdata.notes,
+        notes: divingdata.notes,
         date: divingdata.date,
         location: divingdata.location,
         depth: divingdata.depth,
