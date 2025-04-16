@@ -3,6 +3,7 @@
 import { useMedicalPage } from "./useMedicalPage";
 import SaveChangesModal from "./components/SaveChangesModal";
 import DiscardChangesModal from "./components/DiscardChangesModal";
+import { FaRegCalendar } from "react-icons/fa6";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Image from "next/image";
@@ -234,8 +235,32 @@ export default function MedicalPage() {
                       <input id="issuedBy" type="text" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={issuedBy} onChange={(e) => setIssuedBy(e.target.value)} disabled={!editMode} required />
                     </div>
                     <div className="w-full md:w-2/5">
-                      <label htmlFor="dateIssued" className="block text-[#001526] font-semibold mb-1">Date Issued <span className="text-red-500">*</span></label>
-                      <input id="dateIssued" type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={dateIssued} onChange={(e) => setDateIssued(e.target.value)} disabled={!editMode} required />
+                      <label htmlFor="dateIssued" className="block text-[#001526] font-semibold mb-1">
+                        Date Issued <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="dateIssued"
+                          type="date"
+                          className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526] pr-10"
+                          value={dateIssued}
+                          onChange={(e) => setDateIssued(e.target.value)}
+                          disabled={!editMode}
+                          required
+                        />
+                        <div
+                          className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                          onClick={() => {
+                            const dateInput = document.getElementById("dateIssued") as HTMLInputElement;
+                            if (dateInput) {
+                              dateInput.showPicker?.();
+                              dateInput.click();
+                            }
+                          }}
+                        >
+                          <FaRegCalendar className="text-[#001526] w-5 h-5" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
