@@ -152,21 +152,22 @@ export default function DiveManagement() {
       {/* Search, Sort, and Filter */}
       <div className="flex items-center gap-2">
         {/* Search */}
-        <div className="relative group">
+        <div className="relative w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12">
           <input
             type="text"
             placeholder="Search"
-            className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full 
-              w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base 
-              focus:ring-2 focus:ring-black focus:border-blue-500 
-              ml-auto transition-all duration-300 ease-in-out 
-              group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80"
+            className="absolute right-0 top-0 border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full 
+      h-full pl-4 pr-10 text-xs sm:text-base 
+      focus:ring-2 focus:ring-black focus:border-blue-500 
+      transition-all duration-300 ease-in-out 
+      w-20 md:w-32 lg:w-70 
+      hover:w-40 focus-within:w-60 md:hover:w-60 md:focus-within:w-80 z-10"
             aria-label="Search certificate"
           />
           <IoSearch
             size={20}
             className="absolute right-2 lg:right-5 top-1/2 transform -translate-y-1/2 
-              w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-[#001526]"
+      w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-[#001526] z-20"
             aria-hidden="true"
           />
         </div>
