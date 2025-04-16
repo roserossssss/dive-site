@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import { MdDashboard } from "react-icons/md";
-import { CiSettings } from "react-icons/ci";
 import { GiSnorkel } from "react-icons/gi";
-import { TbCertificate } from "react-icons/tb";
-import { FaFileMedical } from "react-icons/fa";
+import { PiCertificateFill } from "react-icons/pi";
 import { IoClose, IoMenu } from "react-icons/io5";
-import { TfiGallery } from "react-icons/tfi";
+import { IoMdPhotos } from "react-icons/io";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CiLogout } from "react-icons/ci";
+import { IoPower } from "react-icons/io5";
+import { FaNotesMedical } from "react-icons/fa";
+import { IoIosSettings } from "react-icons/io";
 import Image from 'next/image';
 
 const Itemmenu = [
@@ -19,21 +19,21 @@ const Itemmenu = [
     list: [
       { title: "Dashboard", path: "/dashboard", icon: <MdDashboard /> },
       { title: "Manage Dive", path: "/dashboard/DiveManagement", icon: <GiSnorkel /> },
-      { title: "Gallery", path: "/dashboard/GalleryPage", icon: <TfiGallery /> },
+      { title: "Gallery", path: "/dashboard/GalleryPage", icon: <IoMdPhotos /> },
     ],
   },
   { 
     title: "Requirements",
     list: [
-      { title: "Diving Certificate", path: "/dashboard/CertificatePage", icon: <TbCertificate /> },
-      { title: "Medical Profile", path: "/dashboard/MedicalPage", icon: <FaFileMedical /> },
+      { title: "Diving Certificate", path: "/dashboard/CertificatePage", icon: <PiCertificateFill /> },
+      { title: "Medical Profile", path: "/dashboard/MedicalPage", icon: <FaNotesMedical /> },
     ],
   },
   {
     title: "Account",
     list: [
-      { title: "Settings", path: "/dashboard/SettingsPage", icon: <CiSettings /> },
-      { title: "Logout", path: "/Authentication/login", icon: <CiLogout /> },
+      { title: "Settings", path: "/dashboard/SettingsPage", icon: <IoIosSettings /> },
+      { title: "Logout", path: "/Authentication/login", icon: <IoPower /> },
     ],
   },
 ];
@@ -57,18 +57,18 @@ export default function Sidebar() {
         className={`fixed top-0 left-0 w-64 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
-        <img className="h-10 w-10" src="/images/dive_light_logo.svg" alt="Logo" />
-        <span className="ml-2 text-[#001526] font-bold">MASTER LIVEABOARDS</span>
+        <img className="h-12 w-12 mr-2 -mt-1" src="/images/dive_light_logo.svg" alt="Logo" />
+        <span className="mr-3 text-[#001526] text-sm md:text-base font-bold whitespace-nowrap">MASTER LIVEABOARDS</span>
       </div>
 
       {/* Sidebar */}
       <div
-        className={`fixed top-14 left-0 h-[calc(100%-56px)] w-64 md:w-72 flex flex-col text-black z-50 
+        className={`fixed top-[4.5rem] left-0 h-[calc(100%-72px)] w-64 md:w-72 flex flex-col text-black z-50 
         transition-transform duration-300 ease-in-out bg-[#001526] rounded-tr-3xl overflow-y-auto 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         {/* Sidebar Menu */}
-        <div className="mt-8 p-4">
+        <div className="mt-4 md:mt-8 p-4">
           <ul>
             {Itemmenu.map((category) => (
               <li key={category.title} className="mb-3 relative -left-5">
@@ -98,16 +98,15 @@ export default function Sidebar() {
         </div>
 
         {/* User Profile Section */}
-        <div className="absolute left-2 bottom-4 flex items-center gap-2 p-2 rounded-lg bg-gray-100 w-[calc(100%-1rem)]">
-          <Image  src="/globe.svg" width="32" height="32" className="rounded-full" alt="User Avatar" />
-          <div className="flex-1">
-            <span className="block font-semibold text-black text-sm truncate">John Doe</span>
-            <span className="text-gray-500 text-xs truncate">johndoe@gmail.com</span>
+        <Link href="/dashboard/ProfilePage/ProfileSettings">
+          <div className="absolute left-4 bottom-5 flex items-center gap-4 p-[0.85rem] rounded-3xl bg-[#D9E7EC] w-[calc(100%-2rem)] cursor-pointer">
+            <Image src="/images/sample_profile_pic.jpg" width="36" height="36" className="rounded-full ml-2" alt="User Avatar" />
+            <div className="flex-1 flex flex-col">
+              <span className="font-semibold text-black text-sm truncate">John Doe</span>
+              <span className="text-[#001526] text-xs truncate">johndoe@gmail.com</span>
+            </div>
           </div>
-          <Link href="/dashboard/ProfilePage/ProfileSettings">
-            <span className="text-lg text-black cursor-pointer">...</span>
-          </Link>
-        </div>
+        </Link>
       </div>
     </>
   );
