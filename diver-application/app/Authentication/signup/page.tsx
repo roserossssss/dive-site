@@ -7,6 +7,16 @@ import { Eye, EyeOff } from "lucide-react";
 import { CiCalendar } from "react-icons/ci";
 
 export default function Signup() {
+
+  const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
+
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const showError = touched && email !== "" && !isValidEmail(email);
+
+
   const dateInputRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
@@ -85,7 +95,7 @@ export default function Signup() {
                       (dateInputRef.current as unknown as HTMLInputElement)?.showPicker()
                     }
                   />
-                </div>
+              </div>
 
                 {/* Gender Selection */}
                 <div className="mt-1 mb-1">
@@ -124,18 +134,28 @@ export default function Signup() {
               {/* Email Address */}
               <div className="relative w-full mb-3">
                 <input
-                  type="email"
-                  id="email"
-                  placeholder=" "
-                  className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
-                  required
-                />
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={() => setTouched(true)}
+                    placeholder=" "
+                    className={`peer h-12 w-full border ${
+                      showError ? "border-red-500" : "border-[#001526]"
+                      } rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 ${
+                      showError ? "focus:ring-red-500" : "focus:ring-[#005f80]"
+                        } focus:border-0 bg-[#D9E7EC] text-[#001526]`}
+                    required
+                  />
                 <label
                   htmlFor="email"
                   className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#005f80] bg-[#D9E7EC] px-1"
                 >
                   Email Address
                 </label>
+                {showError && (
+                  <p className="text-red-500 text-xs mt-1 ml-2">Please enter a valid email address.</p>
+                )}
               </div>
 
               {/* Password */}

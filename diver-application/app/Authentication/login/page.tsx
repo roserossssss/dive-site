@@ -8,6 +8,14 @@ import { Eye, EyeOff } from "lucide-react";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
+
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const showError = touched && email !== "" && !isValidEmail(email);
+
   return (
     <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
       <Image 
@@ -38,8 +46,15 @@ export default function Login() {
                 <input
                   type="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => setTouched(true)}
                   placeholder=" "
-                  className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
+                  className={`peer h-12 w-full border ${
+                    showError ? "border-red-500" : "border-[#001526]"
+                  } rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 ${
+                    showError ? "focus:ring-red-500" : "focus:ring-[#005f80]"
+                  } focus:border-0 bg-[#D9E7EC] text-[#001526]`}
                   required
                 />
                 <label
@@ -48,8 +63,10 @@ export default function Login() {
                 >
                   Email Address
                 </label>
+                {showError && (
+                  <p className="text-red-500 text-xs mt-1 ml-2">Please enter a valid email address.</p>
+                )}
               </div>
-
               {/* Password */}
               <div className="relative w-full mb-3">
                 <input
