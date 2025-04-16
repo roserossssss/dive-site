@@ -144,17 +144,17 @@ const DiveCertification = () => {
             </span>
           </button>
         </div>
-
+        {/* Search bar*/}
         <div className="flex items-center gap-8">
           <div className="relative group">
             <input
               type="text"
               placeholder="Search"
               className="relative flex items-center border border-[#001526] placeholder-[#001526] bg-white text-black rounded-full 
-                w-20 md:w-32 lg:w-70 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base 
+                w-36 md:w-48 lg:w-48 h-7 md:h-12 lg:h-12 pl-4 pr-10 text-xs sm:text-base 
                 focus:ring-2 focus:ring-black focus:border-blue-500 
                 ml-auto transition-all duration-300 ease-in-out 
-                group-hover:w-40 group-focus-within:w-60 md:group-hover:w-60 md:group-focus-within:w-80"
+                group-hover:w-48 group-focus-within:w-60 md:group-hover:w-96 md:group-focus-within:w-80"
               aria-label="Search certificate"
             />
             <IoSearch
