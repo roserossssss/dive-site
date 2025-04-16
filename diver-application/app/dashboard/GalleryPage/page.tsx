@@ -15,13 +15,6 @@ interface GalleryItem {
 
 export default function GalleryPage() {
   const [gallery, setGallery] = useState<GalleryItem[]>([
-    {
-      src: "https://media.istockphoto.com/id/1990410887/photo/scuba-diver-makes-ok-sign-underwater-scene-with-exotic-fishes-and-coral-reef.jpg?s=1024x1024&w=is&k=20&c=KKEOBFFWwFnJCVxH1poexlnC_AcFa5ap6wtXSt3OOy4=",
-      alt: "Authorings",
-      Name: "Selfie",
-      Date: "2024-06-06",
-    },
-
   ]);
 
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
@@ -88,7 +81,7 @@ export default function GalleryPage() {
           Date: new Date().toISOString().split("T")[0],
         }));
 
-      setGallery((prevGallery) => [...prevGallery, ...newPhotos]);
+      setGallery((prevGallery) => [...newPhotos, ...prevGallery]);
     }
   };
 
@@ -132,6 +125,7 @@ export default function GalleryPage() {
         </h2>
       </div>
       <div className="mx-auto mt-16">
+        {/* Buttons Section */}
         <div className="mt-7 mb-4 flex flex-wrap items-center justify-between gap-2">
           <h1 className="text-[#001526] text-lg md:text-2xl lg:text-2xl font-bold mt-3">
             {gallery.length} Items
@@ -195,44 +189,71 @@ export default function GalleryPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 auto-rows-[150px] sm:auto-rows-[200px]">
-          {paginatedGallery.map((item, index) => (
-            <a
-              key={index}
-              href="#"
-              className={`group relative flex items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg cursor-pointer transition-all duration-200 ${
-                index === 0 ? "col-span-2 sm:col-span-2 row-span-2" : ""
-              }`}
-              onClick={(e) => {
-                e.preventDefault();
-                if (isSelecting) {
-                  // Toggle selection if in select mode
-                  toggleImageSelection(item.src);
-                } else {
-                  // Open view photo modal if not in select mode
-                  setSelectedPhotoIndex((currentPage - 1) * photosPerPage + index);
-                }
-              }}
-            >
-              <Image width={1000} height={1000}
-                src={item.src}
-                loading="lazy"
-                alt={item.alt}
-                className={`absolute inset-0 h-full w-full object-cover object-center transition duration-200 ${
-                  isSelecting ? "group-hover:opacity-70" : "group-hover:scale-110"
-                }`}
+        {/* Gallery Section */}
+        {gallery.length === 0 ? (
+          <div className="flex items-center justify-center w-full min-h-[70vh] text-center">
+            <div>
+              <Image
+                src="/images/my_gallery_empty.svg"
+                alt="No Photos"
+                width={350}
+                height={200}
+                className="mx-auto"
               />
-              {selectedImages.includes(item.src) && (
-                <div className="absolute top-2 right-2 rounded-full p-2 shadow-md text-white border-white border-2">
-                  <FaCheck />
-                </div>
-              )}
-              <span className="relative p-2 text-sm text-white bg-black bg-opacity-50 rounded-md">
-                {item.Name}
-              </span>
-            </a>
-          ))}
-        </div>
+              <p className="text-3xl sm:text-4xl font-bold text-[#001526] mt-5">
+                No Photos Yet
+              </p>
+              <p className="text-lg sm:text-xl text-[#001526] mt-6">
+                Your gallery is empty. <br />Start uploading your dive memories now!
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 auto-rows-[150px] sm:auto-rows-[200px]">
+            {paginatedGallery.map((item, index) => (
+              <a
+                key={index}
+                href="#"
+                className={`group relative flex items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg cursor-pointer transition-all duration-200 ${
+                  index === 0 ? "col-span-2 sm:col-span-2 row-span-2" : ""
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (isSelecting) {
+                    // Toggle selection if in select mode
+                    toggleImageSelection(item.src);
+                  } else {
+                    // Open view photo modal if not in select mode
+                    setSelectedPhotoIndex(
+                      (currentPage - 1) * photosPerPage + index
+                    );
+                  }
+                }}
+              >
+                <Image
+                  width={1000}
+                  height={1000}
+                  src={item.src}
+                  loading="lazy"
+                  alt={item.alt}
+                  className={`absolute inset-0 h-full w-full object-cover object-center transition duration-200 ${
+                    isSelecting
+                      ? "group-hover:opacity-70"
+                      : "group-hover:scale-110"
+                  }`}
+                />
+                {selectedImages.includes(item.src) && (
+                  <div className="absolute top-2 right-2 rounded-full p-2 shadow-md text-white border-white border-2">
+                    <FaCheck />
+                  </div>
+                )}
+                <span className="relative p-2 text-sm text-white bg-black bg-opacity-50 rounded-md">
+                  {item.Name}
+                </span>
+              </a>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Modals */}
@@ -248,8 +269,9 @@ export default function GalleryPage() {
         selectedPhotoIndex={selectedPhotoIndex}
         setSelectedPhotoIndex={setSelectedPhotoIndex}
         handlePreviousPhoto={handlePreviousPhoto}
-        handleNextPhoto={handleNextPhoto} 
-        gallery={[]}      />
+        handleNextPhoto={handleNextPhoto}
+        gallery={gallery.map((item) => item.src)}
+      />
     </div>
   );
 }
