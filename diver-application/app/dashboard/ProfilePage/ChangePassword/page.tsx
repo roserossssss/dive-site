@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { usePathname, useRouter } from 'next/navigation';
 import dynamic from "next/dynamic";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const PasswordUpdatedModal = dynamic(() => import('./PasswordUpdatedModal'), { ssr: false });
 
@@ -12,6 +13,11 @@ export default function ChangePasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordUpdatedModalOpen, setIsPasswordUpdatedModalOpen] = useState(false);
   const [error, setError] = useState("");
+
+  // Password visibility states
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -80,27 +86,41 @@ export default function ChangePasswordPage() {
                 <h3 className="text-xl font-bold text-[#001526] mb-1">Password</h3>
                 <p className="text-[#001526] mb-3 text-justify">Please enter your current password to change your password</p>
                 <div className="flex flex-col gap-3 mb-3">
-                  <div className="w-full">
+                  <div className="w-full relative">
                     <label htmlFor="currentPassword" className="block text-[#001526] font-semibold mb-1">Current Password <span className="text-red-500">*</span></label>
                     <input
                       id="currentPassword"
-                      type="password"
+                      type={showCurrentPassword ? "text" : "password"}
                       className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]"
                       value={currentPassword}
                       onChange={(e) => setCurrentPassword(e.target.value)}
                       required
                     />
+                    <button
+                      type="button"
+                      className="absolute bottom-[6px] right-4 transform -translate-y-1/2 text-[#001526]"
+                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    >
+                      {showCurrentPassword ? <IoEyeOff /> : <IoEye />}
+                    </button>
                   </div>
-                  <div className="w-full">
+                  <div className="w-full relative">
                     <label htmlFor="newPassword" className="block text-[#001526] font-semibold mb-1">New Password <span className="text-red-500">*</span></label>
                     <input
                       id="newPassword"
-                      type="password"
+                      type={showNewPassword ? "text" : "password"}
                       className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       required
                     />
+                    <button
+                      type="button"
+                      className="absolute top-[48px] right-4 transform -translate-y-1/2 text-[#001526]"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                    >
+                      {showNewPassword ? <IoEyeOff /> : <IoEye />}
+                    </button>
                     <p className="text-[#001526] mt-2">New password must contain:</p>
                     <ul className="list-disc list-inside text-[#001526] text-justify">
                       <li>At least 8 characters</li>
@@ -109,16 +129,23 @@ export default function ChangePasswordPage() {
                       <li>At least 1 number or special character</li>
                     </ul>
                   </div>
-                  <div className="w-full">
+                  <div className="w-full relative">
                     <label htmlFor="confirmPassword" className="block text-[#001526] font-semibold mb-1">Confirm Password <span className="text-red-500">*</span></label>
                     <input
                       id="confirmPassword"
-                      type="password"
+                      type={showConfirmPassword ? "text" : "password"}
                       className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required
                     />
+                    <button
+                      type="button"
+                      className="absolute bottom-[6px] right-4 transform -translate-y-1/2 text-[#001526]"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? <IoEyeOff /> : <IoEye />}
+                    </button>
                   </div>
                 </div>
                 {error && <p className="text-red-500">{error}</p>}

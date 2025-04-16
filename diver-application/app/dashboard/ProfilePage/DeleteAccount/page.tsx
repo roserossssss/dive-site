@@ -63,27 +63,16 @@ export default function DeleteAccountPage() {
         {/* Header Container for User's Profile Photo, Name, and Email Address */}
         <div className="bg-[#2C7DA0] p-8 rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12">
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto relative">
-<<<<<<< HEAD
-          <div className="relative">
-            <img
-              src={profileImagePreview}
-              alt="User Photo"
-              className="w-24 md:w-32 rounded-full mr-4 object-cover aspect-square"
-            />
-            <input type="file" id="profileImageInput" className="hidden" accept="image/*" />
-          </div>
-=======
             <div className="relative">
               <Image width={1000} height={1000}
                src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
               <input type="file" id="profileImageInput" className="hidden" accept="image/*"/>
             </div>
->>>>>>> main
             <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
-                <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-white" style={{ textTransform: 'uppercase' }}>
+                <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-100" style={{ textTransform: 'uppercase' }}>
                     {firstName} {lastName} {suffix && suffix.toUpperCase()}
                 </h2>
-              <p className="text-lg md:text-xl font-medium text-white">{email}</p>
+              <p className="text-lg md:text-xl font-medium text-gray-200">{email}</p>
             </div>
           </div>
         </div>
