@@ -2,8 +2,9 @@
 import { useState } from "react";
 import Image from 'next/image';
 
-export default function UsersManagement() {
-  //replace with interface 
+export default function UsersManagement() 
+//Add Certificate pages JSON data soon
+{
   const [users] = useState([
     {
       id: 1,
