@@ -50,11 +50,11 @@ export default function Chart() {
   };
 
   return (
-    <div className="bg-[#D9E7EC] p-4 rounded-lg shadow-md mb-2 mt-8">
-      <div className="lg:flex justify-between items-center">
-        <h2 className="text-[#001526] text-3xl p-2 font-bold">Your Dive Data</h2>
+    <div className="bg-[#D9E7EC] py-5 px-1 rounded-lg shadow-md mb-0 mt-4 w-full h-full mx-auto">
+      <div className="lg:flex justify-between items-center md:ml-8">
+        <h2 className="text-[#001526] text-2xl md:text-2xl p-2 font-bold text-center lg:text-left">Your Dive Data</h2>
 
-        <div className="justify-self-center">
+      <div className="mt-2 lg:mt-0 flex justify-center md:mr-8">
 
           <select 
             aria-label="Select Time Range"
@@ -70,7 +70,7 @@ export default function Chart() {
         </div>
       </div>
 
-      <div className="w-full h-80 mt-4">  
+      <div className="w-full h-72 mt-2 -mx-2">  
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={getChartData()} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3"/>
