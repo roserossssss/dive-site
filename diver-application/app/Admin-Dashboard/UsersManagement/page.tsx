@@ -8,7 +8,7 @@ export default function UsersManagement()
   const [users] = useState([
     {
       id: 1,
-      profile: "#",
+      profile: "/",
       name: "Diver 1",
       birthday: "1990-05-15",
       email: "john@example.com",
@@ -18,7 +18,7 @@ export default function UsersManagement()
     },
     {
       id: 2,
-      profile: "#",
+      profile: "/",
       name: "Diver 2",
       birthday: "1985-09-22",
       email: "jane@example.com",
@@ -28,7 +28,7 @@ export default function UsersManagement()
     },
     {
       id: 3,
-      profile: "#",
+      profile: "/",
       name: "Diver 3",
       birthday: "1992-07-10",
       email: "diver3@example.com",
