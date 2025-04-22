@@ -6,6 +6,7 @@ import { TiArrowSortedUp } from "react-icons/ti";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { FaRegCalendar } from "react-icons/fa6";
 import { BsExclamationCircle } from "react-icons/bs";
+import Image from "next/image";
 
 export default function AddDive() {
   const router = useRouter();
@@ -211,14 +212,14 @@ export default function AddDive() {
                 } rounded-lg h-52 w-[100%] flex items-center justify-center bg-[#D9E7EC]`}
               >
                 {imagePreview ? (
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="Preview"
                     className="w-full h-full object-cover rounded-lg"
                   />
                 ) : (
                   <div className="text-center">
-                    <img
+                    <Image
                       src="/image-uploadblack.svg"
                       alt="Upload Icon"
                       className="w-24 h-24 mx-auto"

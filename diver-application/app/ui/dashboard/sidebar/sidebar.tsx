@@ -57,7 +57,7 @@ export default function Sidebar() {
         className={`fixed top-0 left-0 w-64 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
-        <img className="h-12 w-12 mr-2 -mt-1" src="/images/dive_light_logo.svg" alt="Logo" />
+        <Image className="h-12 w-12 mr-2 -mt-1" src="/images/dive_light_logo.svg" alt="Logo" />
         <span className="mr-3 text-[#001526] text-sm md:text-base font-bold whitespace-nowrap">MASTER LIVEABOARDS</span>
       </div>
 

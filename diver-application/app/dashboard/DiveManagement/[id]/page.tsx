@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { TiArrowSortedUp } from "react-icons/ti";
@@ -211,14 +213,14 @@ export default function AddDive() {
                 } rounded-lg h-52 w-[100%] flex items-center justify-center bg-[#D9E7EC]`}
               >
                 {imagePreview ? (
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="Preview"
                     className="w-full h-full object-cover rounded-lg"
                   />
                 ) : (
                   <div className="text-center">
-                    <img
+                    <Image
                       src="/image-uploadblack.svg"
                       alt="Upload Icon"
                       className="w-24 h-24 mx-auto"
@@ -392,7 +394,7 @@ export default function AddDive() {
             </div>
             <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Save New Dive?</h2>
             <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">
-              You're about to update your details.
+              You&apos;re about to update your details.
               <br />
               Want to proceed?
             </p>
