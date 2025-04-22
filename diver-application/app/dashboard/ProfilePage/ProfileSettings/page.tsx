@@ -6,6 +6,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { TbEditCircle } from "react-icons/tb";
 import { BsExclamationCircle } from "react-icons/bs";
+import { FaRegCalendar } from "react-icons/fa6";
 import Image from 'next/image';
 
 export default function ProfilePage() {
@@ -128,8 +129,31 @@ export default function ProfilePage() {
                 </div>
                 <div className="flex flex-col md:flex-row gap-3 mb-3">
                   <div className="w-full md:w-1/4">
-                    <label className="block text-[#001526] font-semibold mb-1">Birthdate <span className="text-red-500">*</span></label>
-                    <input type="date" className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526]" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} required />
+                    <label className="block text-[#001526] font-semibold mb-1">
+                      Birthdate <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="birthdate"
+                        type="date"
+                        value={birthdate}
+                        onChange={(e) => setBirthdate(e.target.value)}
+                        required
+                        className="p-2 border border-[#001526] rounded-lg w-full bg-[#D9E7EC] text-[#001526] pr-10"
+                      />
+                      <div
+                        className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                        onClick={() => {
+                          const dateInput = document.getElementById("birthdate") as HTMLInputElement;
+                          if (dateInput) {
+                            dateInput.showPicker?.();
+                            dateInput.click();
+                          }
+                        }}
+                      >
+                        <FaRegCalendar className="text-[#001526] w-5 h-5" />
+                      </div>
+                    </div>
                   </div>
                   <div className="w-full md:w-1/4">
                     <label className="block text-[#001526] font-semibold mb-3">Sex <span className="text-red-500">*</span></label>

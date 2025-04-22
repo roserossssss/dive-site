@@ -13,7 +13,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   totalGoal = 100,
   label = "OUT OF"
 }) => {
-  const size = 200; // Reduced SVG size for better responsiveness
+  const size = 150; // Reduced SVG size for better responsiveness
   const strokeWidth = 20; // Reduced stroke width
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -21,7 +21,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
   //for the circular progress bar
   return (
-    <div className="relative w-[150px] h-[150px] flex flex-col items-center justify-center mx-auto bg-[#001526] rounded-full shadow-md">
+    <div className="relative w-[210px] h-[210px] flex flex-col items-center justify-center mx-auto bg-[#001526] rounded-full shadow-md">
       <svg 
         width="100%" 
         height="100%" 
@@ -62,8 +62,8 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
       {/* Progress Text */}
       <div className="z-10 text-center">
-        <span className="block text-2xl font-bold text-white">{progress}</span>
-        <span className="block text-xs text-white/70 mt-1">
+        <span className="block text-5xl font-bold text-white">{progress}</span>
+        <span className="block text-xs text-[#D9E7EC] mt-1">
           {label} {totalGoal}
         </span>
       </div>
@@ -72,27 +72,25 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 };
 
 export default function Card() {
-  const data = { progress: 69 };
+  const data = { progress: 80 };
 
   return (
-    <div className="bg-[#D9E7EC] shadow-lg rounded-lg h-[500px] p-8 m-2">
-      <h1 className="text-[#001526] text-center text-sm">Your score is</h1>
-      <h2 className="text-[#001526] text-center text-2xl font-bold">Awesome</h2>
+    <div className="bg-[#D9E7EC] shadow-lg rounded-lg h-full p-8 w-full lg:max-w-[100%] flex flex-col justify-center items-center">
+      <h1 className="text-[#001526] text-center text-[1rem] -mb-1">Your score is</h1>
+      <h2 className="text-[#001526] text-center text-[1.75rem] font-bold">Awesome</h2>
 
       <div className="mt-8">
-        <CircularProgress progress={data.progress}/>
+        <CircularProgress progress={data.progress} />
       </div>
-      
 
-
-      <h1 className="text-xs text-[#001526] text-center mt-10">
+      <h1 className="text-[0.85rem] text-[#001526] text-center mt-8">
         Your score is based on the <br />completed
       </h1>
-      <h2 className="text-[#001526] font-bold text-center text-sm">{data.progress} Total Dives</h2>
+      <h2 className="text-[#001526] font-bold text-center text-[1.1rem]">{data.progress} Total Dives</h2>
 
-      <div className="flex justify-center mt-4">
-        <button>
-          <p className="text-sm text-white bg-[#001526] font-semibold rounded-lg p-4 text-center w-full">
+      <div className="flex justify-center mt-4 w-full px-10">
+        <button className="w-full">
+          <p className="text-sm text-white bg-[#001526] font-semibold rounded-lg p-3 text-center">
             View My Perks
           </p>
         </button>

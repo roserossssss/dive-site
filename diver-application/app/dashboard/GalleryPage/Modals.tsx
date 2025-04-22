@@ -98,43 +98,42 @@ const Modals: React.FC<ModalsProps> = ({
 
       {/* View Photo Modal */}
       {selectedPhotoIndex !== null && gallery[selectedPhotoIndex] && (
-  <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-    <div className="relative bg-[#D9E7EC] rounded-lg shadow-lg max-w-full sm:max-w-4xl w-full p-4">
-      <div className="relative flex justify-center items-center">
-        <Image
-          width={20}
-          height={20}
-          src={gallery[selectedPhotoIndex]}
-          alt={`Photo ${selectedPhotoIndex + 1}`}
-          className="max-h-[80vh] max-w-full object-contain rounded-lg"
-        />
-        <button
-          className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75"
-          onClick={() => setSelectedPhotoIndex(null)}
-        >
-          <IoIosClose className="w-8 h-8" />
-        </button>
-      </div>
-      {selectedPhotoIndex > 0 && (
-        <button
-          onClick={handlePreviousPhoto}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-3 hover:bg-opacity-75"
-        >
-          <IoIosArrowBack className="w-6 h-6" />
-        </button>
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div className="relative bg-[#D9E7EC] rounded-lg shadow-lg w-[800px] h-[600px] p-4 flex items-center justify-center">
+          <div className="relative w-full h-full flex items-center justify-center">
+              <Image
+                width={600}
+                height={400}
+                src={gallery[selectedPhotoIndex]}
+                alt={`Photo ${selectedPhotoIndex + 1}`}
+                className="max-h-[80vh] max-w-full max-h-full object-contain rounded-lg"
+              />
+              <button
+                className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75"
+                onClick={() => setSelectedPhotoIndex(null)}
+              >
+                <IoIosClose className="w-8 h-8" />
+              </button>
+            </div>
+            {selectedPhotoIndex > 0 && (
+              <button
+                onClick={handlePreviousPhoto}
+                className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-3 hover:bg-opacity-75"
+              >
+                <IoIosArrowBack className="w-6 h-6" />
+              </button>
+            )}
+            {selectedPhotoIndex < gallery.length - 1 && (
+              <button
+                onClick={handleNextPhoto}
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-3 hover:bg-opacity-75"
+              >
+                <IoIosArrowForward className="w-6 h-6" />
+              </button>
+            )}
+          </div>
+        </div>
       )}
-      {selectedPhotoIndex < gallery.length - 1 && (
-        <button
-          onClick={handleNextPhoto}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-3 hover:bg-opacity-75"
-        >
-          <IoIosArrowForward className="w-6 h-6" />
-        </button>
-      )}
-    </div>
-  </div>
-)}
-
     </>
   );
 };
