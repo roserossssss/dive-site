@@ -23,7 +23,7 @@ const diveSpotData = [
 
 export default function DiveChart() {
   return (
-    <div className="bg-[#D9E7EC] py-5 px-1 rounded-lg shadow-md mb-0 mt-0 md:mt-0 w-full h-[21.5rem] mx-auto">
+    <div className="bg-[#D9E7EC] py-5 px-1 rounded-lg shadow-md mb-0 mt-0 md:mt-0 w-full h-[22.75rem] mx-auto">
       <div className="lg:flex justify-between items-center md:ml-8">
         <h2 className="text-[#001526] text-2xl md:text-2xl p-2 font-bold text-center lg:text-left">
           Dive Spot Popularity
@@ -31,7 +31,7 @@ export default function DiveChart() {
       </div>
 
       {/* Chart Container */}
-      <div className="w-full h-[17rem] mt-2 -mx-2">
+      <div className="w-full h-[17rem] -mx-2">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={diveSpotData}

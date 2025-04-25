@@ -12,7 +12,7 @@ import { FaAnchorCircleCheck } from "react-icons/fa6";
 
 export default function AdminDashboard() {
   return (
-    <div className="text-[#001526] lg:p-4 p-1 relative">
+    <div className="text-[#001526] lg:px-4 pt-[1.05rem] relative">
       {/* Top Header (Dashboard Title) */}
       <div className="fixed top-0 left-0 w-full bg-white z-10 p-4 md:pl-80">
         <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-[#001526] text-center md:text-left mt-2">
@@ -23,7 +23,7 @@ export default function AdminDashboard() {
       {/* Main Content */}
       <div className="mt-10">
         {/* Top Header (Welcome Card) */}
-        <div className="mb-4 pt-4 md:pt-0">
+        <div className="mb-4 md:pt-0">
           <WelcomeCard />
         </div>
 
@@ -34,7 +34,7 @@ export default function AdminDashboard() {
             title="TOTAL"
             subtitle="NUMBER OF DIVERS"
             count={4353}
-            link="/admin/users"
+            link="/Admin-Dashboard/UsersManagement"
             Icon={FaUserAstronaut}
             iconSize="2.8rem" 
           />
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
             title="PENDING"
             subtitle="DIVE CERTIFICATIONS"
             count={15}
-            link="/admin/roles"
+            link="/Admin-Dashboard/AdminManagement"
             Icon={LiaCertificateSolid}
             iconSize="3.5rem" 
           />
@@ -50,7 +50,7 @@ export default function AdminDashboard() {
             title="PENDING"
             subtitle="MEDICAL CERTIFICATIONS"
             count={30}
-            link="/admin/logs"
+            link="/Admin-Dashboard/MedicalManagement"
             Icon={MdOutlineHealthAndSafety}
             iconSize="3.5rem" 
           />
@@ -58,7 +58,7 @@ export default function AdminDashboard() {
             title="TOTAL"
             subtitle="COMPLETED DIVES"
             count={4985}
-            link="/admin/reports"
+            link="/Admin-Dashboard/DiveManagement"
             Icon={FaAnchorCircleCheck}
             iconSize="3.2rem" 
           />
@@ -66,16 +66,16 @@ export default function AdminDashboard() {
         </div>
 
         {/* Main Grid */}
-        <div className="grid lg:grid-cols-[2fr_1fr] md:grid-cols-1 gap-x-2">
+        <div className="grid lg:grid-cols-[2fr_1fr] md:grid-cols-1 gap-x-4">
           {/* Left side (Dive Chart) */}
-          <div className="p-1 md:h-full flex flex-col">
+          <div className="md:h-full flex flex-col">
             <Suspense fallback={<p className="text-center">Loading chart...</p>}>
               <DiveChart />
             </Suspense>
           </div>
 
           {/* Right side (Recent Dive Logs) */}
-          <div className="p-1 md:h-full">
+          <div className="md:h-full">
             <Suspense fallback={<p className="text-center">Loading recent dive logs...</p>}>
               <RecentDiveLogs />
             </Suspense>

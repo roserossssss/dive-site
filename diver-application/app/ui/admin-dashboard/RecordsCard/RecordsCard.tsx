@@ -1,5 +1,6 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
+import Link from "next/link";
 
 interface RecordsCardProps {
   title: string;
@@ -21,18 +22,27 @@ const RecordsCard: React.FC<RecordsCardProps> = ({ title, subtitle, count, link,
       </div>
 
       {/* Right Section - Icons */}
-      <div className="flex flex-col items-end md:-mr-[0.5rem]">
+      <div className="flex flex-col items-end md:-mr-[0.20rem]">
         {/* Arrow with diff adjustment */}
-        <FaArrowRight
+        <Link href={link}>
+          <FaArrowRight
+            style={{
+              fontSize: "1.25rem",
+              marginBottom: title === "TOTAL" ? "1.1rem" //mg for card with title 'TOTAL'
+                : "0.6rem", //mg for card with title 'PENDING'
+            }}
+            className="text-[#001526] cursor-pointer"
+          />
+        </Link>
+        <Icon
           style={{
-            fontSize: "1.25rem",
-            marginBottom: title === "TOTAL" ? "1.1rem" //mg for card with title 'TOTAL'
-             : "0.6rem" //mg for card with title 'PENDING'
-             ,
+            fontSize: iconSize,
+            marginRight: title === "PENDING" ? "-0.5rem" // mr for card with title 'PENDING'
+              : title === "TOTAL" ? "-0.15rem" // mr for card with title 'TOTAL'
+              : "-0.15rem", // Default margin
           }}
-          className="text-[#001526]"
+          className="text-[#001526] mt-3"
         />
-        <Icon style={{ fontSize: iconSize }} className="text-[#001526] mt-3 -mr-1" />
       </div>
     </div>
   );

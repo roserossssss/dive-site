@@ -39,7 +39,7 @@ export default function RecentDiveLogs() {
     ];
   
     return (
-      <div className="bg-[#2C7DA0] py-2 px-5 rounded-lg shadow-md h-[21.5rem] overflow-y-scroll">
+      <div className="bg-[#2C7DA0] py-2 px-5 rounded-lg shadow-md h-[22.8rem] overflow-y-scroll mt-4 md:mt-0">
         <h3 className="text-lg font-bold py-3 mb-2 ml-2 text-white">Recent Dive Logs</h3>
         <ul className="md:ml-2 md:-mr-[0.30rem]">
           {logs.map((log) => (
