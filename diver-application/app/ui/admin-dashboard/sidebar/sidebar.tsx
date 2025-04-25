@@ -79,17 +79,17 @@ export default function Sidebar() {
 
       {/* Sidebar Header (Separate but Follows Sidebar State) */}
       <div
-        className={`fixed top-0 left-0 w-64 md:w-72 bg-white p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
+        className={`fixed top-0 left-0 w-64 md:w-72 bg-[#001526] p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         <Image
           className="h-12 w-12 mr-2 -mt-1"
           width={12}
           height={12}
-          src="/images/dive_light_logo.svg"
+          src="/images/dive_dark_logo.svg"
           alt="Logo"
         />
-        <span className="mr-3 text-[#001526] text-sm md:text-base font-bold whitespace-nowrap">
+        <span className="mr-3 text-white text-sm md:text-base font-bold whitespace-nowrap">
           MASTER LIVEABOARDS
         </span>
       </div>
@@ -97,11 +97,11 @@ export default function Sidebar() {
       {/* Sidebar */}
       <div
         className={`fixed top-[4.5rem] left-0 h-[calc(100%-72px)] w-64 md:w-72 flex flex-col text-black z-50 
-        transition-transform duration-300 ease-in-out bg-[#001526] rounded-tr-3xl overflow-hidden 
+        transition-transform duration-300 ease-in-out bg-[#FDFDFD] rounded-tr-3xl overflow-hidden 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         {/* Sticky Top Spacer */}
-        <div className="sticky top-0 bg-[#001526] w-full h-[2rem] z-10"></div>
+        <div className="sticky top-0 bg-[#FDFDFD] w-full h-[2rem] z-10"></div>
 
         {/* Sidebar Menu */}
         <div className="flex-1 overflow-y-auto p-4 pb-18">
@@ -109,13 +109,13 @@ export default function Sidebar() {
             {Itemmenu.map((category) => (
               <li key={category.title} className="mb-3 relative -left-5">
                 {/* Section Title */}
-                <h4 className="text-white text-xs font-medium mb-2 pl-12">{category.title}</h4>
+                <h4 className="text-[#001526] text-xs font-medium mb-2 pl-12">{category.title}</h4>
                 <ul className="mb-8 mt-4 space-y-2">
                   {category.list.map((item) => (
                     <li key={item.title} className="relative text-center">
                       <Link
                         href={item.path}
-                        className="flex gap-0 p-2 pl-12 text-white text-[0.95rem] relative"
+                        className="flex gap-0 p-2 pl-12 text-[#001526] font-semibold text-[0.95rem] relative"
                         onClick={() => setIsOpen(false)}
                       >
                         {/* Active Page Indicator */}
@@ -136,9 +136,9 @@ export default function Sidebar() {
         </div>
 
         {/* User Profile Section Wrapper */}
-        <div className="bg-[#001526] w-full h-[4.9rem] relative">
+        <div className="bg-[#FDFDFD] w-full h-[4.9rem] relative">
           <Link href="">
-            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-4 p-[0.85rem] rounded-3xl bg-[#D9E7EC] cursor-pointer">
+            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-4 p-[0.85rem] rounded-3xl bg-[#001526] cursor-pointer">
               <Image
                 src="/images/sample_profile_pic.jpg"
                 width="36"
@@ -147,8 +147,8 @@ export default function Sidebar() {
                 alt="User Avatar"
               />
               <div className="flex-1 flex flex-col">
-                <span className="font-semibold text-black text-sm truncate">John Doe</span>
-                <span className="text-[#001526] text-xs truncate">johndoe@gmail.com</span>
+                <span className="font-semibold text-white text-sm truncate">John Doe</span>
+                <span className="text-white text-xs truncate">johndoe@gmail.com</span>
               </div>
             </div>
           </Link>
