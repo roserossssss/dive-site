@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function WelcomeCard() {
   return (
-    <div className="bg-[#2C7DA0] text-white py-7 px-8 rounded-lg shadow-md flex flex-col md:flex-row items-center md:items-start justify-between h-auto md:h-[13rem]">
+    <div className="bg-[#2C7DA0] text-white py-7 px-8 rounded-2xl shadow-md flex flex-col md:flex-row items-center md:items-start justify-between h-auto md:h-[13rem]">
       {/* Left Section - Welcome Text */}
       <div className="flex-1 text-center md:text-left mb-4 md:ml-10 md:mt-6">
         <h1 className="text-2xl md:text-4xl font-bold">Welcome, Admin!</h1>

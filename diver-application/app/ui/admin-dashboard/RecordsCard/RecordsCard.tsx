@@ -13,7 +13,7 @@ interface RecordsCardProps {
 
 const RecordsCard: React.FC<RecordsCardProps> = ({ title, subtitle, count, link, Icon, iconSize = "2rem" }) => {
   return (
-    <div className="bg-[#D9E7EC] shadow-md rounded-lg p-4 flex justify-between items-center hover:shadow-lg transition-shadow md:px-6 md:py-4 px-8 py-5">
+    <div className="bg-[#D9E7EC] shadow-md rounded-2xl p-4 flex justify-between items-center hover:shadow-lg transition-shadow md:px-6 md:py-4 px-8 py-5">
       {/* Left Section - Texts */}
       <div className="">
         <h3 className="text-xl font-bold text-[#001526]">{title}</h3>
