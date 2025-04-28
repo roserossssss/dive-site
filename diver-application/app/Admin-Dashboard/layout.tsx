@@ -6,8 +6,8 @@ export default function Layout({
     children: React.ReactNode;
   }>) {
     return (
-         <div className="flex min-h-screen">
-            <div className=" fixed h-full w-auto z-50 ">
+         <div className="flex min-h-screen bg-[#001526]">
+            <div className=" fixed h-full z-50">
                 <Sidebar />
             </div>
         
