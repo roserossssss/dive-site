@@ -14,7 +14,7 @@ export default function WelcomeCard() {
   };
 
   return (
-    <div className="bg-[#2C7DA0] text-white lg:p-6 lg:pl-12 p-8 rounded-lg shadow-md w-full h-full mx-auto grid lg:grid-cols-[1.5fr_1fr] md:grid-cols-2 gap-4">
+    <div className="bg-[#2C7DA0] text-white lg:p-6 lg:pl-12 p-8 rounded-2xl shadow-md w-full h-full mx-auto grid lg:grid-cols-[1.5fr_1fr] md:grid-cols-2 gap-4">
       <div className="flex flex-col justify-center text-center lg:text-left">
         <h1 className="text-2xl md:text-3xl font-bold mb-2">
           Welcome, {userProfile.name}!
@@ -33,7 +33,7 @@ export default function WelcomeCard() {
         </Link>
       </div>
     
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center -mr-0 md:-mr-12">
         <Image
           src="/images/db_welcome_user.svg" 
           alt="Dive Welcome Illustration" 

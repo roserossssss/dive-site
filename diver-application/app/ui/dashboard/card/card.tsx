@@ -9,8 +9,8 @@ interface CardProps {
 
 export default function Card({value, description, icon }: CardProps) {
   return (
-    <div className="bg-[#D9E7EC] p-2 rounded-lg shadow-md w-96 h-auto mb-2 flex flex-1">
-      <div className="flex items-center justify-center w-14 h-14 bg-[#001526] text-white rounded-md p-3 ml-2 mt-2 relative">
+    <div className="bg-[#D9E7EC] mt-7 p-2 rounded-2xl shadow-md w-96 h-auto mb-2 flex flex-1">
+      <div className="flex items-center justify-center w-14 h-14 bg-[#001526] text-white rounded-xl p-3 ml-2 mt-2 relative">
         <span className="text-[2rem] absolute">{icon}</span>
       </div>
       <div className="p-1 pt-1 pl-4">

@@ -72,6 +72,7 @@ export default function AdminDashboard() {
             <Suspense fallback={<p className="text-center">Loading chart...</p>}>
               <DiveChart />
             </Suspense>
+
           </div>
 
           {/* Right side (Recent Dive Logs) */}
