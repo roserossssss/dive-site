@@ -79,7 +79,7 @@ export default function Sidebar() {
 
       {/* Sidebar Header (Separate but Follows Sidebar State) */}
       <div
-        className={`fixed top-0 left-0 w-64 md:w-72 bg-[#001526] p-4 flex items-center justify-center z-40 transition-transform duration-300 ease-in-out 
+        className={`fixed top-0 left-0 w-64 md:w-72 bg-[#001526] p-4 pb-8 flex items-center justify-center transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         <Image
@@ -96,7 +96,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-[4.5rem] left-0 h-[calc(100%-72px)] w-64 md:w-72 flex flex-col text-black z-50 
+        className={`fixed top-[4.5rem] left-0 h-[calc(100%-60px)] w-72 flex flex-col text-black z-50 
         transition-transform duration-300 ease-in-out bg-[#FDFDFD] rounded-tr-3xl overflow-hidden 
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >

@@ -7,11 +7,11 @@ export default function Layout({
   }>) {
     return (
          <div className="flex min-h-screen">
-            <div className=" fixed h-full z-50">
+            <div className=" fixed h-full w-auto z-50 ">
                 <Sidebar />
             </div>
         
-            <div className="flex-1 p-4 md:ml-72 ml-0">
+            <div className="flex-1 p-8 md:ml-72 ml-0 bg-[#001526] ">
                 {children}
             </div>
         </div>
