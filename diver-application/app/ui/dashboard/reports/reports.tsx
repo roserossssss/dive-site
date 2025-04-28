@@ -75,7 +75,7 @@ export default function Card() {
   const data = { progress: 80 };
 
   return (
-    <div className="bg-[#D9E7EC] shadow-lg rounded-lg h-full p-8 w-full lg:max-w-[100%] flex flex-col justify-center items-center">
+    <div className="bg-[#D9E7EC] shadow-lg rounded-2xl h-full p-8 w-full lg:max-w-[100%] flex flex-col justify-center items-center">
       <h1 className="text-[#001526] text-center text-[1rem] -mb-1">Your score is</h1>
       <h2 className="text-[#001526] text-center text-[1.75rem] font-bold">Awesome</h2>
 
