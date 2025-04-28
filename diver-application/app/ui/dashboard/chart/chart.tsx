@@ -50,7 +50,7 @@ export default function Chart() {
   };
 
   return (
-    <div className="bg-[#D9E7EC] py-5 px-1 rounded-lg shadow-md mb-0 mt-4 w-full h-full mx-auto">
+    <div className="bg-[#D9E7EC] py-5 px-1 rounded-2xl shadow-md mb-0 mt-[0.65rem] md:mt-4 w-full h-full mx-auto">
       <div className="lg:flex justify-between items-center md:ml-8">
         <h2 className="text-[#001526] text-2xl md:text-2xl p-2 font-bold text-center lg:text-left">Your Dive Data</h2>
 

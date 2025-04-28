@@ -17,10 +17,12 @@ export default function Dashboard() {
         </h2>
       </div>
 
+      
+
       {/* Dashboard Cards */}
-      <div className="grid grid-cols-1 gap-2 items-center mt-4 md:mt-2 pt-8">
+      <div className="grid grid-cols-1 gap-2 items-center mt-4 md:mt-2 py-2 md:pt-6">
         {/* Scrollable Carousel */}
-        <div className="carousel-center flex md:grid md:grid-cols-3 gap-4 overflow-x-auto md:overflow-x-visible scroll-smooth scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-[#001526] p-1">
+        <div className="carousel-center flex md:-mt-6 md:grid md:grid-cols-3 gap-4 overflow-x-auto md:overflow-x-visible scroll-smooth scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-[#001526]">
           <div className="flex-shrink-0 w-full min-w-[300px] md:min-w-0 md:w-auto">
             <Destinations />
           </div>
@@ -34,9 +36,9 @@ export default function Dashboard() {
       </div>
 
       {/* Main Grid */}
-      <div className="grid lg:grid-cols-[2.05fr_1fr] md:grid-cols-1 gap-x-2">
+      <div className="grid lg:grid-cols-[2.05fr_1fr] md:grid-cols-1 gap-x-2 -mt-4 md:-mt-0">
         {/* Left side */}
-        <div className="mt-4 md:mt-0 mb-0 md:mb-2 p-1 md:h-full flex flex-col">
+        <div className="mt-4 md:mt-0 mb-0 md:mb-2 md:h-full flex flex-col md:pr-1 md:pl-0">
           <Suspense fallback={<p className="text-center">Loading widgets...</p>}>
             <CardDisplayName />
           </Suspense>
@@ -47,7 +49,7 @@ export default function Dashboard() {
         </div>
 
         {/* Right side */}
-        <div className="mt-3 md:mt-0 md:mb-2 p-1 md:h-full">
+        <div className="mt-3 md:mt-0 md:mb-2 md:h-full md:pl-1 md:pr-0">
           <Suspense fallback={<p className="text-center">Loading reports...</p>}>
             <Reports />
           </Suspense>
