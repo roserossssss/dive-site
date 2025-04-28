@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Listbox } from "@headlessui/react";
 import { ChevronDown, MoreVertical } from "lucide-react";
 import { IoSearch } from "react-icons/io5";
@@ -51,6 +52,7 @@ const accountTypes = ["Diver", "Instructor", "Dive Master", "Student Diver"];
 const statuses = ["Active", "Inactive", "Locked"];
 
 export default function UserManagement() {
+  const router = useRouter();
   const [dropdownUser, setDropdownUser] = useState<number | null>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedUserToDelete, setSelectedUserToDelete] = useState<number | null>(null);
@@ -179,7 +181,8 @@ export default function UserManagement() {
 
                       {dropdownUser === index && (
                         <div className="absolute right-20 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-10">
-                          <button className="block w-full text-sm text-center px-4 py-1 -mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition">
+                          <button className="block w-full text-sm text-center px-4 py-1 -mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                           onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}>
                             View
                           </button>
                           <button
