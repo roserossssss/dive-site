@@ -86,7 +86,7 @@ export default function UserManagement() {
             {/* Search */}
             <div className="relative group">
               <span className="hidden sm:block absolute -top-7 left-3 text-xs sm:text-sm text-white font-medium opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300">
-                User's name/email
+                User&apos;s name/email
               </span>
               <IoSearch size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10" />
               <input

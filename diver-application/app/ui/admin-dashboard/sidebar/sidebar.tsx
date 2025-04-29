@@ -6,7 +6,7 @@ import { GiSnorkel } from "react-icons/gi";
 import { PiCertificateFill } from "react-icons/pi";
 import { IoAnalytics, IoClose, IoMenu } from "react-icons/io5";
 import { IoPower } from "react-icons/io5";
-import { FaNotesMedical, FaStore, FaUserCheck, FaUserCog, FaUserLock } from "react-icons/fa";
+import { FaNotesMedical, FaUserCheck, FaUserCog, FaUserLock } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";

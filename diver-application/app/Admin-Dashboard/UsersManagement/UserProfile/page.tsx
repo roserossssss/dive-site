@@ -22,6 +22,7 @@ export default function ProfilePage() {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [profileImagePreview, setProfileImagePreview] = useState("/images/sample_profile_pic.jpg");
   const [isEditing, setIsEditing] = useState(false);
@@ -242,7 +243,7 @@ export default function ProfilePage() {
               <BsExclamationCircle className="w-24 h-24 text-[#001526]" />
             </div>
             <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Save Changes?</h2>
-            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">You're about to update your details.<br />Want to proceed?</p>
+            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">You&lsquo;re about to update your details.<br />Want to proceed?</p>
             <div className="flex justify-center mt-5">
               <button
                 className="mr-2 w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] border border-[#001526] rounded-full text-[16px] font-semibold"
