@@ -7,7 +7,7 @@ export default function Layout({
   }>) {
     return (
          <div className="flex min-h-screen">
-            <div className=" fixed h-full z-50 ">
+            <div className=" fixed h-full w-auto z-50 ">
                 <Sidebar />
             </div>
         
