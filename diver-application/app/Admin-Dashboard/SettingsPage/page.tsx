@@ -39,7 +39,7 @@ export default function ProfilePage() {
                 />
                 <div
                   className={`w-14 h-8 border-2 border-[#001526] peer-focus:ring-2 rounded-full peer transition ${
-                    notificationsEnabled ? "bg-gray-300" : "border-gray-500"
+                    notificationsEnabled ? "bg-white" : "border-gray-500"
                   }`}
                 >
                   <div

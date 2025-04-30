@@ -1,7 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { LifeBuoy, Monitor, FileText, Mail } from "lucide-react";
+import { LifeBuoy, Monitor, BarChart3, Mail } from "lucide-react";
+import { GiTropicalFish } from "react-icons/gi";
+
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function HelpPage() {
@@ -28,23 +30,23 @@ export default function HelpPage() {
       {/* Main Content */}
       <main className="flex-1 md:mt-48 mx-auto p-4">
         {/* Help Cards Grid */}
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center">
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-7 justify-items-center">
           <HelpCard
-            icon={<LifeBuoy size={130} className="text-[#001526]" />}
-            title="New to Master Liveaboards?"
-            description="Set up your account, verify your profile, and start logging dives."
+            icon={<GiTropicalFish size={130} className="text-[#001526]" />}
+            title="New to the Admin Side?"
+            description="Easily manage everything by exploring each section of the admin panel."
           />
 
           <HelpCard
             icon={<Monitor size={130} className="text-[#001526]" />}
-            title="Dive Management"
-            description="Upload your certifications to keep digital records of your licenses."
+            title="Admin Role"
+            description="Oversee diver accounts with access to their dive uploads, certifications, personal and medical details."
           />
 
           <HelpCard
-            icon={<FileText size={130} className="text-[#001526]" />}
-            title="Dive Certification"
-            description="Keep track of your dives and maintain accurate records."
+            icon={<BarChart3 size={130} className="text-[#001526]" />}
+            title="Analytics Dashboard"
+            description="View dive statistics, activity trends, and performance reports in one place."
           />
 
           <HelpCard
@@ -69,7 +71,7 @@ function HelpCard({
   description: string;
 }) {
   return (
-    <div className="bg-[#D9E7EC] p-6 rounded-xl shadow-lg shadow-gray-400 text-center flex flex-col items-center justify-center w-[335px] h-[400px]">
+    <div className="bg-[#D9E7EC] p-6 rounded-xl text-center flex flex-col items-center justify-center w-[335px] h-[400px] transition-shadow duration-300 ease-in-out hover:shadow-2xl hover:shadow-gray-400">
       <div className="text-[#001526] text-[120px] flex justify-center">
         {icon}
       </div>
