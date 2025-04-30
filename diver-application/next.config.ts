@@ -1,12 +1,12 @@
-// next.config.js or next.config.ts
 const withPWA = require("@ducanh2912/next-pwa").default({
   dest: "public",
   disable: false,
 });
 
 const nextConfig = {
+  output: "export",
   images: {
-    domains: ['media.istockphoto.com'],
+    domains: ["media.istockphoto.com"],
   },
 };
 
