@@ -58,22 +58,22 @@ export default function ProfilePage() {
       <div className="mb-1 text-right mt-4 pt-5">
         <div className="flex flex-wrap justify-between mb-2 space-y-2 sm:space-y-0 sm:space-x-4">
           <button
-            className={`flex-grow px-5 py-5 rounded-full text-[18px] font-bold ${pathname === '/dashboard/ProfilePage/ProfileSettings' ? 'bg-[#2C7DA0] text-white' : 'bg-[#D9E7EC] text-[#001526]'}`}
-            onClick={() => router.push('/Admin-Dashboard/ProfilePage/ProfileSettings')}
+              className={`flex-grow px-5 py-5 rounded-full text-[18px] font-bold ${pathname === '/Admin-Dashboard/ProfilePage/ProfileSettings' ? 'bg-[#2C7DA0] text-white' : 'bg-[#D9E7EC] text-[#001526]'}`}
+              onClick={() => router.push('/Admin-Dashboard/ProfilePage/ProfileSettings')}
           >
-            Profile Settings
+              Profile Settings
           </button>
           <button
-            className={`flex-grow px-5 py-5 rounded-full text-[18px] font-bold ${pathname === '/dashboard/ProfilePage/ChangePassword' ? 'bg-[#2C7DA0] text-white' : 'bg-[#D9E7EC] text-[#001526]'}`}
-            onClick={() => router.push('/Admin-Dashboard/ProfilePage/ChangePassword')}
+              className={`flex-grow px-5 py-5 rounded-full text-[18px] font-bold ${pathname === '/Admin-Dashboard/ProfilePage/ChangePassword' ? 'bg-[#2C7DA0] text-white' : 'bg-[#D9E7EC] text-[#001526]'}`}
+              onClick={() => router.push('/Admin-Dashboard/ProfilePage/ChangePassword')}
           >
-            Change Password
+              Change Password
           </button>
           <button
-            className={`flex-grow px-5 py-5 rounded-full text-[18px] font-bold ${pathname === '/dashboard/ProfilePage/DeleteAccount' ? 'bg-[#2C7DA0] text-white' : 'bg-[#D9E7EC] text-[#001526]'}`}
-            onClick={() => router.push('/Admin-Dashboard/ProfilePage/DeleteAccount')}
+              className={`flex-grow px-5 py-5 rounded-full text-[18px] font-bold ${pathname === '/Admin-Dashboard/ProfilePage/DeleteAccount' ? 'bg-[#2C7DA0] text-white' : 'bg-[#D9E7EC] text-[#001526]'}`}
+              onClick={() => router.push('/Admin-Dashboard/ProfilePage/DeleteAccount')}
           >
-            Delete Account
+              Delete Account
           </button>
         </div>
       </div>
