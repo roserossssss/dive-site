@@ -64,6 +64,7 @@ export default function Sidebar() {
           width={50}
           height={50}
         />
+
         <span className="mr-3 text-[#001526] text-sm md:text-base font-bold whitespace-nowrap">MASTER LIVEABOARDS</span>
       </div>
 
