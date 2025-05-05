@@ -7,9 +7,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 const nextConfig = {
   output: "export",
   images: {
-    
+    domains: ['media.istockphoto.com'],
     unoptimized: true,
-    //domains: ['media.istockphoto.com'],
+
   },
 };
 
