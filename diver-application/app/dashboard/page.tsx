@@ -20,7 +20,7 @@ export default function Dashboard() {
       {/* Dashboard Cards */}
       <div className="grid grid-cols-1 gap-2 items-center mt-4 md:mt-2 py-2 md:pt-6">
         {/* Scrollable Carousel */}
-        <div className="carousel-center flex md:-mt-6 md:grid md:grid-cols-3 gap-4 overflow-x-auto md:overflow-x-visible scroll-smooth scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-[#001526]">
+        <div className="carousel-center flex lg:grid lg:grid-cols-3 gap-4 overflow-x-auto scroll-smooth scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-[#001526]">
           <div className="flex-shrink-0 w-full min-w-[300px] md:min-w-0 md:w-auto">
             <Destinations />
           </div>
@@ -47,7 +47,7 @@ export default function Dashboard() {
         </div>
 
         {/* Right side */}
-        <div className="mt-3 md:mt-0 md:mb-2 md:h-full md:pl-1 md:pr-0">
+        <div className="lg:mt-0 md:mt-4 mt-4 md:mb-2 md:h-full md:pl-1 md:pr-0">
           <Suspense fallback={<p className="text-center">Loading reports...</p>}>
             <Reports />
           </Suspense>
