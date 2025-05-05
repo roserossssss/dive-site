@@ -88,7 +88,7 @@ export default function UserManagement() {
           <div className="relative flex items-center gap-3">
             {/* Search */}
             <div className="relative group">
-              <span className="hidden sm:block absolute -top-7 left-3 text-xs sm:text-sm text-white font-medium opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300">
+              <span className="hidden sm:block absolute -top-6 left-3 text-xs sm:text-sm text-white font-medium opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300">
                 User's name/email
               </span>
               <IoSearch size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10" />
@@ -100,12 +100,12 @@ export default function UserManagement() {
             </div>
 
             {/* Sort & Filter */}
-            <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-2">
+            <button className="bg-white text-[#001526] -ml-2 lg:-ml-1 text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <TbSortAscending2 className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Sort</span>
             </button>
 
-            <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-2">
+            <button className="bg-white text-[#001526] -ml-2 lg:-ml-1 text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <HiOutlineFilter className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Filter</span>
             </button>
@@ -156,7 +156,7 @@ export default function UserManagement() {
                       </button>
 
                       {dropdownUser === index && (
-                        <div className="absolute right-20 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-10">
+                        <div className="absolute right-20 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-10">
                           <button
                             className="block w-full text-sm text-center px-4 py-1 -mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
                             onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}
@@ -188,8 +188,9 @@ export default function UserManagement() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] rounded-2xl shadow-lg flex flex-col items-center">
             <GoTrash className="text-[#001526] w-24 h-24 mt-3" />
-            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Delete User?</h2>
-            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">This action cannot be undone.</p>
+            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Delete Admin?</h2>
+            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">Are you sure you want to delete?</p>
+            <p className="font-semibold text-center text-[#001526] -mt-5 text-[15px]">This action cannot be undone.</p>
             <div className="flex justify-center mt-5">
               <button
                 className="mr-2 w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] border border-[#001526] rounded-full text-[16px] font-semibold"
@@ -288,7 +289,7 @@ function CustomDropdown({ items, selected }: { items: string[]; selected: string
     <Listbox value={selectedItem} onChange={setSelectedItem}>
       <div className="relative">
         <Listbox.Button
-          className={`font-medium w-40 px-4 py-2 rounded-2xl flex justify-between items-center shadow-inner hover:opacity-90 transition ${getSelectedColor(
+          className={`font-medium w-40 px-6 py-2 rounded-2xl flex justify-between items-center shadow-inner hover:opacity-90 transition ${getSelectedColor(
             selectedItem
           )}`}
         >
@@ -296,7 +297,7 @@ function CustomDropdown({ items, selected }: { items: string[]; selected: string
           <ChevronDown size={16} />
         </Listbox.Button>
 
-        <Listbox.Options className="absolute -ml-3 mt-2 w-44 bg-[#A3D4E3] text-[#001526] font-semibold rounded-2xl p-2 z-10">
+        <Listbox.Options className="absolute -ml-3 mt-2 w-44 bg-[#A3D4E3] text-[#001526] font-semibold rounded-xl p-2 z-10">
           {items.map((item) => {
             const lower = item.toLowerCase();
             const bgColor =
@@ -312,7 +313,7 @@ function CustomDropdown({ items, selected }: { items: string[]; selected: string
               <Listbox.Option key={item} value={item}>
                 {({ active, selected }) => (
                   <div
-                    className={`p-2 rounded-lg cursor-pointer transition-all ${
+                    className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
                       active || selected ? `${bgColor} opacity-90` : "text-[#001526]"
                     }`}
                   >
