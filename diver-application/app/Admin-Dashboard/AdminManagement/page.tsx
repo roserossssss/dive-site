@@ -11,8 +11,10 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { GoTrash } from "react-icons/go";
 import { HiPlus } from "react-icons/hi";
 import { FaUserShield } from "react-icons/fa";
+import { FiCheck, FiTrash2,  FiX } from "react-icons/fi";
 
-const users = [
+
+const initialUsers = [
   {
     adminId: "ML00001",
     name: "Jay Marc",
@@ -53,13 +55,28 @@ export default function UserManagement() {
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
   const [inviteName, setInviteName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
+  const [selectMode, setSelectMode] = useState(false);
+  const [selectedAdmins, setSelectedAdmins] = useState<number[]>([]);
+  const [users, setUsers] = useState(initialUsers);
+
+  const toggleAdminSelection = (index: number) => {
+    setSelectedAdmins((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
 
   const confirmDelete = () => {
     if (selectedUserToDelete !== null) {
-      console.log("User deleted:", selectedUserToDelete);
+      setUsers((prev) => prev.filter((_, i) => i !== selectedUserToDelete));
     }
     setDeleteModalOpen(false);
     setSelectedUserToDelete(null);
+  };
+
+  const removeSelectedAdmins = () => {
+    setUsers((prev) => prev.filter((_, i) => !selectedAdmins.includes(i)));
+    setSelectedAdmins([]);
+    setSelectMode(false);
   };
 
   return (
@@ -72,40 +89,74 @@ export default function UserManagement() {
         {/* Header */}
         <div className="flex justify-between text-[#001526] font-semibold items-center mb-4">
           <div className="flex items-center gap-2">
-            <IoIosArrowBack size={24} className="cursor-pointer text-white" />
-            <IoIosArrowForward size={24} className="cursor-pointer text-white" />
-            <button
-              onClick={() => setInviteModalOpen(true)}
-              className="bg-[#2C7DA0] text-white text-xs sm:text-base px-4 sm:px-8 py-2 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center justify-center gap-2"
-            >
-              <span className="block sm:hidden">
-                <HiPlus size={18} />
-              </span>
-              <span className="hidden sm:block">Add</span>
-            </button>
-          </div>
+            <IoIosArrowBack size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            <IoIosArrowForward size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+
+             {/* Select and Cancel Button */}
+             <button
+             onClick={() => {
+              if (selectMode && selectedAdmins.length > 0) {
+                setDeleteModalOpen(true); 
+              } else {
+                setSelectMode(!selectMode); 
+                if (selectMode) setSelectedAdmins([]); 
+              }
+            }}
+            className={`${
+              selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
+              } text-white text-xs sm:text-base px-3 md:px-3 py-2 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2`}
+              >
+                <span className="block lg:hidden">
+                  {selectMode && selectedAdmins.length > 0 ? (
+                    <FiTrash2 size={18} strokeWidth={3} />
+                  ) : selectMode ? (
+                  <FiX size={18} strokeWidth={3} />
+                ) : (
+                <FiCheck size={18} strokeWidth={3} />
+                )}
+                </span>
+                <span className="hidden lg:inline">
+                  {selectMode && selectedAdmins.length > 0
+                  ? "Delete"
+                  : selectMode
+                  ? "Cancel"
+                  : "Select"}
+                  </span>
+                  
+                  </button>
+                    
+                    {/* Add Button */}
+                    <button
+                    onClick={() => setInviteModalOpen(true)}
+                    className="bg-[#2C7DA0] text-white text-xs sm:text-base px-3 md:px-3 py-2 lg:px-5 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2"
+                    >
+                      <span  className="block lg:hidden">
+                        <HiPlus size={18} />
+                        </span>
+                        <span className="hidden lg:inline">Add</span>
+                        </button>
+                        </div>
 
           <div className="relative flex items-center gap-3">
             {/* Search */}
             <div className="relative group">
-              <span className="hidden sm:block absolute -top-6 left-3 text-xs sm:text-sm text-white font-medium opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity duration-300">
-                User's name/email
+              <span className="hidden sm:block absolute -top-6 left-3 text-xs sm:text-sm text-white font-medium opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100 transition-opacity duration-300">
+                Admin's name/email
               </span>
               <IoSearch size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10" />
               <input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 sm:hover:w-60 sm:focus-within:w-80"
+                className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 lg:hover:w-60 lg:focus-within:w-80"
               />
             </div>
 
-            {/* Sort & Filter */}
-            <button className="bg-white text-[#001526] -ml-2 lg:-ml-1 text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
+            <button className="bg-white text-[#001526] text-xs sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <TbSortAscending2 className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Sort</span>
             </button>
 
-            <button className="bg-white text-[#001526] -ml-2 lg:-ml-1 text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
+            <button className="bg-white text-[#001526] text-xs  sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <HiOutlineFilter className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Filter</span>
             </button>
@@ -118,36 +169,34 @@ export default function UserManagement() {
             <table className="w-full text-center text-[#001526] mt-1 table-auto">
               <thead className="bg-[#D9E7EC] border-b-2 border-gray-400">
                 <tr>
-                  {["Admin ID", "Name", "Email", "Status", "Last Login", ""].map((head, idx) => (
-                    <th
-                      key={idx}
-                      className={`px-22 py-7 font-semibold text-sm sm:text-base whitespace-nowrap ${
-                        idx === 6
-                          ? "w-[90px] md:w-[100px] lg:w-[100px]"
-                          : "w-[180px] md:w-[200px] lg:w-[220px]"
-                      }`}
-                    >
+                  {["", "Admin ID", "Name", "Email", "Status", "Last Login", ""].map((head, idx) => (
+                    <th key={idx} className="px-2 py-7 font-semibold text-sm sm:text-base whitespace-nowrap">
                       {head}
                     </th>
                   ))}
                 </tr>
               </thead>
-
               <tbody className="bg-[#D9E7EC] text-[#001526]">
                 {users.map((user, index) => (
                   <tr key={index} className="border-b border-gray-300 hover:bg-[#cfe5ee] transition">
-                    <td className="px-16 py-6 text-center text-sm sm:text-base whitespace-nowrap">{user.adminId}</td>
-                    <td className="px-24 py-6 text-center text-xs sm:text-base whitespace-nowrap">{user.name}</td>
-                    <td className="px-10 py-6 text-center text-xs sm:text-base whitespace-nowrap">
-                      <span className="-ml-10">{user.email}</span>
+                    <td className="px-2 py-6">
+                      {selectMode && (
+                        <div
+                        onClick={() => toggleAdminSelection(index)}
+                        className={`w-5 h-5 rounded-full border-2 border-[#001526] cursor-pointer flex items-center justify-center transition ml-7 ${
+                          selectedAdmins.includes(index) ? "bg-[#001526]" : "bg-transparent"
+                        }`}
+                        ></div>
+                        )}
+                        </td>
+                    <td className="px-6 py-6 text-sm sm:text-base">{user.adminId}</td>
+                    <td className="px-6 py-6 text-xs sm:text-base">{user.name}</td>
+                    <td className="px-6 py-6 text-xs sm:text-base">{user.email}</td>
+                    <td className="px-6 py-6 text-xs sm:text-base">
+                      <CustomDropdown items={statuses} selected={user.status} />
                     </td>
-                    <td className="px-10 py-6 text-center text-xs sm:text-base whitespace-nowrap">
-                      <div className="ml-16">
-                        <CustomDropdown items={statuses} selected={user.status} />
-                      </div>
-                    </td>
-                    <td className="px-16 py-3 text-center text-xs sm:text-base whitespace-nowrap">{user.lastLogin}</td>
-                    <td className="relative px-1 py-3">
+                    <td className="px-6 py-6 text-xs sm:text-base">{user.lastLogin}</td>
+                    <td className="px-2 py-3 relative">
                       <button
                         onClick={() => setDropdownUser(index)}
                         className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
@@ -156,21 +205,12 @@ export default function UserManagement() {
                       </button>
 
                       {dropdownUser === index && (
-                        <div className="absolute right-20 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-10">
+                        <div className="absolute right-8 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
                           <button
-                            className="block w-full text-sm text-center px-4 py-1 -mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                            className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
                             onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}
                           >
-                            View
-                          </button>
-                          <button
-                            className="block w-full text-sm text-center px-4 py-1 mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                            onClick={() => {
-                              setSelectedUserToDelete(index);
-                              setDeleteModalOpen(true);
-                            }}
-                          >
-                            Delete
+                            View Admin
                           </button>
                         </div>
                       )}
@@ -183,9 +223,9 @@ export default function UserManagement() {
         </div>
       </div>
 
-      {/* Delete Modal */}
+      {/* Modals (unchanged) */}
       {deleteModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60">
           <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] rounded-2xl shadow-lg flex flex-col items-center">
             <GoTrash className="text-[#001526] w-24 h-24 mt-3" />
             <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Delete Admin?</h2>
@@ -209,10 +249,9 @@ export default function UserManagement() {
         </div>
       )}
 
-      {/* Invite Modal */}
       {inviteModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[680px] min-h-[400px] rounded-2xl shadow-lg flex flex-col gap-6 items-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60">
+          <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[700px] min-h-[420px] rounded-2xl shadow-lg flex flex-col gap-6 items-center">
             <div className="w-full text-left">
               <h2 className="text-[#001526] text-3xl mt-2 ml-2 font-bold flex items-center gap-2 mb-2">
                 <FaUserShield className="text-[#001526] w-20 h-20" /> Invite Admin
@@ -230,7 +269,6 @@ export default function UserManagement() {
                   className="px-4 py-1 rounded-xl border-2 border-[#001526] placeholder-gray-500 placeholder:text-sm text-[#001526] bg-transparent"
                 />
               </div>
-
               <div className="flex flex-col w-full">
                 <label className="text-[#001526] font-semibold mb-1">Email</label>
                 <input
@@ -243,7 +281,7 @@ export default function UserManagement() {
               </div>
             </div>
 
-            <div className="flex justify-center gap-4 mt-10 w-full">
+            <div className="flex justify-center gap-4 mt-16 w-full">
               <button
                 onClick={() => setInviteModalOpen(false)}
                 className="w-full sm:w-44 py-2 border-2 border-[#001526] rounded-full text-[#001526] font-semibold hover:bg-[#001526] hover:text-white transition duration-200"
