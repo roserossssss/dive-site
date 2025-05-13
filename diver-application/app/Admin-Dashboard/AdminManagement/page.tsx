@@ -66,8 +66,9 @@ export default function UserManagement() {
   };
 
   const confirmDelete = () => {
-    if (selectedUserToDelete !== null) {
-      setUsers((prev) => prev.filter((_, i) => i !== selectedUserToDelete));
+    if (selectedAdmins.length > 0) {
+      console.log("Deleting admins:", selectedAdmins);
+      removeSelectedAdmins();
     }
     setDeleteModalOpen(false);
     setSelectedUserToDelete(null);
@@ -94,17 +95,17 @@ export default function UserManagement() {
 
              {/* Select and Cancel Button */}
              <button
-             onClick={() => {
-              if (selectMode && selectedAdmins.length > 0) {
-                setDeleteModalOpen(true); 
-              } else {
-                setSelectMode(!selectMode); 
-                if (selectMode) setSelectedAdmins([]); 
-              }
-            }}
+  onClick={() => {
+    if (selectMode && selectedAdmins.length > 0) {
+      setDeleteModalOpen(true);
+    } else {
+      setSelectMode(!selectMode);
+      if (selectMode) setSelectedAdmins([]);
+    }
+  }}
             className={`${
               selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
-              } text-white text-xs sm:text-base px-3 md:px-3 py-2 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2`}
+              } text-white text-xs sm:text-base sm: -ml-2 px-3 md:px-3 py-2 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2`}
               >
                 <span className="block lg:hidden">
                   {selectMode && selectedAdmins.length > 0 ? (
@@ -128,7 +129,7 @@ export default function UserManagement() {
                     {/* Add Button */}
                     <button
                     onClick={() => setInviteModalOpen(true)}
-                    className="bg-[#2C7DA0] text-white text-xs sm:text-base px-3 md:px-3 py-2 lg:px-5 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2"
+                    className="bg-[#2C7DA0] text-white sm: -ml-1 text-xs sm:text-base px-3 md:px-3 py-2 lg:px-5 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2"
                     >
                       <span  className="block lg:hidden">
                         <HiPlus size={18} />
@@ -147,16 +148,16 @@ export default function UserManagement() {
               <input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 lg:hover:w-60 lg:focus-within:w-80"
+                className="pl-10 pr-4 py-2 rounded-full lg:mr-0.5 bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 lg:hover:w-60 lg:focus-within:w-80"
               />
             </div>
 
-            <button className="bg-white text-[#001526] text-xs sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
+            <button className="bg-white text-[#001526] text-xs lg:mr-0.5 sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <TbSortAscending2 className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Sort</span>
             </button>
 
-            <button className="bg-white text-[#001526] text-xs  sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
+            <button className="bg-white text-[#001526] text-xs lg:mr-0.5 sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <HiOutlineFilter className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Filter</span>
             </button>
@@ -227,19 +228,23 @@ export default function UserManagement() {
       {deleteModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60">
           <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] rounded-2xl shadow-lg flex flex-col items-center">
-            <GoTrash className="text-[#001526] w-24 h-24 mt-3" />
-            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Delete Admin?</h2>
+            <GoTrash className="text-[#001526] w-24 h-24 mt-10 mb-3" />
+            <h2 className="text-3xl font-bold mb-7 text-center text-[#001526]">
+              {selectedAdmins.length === 1
+              ? "Delete Admin?"
+              : `Delete ${selectedAdmins.length} Admins?`}
+              </h2>
             <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">Are you sure you want to delete?</p>
             <p className="font-semibold text-center text-[#001526] -mt-5 text-[15px]">This action cannot be undone.</p>
-            <div className="flex justify-center mt-5">
+            <div className="flex justify-center mt-12">
               <button
-                className="mr-2 w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] border border-[#001526] rounded-full text-[16px] font-semibold"
+                className="mr-2 w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] border-2 border-[#001526] rounded-full text-[16px] font-semibold hover:bg-[#001526] hover:text-white transition duration-200"
                 onClick={() => setDeleteModalOpen(false)}
               >
                 Cancel
               </button>
               <button
-                className="ml-2 w-36 px-5 py-3 bg-[#001526] text-white rounded-full text-[16px] font-semibold"
+                className="ml-2 w-36 px-5 py-3bg-[#D9E7EC] text-[#001526] border-2 border-[#001526] rounded-full text-[16px] font-semibold hover:bg-[#001526] hover:text-white transition duration-200"
                 onClick={confirmDelete}
               >
                 Yes
