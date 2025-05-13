@@ -18,7 +18,7 @@ const users = [
     name: "Princess Denise Ong",
     email: "ongdenise234@gmail.com",
     AccountType: "Admin",
-    Role: "Admin1",
+    Role: "Admin 1",
     Create: true,
     Update: false,
     Delete: false,
@@ -29,7 +29,7 @@ const users = [
     name: "Althea Rose Sardana",
     email: "rosesardana2610@gmail.com",
     AccountType: "Admin",
-    Role: "Admin2",
+    Role: "Admin 2",
     Create: true,
     Update: true,
     Delete: true,
@@ -40,7 +40,7 @@ const users = [
     name: "Jay Marc",
     email: "jaymarc123@gmail.com",
     AccountType: "Admin",
-    Role: "Admin3",
+    Role: "Admin 3",
     Create: false,
     Update: false,
     Delete: true,
@@ -51,7 +51,7 @@ const users = [
     name: "Juan Dela Cruz",
     email: "juandelacruz@gmail.com",
     AccountType: "Admin",
-    Role: "Admin4",
+    Role: "Admin 4",
     Create: false,
     Update: false,
     Delete: false,
@@ -109,8 +109,8 @@ export default function RolesPermissions() {
   {/* Header */}
   <div className="flex justify-between text-[#001526] font-semibold items-center mb-4">
     <div className="flex items-center gap-2">
-      <IoIosArrowBack size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-      <IoIosArrowForward size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+      <IoIosArrowBack size={24} className="cursor-pointer text-white sm: -ml-2 md:ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+      <IoIosArrowForward size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-2 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
 
       <button
   onClick={() => {
@@ -121,7 +121,7 @@ export default function RolesPermissions() {
       if (selectMode) setSelectedAdmins([]);
     }
   }}
-  className={`text-white text-xs sm:text-base px-3 md:px-4 py-2 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2 ${
+  className={`text-white sm: -ml-2 lg: -ml-1 text-xs sm:text-base px-3 md:px-4 py-2 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2 ${
     selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
   }`}
 >
@@ -138,7 +138,7 @@ export default function RolesPermissions() {
       </>
     ) : (
       <>
-        <FiCheck className="lg:hidden" />
+        <FiCheck className="lg:hidden " />
         <span className="hidden lg:inline">Select</span>
       </>
     )}
@@ -148,7 +148,7 @@ export default function RolesPermissions() {
 
 <button
   onClick={() => setSaveModalOpen(true)}
-  className="bg-white text-[#001526] text-xs sm:text-base px-3 md:px-3 py-2 lg:px-5 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2"
+  className="bg-white text-[#001526] text-xs sm: -ml-1 lg: -ml-0.5 sm:text-base px-3 md:px-3 py-2 lg:px-5 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2"
 >
   <FiSave className="lg:hidden" />
   <span className="hidden lg:inline">Save</span>
@@ -160,18 +160,18 @@ export default function RolesPermissions() {
             {/* Search */}
             <div className="relative group">
               <span className="hidden sm:block absolute -top-6 left-3 text-xs sm:text-sm text-white font-medium opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100 transition-opacity duration-300">
-                Admin Name / ID
+                Admin's Name / ID
               </span>
               <IoSearch size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10" />
               <input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 py-2 rounded-full lg:mr-0.5 bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 lg:hover:w-60 lg:focus-within:w-80"
+                className="pl-10 pr-4 py-2 rounded-full lg:mr-0.5 bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 lg:hover:w-60 lg:focus-within:w-96"
               />
             </div>
 
             {/* Sort & Filter */}
-            <button className="bg-white text-[#001526] text-xs lg:mr-0.5 sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
+            <button className="bg-white text-[#001526] lg:mr-0.5 sm: -ml-2 text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <TbSortAscending2 className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Sort</span>
             </button>
@@ -184,17 +184,17 @@ export default function RolesPermissions() {
         </div>
 
         {/* User Table */}
-        <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md max-h-[85vh]">
-          <div className="overflow-y-auto min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
+        <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md max-h-[85vh">
+          <div className="overflow-y-auto min-h-[70vh] sm:min-h-[70vh] lg:min-h-[75vh]">
             <table className="w-full text-center text-[#001526] mt-1 table-auto">
               <thead className="bg-[#D9E7EC] border-b-2 border-gray-400">
                 <tr>
                   {/* Selection Column Header (Empty) */}
           <th className="px-2 py-7 w-[50px]"></th>
-                  {["AdminID", "Name", "Role", "Create", "Update", "Delete", ""].map((head, idx) => (
+                  {["Admin ID", "Name", "Role", "Create", "Update", "Delete", ""].map((head, idx) => (
                     <th
                       key={idx}
-                      className={`px-2 py-7 font-semibold text-sm sm:text-base
+                      className={`px-5 py-7 font-semibold text-sm sm:text-base
                         ${
                           idx === 6 ? "w-[90px] md:w-[100px] lg:w-[100px]" : "w-[270px] md:w-[270px] lg:w-[270px]"
                         }`
@@ -203,7 +203,7 @@ export default function RolesPermissions() {
                       {head}
                     </th>
                   ))}
-                </tr>
+                </tr>                                                                             
               </thead>
               <tbody className="bg-[#D9E7EC] text-[#001526]">
         {users.map((user, index) => (
@@ -216,7 +216,7 @@ export default function RolesPermissions() {
               {selectMode ? (
                 <div
                   onClick={() => toggleAdminSelection(index)}
-                  className={`w-5 h-5 rounded-full border-2 border-[#001526] cursor-pointer flex items-center justify-center transition ml-5 ${
+                  className={`w-4 h-4 rounded-full border-2 border-[#001526] cursor-pointer flex items-center justify-center transition ml-5 ${
                     selectedAdmins.includes(index)
                       ? "bg-[#001526]"
                       : "bg-transparent"
@@ -246,7 +246,7 @@ export default function RolesPermissions() {
                     
             {/* CREATE TOGGLE */}
             <td>
-              <label className="inline-flex items-center cursor-pointer -ml-5">
+              <label className="inline-flex items-center cursor-pointer -ml-1">
               <input
                   type="checkbox"
                   className="sr-only peer"
@@ -294,8 +294,8 @@ export default function RolesPermissions() {
                       </button>
 
                       {dropdownUser === index && (
-                        <div className="absolute right-16 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-10">
-                          <button className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                        <div className="absolute right-16 mt-3 w-28 h-8 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-10">
+                          <button className="block w-full text-xs text-center px-5 py-1 -mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
                            onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}>
                             View
                           </button>
@@ -344,7 +344,7 @@ export default function RolesPermissions() {
       {saveModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[500px] min-h-[450px] rounded-2xl shadow-lg flex flex-col items-center">
-          <FiAlertCircle className="text-[#001526] w-24 h-24 mt-10" />
+          <FiAlertCircle className="text-[#001526] w-24 h-24 mt-10 mb-3" />
           <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">Save Changes?</h2>
           <p className="font-semibold text-center text-[#001526] text-[15px]">Are you sure you want to save these changes?</p>
           <p className="font-semibold text-center text-[#001526] text-[15px]">This action will update the records.</p>
