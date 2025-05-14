@@ -5,7 +5,7 @@
 - Recommended tool: **VS Code**
 - Ensure you have **Node.js** and **npm** installed.
 
-## Running the Application:
+## Running the Application(Developer environment):
 
 1. Open your terminal and navigate to the project directory:
 
@@ -19,29 +19,50 @@
    npm run dev
    ```
 
-## Installed Libraries
+## Running the Application (Build Mode for performance testing and test for deployment):
 
-- `@emnapi/runtime@extraneous`
-- `@eslint/eslintrc@3.3.0`
-- `@types/node@20.17.19`
-- `@types/react-dom@19.0.4`
-- `@types/react@19.0.10`
-- `eslint-config-next@15.1.7`
-- `eslint@9.21.0`
-- `mongoose@8.10.2`
-- `next@15.1.7`
-- `postcss@8.5.3`
-- `react-dom@19.0.0`
-- `react-icons@4.11.0`
-- `react@19.0.0`
-- `recharts@2.15.1`
-- `tailwindcss@3.4.17`
-- `typescript@5.7.3`
+1. Open your terminal and navigate to the project directory:
+
+ ```
+cd diver-application
+ ```
+
+2. Create a Build environment(Static File)
+**Caution, this will re written the previous build mode and /out folders for firebase**
+ ```
+npm run build
+ ```
+
+3. Run the build environment 
+ ```
+npm start
+ ```
+
+## Setting Up/Updating Firebase files (For Deployment):
+1. Ensure you are logged in to Firebase:
+ ```
+firebase login
+ ```
+
+2. Initialize Firebase in the project directory (skip if already initialized):
+ ```
+firebase init
+ ```
+
+3. Build the static site for deployment:
+ ```
+npm run build
+ ```
+
+4. Deploy the site to Firebase Hosting(you can change the domain name at the firebase dashboard):
+ ```
+firebase deploy --only hosting:master-liveaboards-webapp
+ ```
 
 ## Troubleshoot and stuff:
 
+   Install missing libraries/dependencies
    ```
    npm install
    ```
-   Install missing libraries/dependencies
-
+   
