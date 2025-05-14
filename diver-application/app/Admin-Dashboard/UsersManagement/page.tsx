@@ -75,9 +75,9 @@ export default function UserManagement() {
         {/* Header */}
         <div className="flex justify-between text-[#001526] font-semibold items-center mb-4">
           <div className="flex items-center gap-2">
-            <IoIosArrowBack size={24} className="cursor-pointer text-white" />
-            <IoIosArrowForward size={24} className="cursor-pointer text-white" />
-            <p className="-ml-1 lg:ml-1 text-white font-semibold text-opacity-50 text-xs md:text-sm lg:text-base">
+            <IoIosArrowBack size={24} className="cursor-pointer text-white sm: -ml-1 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            <IoIosArrowForward size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            <p className="-ml-2 lg:ml-1 text-white font-semibold text-opacity-50 text-[9px] md:text-sm lg:text-base">
               Showing 10 results
             </p>
           </div>
@@ -92,17 +92,17 @@ export default function UserManagement() {
               <input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 sm:hover:w-60 sm:focus-within:w-80"
+                className="pl-10 pr-4 py-2 rounded-full lg:mr-0.5 bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 lg:hover:w-70 lg:focus-within:w-80"
               />
             </div>
 
             {/* Sort & Filter */}
-            <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-2">
-              <TbSortAscending2 className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
+            <button className="bg-white text-[#001526] text-xs lg:mr-0.5 sm: -ml-2 sm:text-base px-4 py-2 rounded-full font-semibold flex items-center gap-1">
+              <TbSortAscending2 className="w-4 md:w-5 lg:w-5 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Sort</span>
             </button>
 
-            <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-2">
+            <button className="bg-white text-[#001526] text-xs lg:mr-0.5 sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
               <HiOutlineFilter className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
               <span className="hidden lg:inline">Filter</span>
             </button>
@@ -110,9 +110,9 @@ export default function UserManagement() {
         </div>
 
         {/* User Table */}
-        <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md max-h-[85vh]">
-          <div className="overflow-y-auto min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
-            <table className="w-full text-center text-[#001526] mt-1 table-fixed">
+        <div className="rounded-3xl overflow-hidden mt-5 bg-[#D9E7EC] shadow-md max-h-[85vh]">
+          <div className="overflow-y-auto min-h-[70vh] sm:min-h-[70vh] lg:min-h-[80vh]">
+            <table className="w-full text-center text-[#001526] mt-1 table-auto">
               <thead className="bg-[#D9E7EC] border-b-2 border-gray-400">
                 <tr>
                   {["Name", "Email", "Account Type", "Status", "Last Login", ""].map((head, idx) => (
@@ -130,7 +130,7 @@ export default function UserManagement() {
               <tbody className="bg-[#D9E7EC] text-[#001526]">
                 {users.map((user, index) => (
                   <tr key={index} className="border-b border-gray-300 hover:bg-[#cfe5ee] transition">
-                    {/* Avatar + Name */}
+                    {/* Avatar & Name */}
                     <td className="px-6 py-6 text-sm sm:text-base whitespace-nowrap">
                       <div className="flex items-center gap-4 max-w-full overflow-hidden">
                         {user.avatar ? (
@@ -153,17 +153,17 @@ export default function UserManagement() {
                     </td>
 
                     <td className="px-2 py-6 text-sm sm:text-base">
-                      <span className="-ml-10">{user.email}</span>
+                      <span className="-ml-4">{user.email}</span>
                     </td>
 
                     <td className="px-2 py-6 text-sm sm:text-base">
-                      <div className="ml-16">
+                      <div className="ml-12">
                         <CustomDropdown items={accountTypes} selected={user.accountType} />
                       </div>
                     </td>
 
                     <td className="px-2 py-6 text-sm sm:text-base">
-                      <div className="ml-16">
+                      <div className="ml-12">
                         <CustomDropdown items={statuses} selected={user.status} />
                       </div>
                     </td>
@@ -172,16 +172,15 @@ export default function UserManagement() {
 
                     {/* Dropdown Options */}
                     <td className="relative px-4 py-3">
-                      <button
-                        onClick={() => setDropdownUser(index)}
-                        className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                    <button
+                        onClick={() => setDropdownUser(dropdownUser === index ? null : index)}
+                        className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-200 transition"
                       >
                         <MoreVertical size={18} />
                       </button>
-
                       {dropdownUser === index && (
-                        <div className="absolute right-20 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-10">
-                          <button className="block w-full text-sm text-center px-4 py-1 -mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                        <div className="absolute right-16 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
+                          <button className="block w-full text-sm text-center px-4 py-1 mb-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
                            onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}>
                             View
                           </button>
@@ -259,7 +258,7 @@ function CustomDropdown({ items, selected }: { items: string[]; selected: string
           <ChevronDown size={16} />
         </Listbox.Button>
 
-        <Listbox.Options className="absolute -ml-3 mt-2 w-44 bg-[#A3D4E3] text-[#001526] font-semibold rounded-2xl p-2 z-10">
+        <Listbox.Options className="absolute -ml-3 mt-2 w-44 bg-[#A3D4E3] text-[#001526] font-semibold rounded-xl p-2 z-10">
           {items.map((item) => {
             const lower = item.toLowerCase();
             const bgColor =
@@ -275,7 +274,7 @@ function CustomDropdown({ items, selected }: { items: string[]; selected: string
               <Listbox.Option key={item} value={item}>
                 {({ active, selected }) => (
                   <div
-                    className={`p-2 rounded-lg cursor-pointer transition-all ${
+                    className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
                       active || selected ? `${bgColor} opacity-90` : "text-[#001526]"
                     }`}
                   >
