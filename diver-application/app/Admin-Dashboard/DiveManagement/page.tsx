@@ -138,16 +138,13 @@ export default function DiveManagement() {
   };
 
   return (
-    <>
-      {/* Header Section */}
-      <div className="fixed top-0 left-0 w-full bg-[#001526] z-10 p-4 rounded-t-2xl md:pl-80">
-        <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-white text-center md:text-left mt-2">
-          Dive Management
-        </h2>
-      </div>
+  <>
+    <div className="fixed top-0 left-0 w-full z-10 p-4 rounded-t-2xl md:pl-80">
+      <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-white text-center md:text-left mt-2">
+        Dive Management
+      </h2>
 
-      {/* Main Content */}
-      <div className="mt-3 p-5 min-h-[60vh]">
+      <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-2">
         {/* Controls */}
         <div className="flex flex-wrap items-center justify-between gap-2 mt-12">
           {/* Navigation Arrows and Delete Button */}
@@ -219,43 +216,55 @@ export default function DiveManagement() {
           </div>
         </div>
 
-        {/* Table Section */}
-        <div
-          className="rounded-3xl overflow-hidden mt-5 sm:mt-7 bg-[#D9E7EC] shadow-md min-h-[74vh] md:min-h-[74vh]"
-        >
-          {diveRecords.length > 0 ? (
+        {/* Dive Table */}
+        <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
+          {currentPageRecords.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-[77vh]">
+              <img
+                src="/images/empty_table_logo.svg"
+                alt="No Records"
+                className="mx-auto w-32 sm:w-56 h-32 sm:h-56"
+              />
+              <p className="text-[#001526] font-semibold text-lg">
+                No records found.
+              </p>
+            </div>
+          ) : (
             <div
-              className="overflow-y-auto max-h-[73vh] pb-3"
+              className="overflow-x-auto overflow-y-auto max-h-[78vh] sm:max-h-[70vh] lg:max-h-[77vh] pb-3"
               style={{
                 scrollbarWidth: "thin",
                 scrollbarColor: "#001526 #D9E7EC",
+                position: "relative",
+                minHeight: "500px",
               }}
             >
-              <table className="w-full text-center text-[#001526] mt-1 table-auto sm:table-fixed text-xs sm:text-sm md:text-base">
+              <table className="w-full text-center text-[#001526] mt-1 table-auto">
                 <thead className="bg-[#D9E7EC] border-b-2 border-gray-400">
                   <tr>
-                    <th className="pl-4 sm:pl-10 pr-0 py-4 s w-8 sm:w-12 text-left">
+                    <th className="pl-8 sm:pb-3 sm:pl-12 pr-0 py-4 w-8 sm:w-12 text-left">
                       <input
                         type="checkbox"
-                        className="appearance-none w-4 h-4 border-2 border-[#001526] rounded-full bg-[#D9E7EC] checked:bg-[#001526] checked:border-[#001526] focus:ring-2 focus:ring-[#001526] transition-colors"
+                        className={`appearance-none w-4 h-4 border-2 rounded-full ${
+                          selectAll
+                            ? "bg-[#001526] border-[#001526]"
+                            : "bg-[#D9E7EC] border-[#001526]"
+                        } focus:ring-2 focus:ring-[#001526] transition-colors`}
                         aria-label="Select all"
                         checked={selectAll}
                         onChange={handleSelectAll}
                       />
                     </th>
-                    <th className="px-2 sm:px-4 py-7 font-semibold text-xs sm:text-sm md:text-base w-[80px] sm:w-[120px]">
-                      User ID
-                    </th>
-                    <th className="px-2 sm:px-4 py-7 font-semibold text-xs sm:text-sm md:text-base w-[100px] sm:w-[180px]">
-                      Name
-                    </th>
-                    <th className="px-2 sm:px-4 py-7 font-semibold text-xs sm:text-sm md:text-base w-[100px] sm:w-[180px]">
-                      Title
-                    </th>
-                    <th className="px-2 sm:px-4 py-7 font-semibold text-xs sm:text-sm md:text-base w-[80px] sm:w-[140px]">
-                      Date Logged
-                    </th>
-                    <th className="pr-2 sm:pr-4 pl-0 py-7 font-semibold text-xs sm:text-sm md:text-base w-[30px] text-right"></th>
+                    {["User ID", "Name", "Title", "Date Logged", ""].map(
+                      (head, idx) => (
+                        <th
+                          key={idx}
+                          className="px-2 py-7 font-semibold text-sm sm:text-base whitespace-nowrap"
+                        >
+                          {head}
+                        </th>
+                      )
+                    )}
                   </tr>
                 </thead>
                 <tbody className="bg-[#D9E7EC] text-[#001526]">
@@ -264,10 +273,16 @@ export default function DiveManagement() {
                       key={index}
                       className="border-b border-gray-300 hover:bg-[#cfe5ee] transition"
                     >
-                      <td className="pl-4 sm:pl-10 pr-0 py-4 w-8 sm:w-12 text-left">
+                      <td className="pl-8 sm:pb-3 sm:pl-12 pr-0 py-4 w-8 sm:w-12 text-left">
                         <input
                           type="checkbox"
-                          className="appearance-none w-4 h-4 border-2 border-[#001526] rounded-full bg-[#D9E7EC] checked:bg-[#001526] checked:border-[#001526] focus:ring-2 focus:ring-[#001526] transition-colors"
+                          className={`appearance-none w-4 h-4 border-2 rounded-full ${
+                            selectedRows.includes(
+                              (currentPage - 1) * recordsPerPage + index
+                            )
+                              ? "bg-[#001526] border-[#001526]"
+                              : "bg-[#D9E7EC] border-[#001526]"
+                          } focus:ring-2 focus:ring-[#001526] transition-colors`}
                           aria-label={`Select row ${index + 1}`}
                           checked={selectedRows.includes(
                             (currentPage - 1) * recordsPerPage + index
@@ -275,38 +290,40 @@ export default function DiveManagement() {
                           onChange={() => handleRowSelect(index)}
                         />
                       </td>
-                      <td className="px-2 sm:px-4 py-4 text-xs sm:text-sm md:text-base">
+                      <td className="px-6 sm:px-10 py-4 text-sm sm:text-base">
                         {dive.userId}
                       </td>
-                      <td className="px-2 sm:px-4 py-4 text-xs sm:text-sm md:text-base">
+                      <td className="px-2 sm:px-8 py-4 text-xs sm:text-base">
                         {dive.name}
                       </td>
-                      <td className="px-2 sm:px-4 py-4 text-xs sm:text-sm md:text-base">
+                      <td className="px-2 sm:px-8 py-4 text-xs sm:text-base">
                         {dive.title}
                       </td>
-                      <td className="px-2 sm:px-4 py-4 text-xs sm:text-sm md:text-base">
+                      <td className="px-2 sm:px-6 py-4 text-xs sm:text-base">
                         {dive.dateLogged}
                       </td>
-                      <td className="pr-2 sm:pr-4 pl-0 py-4 w-12 sm:w-16 text-right relative">
+                      <td className="py-3 pr-3 sm:pr-0 relative">
                         <button
                           onClick={() =>
-                            setDropdownDive(dropdownDive === index ? null : index)
+                            setDropdownDive(
+                              dropdownDive === index ? null : index
+                            )
                           }
-                          className="bg-[#D9E7EC] text-[#001526] font-semibold w-8 sm:w-10 h-8 sm:h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
-                          aria-label="Actions"
+                          className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
                         >
                           <BsThreeDotsVertical size={16} />
                         </button>
+
                         {dropdownDive === index && (
-                          <div className="absolute right-4 sm:right-10 mt-3 w-24 sm:w-36 top-2 bg-[#2C7DA0] text-white font-medium rounded-xl pt-3 pb-[0.55rem] px-2 z-10">
+                          <div className="absolute right-8 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
                             <button
-                              className="block w-full text-xs sm:text-sm text-center px-2 sm:px-4 py-1 -mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                              className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
                               onClick={() => handleView(index)}
                             >
                               View
                             </button>
                             <button
-                              className="block w-full text-xs sm:text-sm text-center px-2 sm:px-4 py-1 mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                              className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
                               onClick={() => handleDeleteFromDropdown(index)}
                             >
                               Delete
@@ -319,53 +336,43 @@ export default function DiveManagement() {
                 </tbody>
               </table>
             </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center h-[77vh]">
-              <img
-                src="/images/empty_table_logo.svg"
-                alt="No Records"
-                className="mx-auto w-32 sm:w-56 h-32 sm:h-56"
-              />
-              <p className="text-[#001526] font-semibold text-lg">
-                No records found.
-              </p>
-            </div>
           )}
         </div>
       </div>
+    </div>
 
-      {/* Delete Confirmation Modal */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] h-auto sm:h-[450px] rounded-2xl shadow-lg flex flex-col justify-center items-center">
-            <div className="flex justify-center mb-4">
-              <GoTrash className="text-[#001526] w-24 h-24 mt-3" />
-            </div>
-            <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">
-              Delete {selectedRows.length}{" "}
-              {selectedRows.length === 1 ? "Record" : "Records"}?
-            </h2>
-            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">
-              Are you sure you want to delete? <br />
-              This action cannot be undone.
-            </p>
-            <div className="flex justify-center mt-5">
-              <button
-                className="mr-2 w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] border border-[#001526] rounded-full text-[16px] font-semibold"
-                onClick={() => setShowDeleteModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="ml-2 w-36 px-5 py-3 bg-[#001526] text-white rounded-full text-[16px] font-semibold"
-                onClick={confirmDelete}
-              >
-                Yes
-              </button>
-            </div>
+    {/* Delete Confirmation Modal */}
+    {showDeleteModal && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] h-auto sm:h-[450px] rounded-2xl shadow-lg flex flex-col justify-center items-center">
+          <div className="flex justify-center mb-4">
+            <GoTrash className="text-[#001526] w-24 h-24 mt-3" />
+          </div>
+          <h2 className="text-3xl font-bold mb-6 text-center text-[#001526]">
+            Delete {selectedRows.length}{" "}
+            {selectedRows.length === 1 ? "Record" : "Records"}?
+          </h2>
+          <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">
+            Are you sure you want to delete? <br />
+            This action cannot be undone.
+          </p>
+          <div className="flex justify-center mt-5">
+            <button
+              className="mr-2 w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] border border-[#001526] rounded-full text-[16px] font-semibold"
+              onClick={() => setShowDeleteModal(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="ml-2 w-36 px-5 py-3 bg-[#001526] text-white rounded-full text-[16px] font-semibold"
+              onClick={confirmDelete}
+            >
+              Yes
+            </button>
           </div>
         </div>
-      )}
-    </>
-  );
+      </div>
+    )}
+  </>
+);
 }
