@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Listbox } from "@headlessui/react";
 import { ChevronDown, MoreVertical } from "lucide-react";
@@ -19,37 +19,37 @@ const users = [
     name: "Jay Marc", email: "jaymarc123@gmail.com", accountType: "Diver", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
   },
   {
-    name: "Princess Denise Ong", email: "ongdenise234@gmail.com", accountType: "Dive Master", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
+    name: "Princess Ong", email: "ongdenise234@gmail.com", accountType: "Dive Master", status: "Active", lastLogin: "January 25, 2025", avatar: "",
   },
   {
-    name: "Althea Rose Sardana", email: "rosesardana2610@gmail.com", accountType: "Student Diver", status: "Inactive", lastLogin: "January 25, 2025", avatar: "",
-  },
-  {
-    name: "Juan Dela Cruz", email: "juandelacruz@gmail.com", accountType: "Student Diver", status: "Locked", lastLogin: "January 25, 2025", avatar: "",
-  },
-  {
-    name: "Jay Marc", email: "jaymarc123@gmail.com", accountType: "Diver", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
-  },
-  {
-    name: "Princess Denise Ong", email: "ongdenise234@gmail.com", accountType: "Dive Master", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
-  },
-  {
-    name: "Althea Rose Sardana", email: "rosesardana2610@gmail.com", accountType: "Student Diver", status: "Inactive", lastLogin: "January 25, 2025", avatar: "",
+    name: "Althea Sardana", email: "rosesardana2610@gmail.com", accountType: "Student Diver", status: "Inactive", lastLogin: "January 25, 2025", avatar: "",
   },
   {
     name: "Juan Dela Cruz", email: "juandelacruz@gmail.com", accountType: "Student Diver", status: "Locked", lastLogin: "January 25, 2025", avatar: "",
   },
   {
-    name: "Jay Marc", email: "jaymarc123@gmail.com", accountType: "Diver", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
+    name: "Ahn Suho", email: "ahn.suho@gmail.com", accountType: "Diver", status: "Active", lastLogin: "January 25, 2025", avatar: "",
   },
   {
-    name: "Princess Denise Ong", email: "ongdenise234@gmail.com", accountType: "Dive Master", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
+    name: "Nicki Minaj", email: "nickiminaj@gmail.com", accountType: "Dive Master", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
   },
   {
-    name: "Althea Rose Sardana", email: "rosesardana2610@gmail.com", accountType: "Student Diver", status: "Inactive", lastLogin: "January 25, 2025", avatar: "",
+    name: "John Doe", email: "johndoe@gmail.com", accountType: "Student Diver", status: "Inactive", lastLogin: "January 25, 2025", avatar: "",
   },
   {
-    name: "Juan Dela Cruz", email: "juandelacruz@gmail.com", accountType: "Student Diver", status: "Locked", lastLogin: "January 25, 2025", avatar: "",
+    name: "Yao Ming", email: "yaoming@gmail.com", accountType: "Student Diver", status: "Locked", lastLogin: "January 25, 2025", avatar: "",
+  },
+  {
+    name: "Tate McRae", email: "tatemcrae@gmail.com", accountType: "Diver", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
+  },
+  {
+    name: "Chris Brown", email: "chrisbrown@gmail.com", accountType: "Dive Master", status: "Active", lastLogin: "January 25, 2025", avatar: "sample-dive1.jpg",
+  },
+  {
+    name: "Jane Doe", email: "janedoe@gmail.com", accountType: "Student Diver", status: "Inactive", lastLogin: "January 25, 2025", avatar: "",
+  },
+  {
+    name: "Marian Rivera", email: "marianrivera@gmail.com", accountType: "Student Diver", status: "Locked", lastLogin: "January 25, 2025", avatar: "",
   },
 ];
 
@@ -59,6 +59,7 @@ const statuses = ["Active", "Inactive", "Locked"];
 export default function UserManagement() {
   const router = useRouter();
   const [dropdownUser, setDropdownUser] = useState<number | null>(null);
+  const dropdownUserRef = useRef<HTMLDivElement>(null);
   const [selectedUserToDelete, setSelectedUserToDelete] = useState<number | null>(null);
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,6 +89,20 @@ export default function UserManagement() {
       setSelectedUsers([...selectedUsers, globalIndex]); // Select
     }
   };
+
+  useEffect(() => {
+    if (dropdownUser === null) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownUserRef.current &&
+        !dropdownUserRef.current.contains(event.target as Node)
+      ) {
+        setDropdownUser(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownUser]);
 
   const handleDelete = () => {
   let remainingUsers;
@@ -310,31 +325,36 @@ export default function UserManagement() {
                         </td>
                         <td className="px-4 py-3 text-sm sm:text-base">{user.lastLogin}</td>
                         <td className="relative px-4 py-3">
-                          <button
-                            onClick={() => setDropdownUser(dropdownUser === index ? null : index)}
-                            className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
-                          >
-                            <MoreVertical size={18} />
-                          </button>
-                          {dropdownUser === index && (
-                            <div className="absolute right-8 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
-                              <button
-                                className="block w-full text-sm text-center px-4 py-1 mb-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                                onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}
-                              >
-                                View
-                              </button>
-                              <button
-                                className="block w-full text-sm text-center px-4 py-1 mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                                onClick={() => {
-                                  setSelectedUserToDelete((currentPage - 1) * itemsPerPage + index);
-                                  setShowDeleteModal(true);
-                                }}
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          )}
+                          <div ref={dropdownUser === index ? dropdownUserRef : null}>
+                            <button
+                              onClick={() => setDropdownUser(dropdownUser === index ? null : index)}
+                              className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                            >
+                              <MoreVertical size={18} />
+                            </button>
+                            {dropdownUser === index && (
+                              <div className="absolute right-8 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
+                                <button
+                                  className="block w-full text-sm text-center px-4 py-1 mb-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                                  onClick={() => {
+                                    localStorage.setItem("selectedUserProfile", JSON.stringify(user));
+                                    router.push("/Admin-Dashboard/UsersManagement/UserProfile");
+                                  }}
+                                >
+                                  View
+                                </button>
+                                <button
+                                  className="block w-full text-sm text-center px-4 py-1 mt-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                                  onClick={() => {
+                                    setSelectedUserToDelete((currentPage - 1) * itemsPerPage + index);
+                                    setShowDeleteModal(true);
+                                  }}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -389,6 +409,18 @@ function CustomDropdown({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownStyles, setDropdownStyles] = useState({ top: 0, left: 0, width: 0, direction: "down" });
   const buttonRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isDropdownOpen]);
 
   const handleDropdownToggle = () => {
     if (buttonRef.current) {
