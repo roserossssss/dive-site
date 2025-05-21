@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { TbEditCircle } from "react-icons/tb";
 import Image from 'next/image';
-import { FiArrowLeft } from "react-icons/fi";
+import { IoIosArrowBack } from "react-icons/io";
 import { BsExclamationCircle } from "react-icons/bs";
 
 export default function ProfilePage() {
@@ -30,6 +30,22 @@ export default function ProfilePage() {
 
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("selectedUserProfile");
+    if (stored) {
+      const user = JSON.parse(stored);
+      setFirstName(user.name?.split(" ")[0] || "");
+      setLastName(user.name?.split(" ").slice(1).join(" ") || "");
+      setEmail(user.email || "");
+      setProfileImagePreview(user.avatar ? `/${user.avatar}` : "/images/sample_profile_pic.jpg");
+      setContactNumber(user.contactNumber || "9882374117");
+      setHomeAddress(user.homeAddress || "#1234, Sample St., Sample Subdivision");
+      setCountry(user.country || "Philippines");
+      setState(user.state || "Manila");
+      setZipCode(user.zipCode || "1000");
+    }
+  }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -56,29 +72,25 @@ export default function ProfilePage() {
   return (
     <div className="p-5 relative">
       {/* Header */}
-      <div className="fixed top-0 left-0 w-full z-10 p-4 rounded-t-2xl md:pl-80">
-      <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-white text-center md:text-left mt-2">
-        {isEditing ? "Edit User Profile" : "View User Profile"}
-        </h2>
-
-      </div>
-
-      {/* Back Button */}
-      <div className="mb-1 text-right mt-7 pt-5">
-        <div className="flex flex-wrap justify-between mb-2 space-y-2 sm:space-y-0 sm:space-x-4">
-          <button
-            className="flex items-center gap-2 px-5 py-3 rounded-full text-[18px] font-bold bg-[#D9E7EC] text-[#001526] hover:bg-[#2C7DA0] hover:text-white transition duration-300 ease-in-out"
+      <div className="fixed top-0 left-0 w-full z-10 p-4 rounded-t-2xl md:pl-80 bg-[#001526]">
+        <div className="flex items-center justify-between md:justify-start">
+          <IoIosArrowBack
+            size={30}
+            className="cursor-pointer mr-3 mt-2 text-white"
             onClick={() => router.back()}
-          >
-            <FiArrowLeft size={24} strokeWidth={2} />
-          </button>
+            title="Go back"
+            aria-label="Go back"
+          />
+          <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-white text-center flex-1 md:flex-none mt-2 mr-10">
+            {isEditing ? "Edit User Profile" : "View User Profile"}
+          </h2>
         </div>
       </div>
 
       {/* Profile */}
       <div className="pt-3">
         {/* Profile Header */}
-        <div className="bg-[#2C7DA0] p-8 rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12">
+        <div className="bg-[#2C7DA0] p-8 rounded-t-2xl flex flex-col md:flex-row justify-between items-center md:pl-12 mt-8">
           <div className="flex flex-col md:flex-row items-center w-full md:w-auto relative">
             <div className="relative">
               <Image width={1000} height={1000} src={profileImagePreview} alt="User Photo" className="w-24 h-24 md:w-32 md:h-32 rounded-full mr-4" />
@@ -174,6 +186,7 @@ export default function ProfilePage() {
                           backgroundColor: '#D9E7EC',
                           color: '#001526',
                           borderColor: '#001526',
+                          height: "42px",
                         }}
                       />
                     </div>
