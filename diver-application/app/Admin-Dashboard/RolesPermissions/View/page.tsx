@@ -22,6 +22,7 @@ export default function ProfilePage() {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [role, setRole] = useState("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [profileImagePreview, setProfileImagePreview] = useState("/images/sample_profile_pic.jpg");
@@ -32,12 +33,13 @@ export default function ProfilePage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("selectedUserProfile");
+    const stored = localStorage.getItem("selectedAdminProfile");
     if (stored) {
       const user = JSON.parse(stored);
       setFirstName(user.name?.split(" ")[0] || "");
       setLastName(user.name?.split(" ").slice(1).join(" ") || "");
       setEmail(user.email || "");
+      setRole(user.Role || "");
       setProfileImagePreview(user.avatar ? `/${user.avatar}` : "/images/sample_profile_pic.jpg");
       setContactNumber(user.contactNumber || "9882374117");
       setHomeAddress(user.homeAddress || "#1234, Sample St., Sample Subdivision");
@@ -105,7 +107,7 @@ export default function ProfilePage() {
               <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-100 uppercase">
                 {firstName} {lastName} {suffix && suffix.toUpperCase()}
               </h2>
-              <p className="text-lg md:text-xl font-medium text-gray-200">{email}</p>
+              <p className="text-lg md:text-xl font-medium text-gray-200">{role.toUpperCase()}</p>
             </div>
           </div>
         </div>

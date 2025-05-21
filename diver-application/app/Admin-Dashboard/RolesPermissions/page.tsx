@@ -364,7 +364,10 @@ export default function RolesPermissions() {
                               <div className="absolute right-8 mr-7 mt-1 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
                                 <button
                                   className="block w-full text-sm text-center px-4 py-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                                  onClick={() => router.push("/Admin-Dashboard/RolesPermissions/View")}
+                                  onClick={() => {
+                                    localStorage.setItem("selectedAdminProfile", JSON.stringify(userList[globalIndex]));
+                                    router.push("/Admin-Dashboard/RolesPermissions/View");
+                                  }}
                                 >
                                   View
                                 </button>
