@@ -131,8 +131,8 @@ export default function RolesPermissions() {
   };
 
   const selectedAdminsOnPage = paginatedUsers
-  .map((_, idx) => (currentPage - 1) * itemsPerPage + idx)
-  .filter(idx => selectedAdmins.includes(idx));
+    .map((_, idx) => (currentPage - 1) * itemsPerPage + idx)
+    .filter(idx => selectedAdmins.includes(idx));
 
   return (
     <>
@@ -167,9 +167,8 @@ export default function RolesPermissions() {
                     if (selectMode) setSelectedAdmins([]);
                   }
                 }}
-                className={`text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${
-                  selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
-                }`}
+                className={`text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
+                  }`}
               >
                 <span className="flex items-center gap-2">
                   {selectMode && selectedAdmins.length > 0 ? (
@@ -266,9 +265,8 @@ export default function RolesPermissions() {
                       {["Admin ID", "Name", "Role", "Create", "Update", "Delete", ""].map((head, idx) => (
                         <th
                           key={idx}
-                          className={`px-2 py-7 font-semibold text-sm sm:text-base whitespace-nowrap ${
-                            idx === 6 ? "w-[90px] md:w-[100px] lg:w-[100px]" : "w-[170px] sm:w-[200px] md:w-[220px] lg:w-[270px]"
-                          }`}
+                          className={`px-2 py-7 font-semibold text-sm sm:text-base whitespace-nowrap ${idx === 6 ? "w-[90px] md:w-[100px] lg:w-[100px]" : "w-[170px] sm:w-[200px] md:w-[220px] lg:w-[270px]"
+                            }`}
                         >
                           {head}
                         </th>
@@ -289,11 +287,10 @@ export default function RolesPermissions() {
                             {selectMode ? (
                               <div
                                 onClick={() => toggleAdminSelection(globalIndex)}
-                                className={`w-4 h-4 rounded-full border-2 border-[#001526] cursor-pointer flex items-center justify-center transition ml-5 ${
-                                  selectedAdmins.includes(globalIndex)
+                                className={`w-4 h-4 rounded-full border-2 border-[#001526] cursor-pointer flex items-center justify-center transition ml-5 ${selectedAdmins.includes(globalIndex)
                                     ? "bg-[#001526]"
                                     : "bg-transparent"
-                                }`}
+                                  }`}
                               ></div>
                             ) : null}
                           </td>
@@ -395,14 +392,14 @@ export default function RolesPermissions() {
 
       {/* Save Modal */}
       <SaveConfirmationModal
-      isVisible={saveModalOpen}
-      onClose={() => setSaveModalOpen(false)}
-      onConfirm={() => {
-        console.log("Changes saved");
-        initialUserList.current = userList;
-        setSaveModalOpen(false);
-      }}
-    />
+        isVisible={saveModalOpen}
+        onClose={() => setSaveModalOpen(false)}
+        onConfirm={() => {
+          console.log("Changes saved");
+          initialUserList.current = userList;
+          setSaveModalOpen(false);
+        }}
+      />
     </>
   );
 }
@@ -441,18 +438,17 @@ function CustomDropdown({ items, selected }: { items: string[]; selected: string
               lower === "active"
                 ? "bg-[#3BB143]"
                 : lower === "inactive"
-                ? "bg-[#FFD300]"
-                : lower === "locked"
-                ? "bg-[#CF0C0F] text-white"
-                : "bg-[#D9E7EC]";
+                  ? "bg-[#FFD300]"
+                  : lower === "locked"
+                    ? "bg-[#CF0C0F] text-white"
+                    : "bg-[#D9E7EC]";
 
             return (
               <Listbox.Option key={item} value={item}>
                 {({ active, selected }) => (
                   <div
-                    className={`p-2 rounded-lg cursor-pointer transition-all ${
-                      active || selected ? `${bgColor} opacity-90` : "text-[#001526]"
-                    }`}
+                    className={`p-2 rounded-lg cursor-pointer transition-all ${active || selected ? `${bgColor} opacity-90` : "text-[#001526]"
+                      }`}
                   >
                     {item}
                   </div>
