@@ -97,22 +97,22 @@ export default function UserManagement() {
 
   const dropdownRefs = useRef<(HTMLDivElement | null)[]>([]);
   useEffect(() => {
-  if (dropdownUser === null) return;
-  function handleClickOutside(event: MouseEvent) {
-    // Check all refs for the current page
-    for (let i = 0; i < paginatedUsers.length; i++) {
-      if (
-        dropdownRefs.current[i] &&
-        dropdownRefs.current[i]!.contains(event.target as Node)
-      ) {
-        return;
+    if (dropdownUser === null) return;
+    function handleClickOutside(event: MouseEvent) {
+      // Check all refs for the current page
+      for (let i = 0; i < paginatedUsers.length; i++) {
+        if (
+          dropdownRefs.current[i] &&
+          dropdownRefs.current[i]!.contains(event.target as Node)
+        ) {
+          return;
+        }
       }
+      setDropdownUser(null);
     }
-    setDropdownUser(null);
-  }
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => document.removeEventListener("mousedown", handleClickOutside);
-}, [dropdownUser, paginatedUsers.length]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownUser, paginatedUsers.length]);
 
   return (
     <>
@@ -147,9 +147,8 @@ export default function UserManagement() {
                     if (selectMode) setSelectedAdmins([]);
                   }
                 }}
-                className={`text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${
-                  selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
-                }`}
+                className={`text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
+                  }`}
               >
                 <span className="flex items-center gap-2">
                   {selectMode && selectedAdmins.length > 0 ? (
@@ -228,11 +227,10 @@ export default function UserManagement() {
                         {selectMode && (
                           <input
                             type="checkbox"
-                            className={`appearance-none w-4 h-4 border-2 rounded-full ${
-                              selectedAdmins.length === paginatedUsers.length && paginatedUsers.length > 0
+                            className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedAdmins.length === paginatedUsers.length && paginatedUsers.length > 0
                                 ? "bg-[#001526] border-[#001526]"
                                 : "bg-[#D9E7EC] border-[#001526]"
-                            } focus:ring-2 focus:ring-[#001526] transition-colors`}
+                              } focus:ring-2 focus:ring-[#001526] transition-colors`}
                             aria-label="Select all"
                             checked={selectedAdmins.length === paginatedUsers.length && paginatedUsers.length > 0}
                             onChange={() => {
@@ -264,11 +262,10 @@ export default function UserManagement() {
                             {selectMode && (
                               <input
                                 type="checkbox"
-                                className={`appearance-none w-4 h-4 border-2 rounded-full ${
-                                  selectedAdmins.includes(globalIndex)
+                                className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedAdmins.includes(globalIndex)
                                     ? "bg-[#001526] border-[#001526]"
                                     : "bg-[#D9E7EC] border-[#001526]"
-                                } focus:ring-2 focus:ring-[#001526] transition-colors`}
+                                  } focus:ring-2 focus:ring-[#001526] transition-colors`}
                                 aria-label={`Select row ${index + 1}`}
                                 checked={selectedAdmins.includes(globalIndex)}
                                 onChange={() => toggleAdminSelection(globalIndex)}
@@ -435,9 +432,8 @@ function CustomDropdown({
                 setIsDropdownOpen(false);
                 if (onChange) onChange(item);
               }}
-              className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
-                selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
-              }`}
+              className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
+                }`}
             >
               {item}
             </div>
