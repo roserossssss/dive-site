@@ -144,46 +144,16 @@ export default function DiveManagement() {
           Dive Management
         </h2>
 
-      <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-2">
-        {/* Controls */}
-        <div className="flex flex-wrap items-center justify-between gap-2 mt-12">
-          {/* Navigation Arrows and Delete Button */}
-          <div className="flex items-center gap-2">
-            <IoIosArrowBack
-              size={24}
-              className={`cursor-pointer text-white ${
-                currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={handlePreviousPage}
-              aria-hidden="true"
-            />
-            <IoIosArrowForward
-              size={24}
-              className={`cursor-pointer text-white ${
-                currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={handleNextPage}
-              aria-hidden="true"
-            />
-            <button
-              className={`bg-[#CF0C0F] text-[#FFFFFF] text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${
-                selectedRows.length === 0 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={handleDelete}
-              disabled={selectedRows.length === 0}
-              aria-label="Delete selected dives"
-            >
-              <span>Delete</span>
-            </button>
-          </div>
-
-          {/* Search, Sort, and Filter */}
-          <div className="flex items-center gap-2">
-            {/* Search */}
-            <div className="relative group">
-              <IoSearch
-                size={20}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10"
+        <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-2">
+          {/* Controls */}
+          <div className="flex flex-wrap items-center justify-between gap-2 mt-12">
+            {/* Navigation Arrows and Delete Button */}
+            <div className="flex items-center gap-2">
+              <IoIosArrowBack
+                size={24}
+                className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                onClick={handlePreviousPage}
                 aria-hidden="true"
               />
               <IoIosArrowForward
