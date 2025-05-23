@@ -11,6 +11,7 @@ import { HiPlus } from "react-icons/hi";
 import { FiCheck, FiTrash2, FiX } from "react-icons/fi";
 import InviteAdminModal from "./InviteAdminModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import SuccessModal from "./SuccessModal";
 
 const initialUsers = [
   {
@@ -64,6 +65,7 @@ export default function UserManagement() {
   const [selectMode, setSelectMode] = useState(false);
   const [selectedAdmins, setSelectedAdmins] = useState<number[]>([]);
   const [users, setUsers] = useState(initialUsers);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,6 +76,33 @@ export default function UserManagement() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  const handleAddAdmin = (newAdmin: {
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    suffix: string;
+    position: string;
+    email: string;
+  }) => {
+    const newAdminData = {
+      adminId: `ML${String(users.length + 1).padStart(5, "0")}`,
+      name: `${newAdmin.firstName} ${newAdmin.middleName} ${newAdmin.lastName} ${newAdmin.suffix}`.trim(),
+      email: newAdmin.email,
+      status: "Active",
+      lastLogin: "Never",
+    };
+    setUsers((prev) => [...prev, newAdminData]);
+
+    localStorage.setItem("selectedAdminProfile", JSON.stringify({
+      name: newAdminData.name,
+      email: newAdminData.email,
+      Role: newAdmin.position,
+    }));
+
+    setInviteModalOpen(false);
+    setSuccessModalOpen(true);
+  };
 
   const toggleAdminSelection = (index: number) => {
     setSelectedAdmins((prev) =>
@@ -295,8 +324,18 @@ export default function UserManagement() {
                               {dropdownUser === globalIndex && (
                                 <div className="absolute right-4 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
                                   <button
+                                    onClick={() => {
+                                      localStorage.setItem(
+                                        "selectedAdminProfile",
+                                        JSON.stringify({
+                                          name: user.name,
+                                          email: user.email,
+                                          position: user.status, 
+                                        })
+                                      );
+                                      router.push("/Admin-Dashboard/AdminManagement/View");
+                                    }}
                                     className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                                    onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}
                                   >
                                     View
                                   </button>
@@ -326,15 +365,14 @@ export default function UserManagement() {
       {/* Invite Admin Modal */}
       <InviteAdminModal
         isVisible={inviteModalOpen}
-        name={inviteName}
-        email={inviteEmail}
-        onNameChange={setInviteName}
-        onEmailChange={setInviteEmail}
         onCancel={() => setInviteModalOpen(false)}
-        onSend={() => {
-          // handle invite logic here
-          setInviteModalOpen(false);
-        }}
+        onSend={handleAddAdmin}
+      />
+
+      {/* Success Modal */}
+      <SuccessModal
+        isVisible={successModalOpen}
+        onClose={() => setSuccessModalOpen(false)}
       />
     </>
   );
