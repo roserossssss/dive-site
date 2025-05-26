@@ -306,6 +306,7 @@ export default function MedicalManagement() {
                                 setDropdownRecord(dropdownRecord === index ? null : index)
                               }
                               className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                              aria-label={`Options for record ${record.userId}`}
                             >
                               <BsThreeDotsVertical size={16} />
                             </button>
