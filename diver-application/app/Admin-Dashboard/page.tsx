@@ -28,8 +28,8 @@ export default function AdminDashboard() {
         </div>
 
         {/* Dashboard Cards */}
-        <div className="grid grid-cols-1 gap-2 items-center mb-4">
-          <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
+        <div className="mb-4 px-0 md:px-0 overflow-x-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <RecordsCard
               title="TOTAL"
               subtitle="NUMBER OF DIVERS"
@@ -76,7 +76,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Right side (Recent Dive Logs) */}
-          <div className="md:h-full">
+          <div className="md:mt-4 lg:mt-0 md:h-full">
             <Suspense fallback={<p className="text-center">Loading recent dive logs...</p>}>
               <RecentDiveLogs />
             </Suspense>

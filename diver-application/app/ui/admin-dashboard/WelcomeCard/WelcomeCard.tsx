@@ -5,8 +5,8 @@ export default function WelcomeCard() {
     <div className="bg-[#2C7DA0] text-white py-7 px-8 rounded-2xl shadow-md flex flex-col md:flex-row items-center md:items-start justify-between h-auto md:h-[13rem]">
       {/* Left Section - Welcome Text */}
       <div className="flex-1 text-center md:text-left mb-4 md:ml-10 md:mt-6">
-        <h1 className="text-2xl md:text-4xl font-bold">Welcome, Admin!</h1>
-        <p className="mt-2 text-sm md:text-base">
+        <h1 className="md:-mt-5 lg:mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">Welcome, Admin!</h1>
+        <p className="mt-2 lg:mt-2 text-sm md:text-xs lg:text-sm leading-snug">
           Your commitment to managing dive records ensures safe adventures. <br />
           Stay on top of every detail to keep divers safe.
         </p>
