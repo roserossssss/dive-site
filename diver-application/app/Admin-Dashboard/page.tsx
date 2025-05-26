@@ -16,9 +16,9 @@ export default function AdminDashboard() {
       {/* Top Header (Dashboard Title) */}
       <div className="fixed top-0 left-0 w-full bg-[#001526] z-10 p-4 rounded-t-2xl md:pl-80">
         <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-white text-center md:text-left mt-2">
-        Dashboard
+          Dashboard
         </h2>
-    </div>
+      </div>
 
       {/* Main Content */}
       <div className="mt-10">
@@ -28,40 +28,40 @@ export default function AdminDashboard() {
         </div>
 
         {/* Dashboard Cards */}
-        <div className="grid grid-cols-1 gap-2 items-center mb-4">
-          <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
-          <RecordsCard
-            title="TOTAL"
-            subtitle="NUMBER OF DIVERS"
-            count={4353}
-            link="/Admin-Dashboard/UsersManagement"
-            Icon={FaUserAstronaut}
-            iconSize="2.8rem" 
-          />
-          <RecordsCard
-            title="PENDING"
-            subtitle="DIVE CERTIFICATIONS"
-            count={15}
-            link="/Admin-Dashboard/AdminManagement"
-            Icon={LiaCertificateSolid}
-            iconSize="3.5rem" 
-          />
-          <RecordsCard
-            title="PENDING"
-            subtitle="MEDICAL CERTIFICATIONS"
-            count={30}
-            link="/Admin-Dashboard/MedicalManagement"
-            Icon={MdOutlineHealthAndSafety}
-            iconSize="3.5rem" 
-          />
-          <RecordsCard
-            title="TOTAL"
-            subtitle="COMPLETED DIVES"
-            count={4985}
-            link="/Admin-Dashboard/DiveManagement"
-            Icon={FaAnchorCircleCheck}
-            iconSize="3.2rem" 
-          />
+        <div className="mb-4 px-0 md:px-0 overflow-x-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <RecordsCard
+              title="TOTAL"
+              subtitle="NUMBER OF DIVERS"
+              count={4353}
+              link="/Admin-Dashboard/UsersManagement"
+              Icon={FaUserAstronaut}
+              iconSize="2.8rem"
+            />
+            <RecordsCard
+              title="PENDING"
+              subtitle="DIVE CERTIFICATIONS"
+              count={15}
+              link="/Admin-Dashboard/AdminManagement"
+              Icon={LiaCertificateSolid}
+              iconSize="3.5rem"
+            />
+            <RecordsCard
+              title="PENDING"
+              subtitle="MEDICAL CERTIFICATIONS"
+              count={30}
+              link="/Admin-Dashboard/MedicalManagement"
+              Icon={MdOutlineHealthAndSafety}
+              iconSize="3.5rem"
+            />
+            <RecordsCard
+              title="TOTAL"
+              subtitle="COMPLETED DIVES"
+              count={4985}
+              link="/Admin-Dashboard/DiveManagement"
+              Icon={FaAnchorCircleCheck}
+              iconSize="3.2rem"
+            />
           </div>
         </div>
 
@@ -76,7 +76,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Right side (Recent Dive Logs) */}
-          <div className="md:h-full">
+          <div className="md:mt-4 lg:mt-0 md:h-full">
             <Suspense fallback={<p className="text-center">Loading recent dive logs...</p>}>
               <RecentDiveLogs />
             </Suspense>

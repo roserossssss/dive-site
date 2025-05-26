@@ -13,12 +13,12 @@ interface RecordsCardProps {
 
 const RecordsCard: React.FC<RecordsCardProps> = ({ title, subtitle, count, link, Icon, iconSize = "2rem" }) => {
   return (
-    <div className="bg-[#D9E7EC] shadow-md rounded-2xl p-4 flex justify-between items-center hover:shadow-lg transition-shadow md:px-6 md:py-4 px-8 py-5">
+    <div className="bg-[#D9E7EC] shadow-md rounded-2xl p-4 flex justify-between items-center hover:shadow-lg transition-shadow md:px-7 md:py-4 px-8 py-5">
       {/* Left Section - Texts */}
       <div className="">
-        <h3 className="text-xl font-bold text-[#001526]">{title}</h3>
-        <p className="text-sm font-semibold text-[#001526] -mt-1">{subtitle}</p>
-        <p className="text-[2.5rem] font-bold text-[#001526]">{count}</p>
+        <h3 className="text-xl md:text-lg lg:text-2xl font-bold text-[#001526]">{title}</h3>
+        <p className="text-sm md:text-xs lg:text-base font-semibold text-[#001526] -mt-1">{subtitle}</p>
+        <p className="text-3xl md:text-xl lg:text-3xl font-bold text-[#001526] mt-2 md:mt-1">{count}</p>
       </div>
 
       {/* Right Section - Icons */}
@@ -31,7 +31,7 @@ const RecordsCard: React.FC<RecordsCardProps> = ({ title, subtitle, count, link,
               marginBottom: title === "TOTAL" ? "1.1rem" //mg for card with title 'TOTAL'
                 : "0.6rem", //mg for card with title 'PENDING'
             }}
-            className="text-[#001526] cursor-pointer"
+            className="text-[#001526] cursor-pointer hover:text-[#2C7DA0]"
           />
         </Link>
         <Icon
