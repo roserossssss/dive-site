@@ -144,7 +144,7 @@ export default function DiveManagement() {
         Dive Management
       </h2>
 
-      <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-2">
+      <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-[0.65rem]">
         {/* Controls */}
         <div className="flex flex-wrap items-center justify-between gap-2 mt-12">
           {/* Navigation Arrows and Delete Button */}
@@ -310,6 +310,7 @@ export default function DiveManagement() {
                             )
                           }
                           className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                          aria-label={`Options for dive record ${dive.userId}`}
                         >
                           <BsThreeDotsVertical size={16} />
                         </button>
