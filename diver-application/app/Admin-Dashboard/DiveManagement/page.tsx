@@ -310,6 +310,7 @@ export default function DiveManagement() {
                             )
                           }
                           className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                          aria-label={`Options for dive record ${dive.userId}`}
                         >
                           <BsThreeDotsVertical size={16} />
                         </button>
