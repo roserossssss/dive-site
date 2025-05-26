@@ -326,6 +326,7 @@ export default function CertificateManagement() {
                               setDropdownCertificate(dropdownCertificate === index ? null : index)
                             }
                             className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                            aria-label={`Options for certificate ${cert.userId}`}
                           >
                             <MoreVertical size={18} />
                           </button>
@@ -338,6 +339,7 @@ export default function CertificateManagement() {
                                   setViewedCertificate("/images/sample_certificate.jpg");
                                   setShowViewModal(true);
                                 }}
+                                aria-label={`View certificate for user ${cert.userId}`}
                               >
                                 View
                               </button>
