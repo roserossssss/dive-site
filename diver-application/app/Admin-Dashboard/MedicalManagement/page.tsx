@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { TbSortAscending2 } from "react-icons/tb";
@@ -27,6 +27,7 @@ export default function MedicalManagement() {
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [dropdownRecord, setDropdownRecord] = useState<number | null>(null);
+  const dropdownRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [recordList, setRecordList] = useState(records);
@@ -44,6 +45,25 @@ export default function MedicalManagement() {
     setSelectedRows([]);
     setSelectAll(false);
   }, [currentPage, recordList]);
+
+  useEffect(() => {
+    if (dropdownRecord === null) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      for (let i = 0; i < dropdownRefs.current.length; i++) {
+        if (
+          dropdownRefs.current[i] &&
+          dropdownRefs.current[i]!.contains(event.target as Node)
+        ) {
+          return;
+        }
+      }
+      setDropdownRecord(null);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownRecord]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -280,33 +300,33 @@ export default function MedicalManagement() {
                           </span>
                         </td>
                         <td className="py-3 relative">
-                          <button
-                            onClick={() =>
-                              setDropdownRecord(
-                                dropdownRecord === index ? null : index
-                              )
-                            }
-                            className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
-                          >
-                            <BsThreeDotsVertical size={16} />
-                          </button>
+                          <div ref={(el) => (dropdownRefs.current[index] = el)}>
+                            <button
+                              onClick={() =>
+                                setDropdownRecord(dropdownRecord === index ? null : index)
+                              }
+                              className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                            >
+                              <BsThreeDotsVertical size={16} />
+                            </button>
 
-                          {dropdownRecord === index && (
-                            <div className="absolute right-8 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
-                              <button
-                                className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                                onClick={() => handleView(record)}
-                              >
-                                View
-                              </button>
-                              <button
-                                className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                                onClick={() => handleDeleteFromDropdown(index)}
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          )}
+                            {dropdownRecord === index && (
+                              <div className="absolute right-8 mr-7 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
+                                <button
+                                  className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                                  onClick={() => handleView(record)}
+                                >
+                                  View
+                                </button>
+                                <button
+                                  className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                                  onClick={() => handleDeleteFromDropdown(index)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}
