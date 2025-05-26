@@ -162,7 +162,7 @@ export default function CertificateManagement() {
         Certification Management
       </h2>
 
-      <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-2">
+      <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-[0.65rem]">
         {/* Controls */}
         <div className="flex flex-wrap items-center justify-between gap-2 mt-12">
           {/* Navigation Arrows and Delete Button */}
