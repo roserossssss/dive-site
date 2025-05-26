@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Listbox } from "@headlessui/react";
 import { ChevronDown, MoreVertical } from "lucide-react";
 import { IoSearch } from "react-icons/io5";
@@ -53,6 +53,7 @@ export default function CertificateManagement() {
   const [certificates, setCertificates] = useState(initialCertificates);
   const [selectedCertificates, setSelectedCertificates] = useState<number[]>([]);
   const [dropdownCertificate, setDropdownCertificate] = useState<number | null>(null);
+  const dropdownRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -77,6 +78,25 @@ export default function CertificateManagement() {
     setRecordToChangeStatus(null);
     setStatusToChange(null);
   };
+
+  useEffect(() => {
+    if (dropdownCertificate === null) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      for (let i = 0; i < dropdownRefs.current.length; i++) {
+        if (
+          dropdownRefs.current[i] &&
+          dropdownRefs.current[i]!.contains(event.target as Node)
+        ) {
+          return;
+        }
+      }
+      setDropdownCertificate(null);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownCertificate]);
 
   const handleDelete = () => {
     if (recordToDelete !== null) {
@@ -300,37 +320,39 @@ export default function CertificateManagement() {
                         />
                       </td>
                       <td className="pr-5 py-3 relative">
-                        <button
-                          onClick={() =>
-                            setDropdownCertificate(dropdownCertificate === index ? null : index)
-                          }
-                          className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
-                        >
-                          <MoreVertical size={18} />
-                        </button>
+                        <div ref={(el) => (dropdownRefs.current[index] = el)}>
+                          <button
+                            onClick={() =>
+                              setDropdownCertificate(dropdownCertificate === index ? null : index)
+                            }
+                            className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                          >
+                            <MoreVertical size={18} />
+                          </button>
 
-                        {dropdownCertificate === index && (
-                          <div className="absolute right-8 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
-                            <button
-                              className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                              onClick={() => {
-                                setViewedCertificate("/images/sample_certificate.jpg");
-                                setShowViewModal(true);
-                              }}
-                            >
-                              View
-                            </button>
-                            <button
-                              className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                              onClick={() => {
-                                setRecordToDelete(index);
-                                setShowDeleteModal(true);
-                              }}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        )}
+                          {dropdownCertificate === index && (
+                            <div className="absolute right-8 mr-7 mt-1 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
+                              <button
+                                className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                                onClick={() => {
+                                  setViewedCertificate("/images/sample_certificate.jpg");
+                                  setShowViewModal(true);
+                                }}
+                              >
+                                View
+                              </button>
+                              <button
+                                className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                                onClick={() => {
+                                  setRecordToDelete(index);
+                                  setShowDeleteModal(true);
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -385,49 +407,114 @@ export default function CertificateManagement() {
   }: {
     items: string[];
     selected: string;
-    onChange: (value: string) => void;
+    onChange?: (value: string) => void;
   }) {
-    return (
-      <Listbox value={selected} onChange={onChange}>
-        <div className="relative">
-          {/* Dropdown Button */}
-          <Listbox.Button
-            className={`font-medium w-40 px-6 py-2 rounded-2xl flex justify-between items-center shadow-inner hover:opacity-90 transition ${
-              selected === "Approve"
-                ? "bg-[#3BB143] text-white"
-                : selected === "Pending"
-                ? "bg-[#FFD300] text-[#001526]"
-                : "bg-[#CF0C0F] text-white"
-            }`}
-          >
-            {selected}
-            <ChevronDown size={16} />
-          </Listbox.Button>
+    const [selectedItem, setSelectedItem] = useState(selected);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [dropdownStyles, setDropdownStyles] = useState({ top: 0, left: 0, width: 0, direction: "down" });
+    const buttonRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
-          {/* Dropdown Options */}
-          <Listbox.Options className="absolute left-0 mt-2 w-44 bg-[#A3D4E3] text-[#001526] font-semibold rounded-xl p-2 z-10">
-            {items.map((item) => (
-              <Listbox.Option key={item} value={item}>
-                {({ active, selected }) => (
-                  <div
-                    className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
-                      active || selected
-                        ? item === "Approve"
-                          ? "bg-[#D9E7EC] text-[#001526]"
-                          : item === "Pending"
-                          ? "bg-[#D9E7EC] text-[#001526]"
-                          : "bg-[#D9E7EC] text-[#001526]"
-                        : "text-[#001526]"
-                    }`}
-                  >
-                    {item}
-                  </div>
-                )}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
+    useEffect(() => {
+      if (!isDropdownOpen) return;
+
+      function handleClickOutside(event: MouseEvent) {
+        if (
+          buttonRef.current &&
+          !buttonRef.current.contains(event.target as Node) &&
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target as Node)
+        ) {
+          setIsDropdownOpen(false);
+        }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isDropdownOpen]);
+
+    const handleDropdownToggle = () => {
+      if (buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const spaceBelow = viewportHeight - rect.bottom;
+        const spaceAbove = rect.top;
+        const direction = spaceBelow < 200 && spaceAbove > 150 ? "up" : "down";
+        setDropdownStyles({
+          top: direction === "down" ? rect.bottom + window.scrollY : rect.top + window.scrollY,
+          left: rect.left + window.scrollX,
+          width: rect.width,
+          direction,
+        });
+        setIsDropdownOpen(!isDropdownOpen);
+      }
+    };
+
+    const getSelectedColor = (item: string) => {
+      switch (item.toLowerCase()) {
+        case "approve":
+          return "bg-[#3BB143] text-white font-semibold";
+        case "pending":
+          return "bg-[#FFD300] text-[#001526] font-semibold";
+        case "decline":
+          return "bg-[#CF0C0F] text-white font-semibold";
+        default:
+          return "bg-[#A9D6E5] text-[#001526] font-semibold";
+      }
+    };
+
+    useEffect(() => {
+      setSelectedItem(selected);
+    }, [selected]);
+
+    const handleItemClick = (item: string) => {
+      setSelectedItem(item);
+      setIsDropdownOpen(false);
+      if (onChange) {
+        onChange(item);
+      }
+    };
+
+    return (
+      <>
+        <div className="relative" ref={buttonRef}>
+          <button
+            className={`font-medium w-40 px-4 py-2 rounded-2xl flex justify-between items-center shadow-inner hover:opacity-90 transition ${getSelectedColor(
+              selectedItem
+            )}`}
+            onClick={handleDropdownToggle}
+            type="button"
+          >
+            {selectedItem}
+            <ChevronDown size={16} />
+          </button>
         </div>
-      </Listbox>
+
+        {isDropdownOpen && (
+          <div
+            ref={dropdownRef}
+            className="absolute bg-[#A3D4E3] text-[#001526] font-semibold rounded-xl p-2 z-50 shadow-lg"
+            style={{
+              position: "fixed",
+              top: dropdownStyles.direction === "down" ? dropdownStyles.top : dropdownStyles.top - 150,
+              left: dropdownStyles.left,
+              width: dropdownStyles.width,
+            }}
+          >
+            {items.map((item) => (
+              <div
+                key={item}
+                onClick={() => handleItemClick(item)}
+                className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
+                  selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
+                }`}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        )}
+      </>
     );
   }
 
