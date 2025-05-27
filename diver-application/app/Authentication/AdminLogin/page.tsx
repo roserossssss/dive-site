@@ -34,7 +34,7 @@ export default function Login() {
                         <div className="flex flex-col items-center lg:px-6 px-4">
                             <Image
                                 className="w-40 h-40 mb-4"
-                                src="/images/dive_dark_logo_name.svg"
+                                src="/images/admin_login_logo.svg"
                                 alt="logo"
                                 width={40}
                                 height={40}
