@@ -1,47 +1,42 @@
 import Image from "next/image";
-import Link from 'next/link';
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-gray-200 flex justify-center">
       {/* Background Image */}
-      <Image 
-        src="/images/page_bg_v2.jpg"  
+      <Image
+        src="/images/page_bg_v2.jpg"
         alt="Landing Page"
         layout="fill"
         objectFit="cover"
-        priority 
+        priority
         className="absolute inset-0"
       />
 
       {/* Top Right Auth Buttons */}
       <div className="absolute top-6 right-10 flex gap-4 z-10">
-      <Link href="/contact">
-      <button className="px-5 py-2 rounded-full text-xs md:text-sm text-[#001526] font-semibold bg-transparent hover:bg-[#005f80]/40 hover:text-white hover:text-opacity-90 transition">
-      Contact Us
-      </button>
-      </Link>
-      <Link href="/Authentication/login">
-      <button className="px-5 py-2 rounded-full text-xs md:text-sm text-[#001526] font-semibold bg-transparent hover:bg-[#005f80]/40 hover:text-white hover:text-opacity-90 transition">
-      Log In
-      </button>
-      </Link>
-      <Link href="/Authentication/signup">
-      <button className="px-5 py-2 rounded-full text-xs md:text-sm text-white font-semibold bg-[#005f80] hover:bg-[#00384e] transition">
-        Sign Up
-        </button>
+        <Link href="/contact">
+          <button className="px-5 py-2 rounded-full text-xs md:text-sm text-[#001526] font-semibold bg-transparent hover:bg-[#005f80]/40 hover:text-white hover:text-opacity-90 transition">
+            Contact Us
+          </button>
         </Link>
-        </div>
+        <Link href="/Authentication/AdminLogin">
+          <button className="px-5 py-2 rounded-full text-xs md:text-sm text-white font-semibold bg-[#005f80] hover:bg-[#00384e] transition">
+            Continue as Admin
+          </button>
+        </Link>
+      </div>
 
       <div className="relative flex flex-col lg:flex-row w-full">
         <div className="w-full lg:m-20 p-4">
           <div className="mt-[6rem] lg:mt-20 lg:ml-[6.3rem] flex justify-center lg:justify-start">
             {/* Logo */}
-            <Image 
-              src="/images/landing_page_logo.png" 
-              alt="logo" 
-              width={300} 
+            <Image
+              src="/images/landing_page_logo.png"
+              alt="logo"
+              width={300}
               height={300}
             />
           </div>
@@ -55,7 +50,8 @@ export default function Home() {
               Diving Experiences
             </h1>
             <h2 className="text-lg lg:text-[22px] mt-8 text-[#001526]">
-              Dive smarter with an all-in-one platform to track your dives, stay organized, <br className="hidden lg:block" />
+              Dive smarter with an all-in-one platform to track your dives, stay
+              organized, <br className="hidden lg:block" />
               analyze your progress, and make every dive count!
             </h2>
 
@@ -69,16 +65,32 @@ export default function Home() {
 
               {/* Social Media Links */}
               <div className="flex gap-9 mt-5 text-[#001526]">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaFacebookF className="hover:text-[#D9E7EC] lg:hover:text-[#005f80] text-2xl transition" />
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaInstagram className="hover:text-[#D9E7EC] lg:hover:text-[#005f80] text-2xl transition" />
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaTwitter className="hover:text-[#D9E7EC] lg:hover:text-[#005f80] text-2xl transition" />
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaYoutube className="hover:text-[#D9E7EC] lg:hover:text-[#005f80] text-2xl transition" />
                 </a>
               </div>
