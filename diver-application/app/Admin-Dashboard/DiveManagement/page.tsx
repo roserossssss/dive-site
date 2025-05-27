@@ -154,6 +154,7 @@ export default function DiveManagement() {
                 className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 onClick={handlePreviousPage}
+
                 aria-hidden="true"
               />
               <IoIosArrowForward
@@ -275,6 +276,7 @@ export default function DiveManagement() {
                             className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedRows.includes(
                               (currentPage - 1) * recordsPerPage + index
                             )
+
                                 ? "bg-[#001526] border-[#001526]"
                                 : "bg-[#D9E7EC] border-[#001526]"
                               } focus:ring-2 focus:ring-[#001526] transition-colors`}

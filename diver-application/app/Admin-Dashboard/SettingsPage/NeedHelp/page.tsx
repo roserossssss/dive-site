@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { LifeBuoy, Monitor, BarChart3, Mail } from "lucide-react";
 import { GiTropicalFish } from "react-icons/gi";
-
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function HelpPage() {
@@ -16,7 +15,7 @@ export default function HelpPage() {
         <div className="flex items-center justify-between md:justify-start">
           <IoIosArrowBack
             size={30}
-            className="cursor-pointer mr-3 mt-2 text-white hover:text-[#2C7DA0] transition duration-300 ease-in-out"
+            className="cursor-pointer mr-3 mt-2 text-white transition duration-300 ease-in-out"
             onClick={() => router.push("/Admin-Dashboard/SettingsPage")}
             title="Go back to Settings"
             aria-label="Go back to Settings"
@@ -28,9 +27,9 @@ export default function HelpPage() {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 md:mt-48 mx-auto p-4">
+      <main className="flex-1 md:mt-10 mt-8 mx-auto p-4">
         {/* Help Cards Grid */}
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-7 justify-items-center">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-7 justify-items-center">
           <HelpCard
             icon={<GiTropicalFish size={130} className="text-[#001526]" />}
             title="New to the Admin Side?"
@@ -71,12 +70,12 @@ function HelpCard({
   description: string;
 }) {
   return (
-    <div className="bg-[#D9E7EC] p-6 rounded-xl text-center flex flex-col items-center justify-center w-[335px] h-[400px] transition-shadow duration-300 ease-in-out hover:shadow-2xl hover:shadow-gray-400">
+    <div className="bg-[#D9E7EC] p-6 rounded-xl text-center flex flex-col items-center justify-center w-[350px] h-[350px] md:w-[530px] md:h-[350px]">
       <div className="text-[#001526] text-[120px] flex justify-center">
         {icon}
       </div>
       <h3 className="mt-4 text-2xl font-bold text-[#001526]">{title}</h3>
-      <p className="mt-2 text-base text-[#001526]">{description}</p>
+      <p className="mt-2 text-base text-[#001526] px-2">{description}</p>
     </div>
   );
 }

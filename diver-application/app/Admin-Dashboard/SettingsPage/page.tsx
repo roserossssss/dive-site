@@ -59,10 +59,10 @@ export default function ProfilePage() {
             </h3>
             <button
               onClick={() => router.push("/Admin-Dashboard/SettingsPage/NeedHelp")}
-              className="mt-3 w-full md:w-56 p-4 border rounded-3xl flex justify-between items-center bg-[#001526] shadow-md"
+              className="mt-3 w-full md:w-80 p-4 border rounded-3xl flex justify-between items-center bg-[#001526] shadow-md"
             >
               <span className="text-white font-medium">Help and Support</span>
-              <span className="text-[#2C7DA0] hover:text-white transition duration-300 ease-in-out">
+              <span className="text-white transition duration-300 ease-in-out">
                 <ChevronRight size={24} strokeWidth={3} />
                 </span>
             </button>
@@ -75,10 +75,10 @@ export default function ProfilePage() {
             </h3>
             <button
               onClick={() => router.push("/Admin-Dashboard/SettingsPage/About")}
-              className="mt-3 w-full md:w-36 p-4 border rounded-3xl flex justify-between items-center bg-[#001526] shadow-md"
+              className="mt-3 w-full md:w-80 p-4 border rounded-3xl flex justify-between items-center bg-[#001526] shadow-md"
             >
               <span className="text-white font-medium">About</span>
-              <span className="text-[#2C7DA0] hover:text-white transition duration-300 ease-in-out">
+              <span className="text-white transition duration-300 ease-in-out">
                 <ChevronRight size={24} strokeWidth={3} />
                 </span>
             </button>
