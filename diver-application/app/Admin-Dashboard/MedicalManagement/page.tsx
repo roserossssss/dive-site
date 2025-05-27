@@ -154,6 +154,7 @@ export default function MedicalManagement() {
                 className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 onClick={handlePreviousPage}
+
                 aria-hidden="true"
               />
               <IoIosArrowForward

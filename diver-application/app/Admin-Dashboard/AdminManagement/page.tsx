@@ -1,47 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Listbox } from "@headlessui/react";
 import { ChevronDown, MoreVertical } from "lucide-react";
 import { IoSearch } from "react-icons/io5";
 import { TbSortAscending2 } from "react-icons/tb";
 import { HiOutlineFilter } from "react-icons/hi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { GoTrash } from "react-icons/go";
 import { HiPlus } from "react-icons/hi";
-import { FaUserShield } from "react-icons/fa";
-import { FiCheck, FiTrash2,  FiX } from "react-icons/fi";
-
+import { FiCheck, FiTrash2, FiX } from "react-icons/fi";
+import InviteAdminModal from "./InviteAdminModal";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import SuccessModal from "./SuccessModal";
 
 const initialUsers = [
   {
-    adminId: "ML00001",
-    name: "Jay Marc",
-    email: "jaymarc123@gmail.com",
-    status: "Active",
-    lastLogin: "January 25, 2025",
+    adminId: "ML00001", name: "Jay Marc", email: "jaymarc123@gmail.com", status: "Active", lastLogin: "January 25, 2025",
   },
   {
-    adminId: "ML00002",
-    name: "Princess Denise Ong",
-    email: "ongdenise234@gmail.com",
-    status: "Active",
-    lastLogin: "January 25, 2025",
+    adminId: "ML00002", name: "Princess Ong", email: "ongdenise234@gmail.com", status: "Active", lastLogin: "January 25, 2025",
   },
   {
-    adminId: "ML00003",
-    name: "Althea Rose Sardana",
-    email: "rosesardana2610@gmail.com",
-    status: "Inactive",
-    lastLogin: "January 25, 2025",
+    adminId: "ML00003", name: "Althea Sardana", email: "rosesardana2610@gmail.com", status: "Inactive", lastLogin: "January 25, 2025",
   },
   {
-    adminId: "ML00004",
-    name: "Juan Dela Cruz",
-    email: "juandelacruz@gmail.com",
-    status: "Locked",
-    lastLogin: "January 25, 2025",
+    adminId: "ML00004", name: "Juan Dela Cruz", email: "juandelacruz@gmail.com", status: "Locked", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00005", name: "John Doe", email: "john.doe@gmail.com", status: "Active", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00006", name: "Seok Matthew", email: "moo.matthew@gmail.com", status: "Active", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00007", name: "Gray Yeon", email: "gray_yeon@gmail.com", status: "Inactive", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00008", name: "Ryomen Sukuna", email: "ryomen.sukuna@gmail.com", status: "Locked", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00009", name: "Jane Doe", email: "janedoe@gmail.com", status: "Active", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00010", name: "Yao Ming", email: "yao.ming@gmail.com", status: "Active", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00011", name: "Hirai Momo", email: "hirai.momo@gmail.com", status: "Inactive", lastLogin: "January 25, 2025",
+  },
+  {
+    adminId: "ML00012", name: "Arthur Nery", email: "arthur_nery@gmail.com", status: "Locked", lastLogin: "January 25, 2025",
   },
 ];
 
@@ -58,6 +65,44 @@ export default function UserManagement() {
   const [selectMode, setSelectMode] = useState(false);
   const [selectedAdmins, setSelectedAdmins] = useState<number[]>([]);
   const [users, setUsers] = useState(initialUsers);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(users.length / itemsPerPage);
+
+  const paginatedUsers = users.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleAddAdmin = (newAdmin: {
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    suffix: string;
+    position: string;
+    email: string;
+  }) => {
+    const newAdminData = {
+      adminId: `ML${String(users.length + 1).padStart(5, "0")}`,
+      name: `${newAdmin.firstName} ${newAdmin.middleName} ${newAdmin.lastName} ${newAdmin.suffix}`.trim(),
+      email: newAdmin.email,
+      status: "Active",
+      lastLogin: "Never",
+    };
+    setUsers((prev) => [...prev, newAdminData]);
+
+    localStorage.setItem("selectedAdminProfile", JSON.stringify({
+      name: newAdminData.name,
+      email: newAdminData.email,
+      Role: newAdmin.position,
+    }));
+
+    setInviteModalOpen(false);
+    setSuccessModalOpen(true);
+  };
 
   const toggleAdminSelection = (index: number) => {
     setSelectedAdmins((prev) =>
@@ -67,7 +112,6 @@ export default function UserManagement() {
 
   const confirmDelete = () => {
     if (selectedAdmins.length > 0) {
-      console.log("Deleting admins:", selectedAdmins);
       removeSelectedAdmins();
     }
     setDeleteModalOpen(false);
@@ -80,240 +124,301 @@ export default function UserManagement() {
     setSelectMode(false);
   };
 
-  return (
-    <div className="fixed top-0 left-0 w-full z-10 p-4 rounded-t-2xl md:pl-80">
-      <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-white text-center md:text-left mt-2">
-        Admin Management
-      </h2>
-
-      <div className="mt-5 p-5 min-h-[60vh]">
-        {/* Header */}
-        <div className="flex justify-between text-[#001526] font-semibold items-center mb-4">
-          <div className="flex items-center gap-2">
-            <IoIosArrowBack size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-            <IoIosArrowForward size={24} className="cursor-pointer text-white sm: -ml-2 md: -ml-1 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-
-             {/* Select and Cancel Button */}
-             <button
-  onClick={() => {
-    if (selectMode && selectedAdmins.length > 0) {
-      setDeleteModalOpen(true);
-    } else {
-      setSelectMode(!selectMode);
-      if (selectMode) setSelectedAdmins([]);
+  const dropdownRefs = useRef<(HTMLDivElement | null)[]>([]);
+  useEffect(() => {
+    if (dropdownUser === null) return;
+    function handleClickOutside(event: MouseEvent) {
+      // Check all refs for the current page
+      for (let i = 0; i < paginatedUsers.length; i++) {
+        if (
+          dropdownRefs.current[i] &&
+          dropdownRefs.current[i]!.contains(event.target as Node)
+        ) {
+          return;
+        }
+      }
+      setDropdownUser(null);
     }
-  }}
-            className={`${
-              selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
-              } text-white text-xs sm:text-base sm: -ml-2 px-3 md:px-3 py-2 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2`}
-              >
-                <span className="block lg:hidden">
-                  {selectMode && selectedAdmins.length > 0 ? (
-                    <FiTrash2 size={18} strokeWidth={3} />
-                  ) : selectMode ? (
-                  <FiX size={18} strokeWidth={3} />
-                ) : (
-                <FiCheck size={18} strokeWidth={3} />
-                )}
-                </span>
-                <span className="hidden lg:inline">
-                  {selectMode && selectedAdmins.length > 0
-                  ? "Delete"
-                  : selectMode
-                  ? "Cancel"
-                  : "Select"}
-                  </span>
-                  
-                  </button>
-                    
-                    {/* Add Button */}
-                    <button
-                    onClick={() => setInviteModalOpen(true)}
-                    className="bg-[#2C7DA0] text-white sm: -ml-1 text-xs sm:text-base px-3 md:px-3 py-2 lg:px-5 md:py-2.5 rounded-full font-semibold shadow hover:opacity-90 transition flex items-center gap-2"
-                    >
-                      <span  className="block lg:hidden">
-                        <HiPlus size={18} />
-                        </span>
-                        <span className="hidden lg:inline">Add</span>
-                        </button>
-                        </div>
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownUser, paginatedUsers.length]);
 
-          <div className="relative flex items-center gap-3">
-            {/* Search */}
-            <div className="relative group">
-              <span className="hidden sm:block absolute -top-6 left-3 text-xs sm:text-sm text-white font-medium opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100 transition-opacity duration-300">
-                Admin's name/email
-              </span>
-              <IoSearch size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10" />
-              <input
-                type="text"
-                placeholder="Search"
-                className="pl-10 pr-4 py-2 rounded-full lg:mr-0.5 bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 lg:hover:w-60 lg:focus-within:w-80"
+  return (
+    <>
+      {/* Main Content */}
+      <div className="fixed top-0 left-0 w-full z-10 p-4 rounded-t-2xl md:pl-80">
+        <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-white text-center md:text-left mt-2">
+          Admin Management
+        </h2>
+
+        <div className="mt-5 p-5 min-h-[60vh] mr-0 md:mr-[0.65rem]">
+          {/* Header */}
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <div className="flex items-center gap-2">
+              <IoIosArrowBack
+                size={24}
+                className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               />
+              <IoIosArrowForward
+                size={24}
+                className={`cursor-pointer text-white ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              />
+
+              {/* Select/Cancel/Delete Button */}
+              <button
+                onClick={() => {
+                  if (selectMode && selectedAdmins.length > 0) {
+                    setDeleteModalOpen(true);
+                  } else {
+                    setSelectMode(!selectMode);
+                    if (selectMode) setSelectedAdmins([]);
+                  }
+                }}
+                className={`text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
+                  }`}
+              >
+                <span className="flex items-center gap-2">
+                  {selectMode && selectedAdmins.length > 0 ? (
+                    <>
+                      <FiTrash2 className="lg:hidden" />
+                      <span className="hidden lg:inline">Delete</span>
+                    </>
+                  ) : selectMode ? (
+                    <>
+                      <FiX className="lg:hidden" />
+                      <span className="hidden lg:inline">Cancel</span>
+                    </>
+                  ) : (
+                    <>
+                      <FiCheck className="lg:hidden" />
+                      <span className="hidden lg:inline">Select</span>
+                    </>
+                  )}
+                </span>
+              </button>
+
+              {/* Add Button */}
+              <button
+                onClick={() => setInviteModalOpen(true)}
+                className="bg-[#2C7DA0] text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2"
+              >
+                <HiPlus className="lg:hidden" size={18} />
+                <span className="hidden lg:inline">Add</span>
+              </button>
             </div>
 
-            <button className="bg-white text-[#001526] text-xs lg:mr-0.5 sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
-              <TbSortAscending2 className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
-              <span className="hidden lg:inline">Sort</span>
-            </button>
-
-            <button className="bg-white text-[#001526] text-xs lg:mr-0.5 sm: -ml-2 sm:text-base px-3 py-2 rounded-full font-semibold flex items-center gap-1">
-              <HiOutlineFilter className="w-4 md:w-5 lg:w-7 h-4 md:h-5 lg:h-5" />
-              <span className="hidden lg:inline">Filter</span>
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Search */}
+              <div className="relative group">
+                <IoSearch size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10" />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 sm:hover:w-60 sm:focus-within:w-80"
+                  aria-label="Search"
+                />
+              </div>
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2">
+                <TbSortAscending2 className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
+                <span className="hidden lg:inline">Sort</span>
+              </button>
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2">
+                <HiOutlineFilter className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
+                <span className="hidden lg:inline">Filter</span>
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* User Table */}
-        <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md max-h-[85vh]">
-          <div className="overflow-y-auto min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
-            <table className="w-full text-center text-[#001526] mt-1 table-auto">
-              <thead className="bg-[#D9E7EC] border-b-2 border-gray-400">
-                <tr>
-                  {["", "Admin ID", "Name", "Email", "Status", "Last Login", ""].map((head, idx) => (
-                    <th key={idx} className="px-2 py-7 font-semibold text-sm sm:text-base whitespace-nowrap">
-                      {head}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="bg-[#D9E7EC] text-[#001526]">
-                {users.map((user, index) => (
-                  <tr key={index} className="border-b border-gray-300 hover:bg-[#cfe5ee] transition">
-                    <td className="px-2 py-6">
-                      {selectMode && (
-                        <div
-                        onClick={() => toggleAdminSelection(index)}
-                        className={`w-5 h-5 rounded-full border-2 border-[#001526] cursor-pointer flex items-center justify-center transition ml-7 ${
-                          selectedAdmins.includes(index) ? "bg-[#001526]" : "bg-transparent"
-                        }`}
-                        ></div>
+          {/* User Table */}
+          <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
+            {paginatedUsers.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-[77vh]">
+                <img
+                  src="/images/empty_table_logo.svg"
+                  alt="No Records"
+                  className="mx-auto w-32 sm:w-56 h-32 sm:h-56"
+                />
+                <p className="text-[#001526] font-semibold text-lg mt-4">
+                  No admins found
+                </p>
+                <p className="text-[#001526] text-sm mt-2">
+                  You can add a new admin by clicking the <span className="font-semibold">Add</span> button.
+                </p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto overflow-y-auto max-h-[78vh] sm:max-h-[70vh] lg:max-h-[77vh] pb-3" style={{ scrollbarWidth: "thin", scrollbarColor: "#001526 #D9E7EC" }}>
+                <table className="w-full text-center text-[#001526] mt-1 table-auto">
+                  <thead className="bg-[#D9E7EC] border-b-2 border-gray-400">
+                    <tr>
+                      <th className="pl-8 sm:pb-3 sm:pl-10 pr-0 py-4 w-8 sm:w-12 text-left">
+                        {selectMode && (
+                          <input
+                            type="checkbox"
+                            className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedAdmins.length === paginatedUsers.length && paginatedUsers.length > 0
+                                ? "bg-[#001526] border-[#001526]"
+                                : "bg-[#D9E7EC] border-[#001526]"
+                              } focus:ring-2 focus:ring-[#001526] transition-colors`}
+                            aria-label="Select all"
+                            checked={selectedAdmins.length === paginatedUsers.length && paginatedUsers.length > 0}
+                            onChange={() => {
+                              if (selectedAdmins.length === paginatedUsers.length) {
+                                // Unselect all
+                                setSelectedAdmins([]);
+                              } else {
+                                // Select all visible
+                                const globalIndices = paginatedUsers.map((_, idx) => (currentPage - 1) * itemsPerPage + idx);
+                                setSelectedAdmins(globalIndices);
+                              }
+                            }}
+                          />
                         )}
-                        </td>
-                    <td className="px-6 py-6 text-sm sm:text-base">{user.adminId}</td>
-                    <td className="px-6 py-6 text-xs sm:text-base">{user.name}</td>
-                    <td className="px-6 py-6 text-xs sm:text-base">{user.email}</td>
-                    <td className="px-6 py-6 text-xs sm:text-base">
-                      <CustomDropdown items={statuses} selected={user.status} />
-                    </td>
-                    <td className="px-6 py-6 text-xs sm:text-base">{user.lastLogin}</td>
-                    <td className="px-2 py-3 relative">
-                      <button
-                        onClick={() => setDropdownUser(index)}
-                        className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
-                      >
-                        <MoreVertical size={18} />
-                      </button>
-
-                      {dropdownUser === index && (
-                        <div className="absolute right-8 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
-                          <button
-                            className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
-                            onClick={() => router.push("/Admin-Dashboard/UsersManagement/UserProfile")}
-                          >
-                            View Admin
-                          </button>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      </th>
+                      {["Admin ID", "Name", "Email", "Status", "Last Login", ""].map((head, idx) => (
+                        <th key={idx} className="px-2 py-7 font-semibold text-sm sm:text-base whitespace-nowrap">
+                          {head}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="bg-[#D9E7EC] text-[#001526]">
+                    {paginatedUsers.map((user, index) => {
+                      const globalIndex = (currentPage - 1) * itemsPerPage + index;
+                      return (
+                        <tr key={index} className="border-b border-gray-300 hover:bg-[#cfe5ee] transition">
+                          <td className="pl-8 sm:pb-3 sm:pl-10 pr-0 py-4 w-8 sm:w-12 text-left">
+                            {selectMode && (
+                              <input
+                                type="checkbox"
+                                className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedAdmins.includes(globalIndex)
+                                    ? "bg-[#001526] border-[#001526]"
+                                    : "bg-[#D9E7EC] border-[#001526]"
+                                  } focus:ring-2 focus:ring-[#001526] transition-colors`}
+                                aria-label={`Select row ${index + 1}`}
+                                checked={selectedAdmins.includes(globalIndex)}
+                                onChange={() => toggleAdminSelection(globalIndex)}
+                              />
+                            )}
+                          </td>
+                          <td className="px-6 py-6 text-sm sm:text-base">{user.adminId}</td>
+                          <td className="px-6 py-6 text-xs sm:text-base">{user.name}</td>
+                          <td className="px-6 py-6 text-xs sm:text-base">{user.email}</td>
+                          <td className="px-6 py-6 text-xs sm:text-base">
+                            <CustomDropdown items={statuses} selected={user.status} />
+                          </td>
+                          <td className="px-6 py-6 text-xs sm:text-base">{user.lastLogin}</td>
+                          <td className="px-2 py-3 relative">
+                            <div
+                              ref={el => (dropdownRefs.current[index] = el)}
+                              className="inline-block"
+                            >
+                              <button
+                                onClick={() =>
+                                  setDropdownUser(dropdownUser === globalIndex ? null : globalIndex)
+                                }
+                                className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                              >
+                                <MoreVertical size={18} />
+                              </button>
+                              {dropdownUser === globalIndex && (
+                                <div className="absolute right-4 mr-7 mt-3 w-36 top-5 bg-[#2C7DA0] text-white font-medium rounded-xl p-2 z-20">
+                                  <button
+                                    onClick={() => {
+                                      localStorage.setItem(
+                                        "selectedAdminProfile",
+                                        JSON.stringify({
+                                          name: user.name,
+                                          email: user.email,
+                                          position: user.status, 
+                                        })
+                                      );
+                                      router.push("/Admin-Dashboard/AdminManagement/View");
+                                    }}
+                                    className="block w-full text-sm text-center px-4 py-1 md-1 rounded-lg hover:bg-[#D9E7EC] hover:text-[#001526] transition"
+                                  >
+                                    View
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Modals (unchanged) */}
-      {deleteModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60">
-          <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[480px] rounded-2xl shadow-lg flex flex-col items-center">
-            <GoTrash className="text-[#001526] w-24 h-24 mt-10 mb-3" />
-            <h2 className="text-3xl font-bold mb-7 text-center text-[#001526]">
-              {selectedAdmins.length === 1
-              ? "Delete Admin?"
-              : `Delete ${selectedAdmins.length} Admins?`}
-              </h2>
-            <p className="font-semibold text-center text-[#001526] mb-5 text-[15px]">Are you sure you want to delete?</p>
-            <p className="font-semibold text-center text-[#001526] -mt-5 text-[15px]">This action cannot be undone.</p>
-            <div className="flex justify-center mt-12">
-              <button
-                className="mr-2 w-36 px-5 py-3 bg-[#D9E7EC] text-[#001526] border-2 border-[#001526] rounded-full text-[16px] font-semibold hover:bg-[#001526] hover:text-white transition duration-200"
-                onClick={() => setDeleteModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="ml-2 w-36 px-5 py-3bg-[#D9E7EC] text-[#001526] border-2 border-[#001526] rounded-full text-[16px] font-semibold hover:bg-[#001526] hover:text-white transition duration-200"
-                onClick={confirmDelete}
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        isVisible={deleteModalOpen}
+        onCancel={() => setDeleteModalOpen(false)}
+        onConfirm={confirmDelete}
+        count={selectedAdmins.length || 1}
+      />
 
-      {inviteModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60">
-          <div className="bg-[#D9E7EC] p-8 w-11/12 sm:w-[700px] min-h-[420px] rounded-2xl shadow-lg flex flex-col gap-6 items-center">
-            <div className="w-full text-left">
-              <h2 className="text-[#001526] text-3xl mt-2 ml-2 font-bold flex items-center gap-2 mb-2">
-                <FaUserShield className="text-[#001526] w-20 h-20" /> Invite Admin
-              </h2>
-            </div>
+      {/* Invite Admin Modal */}
+      <InviteAdminModal
+        isVisible={inviteModalOpen}
+        onCancel={() => setInviteModalOpen(false)}
+        onSend={handleAddAdmin}
+      />
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-2 w-full">
-              <div className="flex flex-col w-full">
-                <label className="text-[#001526] font-semibold mb-1">Name</label>
-                <input
-                  type="text"
-                  value={inviteName}
-                  onChange={(e) => setInviteName(e.target.value)}
-                  placeholder="Full Name"
-                  className="px-4 py-1 rounded-xl border-2 border-[#001526] placeholder-gray-500 placeholder:text-sm text-[#001526] bg-transparent"
-                />
-              </div>
-              <div className="flex flex-col w-full">
-                <label className="text-[#001526] font-semibold mb-1">Email</label>
-                <input
-                  type="email"
-                  value={inviteEmail}
-                  onChange={(e) => setInviteEmail(e.target.value)}
-                  placeholder="Email Address"
-                  className="px-4 py-1 rounded-xl border-2 border-[#001526] placeholder-gray-500 placeholder:text-sm text-[#001526] bg-transparent"
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-center gap-4 mt-16 w-full">
-              <button
-                onClick={() => setInviteModalOpen(false)}
-                className="w-full sm:w-44 py-2 border-2 border-[#001526] rounded-full text-[#001526] font-semibold hover:bg-[#001526] hover:text-white transition duration-200"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  console.log("Invite Sent To:", inviteName, inviteEmail);
-                  setInviteModalOpen(false);
-                  setInviteName("");
-                  setInviteEmail("");
-                }}
-                className="w-full sm:w-44 py-2 border-2 border-[#001526] rounded-full text-[#001526] font-semibold hover:bg-[#001526] hover:text-white transition duration-200"
-              >
-                Send Invite
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      {/* Success Modal */}
+      <SuccessModal
+        isVisible={successModalOpen}
+        onClose={() => setSuccessModalOpen(false)}
+      />
+    </>
   );
 }
 
-function CustomDropdown({ items, selected }: { items: string[]; selected: string }) {
+function CustomDropdown({
+  items,
+  selected,
+  onChange,
+}: {
+  items: string[];
+  selected: string;
+  onChange?: (value: string) => void;
+}) {
   const [selectedItem, setSelectedItem] = useState(selected);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [dropdownStyles, setDropdownStyles] = useState({ top: 0, left: 0, width: 0, direction: "down" });
+  const buttonRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isDropdownOpen]);
+
+  const handleDropdownToggle = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const spaceBelow = viewportHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      const direction = spaceBelow < 200 && spaceAbove > 150 ? "up" : "down";
+      setDropdownStyles({
+        top: direction === "down" ? rect.bottom + window.scrollY : rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        direction,
+      });
+      setIsDropdownOpen(!isDropdownOpen);
+    }
+  };
 
   const getSelectedColor = (item: string) => {
     switch (item.toLowerCase()) {
@@ -328,46 +433,51 @@ function CustomDropdown({ items, selected }: { items: string[]; selected: string
     }
   };
 
+  useEffect(() => {
+    setSelectedItem(selected);
+  }, [selected]);
+
   return (
-    <Listbox value={selectedItem} onChange={setSelectedItem}>
-      <div className="relative">
-        <Listbox.Button
-          className={`font-medium w-40 px-6 py-2 rounded-2xl flex justify-between items-center shadow-inner hover:opacity-90 transition ${getSelectedColor(
+    <>
+      <div className="relative" ref={buttonRef}>
+        <button
+          className={`font-medium w-40 px-4 py-2 rounded-2xl flex justify-between items-center shadow-inner hover:opacity-90 transition ${getSelectedColor(
             selectedItem
           )}`}
+          onClick={handleDropdownToggle}
+          type="button"
         >
           {selectedItem}
           <ChevronDown size={16} />
-        </Listbox.Button>
-
-        <Listbox.Options className="absolute -ml-3 mt-2 w-44 bg-[#A3D4E3] text-[#001526] font-semibold rounded-xl p-2 z-10">
-          {items.map((item) => {
-            const lower = item.toLowerCase();
-            const bgColor =
-              lower === "active"
-                ? "bg-[#3BB143]"
-                : lower === "inactive"
-                ? "bg-[#FFD300]"
-                : lower === "locked"
-                ? "bg-[#CF0C0F] text-white"
-                : "bg-[#D9E7EC]";
-
-            return (
-              <Listbox.Option key={item} value={item}>
-                {({ active, selected }) => (
-                  <div
-                    className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
-                      active || selected ? `${bgColor} opacity-90` : "text-[#001526]"
-                    }`}
-                  >
-                    {item}
-                  </div>
-                )}
-              </Listbox.Option>
-            );
-          })}
-        </Listbox.Options>
+        </button>
       </div>
-    </Listbox>
+
+      {isDropdownOpen && (
+        <div
+          className="absolute bg-[#A3D4E3] text-[#001526] font-semibold rounded-xl p-2 z-50 shadow-lg"
+          style={{
+            position: "fixed",
+            top: dropdownStyles.direction === "down" ? dropdownStyles.top : dropdownStyles.top - 150,
+            left: dropdownStyles.left,
+            width: dropdownStyles.width,
+          }}
+        >
+          {items.map((item) => (
+            <div
+              key={item}
+              onClick={() => {
+                setSelectedItem(item);
+                setIsDropdownOpen(false);
+                if (onChange) onChange(item);
+              }}
+              className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
+                }`}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
