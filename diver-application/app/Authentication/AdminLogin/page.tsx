@@ -17,28 +17,29 @@ export default function Login() {
     const showError = touched && email !== "" && !isValidEmail(email);
 
     return (
-        <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
+        <div className="absolute inset-0 -z-10">
             <Image
-                src="/images/loginadmin.jpg"
-                alt="Master Liveaboards"
-                objectFit="cover"
+                src="/loginadmin.jpg"
+                alt="Login Background"
+                fill
                 priority
-                className="absolute inset-0 w-full h-full"
-                width={1500}
-                height={0}
+                quality={100}
+                className="object-cover object-top w-full h-full"
+                sizes="100vw"
             />
 
             <div className="relative z-10 flex w-full lg:w-2/4 justify-center items-center ml-auto lg:p-8 p-4">
                 <div className="w-full max-w-xl lg:p-8 p-4">
-                    <form className="bg-[#001526] p-8 rounded-3xl shadow-lg w-full lg:pt-16 pt-5 lg:pb-24 pb-12 lg:pl-14 lg:pr-14">
+                    <form className="bg-[#001526] p-8 rounded-3xl shadow-lg w-full lg:pt-16 mt-20 lg:mt-28 md:mt-56 pt-5 lg:pb-24 pb-12 lg:pl-14 lg:pr-14">
                         <div className="flex flex-col items-center lg:px-6 px-4">
                             <Image
-                                className="w-40 h-40 mb-4"
                                 src="/images/admin_login_logo.svg"
                                 alt="logo"
-                                width={40}
-                                height={40}
+                                width={200}
+                                height={200}
+                                className="mb-4"
                             />
+
                             <h1 className="text-2xl font-bold text-center mb-6 text-white">Log in</h1>
 
                             {/* Email Address */}
@@ -51,13 +52,13 @@ export default function Login() {
                                     onBlur={() => setTouched(true)}
                                     placeholder=" "
                                     className={`peer h-12 w-full border ${showError ? "border-red-500" : "border-[#001526]"
-                                        } rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 ${showError ? "focus:ring-red-500" : "focus:ring-[#005f80]"
-                                        } focus:border-0 bg-[#D9E7EC] text-[#001526]`}
+                                        } rounded-3xl border border-[#2C7DA0] px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 ${showError ? "focus:ring-red-500" : "focus:ring-[#005f80]"
+                                        } focus:border-0 bg-transparent text-white`}
                                     required
                                 />
                                 <label
                                     htmlFor="email"
-                                    className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#005f80] bg-[#D9E7EC] px-1"
+                                    className="absolute left-3 top-1/5 -translate-y-1/2 text-xs text-white transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-white bg-[#001526] px-1"
                                 >
                                     Email Address
                                 </label>
@@ -71,12 +72,12 @@ export default function Login() {
                                     type={showPassword ? "text" : "password"}
                                     id="password"
                                     placeholder=" "
-                                    className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
+                                    className="peer h-12 w-full border border-[#2C7DA0] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-transparent text-white"
                                     required
                                 />
                                 <label
                                     htmlFor="password"
-                                    className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#005f80] bg-[#D9E7EC] px-1"
+                                    className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all text-white peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-white bg-[#001526] px-1"
                                 >
                                     Password
                                 </label>
