@@ -68,20 +68,20 @@ const colorMap = {
 
 const dailyUserStats = [
   { label: 'Returning Users', value: 20, color: '#2D3E50' },
-  { label: 'New Users', value: 15, color: '#3B9FCC' },
-  { label: 'Inactive Users', value: 5, color: '#A7D2E9' },
+  { label: 'New Users', value: 15, color: '#3295BF' },
+  { label: 'Inactive Users', value: 5, color: '#257192' },
 ];
 
 const weeklyUserStats = [
   { label: 'Returning Users', value: 200, color: '#2D3E50' },
-  { label: 'New Users', value: 100, color: '#3B9FCC' },
-  { label: 'Inactive Users', value: 50, color: '#A7D2E9' },
+  { label: 'New Users', value: 100, color: '#3295BF' },
+  { label: 'Inactive Users', value: 50, color: '#257192' },
 ];
 
 const monthlyUserStats = [
   { label: 'Returning Users', value: 1000, color: '#2D3E50' },
-  { label: 'New Users', value: 700, color: '#3B9FCC' },
-  { label: 'Inactive Users', value: 150, color: '#A7D2E9' },
+  { label: 'New Users', value: 700, color: '#3295BF' },
+  { label: 'Inactive Users', value: 150, color: '#257192' },
 ];
 
 const dailyGraphData = {
@@ -175,6 +175,7 @@ const AnalyticsDashboard = () => {
         <div className="w-full flex justify-start">
           <div className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
+              
               {/* Line Chart */}
               <div className="bg-[#D9E4EB] p-6 rounded-xl text-[#0B1E2D]">
                 <h2 className="font-semibold mb-4">Active / New Users</h2>
