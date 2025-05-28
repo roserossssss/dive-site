@@ -38,6 +38,17 @@ npm run build
 npm start
  ```
 
+## The following are the login credentials for Admin and User
+- **User**
+
+  Email: `johndoe@example.com`  
+  Password: `Pa$$w0rd2025`
+  
+- **Admin**
+
+  Email: `admin@example.com`
+  Password: `Pa$$w0rd2025`
+
 ## Setting Up/Updating Firebase files (For Deployment):
 1. Ensure you are logged in to Firebase:
  ```
