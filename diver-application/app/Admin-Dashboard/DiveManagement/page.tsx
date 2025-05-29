@@ -7,6 +7,7 @@ import { TbSortAscending2 } from "react-icons/tb";
 import { HiOutlineFilter } from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { GoTrash } from "react-icons/go";
+import Image from "next/image";
 
 const dives = [
   {
@@ -65,7 +66,7 @@ export default function DiveManagement() {
   useEffect(() => {
     setSelectedRows([]);
     setSelectAll(false);
-  }, [currentPage, dives]);
+  }, [currentPage]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -218,10 +219,12 @@ export default function DiveManagement() {
           <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
             {currentPageRecords.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-[77vh]">
-                <img
+                <Image
                   src="/images/empty_table_logo.svg"
                   alt="No Records"
-                  className="mx-auto w-32 sm:w-56 h-32 sm:h-56"
+                  width={224}
+                  height={224} 
+                  className="mx-auto"
                 />
                 <p className="text-[#001526] font-semibold text-lg">
                   No records found.

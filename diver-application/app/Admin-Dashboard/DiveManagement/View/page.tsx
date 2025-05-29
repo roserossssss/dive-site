@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
+import Image from "next/image";
 
 export default function ViewDive() {
   const [divingdata, setDivingData] = useState({
@@ -109,19 +110,21 @@ export default function ViewDive() {
             </div>
 
             {/* Image Preview */}
-						<div className="flex flex-col items-center mt-0 lg:mt-[18px]">
-							<div className="border-2 border-[#001526] rounded-lg flex items-center justify-center bg-[#D9E7EC] overflow-hidden w-full h-[267px]">
-								{divingdata.image ? (
-									<img
-										src={divingdata.image}
-										alt="Dive Preview"
-										className="w-full h-full object-cover rounded-lg"
-									/>
-								) : (
-									<p className="text-center text-sm">No image available</p>
-								)}
-							</div>
-						</div>
+            <div className="flex flex-col items-center mt-0 lg:mt-[18px]">
+              <div className="border-2 border-[#001526] rounded-lg flex items-center justify-center bg-[#D9E7EC] overflow-hidden w-full h-[267px]">
+                {divingdata.image ? (
+                  <Image
+                    src={divingdata.image}
+                    alt="Dive Preview"
+                    width={400}
+                    height={267}
+                    className="object-cover rounded-lg"
+                  />
+                ) : (
+                  <p className="text-center text-sm">No image available</p>
+                )}
+              </div>
+            </div>
 
             {/* Dive Details */}
             <div className="col-span-1 lg:col-span-2 space-y-3">
