@@ -7,6 +7,7 @@ import { ChevronDown, MoreVertical } from "lucide-react";
 import { IoSearch } from "react-icons/io5";
 import { TbSortAscending2 } from "react-icons/tb";
 import { HiOutlineFilter } from "react-icons/hi";
+import { FiTrash2 } from "react-icons/fi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 
@@ -105,17 +106,17 @@ export default function UserManagement() {
   }, [dropdownUser]);
 
   const handleDelete = () => {
-  let remainingUsers;
-  if (selectedUserToDelete !== null) {
-    remainingUsers = users.filter((_, idx) => idx !== selectedUserToDelete);
-    setSelectedUserToDelete(null);
-  } else {
-    remainingUsers = users.filter((_, idx) => !selectedUsers.includes(idx));
-    setSelectedUsers([]);
-  }
-  console.log("Remaining Users:", remainingUsers);
-  setShowDeleteModal(false);
-};
+    let remainingUsers;
+    if (selectedUserToDelete !== null) {
+      remainingUsers = users.filter((_, idx) => idx !== selectedUserToDelete);
+      setSelectedUserToDelete(null);
+    } else {
+      remainingUsers = users.filter((_, idx) => !selectedUsers.includes(idx));
+      setSelectedUsers([]);
+    }
+    console.log("Remaining Users:", remainingUsers);
+    setShowDeleteModal(false);
+  };
 
   const handlePreviousPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -150,67 +151,66 @@ export default function UserManagement() {
         </h2>
 
         <div className="mt-5 p-5 min-h-[60vh] mr-0 md:mr-[0.65rem]">
-          {/* Controls */}
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-            {/* Navigation Arrows and Delete Button */}
-            <div className="flex items-center gap-2">
+          {/* Header Controls */}
+          <div className="flex flex-row justify-between gap-4 mb-4 flex-nowrap overflow-x-auto">
+
+            {/* Left Controls */}
+            <div className="flex items-center gap-2 flex-shrink-0">
               <IoIosArrowBack
-                size={24}
-                className={`cursor-pointer text-white ${
-                  currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 onClick={handlePreviousPage}
                 aria-hidden="true"
               />
               <IoIosArrowForward
-                size={24}
-                className={`cursor-pointer text-white ${
-                  currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 onClick={handleNextPage}
                 aria-hidden="true"
               />
+
               <button
-                className={`bg-[#CF0C0F] text-[#FFFFFF] text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${
-                  selectedUsers.length === 0 ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`text-white text-xs sm:text-base px-6 py-2 w-10 h-8 md:h-10 lg:h-10 sm:-ml-1 md:-ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2 bg-[#CF0C0F] ${selectedUsers.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 onClick={() => setShowDeleteModal(true)}
                 disabled={selectedUsers.length === 0}
                 aria-label="Delete selected users"
               >
-                <span>Delete</span>
+                <span className="flex items-center gap-2">
+                  <FiTrash2 className="w-3 h-3 md:w-4 md:h-4 lg:hidden" />
+                  <span className="hidden lg:inline">Delete</span>
+                </span>
               </button>
             </div>
 
-            {/* Search, Sort, and Filter */}
-            <div className="flex items-center gap-2">
+            {/* Right Controls */}
+            <div className="flex items-center gap-1 flex-nowrap whitespace-nowrap flex-shrink-0">
               {/* Search */}
               <div className="relative group">
                 <IoSearch
                   size={20}
                   className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10"
-                  aria-hidden="true"
                 />
                 <input
                   type="text"
                   placeholder="Search"
-                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 sm:hover:w-60 sm:focus-within:w-80"
+                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-16 md:w-20 lg:w-70 md:hover:w-38 md:focus-within:w-38 lg:focus-within:w-80"
                   aria-label="Search"
                 />
               </div>
 
-              {/* Sort Dropdown */}
+              {/* Sort */}
               <button
-                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2"
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
                 aria-label="Sort users"
               >
                 <TbSortAscending2 className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
                 <span className="hidden lg:inline">Sort</span>
               </button>
 
-              {/* Filter Dropdown */}
+              {/* Filter */}
               <button
-                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2"
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
                 aria-label="Filter users"
               >
                 <HiOutlineFilter className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
@@ -218,6 +218,7 @@ export default function UserManagement() {
               </button>
             </div>
           </div>
+
 
           {/* User Table */}
           <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
@@ -243,11 +244,10 @@ export default function UserManagement() {
                       <th className="pl-8 sm:pb-3 sm:pl-10 pr-0 py-4 w-8 sm:w-12 text-left">
                         <input
                           type="checkbox"
-                          className={`appearance-none w-4 h-4 border-2 rounded-full ${
-                            selectedUsers.length === paginatedUsers.length
-                              ? "bg-[#001526] border-[#001526]" // Selected state
-                              : "bg-[#D9E7EC] border-[#001526]" // Unselected state
-                          } focus:ring-2 focus:ring-[#001526] transition-colors`}
+                          className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedUsers.length === paginatedUsers.length
+                            ? "bg-[#001526] border-[#001526]" // Selected state
+                            : "bg-[#D9E7EC] border-[#001526]" // Unselected state
+                            } focus:ring-2 focus:ring-[#001526] transition-colors`}
                           aria-label="Select all"
                           checked={selectedUsers.length === paginatedUsers.length}
                           onChange={toggleSelectAll}
@@ -272,11 +272,10 @@ export default function UserManagement() {
                         <td className="pl-8 sm:pb-3 sm:pl-10 pr-0 py-4 w-8 sm:w-12 text-left">
                           <input
                             type="checkbox"
-                            className={`appearance-none w-4 h-4 border-2 rounded-full ${
-                              selectedUsers.includes((currentPage - 1) * itemsPerPage + index)
-                                ? "bg-[#001526] border-[#001526]" // Selected state
-                                : "bg-[#D9E7EC] border-[#001526]" // Unselected state
-                            } focus:ring-2 focus:ring-[#001526] transition-colors`}
+                            className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedUsers.includes((currentPage - 1) * itemsPerPage + index)
+                              ? "bg-[#001526] border-[#001526]" // Selected state
+                              : "bg-[#D9E7EC] border-[#001526]" // Unselected state
+                              } focus:ring-2 focus:ring-[#001526] transition-colors`}
                             aria-label={`Select row ${index + 1}`}
                             checked={selectedUsers.includes((currentPage - 1) * itemsPerPage + index)}
                             onChange={() => toggleSelectUser(index)}
@@ -329,6 +328,7 @@ export default function UserManagement() {
                             <button
                               onClick={() => setDropdownUser(dropdownUser === index ? null : index)}
                               className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                            aria-label="Selected items"
                             >
                               <MoreVertical size={18} />
                             </button>
@@ -484,9 +484,8 @@ function CustomDropdown({
                 setIsDropdownOpen(false);
                 if (onChange) onChange(item);
               }}
-              className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
-                selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
-              }`}
+              className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
+                }`}
             >
               {item}
             </div>
