@@ -1,6 +1,16 @@
 import React from 'react';
 
-const LineChart = ({ graphData, convertToPolylinePoints }: any) => {
+interface GraphData {
+  active: number[];
+  new: number[];
+}
+
+interface LineChartProps {
+  graphData: GraphData;
+  convertToPolylinePoints: (data: number[], height?: number, width?: number) => string;
+}
+
+const LineChart: React.FC<LineChartProps> = ({ graphData, convertToPolylinePoints }) => {
   return (
     <div className="bg-[#D9E4EB] py-7 px-8 rounded-xl text-[#0B1E2D]">
       <h2 className="font-semibold mb-4 text-[#001526]">Active / New Users</h2>

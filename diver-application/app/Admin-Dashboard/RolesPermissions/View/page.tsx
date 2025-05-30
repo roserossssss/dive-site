@@ -23,7 +23,6 @@ export default function ProfilePage() {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [role, setRole] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [profileImagePreview, setProfileImagePreview] = useState("/images/sample_profile_pic.jpg");
   const [isEditing, setIsEditing] = useState(false);

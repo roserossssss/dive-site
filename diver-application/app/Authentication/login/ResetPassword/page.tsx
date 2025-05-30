@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { confirmPasswordReset } from "firebase/auth";
 import { auth } from "../../../../firebaseConfig";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function ResetPassword() {
+function ResetPasswordContent() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -44,8 +44,12 @@ export default function ResetPassword() {
       setTimeout(() => {
         router.push("/Authentication/login");
       }, 3000);
-    } catch (err: any) {
-      setError(err.message || "Failed to reset password. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to reset password. Please try again.");
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   };
 
@@ -128,5 +132,13 @@ export default function ResetPassword() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }

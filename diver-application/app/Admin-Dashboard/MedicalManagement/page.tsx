@@ -8,7 +8,15 @@ import { HiOutlineFilter } from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { GoTrash } from "react-icons/go";
 
-const records = [
+interface MedicalRecord {
+  userId: string;
+  name: string;
+  age: number;
+  gender: string;
+  status: string;
+}
+
+const records: MedicalRecord[] = [
   { userId: "ML0001", name: "John Doe", age: 29, gender: "Male", status: "Pending" },
   { userId: "ML0002", name: "Adie Eugenio", age: 34, gender: "Female", status: "Verified" },
   { userId: "ML0003", name: "Chris Brown", age: 41, gender: "Male", status: "Declined" },
@@ -36,7 +44,7 @@ export default function MedicalManagement() {
   const recordsPerPage = 10;
   const totalPages = Math.ceil(recordList.length / recordsPerPage);
 
-  const handleView = (record: any) => {
+  const handleView = (record: MedicalRecord) => {
     localStorage.setItem("selectedMedicalRecord", JSON.stringify(record));
     window.location.href = "/Admin-Dashboard/MedicalManagement/View";
   };
@@ -301,7 +309,13 @@ export default function MedicalManagement() {
                           </span>
                         </td>
                         <td className="py-3 relative">
-                          <div ref={(el) => (dropdownRefs.current[index] = el)}>
+                          <div  
+                            ref={(el) => {
+                              if (dropdownRefs.current[index] !== el) {
+                                dropdownRefs.current[index] = el;
+                              }
+                            }}
+                          >
                             <button
                               onClick={() =>
                                 setDropdownRecord(dropdownRecord === index ? null : index)

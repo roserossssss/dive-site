@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
 
-const HistorySection = ({ activityLog, activityTypes, colorMap }: any) => {
+// Define types for props
+interface ActivityLogEntry {
+  name: string;
+  action: string;
+  color: string;
+  type: string;
+}
+
+interface HistorySectionProps {
+  activityLog: ActivityLogEntry[];
+  activityTypes: string[];
+  colorMap: Record<string, string>;
+}
+
+const HistorySection: React.FC<HistorySectionProps> = ({ activityLog, activityTypes, colorMap }) => {
   const [historyFilter, setHistoryFilter] = useState('All');
 
   return (
@@ -17,7 +31,7 @@ const HistorySection = ({ activityLog, activityTypes, colorMap }: any) => {
               value={historyFilter}
               onChange={(e) => setHistoryFilter(e.target.value)}
             >
-              {activityTypes.map((type: string) => (
+              {activityTypes.map((type) => (
                 <option key={type} value={type} className="text-white">
                   {type}
                 </option>
@@ -44,8 +58,8 @@ const HistorySection = ({ activityLog, activityTypes, colorMap }: any) => {
 
       <ul className="space-y-6 text-sm text-[#001526] overflow-y-auto max-h-[190px] sm:max-h-[305px] px-4">
         {activityLog
-          .filter(({ type }: any) => historyFilter === 'All' || type === historyFilter)
-          .map(({ name, action, color }: any, idx: number) => (
+          .filter(({ type }) => historyFilter === 'All' || type === historyFilter)
+          .map(({ name, action, color }, idx) => (
             <li className="flex items-start justify-between gap-2" key={idx}>
               <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-2 flex-1 min-w-0">
                 <div className="flex items-start gap-2 min-w-0">
