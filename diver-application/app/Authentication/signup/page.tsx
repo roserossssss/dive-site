@@ -51,8 +51,12 @@ export default function Signup() {
 
       // Redirect to login page after successful signup
       router.push("/Authentication/login");
-    } catch (err: any) {
-      setError(err.message || "Failed to create account. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to create account. Please try again.");
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   };
 

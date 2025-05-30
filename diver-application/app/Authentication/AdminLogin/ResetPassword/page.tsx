@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { confirmPasswordReset } from "firebase/auth";
 import { auth } from "../../../../firebaseConfig";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function ResetPassword() {
+function ResetPasswordContent() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -44,15 +44,19 @@ export default function ResetPassword() {
       setTimeout(() => {
         router.push("/Authentication/AdminLogin");
       }, 3000);
-    } catch (err: any) {
-      setError(err.message || "Failed to reset password. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to reset password. Please try again.");
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   };
 
   return (
-    <div className="relative min-h-screen bg-[#001526] flex items-center justify-center">
-      <div className="w-full max-w-md bg-[#001526] p-8 rounded-3xl">
-        <h1 className="text-2xl font-bold text-center mb-6 text-white">
+    <div className="relative min-h-screen bg-[#D9E7EC] flex items-center justify-center">
+      <div className="w-full max-w-md bg-[#D9E7EC] p-8 rounded-3xl">
+        <h1 className="text-2xl font-bold text-center mb-6 text-[#001526]">
           Reset Password
         </h1>
         <form onSubmit={handleResetPassword}>
@@ -64,19 +68,19 @@ export default function ResetPassword() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder=" "
-              className="peer h-12 w-full border border-[#2C7DA0] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-transparent text-white"
+              className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-transparent text-[#001526]"
               required
             />
             <label
               htmlFor="newPassword"
-              className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all text-white peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-white bg-[#001526] px-1"
+              className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all text-[#001526] peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#005f80] bg-[#D9E7EC] px-1"
             >
               New Password
             </label>
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-[#001526]"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -90,19 +94,19 @@ export default function ResetPassword() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder=" "
-              className="peer h-12 w-full border border-[#2C7DA0] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-transparent text-white"
+              className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-transparent text-[#001526]"
               required
             />
             <label
               htmlFor="confirmPassword"
-              className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all text-white peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-white bg-[#001526] px-1"
+              className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all text-[#001526] peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#005f80] bg-[#D9E7EC] px-1"
             >
               Confirm Password
             </label>
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-[#001526]"
             >
               {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -121,12 +125,20 @@ export default function ResetPassword() {
           {/* Reset Password Button */}
           <button
             type="submit"
-            className="w-full bg-[#2C7DA0] text-white py-2 rounded-3xl hover:bg-[#005f80] transition mt-6 text-[15px] font-semibold"
+            className="w-full bg-[#001526] text-white py-2 rounded-3xl hover:bg-[#005f80] transition mt-6 text-[15px] font-semibold"
           >
             Reset Password
           </button>
         </form>
       </div>
     </div>
+  );
+}
+
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }

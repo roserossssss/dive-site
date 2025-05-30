@@ -2,7 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
-export default function Home() {
+async function fetchSocialLinks() {
+  return {
+    facebook: "https://facebook.com",
+    instagram: "https://instagram.com",
+    twitter: "https://twitter.com",
+    youtube: "https://youtube.com",
+  };
+}
+
+export default async function Home() {
+  const socialLinks = await fetchSocialLinks();
+
   return (
     <div className="relative min-h-screen bg-gray-200 flex justify-center">
       {/* Background Image */}
@@ -17,7 +28,7 @@ export default function Home() {
 
       {/* Top Right Auth Buttons */}
       <div className="absolute top-6 right-10 flex gap-4 z-10">
-        <Link href="/contact">
+        <Link href="">
           <button className="px-5 py-2 rounded-full text-xs md:text-sm text-[#001526] font-semibold bg-transparent hover:bg-[#005f80]/40 hover:text-white hover:text-opacity-90 transition">
             Contact Us
           </button>
@@ -66,28 +77,28 @@ export default function Home() {
               {/* Social Media Links */}
               <div className="flex gap-9 mt-5 text-[#001526]">
                 <a
-                  href="https://facebook.com"
+                  href={socialLinks.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FaFacebookF className="hover:text-[#D9E7EC] lg:hover:text-[#005f80] text-2xl transition" />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href={socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FaInstagram className="hover:text-[#D9E7EC] lg:hover:text-[#005f80] text-2xl transition" />
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href={socialLinks.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FaTwitter className="hover:text-[#D9E7EC] lg:hover:text-[#005f80] text-2xl transition" />
                 </a>
                 <a
-                  href="https://youtube.com"
+                  href={socialLinks.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

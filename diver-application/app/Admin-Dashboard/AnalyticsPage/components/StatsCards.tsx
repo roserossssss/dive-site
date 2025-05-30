@@ -2,13 +2,35 @@ import React from 'react';
 import { GiTropicalFish } from 'react-icons/gi';
 import { FiInfo } from 'react-icons/fi';
 
-const StatsCards = ({ stats, timeframe }: any) => {
+interface TrendData {
+  Daily: number[];
+  Weekly: number[];
+  Monthly: number[];
+}
+
+interface StatItem {
+  title: string;
+  color: string;
+  data: {
+    Daily: number;
+    Weekly: number;
+    Monthly: number;
+  };
+  trend: TrendData;
+}
+
+interface StatsCardsProps {
+  stats: StatItem[];
+  timeframe: 'Daily' | 'Weekly' | 'Monthly';
+}
+
+const StatsCards: React.FC<StatsCardsProps> = ({ stats, timeframe }) => {
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
-      {stats.map((item: any, index: number) => {
+      {stats.map((item, index) => {
         const count = item.data[timeframe];
         const sparkPoints = item.trend[timeframe]
-          .map((val: number, idx: number) => {
+          .map((val, idx) => {
             const x = (idx * 100) / (item.trend[timeframe].length - 1);
             const y = 50 - (val / Math.max(...item.trend[timeframe])) * 50;
             return `${x},${y}`;
