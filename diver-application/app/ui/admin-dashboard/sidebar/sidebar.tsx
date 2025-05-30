@@ -58,7 +58,7 @@ const Itemmenu = [
     title: "SETTINGS",
     list: [
       { title: "System Settings", path: "/Admin-Dashboard/SettingsPage", icon: <IoIosSettings /> },
-      { title: "Log out", path: "/", icon: <IoPower /> },
+      { title: "Log out", path: "/Authentication/AdminLogin", icon: <IoPower /> },
     ],
   },
 ];

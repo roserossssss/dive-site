@@ -5,21 +5,56 @@ import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
 import { CiCalendar } from "react-icons/ci";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
-
   const [email, setEmail] = useState("");
-  const [touched, setTouched] = useState(false);
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const router = useRouter();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [gender, setGender] = useState("");
+
+  const dateInputRef = useRef(null);
 
   const isValidEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const showError = touched && email !== "" && !isValidEmail(email);
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setSuccess(false);
 
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
-  const dateInputRef = useRef(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showRePassword, setShowRePassword] = useState(false);
+    if (password !== rePassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      // Create user in Firebase Authentication
+      await createUserWithEmailAndPassword(auth, email, password);
+      setSuccess(true);
+
+      // Redirect to login page after successful signup
+      router.push("/Authentication/login");
+    } catch (err: any) {
+      setError(err.message || "Failed to create account. Please try again.");
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-gray-200 flex items-center justify-center">
@@ -35,7 +70,10 @@ export default function Signup() {
 
       <div className="relative z-10 flex w-full lg:w-2/4 justify-center items-center ml-auto lg:p-8 p-4">
         <div className="w-full max-w-xl lg:p-8 p-4">
-          <form className="bg-[#D9E7EC] p-8 rounded-3xl shadow-lg w-full py-12 lg:py-16 px-12">
+          <form
+            onSubmit={handleSignup}
+            className="bg-[#D9E7EC] p-8 rounded-3xl shadow-lg w-full py-12 lg:py-16 px-12"
+          >
             <div className="flex flex-col items-center lg:px-6 px-4">
               <h1 className="text-2xl font-bold text-center mb-8 text-[#001526]">
                 Create Account
@@ -46,6 +84,8 @@ export default function Signup() {
                 <input
                   type="text"
                   id="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder=" "
                   className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
                   required
@@ -63,8 +103,10 @@ export default function Signup() {
                 <input
                   type="text"
                   id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   placeholder=" "
-                  className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80]  focus:border-0 bg-[#D9E7EC] text-[#001526]"
+                  className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
                   required
                 />
                 <label
@@ -84,6 +126,8 @@ export default function Signup() {
                   <input
                     type="date"
                     ref={dateInputRef}
+                    value={birthday}
+                    onChange={(e) => setBirthday(e.target.value)}
                     placeholder="Birthday"
                     className="w-full pl-4 p-2 border rounded-3xl text-[#001526] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] border-black border-t-1"
                     required
@@ -95,7 +139,7 @@ export default function Signup() {
                       (dateInputRef.current as unknown as HTMLInputElement)?.showPicker()
                     }
                   />
-              </div>
+                </div>
 
                 {/* Gender Selection */}
                 <div className="mt-1 mb-1">
@@ -108,6 +152,7 @@ export default function Signup() {
                         type="radio"
                         name="gender"
                         value="male"
+                        onChange={(e) => setGender(e.target.value)}
                         className="mr-2 w-3 h-3 appearance-none rounded-full border-2 border-[#001526] checked:bg-[#005f80] checked:border-[#135572] transition duration-200"
                         required
                       />
@@ -120,6 +165,7 @@ export default function Signup() {
                         type="radio"
                         name="gender"
                         value="female"
+                        onChange={(e) => setGender(e.target.value)}
                         className="mr-2 w-3 h-3 appearance-none rounded-full border-2 border-[#001526] checked:bg-[#005f80] checked:border-[#135572] transition duration-200"
                         required
                       />
@@ -134,28 +180,20 @@ export default function Signup() {
               {/* Email Address */}
               <div className="relative w-full mb-3">
                 <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onBlur={() => setTouched(true)}
-                    placeholder=" "
-                    className={`peer h-12 w-full border ${
-                      showError ? "border-red-500" : "border-[#001526]"
-                      } rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 ${
-                      showError ? "focus:ring-red-500" : "focus:ring-[#005f80]"
-                        } focus:border-0 bg-[#D9E7EC] text-[#001526]`}
-                    required
-                  />
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder=" "
+                  className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
+                  required
+                />
                 <label
                   htmlFor="email"
                   className="absolute left-3 top-1/5 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-[#005f80] bg-[#D9E7EC] px-1"
                 >
                   Email Address
                 </label>
-                {showError && (
-                  <p className="text-red-500 text-xs mt-1 ml-2">Please enter a valid email address.</p>
-                )}
               </div>
 
               {/* Password */}
@@ -163,6 +201,8 @@ export default function Signup() {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder=" "
                   className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
                   required
@@ -187,6 +227,8 @@ export default function Signup() {
                 <input
                   type={showRePassword ? "text" : "password"}
                   id="repassword"
+                  value={rePassword}
+                  onChange={(e) => setRePassword(e.target.value)}
                   placeholder=" "
                   className="peer h-12 w-full border border-[#001526] rounded-3xl px-3 pt-4 pb-1 text-sm placeholder-transparent focus:outline-none focus:ring-2 focus:ring-[#005f80] focus:border-0 bg-[#D9E7EC] text-[#001526]"
                   required
@@ -206,8 +248,23 @@ export default function Signup() {
                 </button>
               </div>
 
+              {/* Error Message */}
+              {error && (
+                <p className="text-red-500 text-sm mt-2 text-center">{error}</p>
+              )}
+
+              {/* Success Message */}
+              {success && (
+                <p className="text-green-500 text-sm mt-2 text-center">
+                  Account created successfully! Redirecting to login...
+                </p>
+              )}
+
               {/* Signup Button */}
-              <button className="w-full bg-[#001526] text-white py-2 rounded-3xl hover:bg-[#005f80] transition mt-6 text-[15px] font-semibold">
+              <button
+                type="submit"
+                className="w-full bg-[#001526] text-white py-2 rounded-3xl hover:bg-[#005f80] transition mt-6 text-[15px] font-semibold"
+              >
                 Sign up
               </button>
 
