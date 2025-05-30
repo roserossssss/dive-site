@@ -143,17 +143,16 @@ export default function RolesPermissions() {
 
         <div className="mt-5 p-5 min-h-[60vh] mr-0 md:mr-[0.65rem]">
           {/* Header */}
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-row justify-between gap-4 mb-4 flex-nowrap overflow-x-auto">
+
+            <div className="flex items-center gap-2 flex-shrink-0">
               <IoIosArrowBack
-                size={24}
-                className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
                 onClick={handlePreviousPage}
                 aria-hidden="true"
               />
               <IoIosArrowForward
-                size={24}
-                className={`cursor-pointer text-white ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
                 onClick={handleNextPage}
                 aria-hidden="true"
               />
@@ -167,8 +166,7 @@ export default function RolesPermissions() {
                     if (selectMode) setSelectedAdmins([]);
                   }
                 }}
-                className={`text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
-                  }`}
+                className={`text-white text-xs sm:text-base px-3 py-2 w-9 sm: -ml-1 md: -ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"}`}
               >
                 <span className="flex items-center gap-2">
                   {selectMode && selectedAdmins.length > 0 ? (
@@ -183,7 +181,7 @@ export default function RolesPermissions() {
                     </>
                   ) : (
                     <>
-                      <FiCheck className="lg:hidden " />
+                      <FiCheck className="lg:hidden" />
                       <span className="hidden lg:inline">Select</span>
                     </>
                   )}
@@ -192,7 +190,7 @@ export default function RolesPermissions() {
 
               <button
                 onClick={() => setSaveModalOpen(true)}
-                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2"
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-9 sm:ml-1 md:-ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2"
                 disabled={!hasChanges}
                 style={{
                   opacity: hasChanges ? 1 : 0.5,
@@ -204,32 +202,34 @@ export default function RolesPermissions() {
               </button>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 flex-nowrap whitespace-nowrap flex-shrink-0">
               {/* Search */}
               <div className="relative group">
                 <IoSearch size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#001526] z-10" />
                 <input
                   type="text"
                   placeholder="Search"
-                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 sm:hover:w-60 sm:focus-within:w-80"
+                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-16 md:w-20 lg:w-70 md:hover:w-38 md:focus-within:w-38 lg:focus-within:w-80"
                   aria-label="Search"
                 />
               </div>
 
               {/* Sort & Filter */}
-              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2">
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2">
                 <TbSortAscending2 className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
                 <span className="hidden lg:inline">Sort</span>
               </button>
-              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2">
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2">
                 <HiOutlineFilter className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
                 <span className="hidden lg:inline">Filter</span>
               </button>
             </div>
+
           </div>
 
+
           {/* User Table */}
-          <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
+          <div className="rounded-3xl overflow-hidden mt-5 bg-[#D9E7EC] shadow-md min-h-[77vh]">
             {paginatedUsers.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-[77vh]">
                 <img
@@ -288,8 +288,8 @@ export default function RolesPermissions() {
                               <div
                                 onClick={() => toggleAdminSelection(globalIndex)}
                                 className={`w-4 h-4 rounded-full border-2 border-[#001526] cursor-pointer flex items-center justify-center transition ml-5 ${selectedAdmins.includes(globalIndex)
-                                    ? "bg-[#001526]"
-                                    : "bg-transparent"
+                                  ? "bg-[#001526]"
+                                  : "bg-transparent"
                                   }`}
                               ></div>
                             ) : null}
