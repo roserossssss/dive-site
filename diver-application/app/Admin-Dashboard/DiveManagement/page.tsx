@@ -152,7 +152,7 @@ export default function DiveManagement() {
             <div className="flex items-center gap-2 flex-shrink-0">
               <IoIosArrowBack
                 size={24}
-                className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 onClick={handlePreviousPage}
 
@@ -160,7 +160,7 @@ export default function DiveManagement() {
               />
               <IoIosArrowForward
                 size={24}
-                className={`cursor-pointer text-white ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 onClick={handleNextPage}
                 aria-hidden="true"
@@ -192,7 +192,7 @@ export default function DiveManagement() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-16 md:w-20 lg:w-70 md:hover:w-38 md:focus-within:w-38 lg:focus-within:w-80"
+                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-16 md:w-20 lg:w-72 md:hover:w-38 md:focus-within:w-38 lg:focus-within:w-80"
                   aria-label="Search"
                 />
               </div>
