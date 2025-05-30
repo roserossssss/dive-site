@@ -5,6 +5,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { TbSortAscending2 } from "react-icons/tb";
 import { HiOutlineFilter } from "react-icons/hi";
+import { FiTrash2 } from "react-icons/fi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { GoTrash } from "react-icons/go";
 
@@ -144,11 +145,11 @@ export default function DiveManagement() {
           Dive Management
         </h2>
 
-        <div className="-mt-7 p-5 min-h-[60vh] mr-0 md:mr-2">
+        <div className="mt-5 p-5 min-h-[60vh] mr-0 md:mr-[0.65rem]">
           {/* Controls */}
-          <div className="flex flex-wrap items-center justify-between gap-2 mt-12">
+          <div className="flex flex-row justify-between gap-4 mb-4 flex-nowrap overflow-x-auto">
             {/* Navigation Arrows and Delete Button */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <IoIosArrowBack
                 size={24}
                 className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
@@ -165,18 +166,22 @@ export default function DiveManagement() {
                 aria-hidden="true"
               />
               <button
-                className={`bg-[#CF0C0F] text-[#FFFFFF] text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectedRows.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+                className={`text-white text-xs sm:text-base px-6 py-2 w-10 h-8 md:h-10 lg:h-10 sm:-ml-1 md:-ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2 bg-[#CF0C0F] ${selectedRows.length === 0 ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 onClick={handleDelete}
                 disabled={selectedRows.length === 0}
                 aria-label="Delete selected dives"
               >
-                <span>Delete</span>
+                <span className="flex items-center gap-2">
+                  <FiTrash2 className="w-3 h-3 md:w-4 md:h-4 lg:hidden" />
+                  <span className="hidden lg:inline">Delete</span>
+                </span>
               </button>
             </div>
 
+
             {/* Search, Sort, and Filter */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 flex-nowrap whitespace-nowrap flex-shrink-0">
               {/* Search */}
               <div className="relative group">
                 <IoSearch
@@ -187,7 +192,7 @@ export default function DiveManagement() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 sm:hover:w-60 sm:focus-within:w-80"
+                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-16 md:w-20 lg:w-70 md:hover:w-38 md:focus-within:w-38 lg:focus-within:w-80"
                   aria-label="Search"
                 />
               </div>
@@ -195,7 +200,7 @@ export default function DiveManagement() {
               {/* Sort Dropdown */}
               <button
                 onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2"
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
                 aria-label="Sort dives"
               >
                 <TbSortAscending2 className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
@@ -205,7 +210,7 @@ export default function DiveManagement() {
               {/* Filter Dropdown */}
               <button
                 onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2"
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
                 aria-label="Filter dives"
               >
                 <HiOutlineFilter className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
@@ -244,8 +249,8 @@ export default function DiveManagement() {
                         <input
                           type="checkbox"
                           className={`appearance-none w-4 h-4 border-2 rounded-full ${selectAll
-                              ? "bg-[#001526] border-[#001526]"
-                              : "bg-[#D9E7EC] border-[#001526]"
+                            ? "bg-[#001526] border-[#001526]"
+                            : "bg-[#D9E7EC] border-[#001526]"
                             } focus:ring-2 focus:ring-[#001526] transition-colors`}
                           aria-label="Select all"
                           checked={selectAll}
@@ -277,8 +282,8 @@ export default function DiveManagement() {
                               (currentPage - 1) * recordsPerPage + index
                             )
 
-                                ? "bg-[#001526] border-[#001526]"
-                                : "bg-[#D9E7EC] border-[#001526]"
+                              ? "bg-[#001526] border-[#001526]"
+                              : "bg-[#D9E7EC] border-[#001526]"
                               } focus:ring-2 focus:ring-[#001526] transition-colors`}
                             aria-label={`Select row ${index + 1}`}
                             checked={selectedRows.includes(
@@ -307,6 +312,7 @@ export default function DiveManagement() {
                               )
                             }
                             className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                            aria-label="Selected items"
                           >
                             <BsThreeDotsVertical size={16} />
                           </button>
