@@ -157,12 +157,12 @@ export default function UserManagement() {
             <div className="flex items-center gap-2">
               <IoIosArrowBack
                 size={24}
-                className={`cursor-pointer text-white ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               />
               <IoIosArrowForward
                 size={24}
-                className={`cursor-pointer text-white ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+                className={`cursor-pointer text-white w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
               />
 
@@ -176,7 +176,7 @@ export default function UserManagement() {
                     if (selectMode) setSelectedAdmins([]);
                   }
                 }}
-                className={`text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
+                className={`text-white text-xs sm:text-base px-3 py-2 w-9 sm: -ml-1 md: -ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 h-7 md:h-9 lg:h-10 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"
                   }`}
               >
                 <span className="flex items-center gap-2">
@@ -202,7 +202,7 @@ export default function UserManagement() {
               {/* Add Button */}
               <button
                 onClick={() => setInviteModalOpen(true)}
-                className="bg-[#2C7DA0] text-white text-xs sm:text-base px-3 py-2 w-20 md:px-3 md:py-2 md:w-28 rounded-full font-semibold flex items-center justify-center gap-2"
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2  sm:ml-1 md:-ml-0.5 md:px-3 md:py-2 w-9 md:w-12 lg:w-28 h-7 md:h-9 lg:h-10 rounded-full font-semibold flex items-center justify-center gap-2"
               >
                 <HiPlus className="lg:hidden" size={18} />
                 <span className="hidden lg:inline">Add</span>
@@ -216,15 +216,15 @@ export default function UserManagement() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-20 sm:w-32 lg:w-70 sm:hover:w-60 sm:focus-within:w-80"
+                  className="pl-10 pr-4 py-2 rounded-full bg-white border border-[#001526] text-[#001526] font-medium placeholder-[#001526] focus:ring-2 focus:ring-[#001526] focus:border-blue-500 transition-all duration-300 ease-in-out text-xs sm:text-base w-16 md:w-20 lg:w-70 md:hover:w-38 md:focus-within:w-38 lg:focus-within:w-80"
                   aria-label="Search"
                 />
               </div>
-              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2">
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2">
                 <TbSortAscending2 className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
                 <span className="hidden lg:inline">Sort</span>
               </button>
-              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-28 rounded-full font-semibold flex items-center gap-2">
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2">
                 <HiOutlineFilter className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
                 <span className="hidden lg:inline">Filter</span>
               </button>
@@ -257,8 +257,8 @@ export default function UserManagement() {
                           <input
                             type="checkbox"
                             className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedAdmins.length === paginatedUsers.length && paginatedUsers.length > 0
-                                ? "bg-[#001526] border-[#001526]"
-                                : "bg-[#D9E7EC] border-[#001526]"
+                              ? "bg-[#001526] border-[#001526]"
+                              : "bg-[#D9E7EC] border-[#001526]"
                               } focus:ring-2 focus:ring-[#001526] transition-colors`}
                             aria-label="Select all"
                             checked={selectedAdmins.length === paginatedUsers.length && paginatedUsers.length > 0}
@@ -292,8 +292,8 @@ export default function UserManagement() {
                               <input
                                 type="checkbox"
                                 className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedAdmins.includes(globalIndex)
-                                    ? "bg-[#001526] border-[#001526]"
-                                    : "bg-[#D9E7EC] border-[#001526]"
+                                  ? "bg-[#001526] border-[#001526]"
+                                  : "bg-[#D9E7EC] border-[#001526]"
                                   } focus:ring-2 focus:ring-[#001526] transition-colors`}
                                 aria-label={`Select row ${index + 1}`}
                                 checked={selectedAdmins.includes(globalIndex)}
@@ -330,7 +330,7 @@ export default function UserManagement() {
                                         JSON.stringify({
                                           name: user.name,
                                           email: user.email,
-                                          position: user.status, 
+                                          position: user.status,
                                         })
                                       );
                                       router.push("/Admin-Dashboard/AdminManagement/View");
