@@ -167,6 +167,13 @@ export default function RolesPermissions() {
                   }
                 }}
                 className={`text-white text-xs sm:text-base px-3 py-2 w-9 sm: -ml-1 md: -ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"}`}
+                aria-label={
+                  selectMode && selectedAdmins.length > 0
+                    ? "Delete selected admins"
+                    : selectMode
+                      ? "Cancel selection"
+                      : "Select admins"
+                }
               >
                 <span className="flex items-center gap-2">
                   {selectMode && selectedAdmins.length > 0 ? (
@@ -196,6 +203,7 @@ export default function RolesPermissions() {
                   opacity: hasChanges ? 1 : 0.5,
                   cursor: hasChanges ? "pointer" : "not-allowed",
                 }}
+                aria-label="Save changes"
               >
                 <FiSave className="lg:hidden" />
                 <span className="hidden lg:inline">Save</span>
@@ -215,11 +223,15 @@ export default function RolesPermissions() {
               </div>
 
               {/* Sort & Filter */}
-              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2">
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
+                aria-label="Sort"
+              >
                 <TbSortAscending2 className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
                 <span className="hidden lg:inline">Sort</span>
               </button>
-              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2">
+              <button className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
+                aria-label="Filter"
+              >
                 <HiOutlineFilter className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
                 <span className="hidden lg:inline">Filter</span>
               </button>
@@ -318,6 +330,7 @@ export default function RolesPermissions() {
                                 className="sr-only peer"
                                 checked={userList[globalIndex]?.Create}
                                 onChange={() => togglePermission(globalIndex, "Create")}
+                                aria-label="Toggle Create permission"
                               />
                               <div className="relative w-11 h-6 rounded-full ring-2 ring-[#001526] bg-[#FFFFFF] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-0.5 after:start-[2px] after:bg-[#2C7DA0] after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all p-3"></div>
                             </label>
@@ -331,6 +344,7 @@ export default function RolesPermissions() {
                                 className="sr-only peer"
                                 checked={userList[globalIndex]?.Update}
                                 onChange={() => togglePermission(globalIndex, "Update")}
+                                aria-label="Toggle Update permission"
                               />
                               <div className="relative w-11 h-6 rounded-full ring-2 ring-[#001526] bg-[#FFFFFF] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-0.5 after:start-[2px] after:bg-[#2C7DA0] after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all p-3"></div>
                             </label>
@@ -344,15 +358,18 @@ export default function RolesPermissions() {
                                 className="sr-only peer"
                                 checked={userList[globalIndex]?.Delete}
                                 onChange={() => togglePermission(globalIndex, "Delete")}
+                                aria-label="Toggle Delete permission"
                               />
                               <div className="relative w-11 h-6 rounded-full ring-2 ring-[#001526] bg-[#FFFFFF] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-0.5 after:start-[2px] after:bg-[#2C7DA0] after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all p-3"></div>
                             </label>
                           </td>
+
                           {/* Dropdown Options */}
                           <td className="relative px-4 py-3">
                             <button
                               onClick={() => setDropdownUser(dropdownUser === globalIndex ? null : globalIndex)}
                               className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
+                              aria-label="Open user options"
                             >
                               <MoreVertical size={18} />
                             </button>
