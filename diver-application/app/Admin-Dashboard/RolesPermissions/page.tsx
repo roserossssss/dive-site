@@ -166,7 +166,7 @@ export default function RolesPermissions() {
                     if (selectMode) setSelectedAdmins([]);
                   }
                 }}
-                className={`text-white text-xs sm:text-base px-3 py-2 w-9 sm: -ml-1 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"}`}
+                className={`text-white text-xs sm:text-base px-3 py-2 w-9 sm: -ml-1 md: -ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2 ${selectMode && selectedAdmins.length > 0 ? "bg-[#CF0C0F]" : "bg-[#2C7DA0]"}`}
               >
                 <span className="flex items-center gap-2">
                   {selectMode && selectedAdmins.length > 0 ? (
@@ -190,7 +190,7 @@ export default function RolesPermissions() {
 
               <button
                 onClick={() => setSaveModalOpen(true)}
-                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-9 sm:ml-1 md:-ml-1 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2"
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-9 sm:ml-1 md:-ml-0.5 md:px-3 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center justify-center gap-2"
                 disabled={!hasChanges}
                 style={{
                   opacity: hasChanges ? 1 : 0.5,
