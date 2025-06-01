@@ -9,6 +9,7 @@ import { HiOutlineFilter } from "react-icons/hi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { HiPlus } from "react-icons/hi";
 import { FiCheck, FiTrash2, FiX } from "react-icons/fi";
+import Image from "next/image";
 import InviteAdminModal from "./InviteAdminModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import SuccessModal from "./SuccessModal";
@@ -247,10 +248,12 @@ export default function UserManagement() {
           <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
             {paginatedUsers.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-[77vh]">
-                <img
+                <Image
                   src="/images/empty_table_logo.svg"
                   alt="No Records"
-                  className="mx-auto w-32 sm:w-56 h-32 sm:h-56"
+                  width={224}
+                  height={224}
+                  className="mx-auto"
                 />
                 <p className="text-[#001526] font-semibold text-lg mt-4">
                   No admins found
@@ -322,7 +325,9 @@ export default function UserManagement() {
                           <td className="px-6 py-6 text-xs sm:text-base">{user.lastLogin}</td>
                           <td className="px-2 py-3 relative">
                             <div
-                              ref={el => (dropdownRefs.current[index] = el)}
+                              ref={(el) => {
+                                dropdownRefs.current[index] = el;
+                              }}
                               className="inline-block"
                             >
                               <button
@@ -404,14 +409,22 @@ function CustomDropdown({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownStyles, setDropdownStyles] = useState({ top: 0, left: 0, width: 0, direction: "down" });
   const buttonRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isDropdownOpen) return;
+
     function handleClickOutside(event: MouseEvent) {
-      if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+      if (
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isDropdownOpen]);
@@ -450,6 +463,14 @@ function CustomDropdown({
     setSelectedItem(selected);
   }, [selected]);
 
+  const handleItemClick = (item: string) => {
+    setSelectedItem(item);
+    setIsDropdownOpen(false);
+    if (onChange) {
+      onChange(item);
+    }
+  };
+
   return (
     <>
       <div className="relative" ref={buttonRef}>
@@ -467,6 +488,7 @@ function CustomDropdown({
 
       {isDropdownOpen && (
         <div
+          ref={dropdownRef}
           className="absolute bg-[#A3D4E3] text-[#001526] font-semibold rounded-xl p-2 z-50 shadow-lg"
           style={{
             position: "fixed",
@@ -478,13 +500,10 @@ function CustomDropdown({
           {items.map((item) => (
             <div
               key={item}
-              onClick={() => {
-                setSelectedItem(item);
-                setIsDropdownOpen(false);
-                if (onChange) onChange(item);
-              }}
-              className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
-                }`}
+              onClick={() => handleItemClick(item)}
+              className={`p-2 mt-1 rounded-xl cursor-pointer transition-all ${
+                selectedItem === item ? "bg-[#D9E7EC] text-[#001526]" : "text-[#001526]"
+              }`}
             >
               {item}
             </div>

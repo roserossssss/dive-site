@@ -1,11 +1,29 @@
 import React from 'react';
 
-const UserCategories = ({ percentages, selectedUserStats }: any) => {
+interface Percentage {
+  label: string;
+  value: number;
+  color: string;
+  percentage: number;
+}
+
+interface UserStat {
+  label: string;
+  value: number;
+  color: string;
+}
+
+interface UserCategoriesProps {
+  percentages: Percentage[];
+  selectedUserStats: UserStat[];
+}
+
+const UserCategories: React.FC<UserCategoriesProps> = ({ percentages, selectedUserStats }) => {
   return (
     <div className="bg-[#D9E4EB] p-6 rounded-xl text-[#0B1E2D] flex flex-col justify-between">
       <h2 className="font-semibold text-lg mb-4">User Categories</h2>
       <div className="relative w-full h-60 flex justify-center items-center mb-6 overflow-visible">
-        {percentages.map((stat: any, i: number) => {
+        {percentages.map((stat, i) => {
           const size = 55 + stat.percentage;
           const positionStyles = [
             'left-1/2 -translate-x-1/2 z-20',
@@ -33,15 +51,16 @@ const UserCategories = ({ percentages, selectedUserStats }: any) => {
         })}
       </div>
       <div className="flex justify-between border-t-2 border-[#C4D6DE] pt-4 text-center text-sm font-semibold">
-        {selectedUserStats.map((item: any, i: number) => (
+        {selectedUserStats.map((item, i) => (
           <div
             key={i}
-            className={`flex-1 ${i === 0
+            className={`flex-1 ${
+              i === 0
                 ? 'pr-2 border-r-2'
                 : i === 2
-                  ? 'pl-2 border-l-2'
-                  : 'px-2'
-              } border-[#C4D6DE]`}
+                ? 'pl-2 border-l-2'
+                : 'px-2'
+            } border-[#C4D6DE]`}
           >
             <div className="text-lg md:text-sm lg:text-lg">{item.value}</div>
             <div className="text-sm md:text-xs lg:text-medium text-gray-500 mt-1">{item.label}</div>

@@ -40,8 +40,12 @@ export default function Login() {
       } else {
         setError("Unauthorized access. This page is for admin only.");
       }
-    } catch (err: any) {
-      setError(err.message || "Failed to log in. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to log in. Please try again.");
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   };
 

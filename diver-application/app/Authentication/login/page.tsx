@@ -37,8 +37,12 @@ export default function Login() {
 
       // Redirect to dashboard after successful login
       router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.message || "Failed to log in. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to log in. Please try again.");
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   };
 

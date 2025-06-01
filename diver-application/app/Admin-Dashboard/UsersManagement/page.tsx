@@ -224,10 +224,12 @@ export default function UserManagement() {
           <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
             {paginatedUsers.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-[77vh]">
-                <img
+                <Image
                   src="/images/empty_table_logo.svg"
                   alt="No Records"
-                  className="mx-auto w-32 sm:w-56 h-32 sm:h-56"
+                  width={224}
+                  height={224} 
+                  className="mx-auto"
                 />
                 <p className="text-[#001526] font-semibold text-lg">
                   No users found.
