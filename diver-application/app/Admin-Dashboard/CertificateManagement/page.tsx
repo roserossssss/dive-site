@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { Listbox } from "@headlessui/react";
 import { ChevronDown, MoreVertical } from "lucide-react";
 import { IoSearch } from "react-icons/io5";
 import { TbSortAscending2 } from "react-icons/tb";
 import { HiOutlineFilter } from "react-icons/hi";
 import { FiTrash2 } from "react-icons/fi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import Image from "next/image";
 
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import StatusChangeModal from "./StatusChangeModal";
@@ -215,21 +215,23 @@ export default function CertificateManagement() {
                 />
               </div>
 
-        {/* User Table */}
-        <div className="rounded-3xl overflow-hidden mt-7 bg-[#D9E7EC] shadow-md min-h-[77vh]">
-          {paginatedCertificates.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-[77vh]">
-              <Image
-                src="/images/empty_table_logo.svg"
-                alt="No Records"
-                width={224}
-                height={224}
-                className="mx-auto"
-              />
-              <p className="text-[#001526] font-semibold text-lg">
-                No certificates found.
-              </p>
+              {/* Sort Dropdown */}
+              <button
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
+                aria-label="Sort certificates"
+              >
+                <TbSortAscending2 className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
+                <span className="hidden lg:inline">Sort</span>
+              </button>
 
+              {/* Filter Dropdown */}
+              <button
+                className="bg-white text-[#001526] text-xs sm:text-base px-3 py-2 w-10 md:px-4 md:py-2 md:w-12 lg:w-28 rounded-full font-semibold flex items-center gap-2"
+                aria-label="Filter certificates"
+              >
+                <HiOutlineFilter className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-5" />
+                <span className="hidden lg:inline">Filter</span>
+              </button>
             </div>
           </div>
 
@@ -258,28 +260,19 @@ export default function CertificateManagement() {
                         <input
                           type="checkbox"
                           className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedCertificates.length === paginatedCertificates.length
-                              ? "bg-[#001526] border-[#001526]" // Selected state
-                              : "bg-[#D9E7EC] border-[#001526]" // Unselected state
+                            ? "bg-[#001526] border-[#001526]" // Selected state
+                            : "bg-[#D9E7EC] border-[#001526]" // Unselected state
                             } focus:ring-2 focus:ring-[#001526] transition-colors`}
                           aria-label="Select all"
                           checked={selectedCertificates.length === paginatedCertificates.length}
                           onChange={toggleSelectAll}
                         />
-                      </td>
-                      <td className="pr-5 py-3 relative">
-                        <div   
-                          ref={(el) => {
-                            if (dropdownRefs.current[index] !== el) {
-                              dropdownRefs.current[index] = el;
-                            }
-                          }}
-                        >
-                          <button
-                            onClick={() =>
-                              setDropdownCertificate(dropdownCertificate === index ? null : index)
-                            }
-                            className="bg-[#D9E7EC] text-[#001526] font-semibold w-10 h-10 flex justify-center items-center rounded-2xl hover:opacity-90 transition"
-                            aria-label={`Options for certificate ${cert.userId}`}
+                      </th>
+                      {["User ID", "Certification", "Level", "Agency", "Date Issued", "Status", ""].map(
+                        (head, idx) => (
+                          <th
+                            key={idx}
+                            className="px-2 py-7 font-semibold text-sm sm:text-base whitespace-nowrap"
                           >
                             {head}
                           </th>
@@ -299,8 +292,8 @@ export default function CertificateManagement() {
                             className={`appearance-none w-4 h-4 border-2 rounded-full ${selectedCertificates.includes(
                               (currentPage - 1) * itemsPerPage + index
                             )
-                                ? "bg-[#001526] border-[#001526]" // Selected state
-                                : "bg-[#D9E7EC] border-[#001526]" // Unselected state
+                              ? "bg-[#001526] border-[#001526]" // Selected state
+                              : "bg-[#D9E7EC] border-[#001526]" // Unselected state
                               } focus:ring-2 focus:ring-[#001526] transition-colors`}
                             aria-label={`Select row ${index + 1}`}
                             checked={selectedCertificates.includes(
@@ -545,12 +538,10 @@ export default function CertificateManagement() {
           className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative"
           onClick={(e) => e.stopPropagation()}
         >
-          <Image
+          <img
             src={certificateImage}
             alt="Certificate"
-            width={800}
-            height={600}
-            className="rounded-lg"
+            className="w-full h-auto rounded-lg"
           />
         </div>
       </div>
