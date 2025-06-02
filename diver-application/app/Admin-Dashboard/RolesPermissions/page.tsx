@@ -143,7 +143,7 @@ export default function RolesPermissions() {
 
         <div className="mt-5 p-5 min-h-[60vh] mr-0 md:mr-[0.65rem]">
           {/* Header */}
-          <div className="flex flex-row justify-between gap-4 mb-4 flex-nowrap overflow-x-auto">
+          <div className="flex flex-row justify-between gap-4 mb-7 flex-nowrap overflow-x-auto">
 
             <div className="flex items-center gap-2 flex-shrink-0">
               <IoIosArrowBack
