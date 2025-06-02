@@ -212,7 +212,7 @@ export default function AddDive() {
                 } rounded-lg h-52 w-[100%] flex items-center justify-center bg-[#D9E7EC]`}
               >
                 {imagePreview ? (
-                  <Image
+                  <img
                     src={imagePreview}
                     alt="Preview"
                     className="w-full h-full object-cover rounded-lg"
