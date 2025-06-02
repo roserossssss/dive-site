@@ -222,7 +222,9 @@ export default function AddDive() {
                     <Image
                       src="/image-uploadblack.svg"
                       alt="Upload Icon"
-                      className="w-24 h-24 mx-auto"
+                      width={100}
+                      height={100}
+                      className="mx-auto"
                     />
                     <p className="text-sm mt-3">Maximum of 5MB</p>
                     <p className="text-sm">JPEG, PNG, JPEG</p>
