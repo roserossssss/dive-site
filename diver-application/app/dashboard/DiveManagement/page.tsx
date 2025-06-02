@@ -340,7 +340,7 @@ export default function DiveManagement() {
 
                 {dropdownIndex === index && (
                   <div className="absolute top-0 right-5 bg-white shadow-md rounded-lg p-2 w-28">
-                    <Link href={`/dashboard/DiveManagement/id${dive.id}`}>
+                    <Link href={`/dashboard/DiveManagement/id`}>
                       <button className="block w-full px-3 py-3 rounded-lg text-[#001526] hover:bg-[#2C7DA0] hover:bg-opacity-50">
                         Update
                       </button>
